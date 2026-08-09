@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import CustomSelect from './CustomSelect'
 import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL } from '../lib/constants'
+import InvoiceModal from './InvoiceModal'
 import './BookingModal.css'
 import './BookingDetailModal.css'
 
@@ -23,6 +24,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
   const [error, setError] = useState('')
 
   const [editMode, setEditMode] = useState(false)
+  const [showInvoice, setShowInvoice] = useState(false)
   const [confirmDeleteBooking, setConfirmDeleteBooking] = useState(false)
   const [saving, setSaving] = useState(false)
 
@@ -260,7 +262,8 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 <span className={`status-pill ${booking.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
                   {booking.status_pembayaran}
                 </span>
-                <button className="btn-ghost" style={{ marginLeft: 'auto' }} onClick={enterEditMode}>Edit</button>
+                <button className="btn-ghost" style={{ marginLeft: 'auto' }} onClick={() => setShowInvoice(true)}>Invoice</button>
+                <button className="btn-ghost" onClick={enterEditMode}>Edit</button>
               </div>
 
               <div className="detail-grid">
@@ -491,6 +494,15 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
           )}
         </div>
       </div>
+
+      {showInvoice && (
+        <InvoiceModal
+          booking={booking}
+          peserta={peserta}
+          payments={payments}
+          onClose={() => setShowInvoice(false)}
+        />
+      )}
     </div>
   )
 }

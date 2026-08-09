@@ -1,0 +1,53 @@
+.invoice-modal { max-width: 640px; }
+.invoice-paper { background: var(--white); }
+
+.inv-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.inv-studio { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); }
+.inv-studio-meta { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+.inv-title-block { text-align: right; }
+.inv-title { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--violet-tx); letter-spacing: 0.04em; }
+.inv-kode { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-faint); margin-top: 2px; }
+
+.inv-divider { height: 1px; background: var(--line); margin: 16px 0; }
+
+.inv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.inv-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; }
+.inv-value { font-size: 14px; font-weight: 600; color: var(--ink); }
+.inv-sub { font-size: 12.5px; color: var(--ink-soft); margin-top: 1px; }
+
+.inv-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+.inv-table thead th {
+  text-align: left; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--ink-faint); padding: 8px 4px; border-bottom: 1.5px solid var(--line);
+}
+.inv-table thead th.right { text-align: right; }
+.inv-table td { padding: 7px 4px; font-size: 13px; color: var(--ink-soft); border-bottom: 1px solid var(--line); }
+.inv-table td.right { text-align: right; font-family: 'Space Mono', monospace; font-size: 12.5px; }
+
+.inv-summary { background: var(--page-a); border-radius: 14px; padding: 14px 18px; margin-bottom: 16px; }
+.inv-summary-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-soft); padding: 4px 0; }
+.inv-summary-row b { color: var(--ink); font-family: 'Space Mono', monospace; font-size: 13px; }
+.inv-summary-final { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 10px; font-weight: 700; }
+.inv-summary-final span { color: var(--coral-tx); font-weight: 700; }
+.inv-summary-final b { color: var(--coral-tx); font-size: 15px; }
+
+.inv-pay-row { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; color: var(--ink-soft); padding: 5px 4px; border-bottom: 1px solid var(--line); }
+
+.inv-note { margin-top: 16px; }
+.inv-footer { text-align: center; font-size: 12.5px; color: var(--ink-faint); margin-top: 28px; padding-top: 16px; border-top: 1px dashed var(--line); }
+
+/* ===== Cetak / Simpan PDF ===== */
+@media print {
+  body * { visibility: hidden; }
+  .invoice-paper, .invoice-paper * { visibility: visible; }
+  .invoice-paper { position: absolute; top: 0; left: 0; width: 100%; padding: 20px; }
+  .invoice-no-print { display: none !important; }
+  .invoice-overlay { position: static; background: none; padding: 0; }
+  .invoice-modal { box-shadow: none; max-height: none; max-width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .inv-grid { grid-template-columns: 1fr; gap: 12px; }
+  .inv-header { flex-direction: column; gap: 10px; }
+  .inv-title-block { text-align: left; }
+}
