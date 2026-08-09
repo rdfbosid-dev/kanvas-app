@@ -1,0 +1,20 @@
+.donutchart-wrap { display: flex; justify-content: center; margin: 8px 0 16px; position: relative; }
+.donutchart-svg { width: 140px; height: 140px; transform: rotate(-90deg); }
+
+.donutchart-track { fill: none; stroke: var(--page-a); stroke-width: 18; }
+
+.donutchart-seg {
+  fill: none; stroke-width: 18; stroke-linecap: butt;
+  transition: stroke-dasharray 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s ease, stroke-width 0.2s ease;
+  cursor: pointer;
+}
+.donutchart-seg.dim { opacity: 0.35; }
+.donutchart-seg.hover { stroke-width: 21; }
+
+.donutchart-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  text-align: center; pointer-events: none;
+}
+.dc-val { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; }
+.dc-lab { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; color: var(--ink-faint); }

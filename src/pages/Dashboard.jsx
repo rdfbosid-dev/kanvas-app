@@ -1,0 +1,486 @@
+import { useEffect, useState } from 'react'
+import { supabase } from '../lib/supabase'
+import { useAuth } from '../context/AuthContext'
+import { useTheme } from '../context/ThemeContext'
+import Sidebar from '../components/Sidebar'
+import BookingModal from '../components/BookingModal'
+import BookingDetailModal from '../components/BookingDetailModal'
+import DonutChart from '../components/DonutChart'
+import TrendChart from '../components/TrendChart'
+import './Dashboard.css'
+
+function formatRupiah(n) {
+  return 'Rp' + (Number(n) || 0).toLocaleString('id-ID')
+}
+
+function initialsOf(name) {
+  return (name || '?')
+    .split(' ')
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase()
+}
+
+function dayLabel(tanggalAcara) {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const target = new Date(tanggalAcara)
+  target.setHours(0, 0, 0, 0)
+  const diffDays = Math.round((target - today) / 86400000)
+
+  if (diffDays === 0) return { text: 'Hari ini', cls: 'today' }
+  if (diffDays === 1) return { text: 'H-1', cls: 'today' }
+  if (diffDays > 1 && diffDays <= 6) return { text: `H-${diffDays}`, cls: 'soon' }
+  if (diffDays > 6) return { text: 'Minggu depan', cls: 'later' }
+  return { text: 'Lewat', cls: 'later' }
+}
+
+function formatTanggal(dateStr) {
+  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
+}
+
+export default function Dashboard() {
+  const { user } = useAuth()
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
+  const [bookings, setBookings] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [chartsIn, setChartsIn] = useState(false)
+  const [error, setError] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const [selectedBooking, setSelectedBooking] = useState(null)
+  const [toast, setToast] = useState('')
+
+  async function loadBookings() {
+    setLoading(true)
+    setError('')
+    const { data, error } = await supabase
+      .from('booking_summary')
+      .select('*')
+      .order('tanggal_acara', { ascending: true })
+
+    if (error) {
+      setError(error.message)
+    } else {
+      setBookings(data || [])
+    }
+    setLoading(false)
+    setChartsIn(false)
+    requestAnimationFrame(() => requestAnimationFrame(() => setChartsIn(true)))
+  }
+
+  useEffect(() => {
+    loadBookings()
+  }, [])
+
+  function handleBookingSaved(kodeBooking) {
+    setShowModal(false)
+    setToast(`Booking ${kodeBooking} berhasil disimpan ✅`)
+    loadBookings()
+    setTimeout(() => setToast(''), 4000)
+  }
+
+  const today = new Date()
+  const curMonth = today.getMonth()
+  const curYear = today.getFullYear()
+
+  const isThisMonth = (b) => {
+    const d = new Date(b.tanggal_acara)
+    return d.getMonth() === curMonth && d.getFullYear() === curYear
+  }
+  const isToday = (b) => {
+    const d = new Date(b.tanggal_acara)
+    return d.toDateString() === today.toDateString()
+  }
+
+  const bookingBulanIni = bookings.filter(isThisMonth)
+  const pesertaBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.total_klien) || 0), 0)
+  const omzetBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.omzet) || 0), 0)
+  const penghasilanBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.penghasilan) || 0), 0)
+  const belanjaKlienBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.belanja_klien) || 0), 0)
+  const transportBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.biaya_transport) || 0), 0)
+  const komisiTimBulanIni = omzetBulanIni - penghasilanBulanIni
+  const belumLunas = bookings.filter((b) => b.status_pembayaran === 'Belum Lunas')
+  const bookingHariIni = bookings.filter(isToday)
+
+  function countBy(arr, key) {
+    const counts = {}
+    arr.forEach((item) => {
+      const k = item[key] || '(Tidak diisi)'
+      counts[k] = (counts[k] || 0) + 1
+    })
+    return Object.entries(counts).sort((a, b) => b[1] - a[1])
+  }
+
+  // Gabungin sisanya jadi "Lainnya" kalau kategorinya lebih dari N,
+  // biar donut Event nggak "pecah" jadi kebanyakan potongan kecil.
+  function topNWithOthers(countsArr, n = 5) {
+    if (countsArr.length <= n) return countsArr
+    const top = countsArr.slice(0, n)
+    const othersTotal = countsArr.slice(n).reduce((sum, [, c]) => sum + c, 0)
+    return [...top, ['Lainnya', othersTotal]]
+  }
+
+  const eventCounts = topNWithOthers(countBy(bookingBulanIni, 'event'), 5)
+  const sumberCounts = countBy(bookingBulanIni, 'sumber')
+  const lokasiCounts = countBy(bookingBulanIni, 'lokasi').slice(0, 5)
+  const CHART_COLORS = ['#C4A4F0', '#F0A0C0', '#E7B655', '#6FC79A', '#8E9FE8']
+  // Warna garis tren dibedain per tema -- versi terang butuh warna gelap
+  // biar kebaca di atas kartu putih, versi dark butuh warna cerah biar
+  // nggak "ilang" ketelen background gelap.
+  const trendColorA = isDark ? '#C9A8F0' : '#7C4FA8'
+  const trendColorB = isDark ? '#F5C368' : '#E7A33D'
+
+  const SUMBER_BRAND_COLORS = {
+    Instagram: '#C13584',
+    WhatsApp: '#25D366',
+    Facebook: '#1877F2',
+    TikTok: '#000000',
+    Referral: '#E7B655',
+  }
+  function sumberColor(label, i) {
+    return SUMBER_BRAND_COLORS[label] || CHART_COLORS[i % CHART_COLORS.length]
+  }
+
+  const BULAN_SINGKAT = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+  const BULAN_PENUH = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+  const namaBulanIni = BULAN_PENUH[curMonth]
+
+  const prevMonthIdx = curMonth === 0 ? 11 : curMonth - 1
+  const prevMonthYear = curMonth === 0 ? curYear - 1 : curYear
+  const namaBulanLalu = BULAN_PENUH[prevMonthIdx]
+  const bookingBulanLalu = bookings.filter((b) => {
+    const d = new Date(b.tanggal_acara)
+    return d.getMonth() === prevMonthIdx && d.getFullYear() === prevMonthYear
+  })
+  const penghasilanBulanLalu = bookingBulanLalu.reduce((sum, b) => sum + (Number(b.penghasilan) || 0), 0)
+  const growthPct = penghasilanBulanLalu > 0
+    ? Math.round(((penghasilanBulanIni - penghasilanBulanLalu) / penghasilanBulanLalu) * 100)
+    : (penghasilanBulanIni > 0 ? 100 : 0)
+  const isGrowthUp = penghasilanBulanIni >= penghasilanBulanLalu
+  const monthlyStats = BULAN_SINGKAT.map((label, i) => {
+    const bulanBookings = bookings.filter((b) => {
+      const d = new Date(b.tanggal_acara)
+      return d.getMonth() === i && d.getFullYear() === curYear
+    })
+    return {
+      label,
+      booking: bulanBookings.length,
+      klien: bulanBookings.reduce((sum, b) => sum + (Number(b.total_klien) || 0), 0),
+      omzet: bulanBookings.reduce((sum, b) => sum + (Number(b.omzet) || 0), 0),
+      penghasilan: bulanBookings.reduce((sum, b) => sum + (Number(b.penghasilan) || 0), 0),
+    }
+  })
+  const adaDataTahunIni = monthlyStats.some((m) => m.booking > 0)
+
+  const bookingTerdekat = bookings
+    .filter((b) => new Date(b.tanggal_acara) >= new Date(today.toDateString()))
+    .slice(0, 5)
+
+  return (
+    <div className="app-shell">
+      <Sidebar />
+      <div className="main">
+        <div className="topbar">
+          <div>
+            <div className="greeting">Halo, {user?.email?.split('@')[0] || ''} 👋</div>
+            <div className="greeting-date">
+              {today.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+            </div>
+          </div>
+          <div className="topbar-actions">
+            <div className="icon-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+            </div>
+            <button className="btn-primary" onClick={() => setShowModal(true)} type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 5v14M5 12h14"/></svg>
+              Booking baru
+            </button>
+          </div>
+        </div>
+
+        {error && <div className="empty-state" style={{ color: 'var(--coral-tx)' }}>Gagal memuat data: {error}</div>}
+        {loading && <div className="loading-state">Memuat data...</div>}
+
+        {!loading && !error && (
+          <>
+            <div className="kpi-grid">
+              <div className="kpi-card">
+                <div className="kpi-top">
+                  <span className="kpi-label">Hari Ini</span>
+                  <div className="kpi-icon" style={{ background: 'var(--coral-bg)' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--coral-tx)" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                  </div>
+                </div>
+                <div className="kpi-value">{bookingHariIni.length}</div>
+                <div className="kpi-sub">Booking terjadwal</div>
+              </div>
+
+              <div className="kpi-card">
+                <div className="kpi-top">
+                  <span className="kpi-label">Booking Bulan Ini</span>
+                  <div className="kpi-icon" style={{ background: 'var(--violet-bg)' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--violet-tx)" strokeWidth="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
+                  </div>
+                </div>
+                <div className="kpi-value">{bookingBulanIni.length} <span className="kpi-unit">booking</span></div>
+                <div className="kpi-sub">{pesertaBulanIni} klien</div>
+              </div>
+
+              <div className="kpi-card">
+                <div className="kpi-top">
+                  <span className="kpi-label">Penghasilan</span>
+                  <div className="kpi-icon" style={{ background: 'var(--mint-bg)' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--mint-tx)" strokeWidth="2"><path d="M3 3v18h18"/><path d="M7 14l4-5 3 3 5-7"/></svg>
+                  </div>
+                </div>
+                <div className="kpi-value">{formatRupiah(penghasilanBulanIni)}</div>
+                <div className="kpi-sub">Total bulan ini</div>
+              </div>
+
+              <div className="kpi-card">
+                <div className="kpi-top">
+                  <span className="kpi-label">Belum Lunas</span>
+                  <div className="kpi-icon" style={{ background: 'var(--gold-bg)' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-tx)" strokeWidth="2"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v6M12 18v.01"/></svg>
+                  </div>
+                </div>
+                <div className="kpi-value">{belumLunas.length}</div>
+                <div className="kpi-sub">Klien perlu ditagih</div>
+              </div>
+            </div>
+
+            <div className="content-grid">
+              <div className="card">
+                <div className="card-head">
+                  <h3>Booking Terdekat</h3>
+                  <a href="/booking">Lihat semua →</a>
+                </div>
+
+                {bookingTerdekat.length === 0 ? (
+                  <div className="empty-state">Belum ada booking mendatang.</div>
+                ) : (
+                  bookingTerdekat.map((b) => {
+                    const day = dayLabel(b.tanggal_acara)
+                    return (
+                      <div className="booking-row" key={b.id} onClick={() => setSelectedBooking(b)} style={{ cursor: 'pointer' }}>
+                        <div className="b-avatar">{initialsOf(b.nama_klien)}</div>
+                        <div className="b-info">
+                          <div className="b-name">{b.nama_klien}</div>
+                          <div className="b-meta">
+                            {b.event || 'Booking'} · {formatTanggal(b.tanggal_acara)}
+                            {b.jam_start_makeup ? ` · ${b.jam_start_makeup.slice(0, 5)} WIB` : ''}
+                          </div>
+                        </div>
+                        <div className="booking-row-right">
+                          <span className={`day-pill ${day.cls}`}>{day.text}</span>
+                          <span className={`status-pill ${b.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
+                            {b.status_pembayaran}
+                          </span>
+                        </div>
+                      </div>
+                    )
+                  })
+                )}
+              </div>
+
+              <div className="card">
+                <div className="card-head"><h3>Ringkasan Keuangan</h3></div>
+                <div className="fin-row">
+                  <span className="fin-label">Total Belanja Klien Bulan {namaBulanIni}</span>
+                  <span className="fin-value">{formatRupiah(belanjaKlienBulanIni)}</span>
+                </div>
+                <div className="fin-row">
+                  <span className="fin-label">Total Biaya Transport yang Diterima Bulan {namaBulanIni}</span>
+                  <span className="fin-value">{formatRupiah(transportBulanIni)}</span>
+                </div>
+                <div className="fin-row">
+                  <span className="fin-label">Total Komisi dari Tim Bulan {namaBulanIni}</span>
+                  <span className="fin-value">{formatRupiah(komisiTimBulanIni)}</span>
+                </div>
+                <div className="fin-row">
+                  <span className="fin-label">Omzet Bulan {namaBulanIni}</span>
+                  <span className="fin-value">{formatRupiah(omzetBulanIni)}</span>
+                </div>
+                <div className="fin-divider"></div>
+                <div className="fin-net">
+                  <span className="fin-label">Penghasilan Bulan {namaBulanIni}</span>
+                  <span className="fin-value">{formatRupiah(penghasilanBulanIni)}</span>
+                </div>
+
+                <div className={`fin-growth ${isGrowthUp ? 'up' : 'down'}`}>
+                  <div className="fin-growth-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                      {isGrowthUp
+                        ? <path d="M3 17l6-6 4 4 8-8M15 7h6v6" />
+                        : <path d="M3 7l6 6 4-4 8 8M15 17h6v-6" />}
+                    </svg>
+                  </div>
+                  <div className="fin-growth-text">
+                    <div className="fin-growth-pct">{isGrowthUp ? '+' : ''}{growthPct}%</div>
+                    <div className="fin-growth-desc">
+                      {isGrowthUp ? 'Meningkat' : 'Menurun'} dari {namaBulanLalu}
+                      <span className="fin-growth-sub"> ({formatRupiah(penghasilanBulanLalu)})</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid-2">
+              <div className="card">
+                <div className="card-head">
+                  <h3>Tren Booking &amp; Klien</h3>
+                  <span className="chart-tag">{curYear}</span>
+                </div>
+                {!adaDataTahunIni ? (
+                  <div className="empty-state">Belum ada data tahun ini</div>
+                ) : (
+                  <TrendChart
+                    months={BULAN_SINGKAT}
+                    mounted={chartsIn}
+                    series={[
+                      { label: 'Booking', values: monthlyStats.map((m) => m.booking), color: trendColorA },
+                      { label: 'Klien', values: monthlyStats.map((m) => m.klien), color: trendColorB },
+                    ]}
+                  />
+                )}
+              </div>
+
+              <div className="card">
+                <div className="card-head">
+                  <h3>Tren Omzet &amp; Penghasilan</h3>
+                  <span className="chart-tag">{curYear}</span>
+                </div>
+                {!adaDataTahunIni ? (
+                  <div className="empty-state">Belum ada data tahun ini</div>
+                ) : (
+                  <TrendChart
+                    months={BULAN_SINGKAT}
+                    mounted={chartsIn}
+                    area
+                    series={[
+                      { label: 'Omzet', values: monthlyStats.map((m) => m.omzet), color: trendColorA, format: formatRupiah },
+                      { label: 'Penghasilan', values: monthlyStats.map((m) => m.penghasilan), color: trendColorB, format: formatRupiah },
+                    ]}
+                  />
+                )}
+              </div>
+            </div>
+
+            <div className="grid-3">
+              <div className="card">
+                <div className="card-head"><h3>Event</h3></div>
+                {eventCounts.length === 0 ? (
+                  <div className="empty-state">Belum ada data</div>
+                ) : (
+                  <>
+                    <DonutChart
+                      data={eventCounts}
+                      colors={CHART_COLORS}
+                      centerValue={bookingBulanIni.length}
+                      centerLabel="ORDER"
+                    />
+                    <div className="legend">
+                      {eventCounts.map(([label, count], i) => (
+                        <div className="legend-row" key={label}>
+                          <span className="legend-dot" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }}></span>
+                          {label}<b>{Math.round((count / bookingBulanIni.length) * 100)}%</b>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              <div className="card">
+                <div className="card-head"><h3>Sumber Booking</h3></div>
+                {sumberCounts.length === 0 ? (
+                  <div className="empty-state">Belum ada data</div>
+                ) : (
+                  <>
+                    <DonutChart
+                      data={sumberCounts}
+                      colors={sumberCounts.map(([label], i) => sumberColor(label, i))}
+                      centerValue={`${Math.round((sumberCounts[0][1] / bookingBulanIni.length) * 100)}%`}
+                      centerLabel={sumberCounts[0][0].slice(0, 10).toUpperCase()}
+                    />
+                    <div className="legend">
+                      {sumberCounts.map(([label, count], i) => (
+                        <div className="legend-row" key={label}>
+                          <span className="legend-dot" style={{ background: sumberColor(label, i) }}></span>
+                          {label}<b>{Math.round((count / bookingBulanIni.length) * 100)}%</b>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              <div className="card">
+                <div className="card-head"><h3>Top 5 Lokasi</h3></div>
+                {lokasiCounts.length === 0 ? (
+                  <div className="empty-state">Belum ada data</div>
+                ) : (
+                  lokasiCounts.map(([label, count], i) => (
+                    <div className="bar-row" key={label}>
+                      <div className="bar-row-top"><span>{label}</span><span className="mono">{count}</span></div>
+                      <div className="bar-track">
+                        <div
+                          className="bar-fill"
+                          style={{
+                            width: chartsIn ? `${(count / lokasiCounts[0][1]) * 100}%` : '0%',
+                            transitionDelay: `${i * 0.08}s`,
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+
+            {bookingBulanIni.length > 0 && (
+              <div className="insight-strip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--violet-tx)" strokeWidth="2"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1.1.9 1.9v.2h5.2v-.2c0-.8.3-1.5.9-1.9A6 6 0 0 0 12 3Z"/></svg>
+                <span>
+                  Booking terbanyak dari <b>{sumberCounts[0]?.[0]} ({Math.round((sumberCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>
+                  {' · '}Event <b>{eventCounts[0]?.[0]} mendominasi ({Math.round((eventCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>
+                  {belumLunas.length > 0
+                    ? ` · Ingatkan ${belumLunas.length} klien yang belum lunas ya!`
+                    : ' · Semua booking sudah lunas 🎉'}
+                </span>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
+      {showModal && (
+        <BookingModal
+          onClose={() => setShowModal(false)}
+          onSaved={handleBookingSaved}
+        />
+      )}
+
+      {selectedBooking && (
+        <BookingDetailModal
+          booking={selectedBooking}
+          onClose={() => setSelectedBooking(null)}
+          onChanged={loadBookings}
+        />
+      )}
+
+      {toast && (
+        <div style={{
+          position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)',
+          background: 'var(--ink)', color: '#fff', padding: '12px 22px', borderRadius: 12,
+          fontSize: 13.5, fontWeight: 600, boxShadow: '0 12px 30px -10px rgba(43,36,56,0.4)', zIndex: 60,
+        }}>
+          {toast}
+        </div>
+      )}
+    </div>
+  )
+}

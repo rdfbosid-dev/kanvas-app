@@ -1,0 +1,137 @@
+/* Token warna diambil dari src/theme.css (termasuk dukungan dark mode) --
+   sengaja nggak didefinisiin ulang di sini biar nggak nabrak. */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--page-a) 0%, var(--page-b) 100%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--ink);
+  padding: 24px;
+}
+
+.auth-card {
+  background: var(--white);
+  border-radius: 24px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 24px 60px -20px rgba(43, 36, 56, 0.2);
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.auth-brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--grad);
+  flex-shrink: 0;
+}
+
+.auth-brand-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.auth-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.auth-subtitle {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.auth-field label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.auth-field input {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--ink);
+}
+
+.auth-field input:focus {
+  outline: none;
+  border-color: #C4A4F0;
+  box-shadow: 0 0 0 3px var(--violet-bg);
+}
+
+.auth-btn {
+  width: 100%;
+  background: var(--grad);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 6px;
+  box-shadow: 0 10px 22px -10px rgba(196, 164, 240, 0.7);
+}
+
+.auth-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-error {
+  background: #FDEAEC;
+  color: var(--coral-tx);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.auth-success {
+  background: #E6F7EE;
+  color: #2E8A5C;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 20px;
+}
+
+.auth-switch a {
+  color: var(--violet-tx);
+  font-weight: 600;
+  text-decoration: none;
+}
