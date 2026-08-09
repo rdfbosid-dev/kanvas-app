@@ -41,7 +41,7 @@ export default function Pengaturan() {
     setSaving(true)
     setMessage(null)
 
-    const cleanPrefix = kodePrefix.trim().toUpperCase().slice(0, 5) || 'BKG'
+    const cleanPrefix = kodePrefix.trim().toUpperCase().slice(0, 5) || 'Book'
 
     // upsert (bukan update) -- jaga-jaga kalau baris profiles ternyata
     // belum ada, update() akan diam-diam nggak ngapa-ngapain tanpa error.

@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
     // Baris profil belum ada (misal akun lama sebelum trigger auto-create
     // dipasang) -- bikinin baru sekarang, biar nggak nyangkut nunggu
     // data yang emang nggak akan pernah datang.
-    const fallback = { studio_name: 'Studio Saya', kode_prefix: 'BKG', instagram: '', whatsapp: '' }
+    const fallback = { studio_name: 'Studio Saya', kode_prefix: 'Book', instagram: '', whatsapp: '' }
     const { data: created, error: createErr } = await supabase
       .from('profiles')
       .upsert({ id: userId, ...fallback })
