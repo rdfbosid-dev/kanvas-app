@@ -148,11 +148,7 @@
 
 @media (max-width: 900px) {
   .app-shell { flex-direction: column; }
-  .sidebar { width: 100%; height: auto; position: static; flex-direction: row; align-items: center; overflow-x: auto; padding: 14px 16px; }
-  .sidebar .nav-section, .sidebar-bottom { display: none; }
-  .sidebar .brand { margin-bottom: 0; margin-right: 12px; }
-  .nav-item { white-space: nowrap; }
-  .main { padding: 20px; }
+  .main { padding: 18px; }
   .kpi-grid { grid-template-columns: repeat(2, 1fr); }
   .content-grid { grid-template-columns: 1fr; }
 }

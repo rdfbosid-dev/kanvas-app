@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
 import './Sidebar.css'
@@ -43,6 +44,11 @@ export default function Sidebar() {
   const { user, profile } = useAuth()
   const { theme, toggleTheme } = useTheme()
   const studioName = profile?.studio_name || ''
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
+
+  // otomatis nutup drawer tiap kali pindah halaman
+  useEffect(() => { setMobileOpen(false) }, [location.pathname])
 
   const initials = (studioName || user?.email || '?')
     .split(' ')
@@ -52,8 +58,25 @@ export default function Sidebar() {
     .toUpperCase()
 
   return (
-    <div className="sidebar">
-      <div className="brand">
+    <>
+      <div className="mobile-topbar">
+        <button type="button" className="hamburger-btn" onClick={() => setMobileOpen(true)}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+        </button>
+        <div className="mobile-brand">
+          <div className="brand-mark small"></div>
+          <span>Kanvas</span>
+        </div>
+      </div>
+
+      {mobileOpen && <div className="sidebar-backdrop" onClick={() => setMobileOpen(false)}></div>}
+
+      <div className={`sidebar${mobileOpen ? ' open' : ''}`}>
+        <button type="button" className="sidebar-close" onClick={() => setMobileOpen(false)}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+
+        <div className="brand">
         <div className="brand-mark"></div>
         <div>
           <div className="brand-name">Kanvas</div>
@@ -110,7 +133,8 @@ export default function Sidebar() {
             <div className="profile-role">{user?.email}</div>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

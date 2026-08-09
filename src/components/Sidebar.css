@@ -11,6 +11,48 @@
   position: sticky;
   top: 0;
   overflow-y: auto;
+  z-index: 100;
+}
+
+.sidebar-close { display: none; }
+.mobile-topbar { display: none; }
+.sidebar-backdrop { display: none; }
+
+/* ===== MOBILE: sidebar jadi drawer geser dari kiri ===== */
+@media (max-width: 900px) {
+  .mobile-topbar {
+    display: flex; align-items: center; gap: 12px;
+    position: sticky; top: 0; z-index: 90;
+    background: var(--white); border-bottom: 1px solid var(--line);
+    padding: 14px 18px;
+  }
+  .hamburger-btn {
+    width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line); background: var(--white);
+    display: flex; align-items: center; justify-content: center; color: var(--ink-soft); cursor: pointer; flex-shrink: 0;
+  }
+  .hamburger-btn svg { width: 18px; height: 18px; }
+  .mobile-brand { display: flex; align-items: center; gap: 9px; }
+  .mobile-brand span { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink); }
+  .brand-mark.small { width: 26px; height: 26px; border-radius: 8px; background: var(--grad); flex-shrink: 0; }
+
+  .sidebar-backdrop {
+    display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 99;
+  }
+
+  .sidebar {
+    position: fixed; top: 0; left: 0; height: 100vh; z-index: 100;
+    transform: translateX(-100%); transition: transform 0.25s ease;
+    background: var(--white); backdrop-filter: none; width: 78vw; max-width: 300px;
+    box-shadow: var(--shadow-modal);
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  .sidebar-close {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 9px; border: none; background: var(--page-a);
+    color: var(--ink-soft); position: absolute; top: 20px; right: 16px; cursor: pointer;
+  }
+  .sidebar-close svg { width: 15px; height: 15px; }
 }
 
 .brand { display: flex; align-items: center; gap: 11px; margin-bottom: 32px; padding: 0 6px; }
