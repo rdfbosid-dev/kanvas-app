@@ -5,6 +5,7 @@ import { useTheme } from '../context/ThemeContext'
 import Sidebar from '../components/Sidebar'
 import BookingModal from '../components/BookingModal'
 import BookingDetailModal from '../components/BookingDetailModal'
+import OnboardingModal from '../components/OnboardingModal'
 import DonutChart from '../components/DonutChart'
 import TrendChart from '../components/TrendChart'
 import './Dashboard.css'
@@ -49,6 +50,7 @@ export default function Dashboard() {
   const [chartsIn, setChartsIn] = useState(false)
   const [error, setError] = useState('')
   const [showModal, setShowModal] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(false)
   const [selectedBooking, setSelectedBooking] = useState(null)
   const [toast, setToast] = useState('')
 
@@ -64,10 +66,23 @@ export default function Dashboard() {
       setError(error.message)
     } else {
       setBookings(data || [])
+      // Munculin sambutan cuma buat akun yang beneran baru (belum ada
+      // booking sama sekali) DAN belum pernah nutup sambutan ini sebelumnya.
+      if (user && (data || []).length === 0) {
+        const key = `dapurmua-onboarded-${user.id}`
+        if (!localStorage.getItem(key)) {
+          setShowOnboarding(true)
+        }
+      }
     }
     setLoading(false)
     setChartsIn(false)
     requestAnimationFrame(() => requestAnimationFrame(() => setChartsIn(true)))
+  }
+
+  function dismissOnboarding() {
+    setShowOnboarding(false)
+    if (user) localStorage.setItem(`dapurmua-onboarded-${user.id}`, '1')
   }
 
   useEffect(() => {
@@ -480,6 +495,13 @@ export default function Dashboard() {
         }}>
           {toast}
         </div>
+      )}
+
+      {showOnboarding && (
+        <OnboardingModal
+          onClose={dismissOnboarding}
+          onBookingBaru={() => setShowModal(true)}
+        />
       )}
     </div>
   )
