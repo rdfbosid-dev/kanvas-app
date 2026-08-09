@@ -93,7 +93,7 @@ export default function Pengaturan() {
         <div className="topbar">
           <div>
             <div className="greeting">Pengaturan</div>
-            <div className="greeting-date">Kelola profil studio &amp; akunmu</div>
+            <div className="greeting-date">Kelola Profil Dapur MUA &amp; Akunmu</div>
           </div>
         </div>
 
@@ -102,7 +102,7 @@ export default function Pengaturan() {
         ) : (
           <div className="pengaturan-layout">
             <div className="card">
-              <div className="card-head"><h3>Profil Studio</h3></div>
+              <div className="card-head"><h3>Profil Dapur MUA</h3></div>
 
               {message && (
                 <div className={message.type === 'success' ? 'msg-success' : 'msg-error'}>{message.text}</div>
@@ -110,14 +110,14 @@ export default function Pengaturan() {
 
               <form onSubmit={handleSaveProfile}>
                 <div className="field">
-                  <label>Nama Studio</label>
-                  <input type="text" value={studioName} onChange={(e) => setStudioName(e.target.value)} placeholder="cth. Studio Anindya" />
+                  <label>Nama Brand MUA</label>
+                  <input type="text" value={studioName} onChange={(e) => setStudioName(e.target.value)} placeholder="contoh: Makeup by Jenny" />
                 </div>
                 <div className="field-row">
                   <div className="field">
                     <label>Kode Prefix Booking</label>
-                    <input type="text" value={kodePrefix} onChange={(e) => setKodePrefix(e.target.value)} placeholder="cth. MBS" maxLength={5} />
-                    <span className="field-hint">Dipakai buat kode otomatis, misal "{kodePrefix || 'MBS'}-0001"</span>
+                    <input type="text" value={kodePrefix} onChange={(e) => setKodePrefix(e.target.value)} placeholder="contoh: Book" maxLength={5} />
+                    <span className="field-hint">Dipakai buat kode otomatis, misal "{kodePrefix || 'Book'}-0001"</span>
                   </div>
                   <div className="field">
                     <label>Email</label>
@@ -127,11 +127,11 @@ export default function Pengaturan() {
                 <div className="field-row">
                   <div className="field">
                     <label>Instagram</label>
-                    <input type="text" value={instagram} onChange={(e) => setInstagram(e.target.value)} placeholder="@namastudio" />
+                    <input type="text" value={instagram} onChange={(e) => setInstagram(e.target.value)} placeholder="@makeupbyjenny" />
                   </div>
                   <div className="field">
-                    <label>WhatsApp Studio</label>
-                    <input type="text" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="0812xxxxxxx" />
+                    <label>Nomor WhatsApp</label>
+                    <input type="text" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="085xxxxxxx" />
                   </div>
                 </div>
                 <button className="btn-primary" type="submit" disabled={saving}>
