@@ -4,6 +4,8 @@ import { ThemeProvider } from './context/ThemeContext'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Landing from './pages/Landing'
+import LupaPassword from './pages/LupaPassword'
+import ResetPassword from './pages/ResetPassword'
 import Dashboard from './pages/Dashboard'
 import BookingList from './pages/BookingList'
 import Kalender from './pages/Kalender'
@@ -39,6 +41,8 @@ export default function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/lupa-password" element={<LupaPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route
               path="/dashboard"
               element={

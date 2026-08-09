@@ -123,6 +123,12 @@
   margin-bottom: 14px;
 }
 
+.auth-forgot {
+  display: block; text-align: right; font-size: 12px; font-weight: 600;
+  color: var(--violet-tx); text-decoration: none; margin-top: 6px;
+}
+.auth-forgot:hover { text-decoration: underline; }
+
 .auth-switch {
   text-align: center;
   font-size: 13px;

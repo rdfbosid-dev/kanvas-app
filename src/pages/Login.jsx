@@ -60,6 +60,7 @@ export default function Login() {
               placeholder="••••••••"
               required
             />
+            <Link to="/lupa-password" className="auth-forgot">Lupa kata sandi?</Link>
           </div>
           <button className="auth-btn" type="submit" disabled={loading}>
             {loading ? 'Memproses...' : 'Masuk'}
