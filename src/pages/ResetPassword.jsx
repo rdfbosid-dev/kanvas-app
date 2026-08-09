@@ -45,7 +45,7 @@ export default function ResetPassword() {
         <div className="auth-card">
           <div className="auth-brand">
             <div className="auth-brand-mark"></div>
-            <div className="auth-brand-name">Kanvas</div>
+            <div className="auth-brand-name">Dapur MUA</div>
           </div>
           <div className="auth-title">Kata sandi berhasil diubah ✅</div>
           <div className="auth-subtitle">Kamu sekarang bisa masuk pakai kata sandi barumu.</div>
@@ -60,7 +60,7 @@ export default function ResetPassword() {
       <div className="auth-card">
         <div className="auth-brand">
           <div className="auth-brand-mark"></div>
-          <div className="auth-brand-name">Kanvas</div>
+          <div className="auth-brand-name">Dapur MUA</div>
         </div>
 
         <div className="auth-title">Bikin kata sandi baru</div>

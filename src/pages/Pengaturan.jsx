@@ -163,7 +163,7 @@ export default function Pengaturan() {
 
             <div className="card danger-card">
               <div className="card-head"><h3>Keluar Akun</h3></div>
-              <p className="danger-text">Kamu akan keluar dari sesi ini dan perlu login ulang buat mengakses Kanvas lagi.</p>
+              <p className="danger-text">Kamu akan keluar dari sesi ini dan perlu login ulang buat mengakses Dapur MUA lagi.</p>
               <button className="btn-danger-ghost" onClick={signOut} type="button">Keluar</button>
             </div>
           </div>

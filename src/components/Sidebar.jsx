@@ -65,7 +65,7 @@ export default function Sidebar() {
         </button>
         <div className="mobile-brand">
           <div className="brand-mark small"></div>
-          <span>Kanvas</span>
+          <span>Dapur MUA</span>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ export default function Sidebar() {
         <div className="brand">
         <div className="brand-mark"></div>
         <div>
-          <div className="brand-name">Kanvas</div>
+          <div className="brand-name">Dapur MUA</div>
           <div className="brand-sub">{studioName || 'Studio Saya'}</div>
         </div>
       </div>

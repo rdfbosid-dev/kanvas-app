@@ -60,7 +60,7 @@ export default function Landing() {
       <header className="landing-nav">
         <div className="landing-brand">
           <div className="brand-mark"></div>
-          <span>Kanvas</span>
+          <span>Dapur MUA</span>
         </div>
         <nav className="landing-nav-links">
           <a href="#fitur">Fitur</a>
@@ -74,9 +74,9 @@ export default function Landing() {
 
       <section className="landing-hero">
         <div className="hero-badge">✨ Untuk Makeup Artist &amp; Studio Rias</div>
-        <h1>Booking, tim, dan uang masuk — <span className="hero-accent">di satu Kanvas.</span></h1>
+        <h1>Booking, tim, dan uang masuk — <span className="hero-accent">diracik rapi di Dapur MUA.</span></h1>
         <p className="hero-sub">
-          Kanvas ngerti kalau 1 booking bisa berisi banyak orang — masing-masing dengan paket,
+          Dapur MUA ngerti kalau 1 booking bisa berisi banyak orang — masing-masing dengan paket,
           tim pengerja, dan tambahan yang beda-beda. Semua kehitung otomatis, sampai ke invoice.
         </p>
         <div className="hero-actions">
@@ -138,7 +138,7 @@ export default function Landing() {
           <div className="cara-step">
             <div className="cara-num">2</div>
             <h3>Catat booking</h3>
-            <p>Isi data klien, peserta, dan tim yang ngerjain — Kanvas yang ngitungin sisanya.</p>
+            <p>Isi data klien, peserta, dan tim yang ngerjain — Dapur MUA yang ngitungin sisanya.</p>
           </div>
           <div className="cara-step">
             <div className="cara-num">3</div>
@@ -151,12 +151,12 @@ export default function Landing() {
       <section className="landing-cta">
         <h2>Siap rapiin bisnis makeup kamu?</h2>
         <p>Gratis buat mulai — nggak perlu kartu kredit.</p>
-        <Link to="/register" className="btn-primary large">Coba Kanvas Sekarang →</Link>
+        <Link to="/register" className="btn-primary large">Coba Dapur MUA Sekarang →</Link>
       </section>
 
       <footer className="landing-footer">
-        <div className="landing-brand"><div className="brand-mark small"></div><span>Kanvas</span></div>
-        <p>© 2026 Kanvas. Dibuat buat makeup artist Indonesia.</p>
+        <div className="landing-brand"><div className="brand-mark small"></div><span>Dapur MUA</span></div>
+        <p>© 2026 Dapur MUA. Dibuat buat makeup artist Indonesia.</p>
       </footer>
     </div>
   )

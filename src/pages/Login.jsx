@@ -32,7 +32,7 @@ export default function Login() {
       <div className="auth-card">
         <div className="auth-brand">
           <div className="auth-brand-mark"></div>
-          <div className="auth-brand-name">Kanvas</div>
+          <div className="auth-brand-name">Dapur MUA</div>
         </div>
 
         <div className="auth-title">Masuk</div>

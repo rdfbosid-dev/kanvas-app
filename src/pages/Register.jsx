@@ -49,7 +49,7 @@ export default function Register() {
         <div className="auth-card">
           <div className="auth-brand">
             <div className="auth-brand-mark"></div>
-            <div className="auth-brand-name">Kanvas</div>
+            <div className="auth-brand-name">Dapur MUA</div>
           </div>
           <div className="auth-title">Cek email kamu 📩</div>
           <div className="auth-subtitle">
@@ -69,7 +69,7 @@ export default function Register() {
       <div className="auth-card">
         <div className="auth-brand">
           <div className="auth-brand-mark"></div>
-          <div className="auth-brand-name">Kanvas</div>
+          <div className="auth-brand-name">Dapur MUA</div>
         </div>
 
         <div className="auth-title">Buat akun baru</div>
