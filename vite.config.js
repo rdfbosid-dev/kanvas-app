@@ -41,6 +41,12 @@ export default defineConfig({
         // Cache aset statis biar app tetap kebuka (walau data booking-nya
         // butuh internet buat update terbaru dari Supabase).
         globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+        // Tanpa 2 baris ini, versi baru yang di-deploy bakal "nyangkut"
+        // nunggu SEMUA instance app ditutup total dulu (jarang kejadian
+        // di HP, orang biasa cuma minimize doang) -- jadi update kerasa
+        // nggak pernah nyampe walau server-nya udah versi terbaru.
+        skipWaiting: true,
+        clientsClaim: true,
       },
     }),
   ],
