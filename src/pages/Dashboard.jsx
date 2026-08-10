@@ -93,6 +93,12 @@ export default function Dashboard() {
     loadBookings()
   }, [])
 
+  useEffect(() => {
+    if (!user) return
+    const stored = localStorage.getItem(`dapurmua-notif-read-${user.id}`)
+    if (stored) setNotifReadKey(stored)
+  }, [user])
+
   function handleBookingSaved(kodeBooking) {
     setShowModal(false)
     setToast(`Booking ${kodeBooking} berhasil disimpan ✅`)
@@ -251,7 +257,10 @@ export default function Dashboard() {
                 onClick={() => {
                   setNotifOpen((v) => {
                     const opening = !v
-                    if (opening) setNotifReadKey(notifKey)
+                    if (opening) {
+                      setNotifReadKey(notifKey)
+                      if (user) localStorage.setItem(`dapurmua-notif-read-${user.id}`, notifKey)
+                    }
                     return opening
                   })
                 }}
