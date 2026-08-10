@@ -54,6 +54,7 @@ export default function Dashboard() {
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [selectedBooking, setSelectedBooking] = useState(null)
   const [notifOpen, setNotifOpen] = useState(false)
+  const [notifReadKey, setNotifReadKey] = useState('')
   const navigate = useNavigate()
   const [toast, setToast] = useState('')
 
@@ -133,7 +134,11 @@ export default function Dashboard() {
       type: 'booking',
       id: b.id,
       title: `${b.nama_klien} — ${b.event || 'Booking'}`,
-      desc: dayLabel(b.tanggal_acara) + (b.jam_start_makeup ? ` · ${b.jam_start_makeup.slice(0, 5)} WIB` : ''),
+      desc: [
+        formatTanggal(b.tanggal_acara),
+        b.jam_start_makeup ? `${b.jam_start_makeup.slice(0, 5)} WIB` : null,
+        b.lokasi || null,
+      ].filter(Boolean).join(' · '),
       booking: b,
     })),
     ...(isAkhirBulan ? [{
@@ -143,6 +148,8 @@ export default function Dashboard() {
       desc: 'Hari terakhir bulan ini — cek rekap Keuangan & Laporan sekarang.',
     }] : []),
   ]
+  const notifKey = notifications.map((n) => n.id).join(',')
+  const hasUnreadNotif = notifications.length > 0 && notifReadKey !== notifKey
   const omzetBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.omzet) || 0), 0)
   const penghasilanBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.penghasilan) || 0), 0)
   const belanjaKlienBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.belanja_klien) || 0), 0)
@@ -240,8 +247,14 @@ export default function Dashboard() {
             <div className="notif-wrap">
               <button
                 type="button"
-                className={`icon-btn${notifications.length > 0 ? ' has-dot' : ''}`}
-                onClick={() => setNotifOpen((v) => !v)}
+                className={`icon-btn${hasUnreadNotif ? ' has-dot' : ''}`}
+                onClick={() => {
+                  setNotifOpen((v) => {
+                    const opening = !v
+                    if (opening) setNotifReadKey(notifKey)
+                    return opening
+                  })
+                }}
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
               </button>
@@ -250,7 +263,18 @@ export default function Dashboard() {
                 <>
                   <div className="notif-backdrop" onClick={() => setNotifOpen(false)}></div>
                   <div className="notif-panel">
-                    <div className="notif-panel-head">Notifikasi</div>
+                    <div className="notif-drag-handle"></div>
+                    <div className="notif-panel-head">
+                      <span>Notifikasi</span>
+                      <button
+                        type="button"
+                        className="notif-close-btn"
+                        onClick={() => setNotifOpen(false)}
+                        aria-label="Tutup notifikasi"
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                      </button>
+                    </div>
                     {notifications.length === 0 ? (
                       <div className="notif-empty">Nggak ada notifikasi baru saat ini.</div>
                     ) : (
