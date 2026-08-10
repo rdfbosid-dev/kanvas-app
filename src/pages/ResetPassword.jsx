@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import ThemeToggleButton from '../components/ThemeToggleButton'
 import './Auth.css'
 
 export default function ResetPassword() {
@@ -42,6 +43,7 @@ export default function ResetPassword() {
   if (done) {
     return (
       <div className="auth-page">
+      <div className="auth-page-toggle"><ThemeToggleButton /></div>
         <div className="auth-card">
           <div className="auth-brand">
             <div className="auth-brand-mark"></div>
@@ -57,6 +59,7 @@ export default function ResetPassword() {
 
   return (
     <div className="auth-page">
+      <div className="auth-page-toggle"><ThemeToggleButton /></div>
       <div className="auth-card">
         <div className="auth-brand">
           <div className="auth-brand-mark"></div>

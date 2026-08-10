@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
@@ -52,6 +53,8 @@ export default function Dashboard() {
   const [showModal, setShowModal] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [selectedBooking, setSelectedBooking] = useState(null)
+  const [notifOpen, setNotifOpen] = useState(false)
+  const navigate = useNavigate()
   const [toast, setToast] = useState('')
 
   async function loadBookings() {
@@ -111,6 +114,35 @@ export default function Dashboard() {
 
   const bookingBulanIni = bookings.filter(isThisMonth)
   const pesertaBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.total_klien) || 0), 0)
+
+  // ---- Notifikasi: booking dalam 3 hari ke depan + pengingat laporan
+  // bulanan kalau hari ini kebetulan hari terakhir di bulan ini. ----
+  const in3Days = new Date(today)
+  in3Days.setDate(in3Days.getDate() + 3)
+  const bookingSegera = bookings
+    .filter((b) => {
+      const d = new Date(b.tanggal_acara)
+      return d >= new Date(today.toDateString()) && d <= in3Days
+    })
+    .sort((a, b) => new Date(a.tanggal_acara) - new Date(b.tanggal_acara))
+
+  const isAkhirBulan = new Date(curYear, curMonth + 1, 0).getDate() === today.getDate()
+
+  const notifications = [
+    ...bookingSegera.map((b) => ({
+      type: 'booking',
+      id: b.id,
+      title: `${b.nama_klien} — ${b.event || 'Booking'}`,
+      desc: dayLabel(b.tanggal_acara) + (b.jam_start_makeup ? ` · ${b.jam_start_makeup.slice(0, 5)} WIB` : ''),
+      booking: b,
+    })),
+    ...(isAkhirBulan ? [{
+      type: 'laporan',
+      id: 'laporan-bulan',
+      title: 'Laporan bulan ini udah lengkap',
+      desc: 'Hari terakhir bulan ini — cek rekap Keuangan & Laporan sekarang.',
+    }] : []),
+  ]
   const omzetBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.omzet) || 0), 0)
   const penghasilanBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.penghasilan) || 0), 0)
   const belanjaKlienBulanIni = bookingBulanIni.reduce((sum, b) => sum + (Number(b.belanja_klien) || 0), 0)
@@ -205,8 +237,50 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="topbar-actions">
-            <div className="icon-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+            <div className="notif-wrap">
+              <button
+                type="button"
+                className={`icon-btn${notifications.length > 0 ? ' has-dot' : ''}`}
+                onClick={() => setNotifOpen((v) => !v)}
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+              </button>
+
+              {notifOpen && (
+                <>
+                  <div className="notif-backdrop" onClick={() => setNotifOpen(false)}></div>
+                  <div className="notif-panel">
+                    <div className="notif-panel-head">Notifikasi</div>
+                    {notifications.length === 0 ? (
+                      <div className="notif-empty">Nggak ada notifikasi baru saat ini.</div>
+                    ) : (
+                      notifications.map((n) => (
+                        <div
+                          className="notif-item"
+                          key={n.id}
+                          onClick={() => {
+                            setNotifOpen(false)
+                            if (n.type === 'booking') setSelectedBooking(n.booking)
+                            else navigate('/laporan')
+                          }}
+                        >
+                          <div className={`notif-icon ${n.type}`}>
+                            {n.type === 'booking' ? (
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
+                            ) : (
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M7 14l4-5 3 3 5-7"/></svg>
+                            )}
+                          </div>
+                          <div>
+                            <div className="notif-item-title">{n.title}</div>
+                            <div className="notif-item-desc">{n.desc}</div>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </>
+              )}
             </div>
             <button className="btn-primary" onClick={() => setShowModal(true)} type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 5v14M5 12h14"/></svg>

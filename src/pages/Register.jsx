@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import ThemeToggleButton from '../components/ThemeToggleButton'
 import './Auth.css'
 
 export default function Register() {
@@ -46,6 +47,7 @@ export default function Register() {
   if (success) {
     return (
       <div className="auth-page">
+      <div className="auth-page-toggle"><ThemeToggleButton /></div>
         <div className="auth-card">
           <div className="auth-brand">
             <div className="auth-brand-mark"></div>

@@ -75,6 +75,7 @@
   font-size: 14px;
   font-family: inherit;
   color: var(--ink);
+  background: var(--white);
 }
 
 .auth-field input:focus {
@@ -128,6 +129,8 @@
   color: var(--violet-tx); text-decoration: none; margin-top: 6px;
 }
 .auth-forgot:hover { text-decoration: underline; }
+
+.auth-page-toggle { position: fixed; top: 20px; right: 20px; z-index: 10; }
 
 .auth-switch {
   text-align: center;

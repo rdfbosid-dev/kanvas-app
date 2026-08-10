@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import ThemeToggleButton from '../components/ThemeToggleButton'
 import './Landing.css'
 
 const FITUR = [
@@ -67,6 +68,7 @@ export default function Landing() {
           <a href="#cara-kerja">Cara Kerja</a>
         </nav>
         <div className="landing-nav-actions">
+          <ThemeToggleButton />
           <Link to="/login" className="btn-text">Masuk</Link>
           <Link to="/register" className="btn-primary">Coba Gratis</Link>
         </div>
@@ -156,7 +158,7 @@ export default function Landing() {
 
       <footer className="landing-footer">
         <div className="landing-brand"><div className="brand-mark small"></div><span>Dapur MUA</span></div>
-        <p>© 2026 Dapur MUA. Dibuat buat makeup artist Indonesia.</p>
+        <p>© 2026 Dapur MUA. Hak cipta dilindungi. Dibuat buat makeup artist Indonesia.</p>
       </footer>
     </div>
   )

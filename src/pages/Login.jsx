@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import ThemeToggleButton from '../components/ThemeToggleButton'
 import './Auth.css'
 
 export default function Login() {
@@ -29,6 +30,7 @@ export default function Login() {
 
   return (
     <div className="auth-page">
+      <div className="auth-page-toggle"><ThemeToggleButton /></div>
       <div className="auth-card">
         <div className="auth-brand">
           <div className="auth-brand-mark"></div>
@@ -36,7 +38,7 @@ export default function Login() {
         </div>
 
         <div className="auth-title">Masuk</div>
-        <div className="auth-subtitle">Kelola booking &amp; keuangan bisnis MUA-mu di sini.</div>
+        <div className="auth-subtitle">Kelola booking &amp; keuangan studiomu di sini.</div>
 
         {error && <div className="auth-error">{error}</div>}
 
