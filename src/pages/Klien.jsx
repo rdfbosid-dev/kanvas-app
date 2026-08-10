@@ -17,48 +17,86 @@ function initialsOf(name) {
 
 export default function Klien() {
   const [bookings, setBookings] = useState([])
+  const [klienRows, setKlienRows] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
   const [selectedClient, setSelectedClient] = useState(null)
   const [selectedBooking, setSelectedBooking] = useState(null)
 
-  async function loadBookings() {
+  async function loadData() {
     setLoading(true)
     setError('')
-    const { data, error } = await supabase
-      .from('booking_summary')
-      .select('*')
-      .order('tanggal_acara', { ascending: false })
-    if (error) setError(error.message)
-    else setBookings(data || [])
+    const [bookingRes, klienRes] = await Promise.all([
+      supabase.from('booking_summary').select('*').order('tanggal_acara', { ascending: false }),
+      supabase.from('klien').select('id, nama, nomor_whatsapp'),
+    ])
+    if (bookingRes.error) setError(bookingRes.error.message)
+    else if (klienRes.error) setError(klienRes.error.message)
+    else {
+      setBookings(bookingRes.data || [])
+      setKlienRows(klienRes.data || [])
+    }
     setLoading(false)
   }
-  useEffect(() => { loadBookings() }, [])
+  useEffect(() => { loadData() }, [])
 
+  // Kelompokkan booking berdasarkan klien_id (ID unik asli dari tabel klien)
+  // -- bukan lagi nebak dari kesamaan nama. Jadi 2 klien beda orang yang
+  // kebetulan namanya sama (nomor WA beda) bakal tetap muncul sebagai
+  // 2 kartu terpisah.
   const clients = useMemo(() => {
     const map = new Map()
+    klienRows.forEach((k) => {
+      map.set(k.id, {
+        id: k.id,
+        nama: k.nama,
+        whatsapp: k.nomor_whatsapp,
+        bookingList: [],
+        totalBelanja: 0,
+        totalSisa: 0,
+        lastTanggal: null,
+      })
+    })
+
+    // Fallback buat booking lama yang belum ke-link klien_id-nya (mestinya
+    // sudah dibackfill lewat migrasi, tapi dijaga di sini biar nggak ada
+    // booking yang "hilang" dari halaman ini kalau ada yang kelewat).
+    let fallbackKlienCounter = 0
+    const fallbackMap = new Map()
+
     bookings.forEach((b) => {
-      const key = (b.nama_klien || '').trim().toLowerCase()
-      if (!key) return
-      if (!map.has(key)) {
-        map.set(key, {
-          nama: b.nama_klien,
-          whatsapp: b.nomor_whatsapp,
-          bookingList: [],
-          totalBelanja: 0,
-          totalSisa: 0,
-          lastTanggal: b.tanggal_acara,
-        })
+      let clientKey = b.klien_id
+      if (!clientKey || !map.has(clientKey)) {
+        const nameKey = (b.nama_klien || '').trim().toLowerCase()
+        if (!nameKey) return
+        if (!fallbackMap.has(nameKey)) {
+          fallbackKlienCounter += 1
+          fallbackMap.set(nameKey, `fallback-${fallbackKlienCounter}`)
+          map.set(fallbackMap.get(nameKey), {
+            id: fallbackMap.get(nameKey),
+            nama: b.nama_klien,
+            whatsapp: b.nomor_whatsapp,
+            bookingList: [],
+            totalBelanja: 0,
+            totalSisa: 0,
+            lastTanggal: null,
+          })
+        }
+        clientKey = fallbackMap.get(nameKey)
       }
-      const c = map.get(key)
+
+      const c = map.get(clientKey)
       c.bookingList.push(b)
       c.totalBelanja += Number(b.belanja_klien) || 0
       c.totalSisa += Number(b.sisa_kekurangan) || 0
-      if (new Date(b.tanggal_acara) > new Date(c.lastTanggal)) c.lastTanggal = b.tanggal_acara
+      if (!c.lastTanggal || new Date(b.tanggal_acara) > new Date(c.lastTanggal)) c.lastTanggal = b.tanggal_acara
     })
-    return Array.from(map.values()).sort((a, b) => new Date(b.lastTanggal) - new Date(a.lastTanggal))
-  }, [bookings])
+
+    return Array.from(map.values())
+      .filter((c) => c.bookingList.length > 0)
+      .sort((a, b) => new Date(b.lastTanggal) - new Date(a.lastTanggal))
+  }, [bookings, klienRows])
 
   const filtered = clients.filter((c) =>
     !search.trim() || c.nama?.toLowerCase().includes(search.trim().toLowerCase())
@@ -93,7 +131,7 @@ export default function Klien() {
           ) : (
             <div className="klien-grid">
               {filtered.map((c) => (
-                <div className="klien-card" key={c.nama} onClick={() => setSelectedClient(c)}>
+                <div className="klien-card" key={c.id} onClick={() => setSelectedClient(c)}>
                   <div className="b-avatar big">{initialsOf(c.nama)}</div>
                   <div className="klien-name">{c.nama}</div>
                   <div className="klien-wa">{c.whatsapp || '-'}</div>
@@ -123,6 +161,7 @@ export default function Klien() {
                 <div><span className="detail-label">No. WhatsApp</span><div>{selectedClient.whatsapp || '-'}</div></div>
                 <div><span className="detail-label">Total Booking</span><div>{selectedClient.bookingList.length}</div></div>
                 <div><span className="detail-label">Total Belanja</span><div>{formatRupiah(selectedClient.totalBelanja)}</div></div>
+                <div><span className="detail-label">ID Klien</span><div style={{ fontFamily: 'monospace', fontSize: 12 }}>{selectedClient.id.slice(0, 8)}</div></div>
               </div>
               <div className="section-label">Riwayat Booking</div>
               {selectedClient.bookingList.map((b) => (
@@ -149,7 +188,7 @@ export default function Klien() {
         <BookingDetailModal
           booking={selectedBooking}
           onClose={() => setSelectedBooking(null)}
-          onChanged={loadBookings}
+          onChanged={loadData}
         />
       )}
     </div>

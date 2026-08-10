@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import CustomSelect from './CustomSelect'
 import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL } from '../lib/constants'
+import { cariAtauBuatKlien } from '../lib/klien'
 import './BookingModal.css'
 
 function todayStr() {
@@ -40,6 +41,41 @@ export default function BookingModal({ onClose, onSaved }) {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
+  const [existingClients, setExistingClients] = useState([])
+  const [showSuggest, setShowSuggest] = useState(false)
+
+  // Ambil daftar klien (dari tabel `klien`, yang masing-masing punya ID unik
+  // asli) buat autocomplete di field Nama klien -- biar klien yang booking
+  // ulang nggak perlu ngetik ulang nomor WA-nya. Karena sumbernya sekarang
+  // tabel klien asli (bukan nebak dari nama di bookings), 2 klien beda orang
+  // yang kebetulan namanya sama bakal tetap muncul terpisah (beda nomor WA).
+  useEffect(() => {
+    async function loadExistingClients() {
+      const { data } = await supabase
+        .from('klien')
+        .select('id, nama, nomor_whatsapp')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+
+      if (data) setExistingClients(data)
+    }
+    if (user) loadExistingClients()
+  }, [user])
+
+  const namaKlienTrim = namaKlien.trim().toLowerCase()
+  const clientSuggestions = namaKlienTrim
+    ? existingClients
+        .filter((c) => c.nama.toLowerCase().includes(namaKlienTrim) && c.nama.toLowerCase() !== namaKlienTrim)
+        .slice(0, 5)
+    : []
+
+  function pilihKlien(c) {
+    setNamaKlien(c.nama)
+    if (c.nomor_whatsapp) setNomorWhatsApp(c.nomor_whatsapp)
+    setShowSuggest(false)
+  }
+
+
   function updatePeserta(i, field, value) {
     setPesertaList((list) => list.map((p, idx) => (idx === i ? { ...p, [field]: value } : p)))
   }
@@ -60,10 +96,20 @@ export default function BookingModal({ onClose, onSaved }) {
 
     setSaving(true)
 
+    let klienId = null
+    try {
+      klienId = await cariAtauBuatKlien(user.id, namaKlien, nomorWhatsApp)
+    } catch (klienErr) {
+      setError('Gagal memproses data klien: ' + klienErr.message)
+      setSaving(false)
+      return
+    }
+
     const { data: booking, error: bookingError } = await supabase
       .from('bookings')
       .insert({
         user_id: user.id,
+        klien_id: klienId,
         tanggal_booking: tanggalBooking,
         nama_klien: namaKlien.trim(),
         nomor_whatsapp: nomorWhatsApp.trim(),
@@ -144,9 +190,32 @@ export default function BookingModal({ onClose, onSaved }) {
                 <label>Tanggal booking <span className="req">*</span></label>
                 <input type="date" value={tanggalBooking} onChange={(e) => setTanggalBooking(e.target.value)} required />
               </div>
-              <div className="field">
+              <div className="field" style={{ position: 'relative' }}>
                 <label>Nama klien <span className="req">*</span></label>
-                <input type="text" placeholder="cth. Ulya Ramadhani" value={namaKlien} onChange={(e) => setNamaKlien(e.target.value)} required />
+                <input
+                  type="text"
+                  placeholder="cth. Ulya Ramadhani"
+                  value={namaKlien}
+                  onChange={(e) => { setNamaKlien(e.target.value); setShowSuggest(true) }}
+                  onFocus={() => setShowSuggest(true)}
+                  onBlur={() => setTimeout(() => setShowSuggest(false), 120)}
+                  autoComplete="off"
+                  required
+                />
+                {showSuggest && clientSuggestions.length > 0 && (
+                  <div className="klien-suggest">
+                    {clientSuggestions.map((c) => (
+                      <div
+                        key={c.id}
+                        className="klien-suggest-item"
+                        onMouseDown={() => pilihKlien(c)}
+                      >
+                        <span className="klien-suggest-name">{c.nama}</span>
+                        {c.nomor_whatsapp && <span className="klien-suggest-wa">{c.nomor_whatsapp}</span>}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="field">
                 <label>No. WhatsApp</label>

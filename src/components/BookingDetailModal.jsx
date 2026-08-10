@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import CustomSelect from './CustomSelect'
 import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL } from '../lib/constants'
+import { cariAtauBuatKlien } from '../lib/klien'
 import InvoiceModal from './InvoiceModal'
 import './BookingModal.css'
 import './BookingDetailModal.css'
@@ -119,9 +120,19 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
     setSaving(true)
     setError('')
 
+    let klienId = null
+    try {
+      klienId = await cariAtauBuatKlien(user.id, namaKlien, nomorWhatsApp)
+    } catch (klienErr) {
+      setSaving(false)
+      setError('Gagal memproses data klien: ' + klienErr.message)
+      return
+    }
+
     const { error: updateErr } = await supabase
       .from('bookings')
       .update({
+        klien_id: klienId,
         nama_klien: namaKlien.trim(),
         nomor_whatsapp: nomorWhatsApp.trim(),
         sumber,
