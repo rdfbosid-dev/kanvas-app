@@ -75,11 +75,11 @@ export default function Landing() {
       </header>
 
       <section className="landing-hero">
-        <div className="hero-badge">✨ Untuk Makeup Artist &amp; Studio Rias</div>
-        <h1>Booking, tim, dan uang masuk — <span className="hero-accent">diracik rapi di Dapur MUA.</span></h1>
+        <div className="hero-badge">Dashboard Balik Layar Make Up Artist</div>
+        <h1>Data Booking, Kalender Agenda, dan Keuangan — <span className="hero-accent">diracik rapi di Dapur MUA.</span></h1>
         <p className="hero-sub">
-          Dapur MUA ngerti kalau 1 booking bisa berisi banyak orang — masing-masing dengan paket,
-          tim pengerja, dan tambahan yang beda-beda. Semua kehitung otomatis, sampai ke invoice.
+          Dapur MUA bantu kerjamu jadi lebih simpel, rapi, dan terukur.<br />
+          Nggak ada lagi data tercecer dan lupa jadwal!
         </p>
         <div className="hero-actions">
           <Link to="/register" className="btn-primary large">Mulai Gratis Sekarang →</Link>
@@ -101,9 +101,9 @@ export default function Landing() {
             <span className="hp-pill">Belum Lunas</span>
           </div>
           <div className="hp-card hp-row">
-            <div className="hp-avatar alt">N</div>
+            <div className="hp-avatar alt">L</div>
             <div className="hp-row-info">
-              <div className="hp-row-name">Naura</div>
+              <div className="hp-row-name">Lyodra</div>
               <div className="hp-row-meta">Bridesmaid · H-2</div>
             </div>
             <span className="hp-pill lunas">Lunas</span>
@@ -113,8 +113,9 @@ export default function Landing() {
 
       <section className="landing-fitur" id="fitur">
         <div className="section-head">
-          <h2>Semua yang studio kamu butuhin</h2>
-          <p>Dari booking pertama sampai laporan akhir tahun, semuanya dalam satu tempat.</p>
+          <h2>Semua yang MUA butuhin</h2>
+          <p>Dari rekap booking, invoice otomatis, sampai progres usahamu.<br />
+          Semuanya dalam satu tempat.</p>
         </div>
         <div className="fitur-grid">
           {FITUR.map((f) => (

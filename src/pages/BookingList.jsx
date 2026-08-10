@@ -145,7 +145,7 @@ export default function BookingList() {
                       <td>{b.event || '-'}</td>
                       <td className="mono">{formatTanggal(b.tanggal_acara)}</td>
                       <td>{b.lokasi || '-'}</td>
-                      <td className="right mono">{formatRupiah(b.belanja_klien)}</td>
+                      <td className="right mono">{formatRupiah(b.sisa_kekurangan)}</td>
                       <td>
                         <span className={`status-pill ${b.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
                           {b.status_pembayaran}
