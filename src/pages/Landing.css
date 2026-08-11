@@ -13,8 +13,18 @@
 .landing-brand-mark.small { width: 26px; height: 26px; border-radius: 8px; }
 
 .landing-nav-links { display: flex; gap: 32px; }
-.landing-nav-links a { color: var(--ink-soft); font-size: 14px; font-weight: 600; text-decoration: none; }
+.landing-nav-links a {
+  color: var(--ink-soft); font-size: 14px; font-weight: 600; text-decoration: none;
+  position: relative; padding-bottom: 5px;
+}
+.landing-nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 2px; border-radius: 2px; background: var(--grad);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform 0.25s ease;
+}
 .landing-nav-links a:hover { color: var(--violet-tx); }
+.landing-nav-links a:hover::after { transform: scaleX(1); }
 
 .landing-nav-actions { display: flex; align-items: center; gap: 18px; }
 .btn-text { color: var(--ink-soft); font-size: 14px; font-weight: 600; text-decoration: none; }
