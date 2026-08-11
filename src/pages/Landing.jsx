@@ -6,32 +6,32 @@ const FITUR = [
   {
     icon: 'grid',
     title: 'Dashboard Real-Time',
-    desc: 'Lihat omzet, penghasilan, dan booking bulan ini sekali buka — lengkap dengan grafik tren dan insight otomatis.',
+    desc: 'Lihat omzet, penghasilan, dan booking bulananan cukup sekali buka — lengkap dengan grafik tren dan insight otomatis.',
   },
   {
     icon: 'plus-circle',
-    title: 'Booking Multi-Peserta',
-    desc: 'Satu booking bisa ada banyak peserta, masing-masing dengan paket, tim pengerja, dan layanan tambahan sendiri.',
+    title: 'Booking Multi-Klien',
+    desc: 'Fitur satu booking bisa banyak klien, beda paket, beda tim, dan layanan tambahan sendiri.',
   },
   {
     icon: 'calendar',
     title: 'Kalender Visual',
-    desc: 'Lihat jadwal sebulan penuh, warna otomatis nunjukin hari mana yang santai, agak padat, atau padat.',
+    desc: 'Sinkronisasi jadwal booking dengan kalender di HP-mu, fitur penanda tanggal booking, dan reminder otomatis.',
   },
   {
     icon: 'users',
     title: 'Riwayat Klien',
-    desc: 'Semua klien otomatis terekap — total booking, total belanja, dan riwayat lengkapnya, tanpa input manual.',
+    desc: 'Semua data klien otomatis terekap — total booking, total belanja, dan riwayat lengkapnya, tanpa ribet.',
   },
   {
     icon: 'trend',
     title: 'Keuangan Otomatis',
-    desc: 'Omzet, komisi tim, dan penghasilan bersih dihitung otomatis dari tiap booking — nggak perlu Excel lagi.',
+    desc: 'Omzet, komisi, dan penghasilan bersih dihitung otomatis dari tiap booking — nggak perlu catat berkali-kali.',
   },
   {
     icon: 'file',
     title: 'Invoice Sekali Klik',
-    desc: 'Buat invoice rapi buat klien, kirim langsung ke WhatsApp atau simpan sebagai PDF.',
+    desc: 'Fitur invoice rapi buat klien, bisa kirim langsung ke WhatsApp klien, atau simpan sebagai arsip.',
   },
 ]
 
@@ -60,8 +60,11 @@ export default function Landing() {
     <div className="landing">
       <header className="landing-nav">
         <div className="landing-brand">
-          <div className="brand-mark"></div>
-          <span>Dapur MUA</span>
+          <div className="landing-brand-mark"></div>
+          <div className="landing-brand-text">
+          <span className="landing-brand-title">Dapur MUA</span>
+          <span className="landing-brand-tagline">Dashboard Balik Layar Make Up Artist</span>
+          </div>
         </div>
         <nav className="landing-nav-links">
           <a href="#fitur">Fitur</a>
@@ -113,8 +116,8 @@ export default function Landing() {
 
       <section className="landing-fitur" id="fitur">
         <div className="section-head">
-          <h2>Semua yang MUA butuhin</h2>
-          <p>Dari rekap booking, invoice otomatis, sampai progres usahamu.<br />
+          <h2>Semua yang MUA butuhin ...</h2>
+          <p>dari rekap booking, invoice otomatis, sampai progres usahamu.<br />
           Semuanya dalam satu tempat.</p>
         </div>
         <div className="fitur-grid">
@@ -135,31 +138,31 @@ export default function Landing() {
         <div className="cara-grid">
           <div className="cara-step">
             <div className="cara-num">1</div>
-            <h3>Daftar akun studio</h3>
-            <p>Bikin akun gratis dalam hitungan detik, langsung dapat Dashboard sendiri.</p>
+            <h3>Daftar akun Dapur MUA</h3>
+            <p>Bikin akun gratis dalam hitungan detik, langsung dapat dashboard sendiri.</p>
           </div>
           <div className="cara-step">
             <div className="cara-num">2</div>
-            <h3>Catat booking</h3>
-            <p>Isi data klien, peserta, dan tim yang ngerjain — Dapur MUA yang ngitungin sisanya.</p>
+            <h3>Input booking</h3>
+            <p>Isi data klien, tanggal acara, event makeup, Dapur MUA yang ngerekap sisanya.</p>
           </div>
           <div className="cara-step">
             <div className="cara-num">3</div>
-            <h3>Pantau &amp; berkembang</h3>
-            <p>Lihat tren omzet, klien yang belum lunas, dan performa studio dari Dashboard.</p>
+            <h3>Pantau Progres</h3>
+            <p>Lihat data klien, lokasi makeup, tren omzet dan penghasilan untuk pengembangan usahamu cukup dalam satu dashboard.</p>
           </div>
         </div>
       </section>
 
       <section className="landing-cta">
         <h2>Siap rapiin bisnis makeup kamu?</h2>
-        <p>Gratis buat mulai — nggak perlu kartu kredit.</p>
+        <p>Gratis buat mulai — nggak perlu ribet.</p>
         <Link to="/register" className="btn-primary large">Coba Dapur MUA Sekarang →</Link>
       </section>
 
       <footer className="landing-footer">
-        <div className="landing-brand"><div className="brand-mark small"></div><span>Dapur MUA</span></div>
-        <p>© 2026 Dapur MUA. Hak cipta dilindungi. Dibuat buat makeup artist Indonesia.</p>
+        <div className="landing-brand"><div className="brand-mark small"></div><span className="landing-brand-title">Dapur MUA</span></div>
+        <p>© 2026 Dapur MUA. Hak cipta dilindungi.</p>
       </footer>
     </div>
   )
