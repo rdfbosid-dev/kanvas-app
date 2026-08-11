@@ -8,8 +8,8 @@
 .landing-brand { display: flex; align-items: center; gap: 10px; }
 .landing-brand-text { display: flex; flex-direction: column; }
 .landing-brand-title { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--ink); }
-.landing-brand-tagline { font-size: 14px; font-weight: 500; color: var(--ink-faint); }
-.landing-brand-mark { width: 40px; height: 40px; border-radius: 11px; background: var(--grad); flex-shrink: 0; }
+.landing-brand-tagline { font-size: 10px; font-weight: 500; color: var(--ink-faint); }
+.landing-brand-mark { width: 36px; height: 36px; border-radius: 11px; background: var(--grad); flex-shrink: 0; }
 .landing-brand-mark.small { width: 26px; height: 26px; border-radius: 8px; }
 
 .landing-nav-links { display: flex; gap: 32px; }
@@ -28,7 +28,7 @@
 .btn-primary.large { padding:  15px 30px; font-size: 15.5px; border-radius: 14px; max-width: 300px;}
 
 .landing-hero {
-  text-align: center; padding: 90px 24px 60px; max-width: 900px; margin: 0 auto;
+  text-align: center; padding: 60px 24px 30px; max-width: 900px; margin: 0 auto;
   background: radial-gradient(circle at 50% 0%, var(--page-a) 0%, transparent 60%);
 }
 .hero-badge {
@@ -64,7 +64,7 @@
 .hp-pill { font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 20px; background: var(--coral-bg); color: var(--coral-tx); }
 .hp-pill.lunas { background: var(--mint-bg); color: var(--mint-tx); }
 
-.section-head { text-align: center; max-width: 560px; margin: 0 auto 44px; }
+.section-head { text-align: center; max-width: 560px; margin: 0 auto 40px; }
 .section-head h2 { font-family: 'Poppins', sans-serif; font-size: 32px; font-weight: 700; color: var(--ink); margin-bottom: 10px; text-wrap: balance; }
 .section-head p { font-size: 12px; color: var(--ink-faint); text-wrap: pretty; }
 
@@ -79,7 +79,7 @@
 .fitur-card h3 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
 .fitur-card p { font-size: 13.5px; color: var(--ink-faint); line-height: 1.6; }
 
-.landing-cara { padding: 40px 60px 90px; background: var(--page-a); }
+.landing-cara { padding: 40px 60px 30px; background: var(--page-a); }
 .cara-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1000px; margin: 0 auto; }
 .cara-step { text-align: center; }
 .cara-num {
@@ -90,12 +90,12 @@
 .cara-step h3 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
 .cara-step p { font-size: 13.5px; color: var(--ink-faint); line-height: 1.6; }
 
-.landing-cta { text-align: center; padding: 90px 24px; display: flex; flex-direction: column; align-items: center; }
+.landing-cta { text-align: center; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
 .landing-cta h2 { font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 700; color: var(--ink); margin-bottom: 10px; text-wrap: balance; }
 .landing-cta p { font-size: 15px; color: var(--ink-faint); margin-bottom: 28px; text-wrap: pretty; }
 
 .landing-footer {
-  display: flex; align-items: center; justify-content: space-between; padding: 28px 60px;
+  display: flex; align-items: center; justify-content: space-between; padding: 20px 60px;
   border-top: 1px solid var(--line);
 }
 .landing-footer p { font-size: 12.5px; color: var(--ink-faint); }
