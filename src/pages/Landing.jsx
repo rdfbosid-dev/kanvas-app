@@ -138,12 +138,12 @@ export default function Landing() {
         <div className="cara-grid">
           <div className="cara-step">
             <div className="cara-num">1</div>
-            <h3>Daftar akun Dapur MUA</h3>
+            <h3>Daftar Akun Dapur MUA</h3>
             <p>Bikin akun gratis dalam hitungan detik, langsung dapat dashboard sendiri.</p>
           </div>
           <div className="cara-step">
             <div className="cara-num">2</div>
-            <h3>Input booking</h3>
+            <h3>Input Booking</h3>
             <p>Isi data klien, tanggal acara, event makeup, Dapur MUA yang ngerekap sisanya.</p>
           </div>
           <div className="cara-step">

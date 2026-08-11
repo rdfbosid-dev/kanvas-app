@@ -3,8 +3,10 @@
 .landing-nav {
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 60px; position: sticky; top: 0; z-index: 20;
-  background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--white) 70%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
 }
+
 .landing-brand { display: flex; align-items: center; gap: 10px; }
 .landing-brand-text { display: flex; flex-direction: column; }
 .landing-brand-title { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--ink); }
@@ -14,12 +16,12 @@
 
 .landing-nav-links { display: flex; gap: 32px; }
 .landing-nav-links a {
-  color: var(--ink-soft); font-size: 14px; font-weight: 600; text-decoration: none;
+  color: var(--ink-soft); font-size: 14px; font-weight: 700; text-decoration: none;
   position: relative; padding-bottom: 5px;
 }
 .landing-nav-links a::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0;
-  height: 2px; border-radius: 2px; background: var(--grad);
+  height: 3px; border-radius: 2px; background: var(--grad);
   transform: scaleX(0); transform-origin: center;
   transition: transform 0.25s ease;
 }
@@ -62,15 +64,15 @@
 .hp-kpi-label { font-size: 12px; color: var(--ink-soft); font-weight: 600; }
 .hp-kpi-value { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; color: var(--ink); margin-top: 4px; }
 .hp-kpi-sub { font-size: 12px; color: var(--mint-tx); font-weight: 700; margin-top: 2px; }
-.hp-row { display: flex; align-items: center; gap: 10px; padding: 10px; background: var(--page-a); border-radius: 14px; }
+.hp-row { display: flex; align-items: center; gap: 10px; padding: 10px; background: var(--page-b); border-radius: 14px; }
 .hp-avatar {
-  width: 34px; height: 34px; border-radius: 50%; background: var(--grad-soft); color: var(--violet-tx);
+  width: 34px; height: 34px; border-radius: 50%; background: var(--grad-soft); color: var(--user-name);
   display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;
 }
 .hp-avatar.alt { background: var(--grad-soft-alt); color: var(--mint-tx); }
 .hp-row-info { flex: 1; min-width: 0; }
 .hp-row-name { font-size: 13px; font-weight: 700; color: var(--ink); }
-.hp-row-meta { font-size: 11px; color: var(--ink-faint); }
+.hp-row-meta { font-size: 11px; color: var(--ink); }
 .hp-pill { font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 20px; background: var(--coral-bg); color: var(--coral-tx); }
 .hp-pill.lunas { background: var(--mint-bg); color: var(--mint-tx); }
 
