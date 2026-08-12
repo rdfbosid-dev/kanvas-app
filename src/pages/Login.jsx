@@ -38,7 +38,7 @@ export default function Login() {
         </div>
 
         <div className="auth-title">Masuk</div>
-        <div className="auth-subtitle">Kelola booking &amp; keuangan studiomu di sini.</div>
+        <div className="auth-subtitle">Kelola dashboard MUA-mu di sini</div>
 
         {error && <div className="auth-error">{error}</div>}
 

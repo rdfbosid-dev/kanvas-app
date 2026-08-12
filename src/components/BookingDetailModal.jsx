@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import CustomSelect from './CustomSelect'
 import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL } from '../lib/constants'
 import { cariAtauBuatKlien } from '../lib/klien'
+import { formatAngkaInput, parseAngkaInput } from '../lib/format'
 import InvoiceModal from './InvoiceModal'
 import './BookingModal.css'
 import './BookingDetailModal.css'
@@ -300,7 +301,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       <div className="pay-edit-row" key={p.id}>
                         <div className="field-grid cols-2">
                           <div className="field"><label>Tanggal</label><input type="date" value={editPayDate} onChange={(e) => setEditPayDate(e.target.value)} /></div>
-                          <div className="field"><label>Jumlah</label><input type="number" value={editPayAmount} onChange={(e) => setEditPayAmount(e.target.value)} /></div>
+                          <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" value={formatAngkaInput(editPayAmount)} onChange={(e) => setEditPayAmount(parseAngkaInput(e.target.value))} /></div>
                         </div>
                         <div className="field">
                           <label>Metode</label>
@@ -336,7 +337,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 <form onSubmit={handleAddPayment} className="peserta-card" style={{ marginTop: 8 }}>
                   <div className="field-grid cols-2">
                     <div className="field"><label>Tanggal</label><input type="date" value={payDate} onChange={(e) => setPayDate(e.target.value)} /></div>
-                    <div className="field"><label>Jumlah</label><input type="number" placeholder="0" value={payAmount} onChange={(e) => setPayAmount(e.target.value)} /></div>
+                    <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(payAmount)} onChange={(e) => setPayAmount(parseAngkaInput(e.target.value))} /></div>
                   </div>
                   <div className="field-grid cols-2">
                     <div className="field">
@@ -417,7 +418,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
               </div>
               <div className="field-grid cols-2" style={{ marginTop: 12 }}>
                 <div className="field"><label>Lokasi</label><input type="text" value={lokasi} onChange={(e) => setLokasi(e.target.value)} /></div>
-                <div className="field"><label>Biaya transport</label><input type="number" value={biayaTransport} onChange={(e) => setBiayaTransport(e.target.value)} /></div>
+                <div className="field"><label>Biaya transport</label><input type="text" inputMode="numeric" value={formatAngkaInput(biayaTransport)} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} /></div>
               </div>
               <div className="field" style={{ marginTop: 12 }}><label>Catatan</label><textarea value={catatan} onChange={(e) => setCatatan(e.target.value)} /></div>
 
@@ -438,7 +439,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       <div className={`toggle-opt${p.jenis_paket === 'VIP' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'jenis_paket', 'VIP')}>VIP</div>
                     </div>
                     <div className="field-grid cols-2">
-                      <div className="field"><label>Biaya makeup</label><input type="number" value={p.biaya_makeup} onChange={(e) => updateEditPeserta(i, 'biaya_makeup', e.target.value)} /></div>
+                      <div className="field"><label>Biaya makeup</label><input type="text" inputMode="numeric" value={formatAngkaInput(p.biaya_makeup)} onChange={(e) => updateEditPeserta(i, 'biaya_makeup', parseAngkaInput(e.target.value))} /></div>
                       <div className="field">
                         <label>&nbsp;</label>
                         <div className="toggle-row">
@@ -448,7 +449,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       </div>
                     </div>
                     {p.dikerjakan_oleh_makeup === 'Tim' && (
-                      <div className="field"><label>Komisi</label><input type="number" value={p.komisi_makeup_tim} onChange={(e) => updateEditPeserta(i, 'komisi_makeup_tim', e.target.value)} /></div>
+                      <div className="field"><label>Komisi</label><input type="text" inputMode="numeric" value={formatAngkaInput(p.komisi_makeup_tim)} onChange={(e) => updateEditPeserta(i, 'komisi_makeup_tim', parseAngkaInput(e.target.value))} /></div>
                     )}
                     <div className="toggle-row">
                       <div className={`toggle-opt${p.layanan_tambahan === 'Tidak Ada' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Tidak Ada')}>Tidak ada</div>
@@ -457,7 +458,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                     </div>
                     {p.layanan_tambahan !== 'Tidak Ada' && (
                       <div className="field-grid cols-2">
-                        <div className="field"><label>Biaya tambahan</label><input type="number" value={p.biaya_tambahan} onChange={(e) => updateEditPeserta(i, 'biaya_tambahan', e.target.value)} /></div>
+                        <div className="field"><label>Biaya tambahan</label><input type="text" inputMode="numeric" value={formatAngkaInput(p.biaya_tambahan)} onChange={(e) => updateEditPeserta(i, 'biaya_tambahan', parseAngkaInput(e.target.value))} /></div>
                         <div className="field">
                           <label>&nbsp;</label>
                           <div className="toggle-row">

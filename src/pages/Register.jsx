@@ -68,25 +68,26 @@ export default function Register() {
 
   return (
     <div className="auth-page">
+      <div className="auth-page-toggle"><ThemeToggleButton /></div>
       <div className="auth-card">
         <div className="auth-brand">
           <div className="auth-brand-mark"></div>
           <div className="auth-brand-name">Dapur MUA</div>
         </div>
 
-        <div className="auth-title">Buat akun baru</div>
-        <div className="auth-subtitle">Mulai kelola booking studiomu dalam 1 menit.</div>
+        <div className="auth-title">Buat Akun Baru</div>
+        <div className="auth-subtitle">Mulai kelola dashboard MUA cukup dalam 1 menit</div>
 
         {error && <div className="auth-error">{error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="auth-field">
-            <label>Nama studio</label>
+            <label>Nama Brand MUA</label>
             <input
               type="text"
               value={studioName}
               onChange={(e) => setStudioName(e.target.value)}
-              placeholder="cth. Studio Anindya"
+              placeholder="contoh: MUA by Jennie"
             />
           </div>
           <div className="auth-field">

@@ -9,8 +9,10 @@
   --ink-soft: #7E6D9B;
   --ink-faint: #633480;
   --fitur-icon: #7a3f9e;
+  --placeholder: #7E6D9B;
   --user-name: #633480;
   --border: #EDE6F7;
+  --border-field: #C4A4F0;
   --line: #EDE6F7;
   --coral: #F0838C;
   --coral-bg: #EE727E;
@@ -42,7 +44,9 @@
   --ink-soft: #FFFFFF;
   --ink-faint: #E6DEF0;
   --fitur-icon: #FFFFFF;
-  --border: #544670;
+  --placeholder: #d6c4ec;
+  --border: #39295a;
+  --border-field: #B58AE8;
   --line: #0C0A11;
   --coral: #E88B92;
   --coral-bg: #EE727E;

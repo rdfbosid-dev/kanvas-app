@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import CustomSelect from './CustomSelect'
 import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL } from '../lib/constants'
+import { formatAngkaInput, parseAngkaInput } from '../lib/format'
 import { cariAtauBuatKlien } from '../lib/klien'
 import './BookingModal.css'
 
@@ -270,11 +271,11 @@ export default function BookingModal({ onClose, onSaved }) {
             <div className="field-grid cols-2">
               <div className="field">
                 <label>Biaya transport</label>
-                <input type="number" placeholder="0" value={biayaTransport} onChange={(e) => setBiayaTransport(e.target.value)} />
+                <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(biayaTransport)} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} />
               </div>
               <div className="field">
                 <label>DP masuk</label>
-                <input type="number" placeholder="0" value={dp} onChange={(e) => setDp(e.target.value)} />
+                <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(dp)} onChange={(e) => setDp(parseAngkaInput(e.target.value))} />
               </div>
             </div>
             <div className="field-grid cols-2" style={{ marginTop: 12 }}>
@@ -339,7 +340,7 @@ export default function BookingModal({ onClose, onSaved }) {
                       <div className="field-grid cols-2">
                         <div className="field">
                           <label>Biaya makeup</label>
-                          <input type="number" placeholder="0" value={p.biayaMakeup} onChange={(e) => updatePeserta(i, 'biayaMakeup', e.target.value)} />
+                          <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(p.biayaMakeup)} onChange={(e) => updatePeserta(i, 'biayaMakeup', parseAngkaInput(e.target.value))} />
                         </div>
                         <div className="field">
                           <label>&nbsp;</label>
@@ -352,7 +353,7 @@ export default function BookingModal({ onClose, onSaved }) {
                       {p.dikerjakanOlehMakeup === 'Tim' && (
                         <div className="field">
                           <label>Komisi untuk kamu</label>
-                          <input type="number" placeholder="0" value={p.komisiMakeup} onChange={(e) => updatePeserta(i, 'komisiMakeup', e.target.value)} />
+                          <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(p.komisiMakeup)} onChange={(e) => updatePeserta(i, 'komisiMakeup', parseAngkaInput(e.target.value))} />
                         </div>
                       )}
 
@@ -369,7 +370,7 @@ export default function BookingModal({ onClose, onSaved }) {
                           <div className="field-grid cols-2">
                             <div className="field">
                               <label>Biaya tambahan</label>
-                              <input type="number" placeholder="0" value={p.biayaTambahan} onChange={(e) => updatePeserta(i, 'biayaTambahan', e.target.value)} />
+                              <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(p.biayaTambahan)} onChange={(e) => updatePeserta(i, 'biayaTambahan', parseAngkaInput(e.target.value))} />
                             </div>
                             <div className="field">
                               <label>&nbsp;</label>
@@ -382,7 +383,7 @@ export default function BookingModal({ onClose, onSaved }) {
                           {p.dikerjakanOlehTambahan === 'Tim' && (
                             <div className="field">
                               <label>Komisi untuk kamu</label>
-                              <input type="number" placeholder="0" value={p.komisiTambahan} onChange={(e) => updatePeserta(i, 'komisiTambahan', e.target.value)} />
+                              <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(p.komisiTambahan)} onChange={(e) => updatePeserta(i, 'komisiTambahan', parseAngkaInput(e.target.value))} />
                             </div>
                           )}
                         </>
