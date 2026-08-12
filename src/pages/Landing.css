@@ -37,6 +37,9 @@
   padding: 11px 22px; font-size: 14px; font-weight: 700; text-decoration: none;
   box-shadow: 0 10px 24px -10px rgba(196,164,240,0.7); display: inline-block;
 }
+.landing-nav-actions .btn-primary {
+  padding: 10px 10px;
+}
 .btn-primary.large { padding:  15px 30px; font-size: 15.5px; border-radius: 14px; max-width: 300px;}
 
 .landing-hero {
