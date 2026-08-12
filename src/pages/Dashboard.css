@@ -6,8 +6,6 @@
 .main {
   flex: 1;
   padding: 32px 40px;
-  max-width: 1280px;
-  margin: 0 auto;
 }
 
 .topbar { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 26px; flex-wrap: wrap; gap: 14px; }
