@@ -3,5 +3,5 @@
   display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft);
   transition: background 0.15s, color 0.15s; flex-shrink: 0;
 }
-.theme-toggle-btn:hover { background: var(--violet-bg); color: var(--violet-tx); }
+.theme-toggle-btn:hover { background: var(--theme-ops); color: var(--violet-tx); }
 .theme-toggle-btn svg { width: 17px; height: 17px; }

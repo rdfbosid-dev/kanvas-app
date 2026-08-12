@@ -3,8 +3,10 @@
   --grad-soft: linear-gradient(135deg, #c39df5 0%, #e6bacb 100%);
   --grad-soft-alt: linear-gradient(135deg, #a7dab8 0%, #baf0cc 100%);
   --white: #FFFFFF;
+  --notif: #EE727E;
   --page-a: #F4E9F9;
   --page-b: #E8D8F0;
+  --theme-ops: #e0cfe8;
   --ink: #2B2438;
   --ink-soft: #7E6D9B;
   --ink-faint: #633480;
@@ -38,8 +40,10 @@
   --grad-soft: linear-gradient(135deg, #c39df5 0%, #e6bacb 100%);
   --grad-soft-alt: linear-gradient(135deg, #a7dab8 0%, #baf0cc 100%);
   --white: #655583;
+  --notif: #EE727E;
   --page-a: #241f30;
   --page-b: #100D15;
+  --theme-ops: #827296;
   --ink: #F4F1F9;
   --ink-soft: #FFFFFF;
   --ink-faint: #E6DEF0;

@@ -386,7 +386,7 @@ export default function Dashboard() {
                   bookingTerdekat.map((b) => {
                     const day = dayLabel(b.tanggal_acara)
                     return (
-                      <div className="booking-row" key={b.id} onClick={() => setSelectedBooking(b)} style={{ cursor: 'pointer' }}>
+                      <div className="dash-booking-row" key={b.id} onClick={() => setSelectedBooking(b)} style={{ cursor: 'pointer' }}>
                         <div className="b-avatar">{initialsOf(b.nama_klien)}</div>
                         <div className="b-info">
                           <div className="b-name">{b.nama_klien}</div>
@@ -395,7 +395,7 @@ export default function Dashboard() {
                             {b.jam_start_makeup ? ` · ${b.jam_start_makeup.slice(0, 5)} WIB` : ''}
                           </div>
                         </div>
-                        <div className="booking-row-right">
+                        <div className="dash-booking-row-right">
                           <span className={`day-pill ${day.cls}`}>{day.text}</span>
                           <span className={`status-pill ${b.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
                             {b.status_pembayaran}
