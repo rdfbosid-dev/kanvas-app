@@ -5,8 +5,8 @@ const W = 600
 const H = 200
 const PAD_TOP = 16
 
-function buildPoints(values) {
-  const max = Math.max(...values, 1)
+function buildPoints(values, sharedMax) {
+  const max = sharedMax || Math.max(...values, 1)
   const n = values.length
   return values.map((v, i) => {
     const x = n > 1 ? (i / (n - 1)) * W : W / 2
@@ -37,7 +37,8 @@ export default function TrendChart({ series, months, area = false, mounted }) {
   const [hoverIdx, setHoverIdx] = useState(null)
   const svgRef = useRef(null)
 
-  const seriesPts = series.map((s) => buildPoints(s.values))
+  const sharedMax = Math.max(...series.flatMap((s) => s.values), 1)
+  const seriesPts = series.map((s) => buildPoints(s.values, sharedMax))
   const n = months.length
 
   function handleMove(e) {
