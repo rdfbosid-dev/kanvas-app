@@ -32,15 +32,36 @@ function ProtectedRoute({ children }) {
   return children
 }
 
+// Kebalikan dari ProtectedRoute -- buat halaman publik (Landing, Login,
+// Register) yang seharusnya nggak perlu dibuka lagi kalau user udah login.
+// Kalau ternyata masih ada sesi aktif, langsung lempar ke Dashboard.
+function GuestRoute({ children }) {
+  const { user, loading } = useAuth()
+
+  if (loading) {
+    return (
+      <div style={{
+        minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#8B8299'
+      }}>
+        Memuat...
+      </div>
+    )
+  }
+
+  if (user) return <Navigate to="/dashboard" replace />
+  return children
+}
+
 export default function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<GuestRoute><Landing /></GuestRoute>} />
+            <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
+            <Route path="/register" element={<GuestRoute><Register /></GuestRoute>} />
             <Route path="/lupa-password" element={<LupaPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route
