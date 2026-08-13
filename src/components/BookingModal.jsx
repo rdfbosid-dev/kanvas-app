@@ -252,7 +252,7 @@ export default function BookingModal({ onClose, onSaved }) {
             </div>
 
             <div className="section-label">Detail acara</div>
-            <div className="field-grid">
+            <div className="field-grid detail-acara-grid">
               <div className="field">
                 <label>Tanggal acara <span className="req">*</span></label>
                 <input type="date" value={tanggalAcara} onChange={(e) => setTanggalAcara(e.target.value)} required />

@@ -49,6 +49,7 @@
 .booking-modal-overlay .section-label:first-child { margin-top: 0; }
 .booking-modal-overlay .field-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
 .booking-modal-overlay .field-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.booking-modal-overlay .field-grid.detail-acara-grid { grid-template-columns: 1fr 0.6fr 1.4fr; }
 .booking-modal-overlay .field { display: flex; flex-direction: column; gap: 6px; }
 .booking-modal-overlay .field label { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
 .booking-modal-overlay .field label .req { color: var(--coral-tx); }
@@ -139,6 +140,7 @@
   .booking-modal-overlay .modal-body { padding: 16px 18px; }
   .booking-modal-overlay .modal-foot { padding: 12px 18px 18px; }
   .booking-modal-overlay .field-grid,
-  .booking-modal-overlay .field-grid.cols-2 { grid-template-columns: 1fr; }
+  .booking-modal-overlay .field-grid.cols-2,
+  .booking-modal-overlay .field-grid.detail-acara-grid { grid-template-columns: 1fr; }
   .booking-modal-overlay .peserta-body .field-grid.cols-2 { grid-template-columns: 1fr; }
 }
