@@ -52,11 +52,11 @@ function dayLabel(tanggalAcara, jamStartMakeup) {
 }
 
 function formatTanggal(dateStr) {
-  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
+  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })
 }
 
 export default function Dashboard() {
-  const { user } = useAuth()
+  const { user, profile } = useAuth()
   const { theme } = useTheme()
   const isDark = theme === 'dark'
   const [bookings, setBookings] = useState([])
@@ -156,8 +156,8 @@ export default function Dashboard() {
       desc: [
         formatTanggal(b.tanggal_acara),
         b.jam_start_makeup ? `${b.jam_start_makeup.slice(0, 5)} WIB` : null,
-        b.lokasi || null,
       ].filter(Boolean).join(' · '),
+      lokasi: b.lokasi || null,
       booking: b,
     })),
     ...(isAkhirBulan ? [{
@@ -257,7 +257,7 @@ export default function Dashboard() {
       <div className="main">
         <div className="topbar">
           <div>
-            <div className="greeting">Halo, {user?.email?.split('@')[0] || ''} 👋</div>
+            <div className="greeting">Halo, {profile?.studio_name || 'Studio Saya'} 👋</div>
             <div className="greeting-date">
               {today.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
             </div>
@@ -320,6 +320,7 @@ export default function Dashboard() {
                           <div>
                             <div className="notif-item-title">{n.title}</div>
                             <div className="notif-item-desc">{n.desc}</div>
+                            {n.lokasi && <div className="notif-item-loc">{n.lokasi}</div>}
                           </div>
                         </div>
                       ))
@@ -377,7 +378,7 @@ export default function Dashboard() {
               <div className="kpi-card">
                 <div className="kpi-top">
                   <span className="kpi-label">Belum Lunas</span>
-                  <div className="kpi-icon" style={{ background: 'var(--gold-bg)' }}>
+                  <div className="kpi-icon" style={{ background: 'var(--icon-attention)' }}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-tx)" strokeWidth="2"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v6M12 18v.01"/></svg>
                   </div>
                 </div>
@@ -583,7 +584,7 @@ export default function Dashboard() {
                   Booking terbanyak dari <b>{sumberCounts[0]?.[0]} ({Math.round((sumberCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>
                   {' · '}Event <b>{eventCounts[0]?.[0]} mendominasi ({Math.round((eventCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>
                   {belumLunas.length > 0
-                    ? ` · Ingatkan ${belumLunas.length} klien yang belum lunas ya!`
+                    ? ` · Ingatkan ${belumLunas.length} klien yang belum lunas, ya!`
                     : ' · Semua booking sudah lunas 🎉'}
                 </span>
               </div>

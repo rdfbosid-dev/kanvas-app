@@ -6,10 +6,12 @@
   --notif: #EE727E;
   --page-a: #F4E9F9;
   --page-b: #E8D8F0;
+  --hover-row: #ecd8f5;
   --theme-ops: #e0cfe8;
   --ink: #2B2438;
   --ink-soft: #7E6D9B;
   --ink-faint: #633480;
+  --ink-faint-value: #4d2665;
   --fitur-icon: #7a3f9e;
   --placeholder: #7E6D9B;
   --user-name: #633480;
@@ -22,6 +24,7 @@
   --gold: #f4d989;
   --gold-bg: #f9e20d;
   --gold-tx: #7b5b13;
+  --icon-attention: #e9c43e;
   --mint: #6FC79A;
   --mint-bg: #aee6c1;
   --mint-tx: #2E8A5C;
@@ -43,10 +46,12 @@
   --notif: #EE727E;
   --page-a: #241f30;
   --page-b: #100D15;
+  --hover-row: #ab8dcb;
   --theme-ops: #80699c;
   --ink: #F4F1F9;
   --ink-soft: #FFFFFF;
   --ink-faint: #E6DEF0;
+  --ink-faint-value: #4d2665;
   --fitur-icon: #FFFFFF;
   --placeholder: #d6c4ec;
   --border: #655583;
@@ -56,8 +61,9 @@
   --coral-bg: #EE727E;
   --coral-tx: #FFFFFF;
   --gold: #DBAE64;
-  --gold-bg: #2C2314;
-  --gold-tx: #EDC873;
+  --gold-bg: #f1c06b;
+  --gold-tx: #7b5b13;
+  --icon-attention: #e9c43e;
   --mint: #67C495;
   --mint-bg: #aee6c1;
   --mint-tx: #2E8A5C;
