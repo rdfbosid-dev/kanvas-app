@@ -174,7 +174,7 @@ export default function BookingModal({ onClose, onSaved }) {
   }
 
   return (
-    <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
+    <div className="modal-overlay booking-modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
       <div className="modal">
         <div className="modal-head">
           <h2>Booking baru</h2>
