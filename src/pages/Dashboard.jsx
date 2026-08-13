@@ -39,7 +39,7 @@ function dayLabel(tanggalAcara) {
 }
 
 function formatTanggal(dateStr) {
-  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
+  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })
 }
 
 export default function Dashboard() {
@@ -193,9 +193,9 @@ export default function Dashboard() {
   const trendColorB = isDark ? '#F5C368' : '#E7A33D'
 
   const SUMBER_BRAND_COLORS = {
-    Instagram: '#C13584',
-    WhatsApp: '#25D366',
-    Facebook: '#1877F2',
+    Instagram: '#D6249F',
+    WhatsApp: '#3db466',
+    Facebook: '#227aef',
     TikTok: '#000000',
     Referral: '#E7B655',
   }
@@ -364,7 +364,7 @@ export default function Dashboard() {
               <div className="kpi-card">
                 <div className="kpi-top">
                   <span className="kpi-label">Belum Lunas</span>
-                  <div className="kpi-icon" style={{ background: 'var(--gold-bg)' }}>
+                  <div className="kpi-icon" style={{ background: 'var(--gold)' }}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-tx)" strokeWidth="2"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v6M12 18v.01"/></svg>
                   </div>
                 </div>
