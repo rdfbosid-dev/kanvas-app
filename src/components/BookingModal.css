@@ -43,12 +43,25 @@
 .booking-modal-overlay .modal-body { padding: 22px 26px; overflow-y: auto; flex: 1; }
 
 .booking-modal-overlay .section-label {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--ink-faint); margin: 5px 0 10px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--ink-faint); margin: 10px 0;
+  text-transform: none;
+  position: relative;
+  padding-bottom: 6px;
+  display: inline-block;
 }
-.booking-modal-overlay .section-label:first-child { margin-top: 0; }
-.booking-modal-overlay .field-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
-.booking-modal-overlay .field-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.booking-modal-overlay .section-label::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--grad);
+}
+
+.booking-modal-overlay .section-label:first-child { margin-top: 0; margin-bottom: 10px;}
+.booking-modal-overlay .field-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 0; }
+.booking-modal-overlay .field-grid.cols-2 { grid-template-columns: repeat(2, 1fr); margin-bottom: 5px; }
 .booking-modal-overlay .field-grid.detail-acara-grid { grid-template-columns: 1fr 0.6fr 1.4fr; }
 .booking-modal-overlay .field { display: flex; flex-direction: column; gap: 6px; }
 .booking-modal-overlay .field label { font-size: 12px; font-weight: 600; color: var(--ink-soft); }

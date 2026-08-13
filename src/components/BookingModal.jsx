@@ -177,7 +177,7 @@ export default function BookingModal({ onClose, onSaved }) {
     <div className="modal-overlay booking-modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
       <div className="modal">
         <div className="modal-head">
-          <h2>Booking baru</h2>
+          <h2>Booking Baru</h2>
           <button className="modal-close" onClick={onClose} type="button">&times;</button>
         </div>
 
@@ -185,14 +185,14 @@ export default function BookingModal({ onClose, onSaved }) {
           <div className="modal-body">
             {error && <div className="modal-error">{error}</div>}
 
-            <div className="section-label">Info booking</div>
+            <div className="section-label">Info Booking</div>
             <div className="field-grid">
               <div className="field">
-                <label>Tanggal booking <span className="req">*</span></label>
+                <label>Tanggal Booking <span className="req">*</span></label>
                 <input type="date" value={tanggalBooking} onChange={(e) => setTanggalBooking(e.target.value)} required />
               </div>
               <div className="field" style={{ position: 'relative' }}>
-                <label>Nama klien <span className="req">*</span></label>
+                <label>Nama Klien <span className="req">*</span></label>
                 <input
                   type="text"
                   placeholder="contoh: Jenny Black Pink"
@@ -251,14 +251,14 @@ export default function BookingModal({ onClose, onSaved }) {
               </div>
             </div>
 
-            <div className="section-label">Detail acara</div>
+            <div className="section-label">Detail Acara</div>
             <div className="field-grid detail-acara-grid">
               <div className="field">
-                <label>Tanggal acara <span className="req">*</span></label>
+                <label>Tanggal Acara <span className="req">*</span></label>
                 <input type="date" value={tanggalAcara} onChange={(e) => setTanggalAcara(e.target.value)} required />
               </div>
               <div className="field">
-                <label>Jam mulai</label>
+                <label>Jam Mulai</label>
                 <input type="time" value={jamStartMakeup} onChange={(e) => setJamStartMakeup(e.target.value)} />
               </div>
               <div className="field">
@@ -267,14 +267,14 @@ export default function BookingModal({ onClose, onSaved }) {
               </div>
             </div>
 
-            <div className="section-label">Biaya tambahan</div>
+            <div className="section-label">Biaya Tambahan</div>
             <div className="field-grid cols-2">
               <div className="field">
-                <label>Biaya transport</label>
+                <label>Biaya Transport</label>
                 <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(biayaTransport)} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} />
               </div>
               <div className="field">
-                <label>DP masuk</label>
+                <label>DP Masuk</label>
                 <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(dp)} onChange={(e) => setDp(parseAngkaInput(e.target.value))} />
               </div>
             </div>
