@@ -18,10 +18,22 @@ function formatTanggal(dateStr) {
 function initialsOf(name) {
   return (name || '?').split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()
 }
-function isSelesai(dateStr) {
+function isSelesai(dateStr, jamStartMakeup) {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
-  return new Date(dateStr) < today
+  const target = new Date(dateStr)
+  target.setHours(0, 0, 0, 0)
+
+  if (target < today) return true
+  if (target > today) return false
+
+  // Booking hari ini -- baru dianggap selesai kalau udah lewat 4 jam dari
+  // jam mulai makeup (sama persis kayak logika di Dashboard).
+  if (!jamStartMakeup) return false
+  const [jam, menit] = jamStartMakeup.split(':').map(Number)
+  const mulai = new Date(dateStr)
+  mulai.setHours(jam, menit || 0, 0, 0)
+  return (new Date() - mulai) / 3600000 >= 4
 }
 
 export default function BookingList() {
@@ -132,12 +144,12 @@ export default function BookingList() {
                     <tr key={b.id} onClick={() => setSelectedBooking(b)}>
                       <td>
                         <div className="tbl-klien">
-                          <div className={`bl-avatar${isSelesai(b.tanggal_acara) ? ' selesai' : ''}`}>{initialsOf(b.nama_klien)}</div>
+                          <div className={`bl-avatar${isSelesai(b.tanggal_acara, b.jam_start_makeup) ? ' selesai' : ''}`}>{initialsOf(b.nama_klien)}</div>
                           <div>
                             <div className="b-name">{b.nama_klien}</div>
                             <div className="b-meta">
                               {b.kode_booking}
-                              {isSelesai(b.tanggal_acara) && <span className="selesai-badge">Selesai</span>}
+                              {isSelesai(b.tanggal_acara, b.jam_start_makeup) && <span className="selesai-badge">Selesai</span>}
                             </div>
                           </div>
                         </div>
