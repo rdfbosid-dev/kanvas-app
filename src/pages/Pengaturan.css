@@ -1,5 +1,5 @@
 .greeting { font-size: 24px; }
-.greeting-date { font-size: 14px; color: var(ink-faint); }
+.greeting-date { font-size: 14px; color: var(--ink-faint); }
 
 .pengaturan-layout { display: flex; flex-direction: column; gap: 18px; max-width: 640px; }
 
