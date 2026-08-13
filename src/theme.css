@@ -30,6 +30,9 @@
   --mint-tx: #2E8A5C;
   --violet-tx: #7a3f9e;
   --violet-bg: #F0E7FB;
+  --disable-field: #E8D8F0;
+  --logout: #EE727E;
+  --logout-hover: #c33e4b;
 
   --shadow-modal: 0 24px 60px -12px rgba(43, 36, 56, 0.35);
   --shadow-card: 0 6px 16px -6px rgba(43, 36, 56, 0.06);
@@ -69,6 +72,9 @@
   --mint-tx: #2E8A5C;
   --violet-tx: #ecdaf6;
   --violet-bg: #423156;
+  --disable-field: #44365d;
+  --logout: #EE727E;
+  --logout-hover: #c33e4b;
 
   --shadow-modal: 0 24px 60px -12px rgba(0, 0, 0, 0.65);
   --shadow-card: 0 6px 18px -6px rgba(0, 0, 0, 0.4);
