@@ -3,7 +3,7 @@
 .cselect-trigger {
   width: 100%; display: flex; align-items: center; justify-content: space-between;
   border: 1px solid var(--border-field); border-radius: 11px; padding: 9px 10px 9px 12px;
-  font-size: 13px; font-family: inherit; color: var(--ink); background: var(--white);
+  font-size: 12px; font-family: inherit; color: var(--ink); background: var(--white);
   cursor: pointer; text-align: left; transition: border-color 0.15s, box-shadow 0.15s;
 }
 .cselect-trigger:hover { border-color: #D9C9F0; }
@@ -23,7 +23,7 @@
 
 .cselect-option {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 8px 10px; border-radius: 8px; font-size: 13px; color: var(--ink-soft);
+  padding: 8px 10px; border-radius: 8px; font-size: 12px; color: var(--ink-soft);
   cursor: pointer; transition: background 0.12s, color 0.12s;
 }
 .cselect-option:hover { background: var(--violet-bg); color: var(--violet-tx); }

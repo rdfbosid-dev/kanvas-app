@@ -311,27 +311,27 @@ export default function BookingModal({ onClose, onSaved }) {
                       <div className="field-grid cols-2">
                         <div className="field">
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <label>Nama peserta</label>
+                            <label>Nama Klien</label>
                             {i === 0 && namaKlien.trim() && (
                               <button
                                 type="button"
                                 className="quickfill-btn"
                                 onClick={() => updatePeserta(0, 'nama', namaKlien.trim())}
                               >
-                                Pakai nama klien
+                                Pakai nama klien utama
                               </button>
                             )}
                           </div>
-                          <input type="text" placeholder="cth. Ulya" value={p.nama} onChange={(e) => updatePeserta(i, 'nama', e.target.value)} />
+                          <input type="text" placeholder="contoh: Jenny Black Pink" value={p.nama} onChange={(e) => updatePeserta(i, 'nama', e.target.value)} />
                         </div>
                         <div className="field">
                           <label>Peran</label>
-                          <input type="text" placeholder="cth. Wisudawati" value={p.peran} onChange={(e) => updatePeserta(i, 'peran', e.target.value)} />
+                          <input type="text" placeholder="contoh: KLien Utama/Wisudawati" value={p.peran} onChange={(e) => updatePeserta(i, 'peran', e.target.value)} />
                         </div>
                       </div>
 
                       <div>
-                        <div className="sb-label">Layanan makeup</div>
+                        <div className="sb-label">Layanan Makeup</div>
                         <div className="toggle-row">
                           <div className={`toggle-opt${p.jenisPaket === 'Reguler' ? ' sel' : ''}`} onClick={() => updatePeserta(i, 'jenisPaket', 'Reguler')}>Reguler</div>
                           <div className={`toggle-opt${p.jenisPaket === 'VIP' ? ' sel' : ''}`} onClick={() => updatePeserta(i, 'jenisPaket', 'VIP')}>VIP</div>
@@ -339,7 +339,7 @@ export default function BookingModal({ onClose, onSaved }) {
                       </div>
                       <div className="field-grid cols-2">
                         <div className="field">
-                          <label>Biaya makeup</label>
+                          <label>Biaya Makeup</label>
                           <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(p.biayaMakeup)} onChange={(e) => updatePeserta(i, 'biayaMakeup', parseAngkaInput(e.target.value))} />
                         </div>
                         <div className="field">
@@ -352,13 +352,13 @@ export default function BookingModal({ onClose, onSaved }) {
                       </div>
                       {p.dikerjakanOlehMakeup === 'Tim' && (
                         <div className="field">
-                          <label>Komisi untuk kamu</label>
+                          <label>Komisi untuk Kamu</label>
                           <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(p.komisiMakeup)} onChange={(e) => updatePeserta(i, 'komisiMakeup', parseAngkaInput(e.target.value))} />
                         </div>
                       )}
 
                       <div>
-                        <div className="sb-label">Tambahan rambut</div>
+                        <div className="sb-label">Tambahan Layanan Rambut</div>
                         <div className="toggle-row">
                           <div className={`toggle-opt${p.layananTambahan === 'Tidak Ada' ? ' sel' : ''}`} onClick={() => updatePeserta(i, 'layananTambahan', 'Tidak Ada')}>Tidak ada</div>
                           <div className={`toggle-opt${p.layananTambahan === 'Hairdo' ? ' sel' : ''}`} onClick={() => updatePeserta(i, 'layananTambahan', 'Hairdo')}>Hairdo</div>
@@ -369,7 +369,7 @@ export default function BookingModal({ onClose, onSaved }) {
                         <>
                           <div className="field-grid cols-2">
                             <div className="field">
-                              <label>Biaya tambahan</label>
+                              <label>Biaya Tambahan</label>
                               <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(p.biayaTambahan)} onChange={(e) => updatePeserta(i, 'biayaTambahan', parseAngkaInput(e.target.value))} />
                             </div>
                             <div className="field">
@@ -382,7 +382,7 @@ export default function BookingModal({ onClose, onSaved }) {
                           </div>
                           {p.dikerjakanOlehTambahan === 'Tim' && (
                             <div className="field">
-                              <label>Komisi untuk kamu</label>
+                              <label>Komisi untuk Kamu</label>
                               <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(p.komisiTambahan)} onChange={(e) => updatePeserta(i, 'komisiTambahan', parseAngkaInput(e.target.value))} />
                             </div>
                           )}
@@ -392,7 +392,7 @@ export default function BookingModal({ onClose, onSaved }) {
                   </div>
                 )
               })}
-              <button type="button" className="add-peserta" onClick={addPeserta}>+ Tambah peserta</button>
+              <button type="button" className="add-peserta" onClick={addPeserta}>+ Tambah Peserta</button>
             </div>
           </div>
 
