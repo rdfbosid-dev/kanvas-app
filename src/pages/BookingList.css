@@ -37,7 +37,7 @@
 
 .selesai-badge {
   display: inline-block; margin-left: 8px; font-size: 9.5px; font-weight: 700;
-  color: var(--mint-tx); background: var(--mint-bg); border: none;
+  background: var(--border-field); color: var(--ink); border: none;
   padding: 2px 7px; border-radius: 20px; letter-spacing: 0.03em; vertical-align: middle;
 }
 

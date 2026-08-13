@@ -195,7 +195,7 @@ export default function BookingModal({ onClose, onSaved }) {
                 <label>Nama klien <span className="req">*</span></label>
                 <input
                   type="text"
-                  placeholder="cth. Ulya Ramadhani"
+                  placeholder="contoh: Jenny Black Pink"
                   value={namaKlien}
                   onChange={(e) => { setNamaKlien(e.target.value); setShowSuggest(true) }}
                   onFocus={() => setShowSuggest(true)}
@@ -219,7 +219,7 @@ export default function BookingModal({ onClose, onSaved }) {
                 )}
               </div>
               <div className="field">
-                <label>No. WhatsApp</label>
+                <label>Nomor WhatsApp</label>
                 <input type="text" placeholder="0812xxxxxxx" value={nomorWhatsApp} onChange={(e) => setNomorWhatsApp(e.target.value)} />
               </div>
             </div>
@@ -263,7 +263,7 @@ export default function BookingModal({ onClose, onSaved }) {
               </div>
               <div className="field">
                 <label>Lokasi</label>
-                <input type="text" placeholder="Kecamatan, Kota" value={lokasi} onChange={(e) => setLokasi(e.target.value)} />
+                <input type="text" placeholder="Kecamatan, Kota/Kabupaten" value={lokasi} onChange={(e) => setLokasi(e.target.value)} />
               </div>
             </div>
 
