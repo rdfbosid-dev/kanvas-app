@@ -24,14 +24,27 @@ function initialsOf(name) {
     .toUpperCase()
 }
 
-function dayLabel(tanggalAcara) {
+function dayLabel(tanggalAcara, jamStartMakeup) {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   const target = new Date(tanggalAcara)
   target.setHours(0, 0, 0, 0)
   const diffDays = Math.round((target - today) / 86400000)
 
-  if (diffDays === 0) return { text: 'Hari ini', cls: 'today' }
+  if (diffDays === 0) {
+    // Booking hari ini -- kalau udah lewat 4 jam dari jam mulai makeup,
+    // kemungkinan besar sesi makeup-nya udah kelar, jadi badge-nya diganti
+    // "Selesai" (netral) daripada tetap nampilin "Hari ini" (merah/mendesak)
+    // sepanjang hari.
+    if (jamStartMakeup) {
+      const [jam, menit] = jamStartMakeup.split(':').map(Number)
+      const mulai = new Date(tanggalAcara)
+      mulai.setHours(jam, menit || 0, 0, 0)
+      const jamBerlalu = (new Date() - mulai) / 3600000
+      if (jamBerlalu >= 4) return { text: 'Selesai', cls: 'selesai' }
+    }
+    return { text: 'Hari ini', cls: 'today' }
+  }
   if (diffDays === 1) return { text: 'H-1', cls: 'today' }
   if (diffDays > 1 && diffDays <= 6) return { text: `H-${diffDays}`, cls: 'soon' }
   if (diffDays > 6) return { text: 'Minggu depan', cls: 'later' }
@@ -39,7 +52,7 @@ function dayLabel(tanggalAcara) {
 }
 
 function formatTanggal(dateStr) {
-  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })
+  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
 }
 
 export default function Dashboard() {
@@ -193,9 +206,9 @@ export default function Dashboard() {
   const trendColorB = isDark ? '#F5C368' : '#E7A33D'
 
   const SUMBER_BRAND_COLORS = {
-    Instagram: '#D6249F',
-    WhatsApp: '#3db466',
-    Facebook: '#227aef',
+    Instagram: '#C13584',
+    WhatsApp: '#25D366',
+    Facebook: '#1877F2',
     TikTok: '#000000',
     Referral: '#E7B655',
   }
@@ -364,7 +377,7 @@ export default function Dashboard() {
               <div className="kpi-card">
                 <div className="kpi-top">
                   <span className="kpi-label">Belum Lunas</span>
-                  <div className="kpi-icon" style={{ background: 'var(--gold)' }}>
+                  <div className="kpi-icon" style={{ background: 'var(--gold-bg)' }}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-tx)" strokeWidth="2"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v6M12 18v.01"/></svg>
                   </div>
                 </div>
@@ -384,7 +397,7 @@ export default function Dashboard() {
                   <div className="empty-state">Belum ada booking mendatang.</div>
                 ) : (
                   bookingTerdekat.map((b) => {
-                    const day = dayLabel(b.tanggal_acara)
+                    const day = dayLabel(b.tanggal_acara, b.jam_start_makeup)
                     return (
                       <div className="dash-booking-row" key={b.id} onClick={() => setSelectedBooking(b)} style={{ cursor: 'pointer' }}>
                         <div className="b-avatar">{initialsOf(b.nama_klien)}</div>
