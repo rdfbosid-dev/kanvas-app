@@ -401,7 +401,7 @@ export default function Dashboard() {
                     const day = dayLabel(b.tanggal_acara, b.jam_start_makeup)
                     return (
                       <div className="dash-booking-row" key={b.id} onClick={() => setSelectedBooking(b)} style={{ cursor: 'pointer' }}>
-                        <div className="b-avatar">{initialsOf(b.nama_klien)}</div>
+                        <div className={`b-avatar${day.cls === 'selesai' ? ' selesai' : ''}`}>{initialsOf(b.nama_klien)}</div>
                         <div className="b-info">
                           <div className="b-name">{b.nama_klien}</div>
                           <div className="b-meta">

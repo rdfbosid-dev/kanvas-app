@@ -126,6 +126,7 @@
 .day-pill.selesai { background: var(--border-field); color: var(--ink); }
 
 .b-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--grad-soft); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #9B5FC0; }
+.b-avatar.selesai { background: var(--grad-soft-alt); color: var(--mint-tx); }
 .b-info { flex: 1; min-width: 0; }
 .b-name { font-size: 14px; font-weight: 600; }
 .b-meta { font-size: 12.5px; color: var(--ink-soft); margin-top: 1px; }
