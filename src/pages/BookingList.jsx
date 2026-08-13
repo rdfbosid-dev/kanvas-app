@@ -13,7 +13,7 @@ function formatRupiah(n) {
 }
 function formatTanggal(dateStr) {
   if (!dateStr) return '-'
-  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
+  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })
 }
 function initialsOf(name) {
   return (name || '?').split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()
@@ -97,7 +97,7 @@ export default function BookingList() {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
             <input
               type="text"
-              placeholder="Cari nama klien, kode booking, event, atau lokasi..."
+              placeholder="Cari nama klien, kode booking, event, atau lokasi ...."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -132,7 +132,7 @@ export default function BookingList() {
                     <tr key={b.id} onClick={() => setSelectedBooking(b)}>
                       <td>
                         <div className="tbl-klien">
-                          <div className="b-avatar">{initialsOf(b.nama_klien)}</div>
+                          <div className={`bl-avatar${isSelesai(b.tanggal_acara) ? ' selesai' : ''}`}>{initialsOf(b.nama_klien)}</div>
                           <div>
                             <div className="b-name">{b.nama_klien}</div>
                             <div className="b-meta">

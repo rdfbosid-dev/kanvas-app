@@ -5,7 +5,7 @@
   background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
 }
 .search-box svg { width: 16px; height: 16px; color: var(--ink-faint); flex-shrink: 0; }
-.search-box input { border: none; outline: none; font-size: 13.5px; font-family: inherit; color: var(--ink); flex: 1; background: none; }
+.search-box input { border: none; outline: none; font-size: 12px; font-family: inherit; color: var(--ink); flex: 1; background: none; }
 .search-box input::placeholder { color: var(--ink-faint); }
 
 .filter-select { width: 170px; }
@@ -15,18 +15,25 @@
 .booking-table { width: 100%; border-collapse: collapse; }
 .booking-table thead th {
   text-align: left; font-size: 11.5px; font-weight: 700; color: var(--ink-faint);
-  text-transform: uppercase; letter-spacing: 0.04em; padding: 16px 20px; border-bottom: 1px solid var(--line);
+  text-transform: uppercase; letter-spacing: 0.04em; padding: 16px 20px; border-bottom: 1px solid var(--ink-soft);
 }
 .booking-table thead th.right { text-align: right; }
 
-.booking-table tbody tr { cursor: pointer; transition: background 0.15s; border-bottom: 1px solid var(--line); }
+.booking-table tbody tr { cursor: pointer; transition: background 0.15s; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent); }
 .booking-table tbody tr:last-child { border-bottom: none; }
-.booking-table tbody tr:hover { background: var(--page-a); }
+.booking-table tbody tr:hover { background: color-mix(in srgb, var(--hover-row) 60%, transparent); }
 .booking-table td { padding: 14px 20px; font-size: 13.5px; color: var(--ink-soft); }
 .booking-table td.right { text-align: right; }
-.booking-table td.mono { font-family: 'Space Mono', monospace; font-size: 12.5px; }
+.booking-table td.mono { font-size: 12.5px; }
 
 .tbl-klien { display: flex; align-items: center; gap: 12px; }
+
+.bl-avatar {
+  width: 38px; height: 38px; border-radius: 50%; background: var(--grad-soft); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
+  color: var(--ink-faint-value);
+}
+.bl-avatar.selesai { background: var(--grad-soft-alt); color: var(--mint-tx); }
 
 .selesai-badge {
   display: inline-block; margin-left: 8px; font-size: 9.5px; font-weight: 700;
