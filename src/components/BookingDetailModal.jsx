@@ -274,26 +274,27 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 <span className={`status-pill ${booking.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
                   {booking.status_pembayaran}
                 </span>
-                <button className="btn-ghost" style={{ marginLeft: 'auto', }} onClick={() => setShowInvoice(true)}>Invoice</button>
+                <button className="btn-ghost" style={{ marginLeft: 'auto', marginRight: 10}} onClick={() => setShowInvoice(true)}>Invoice</button>
                 <button className="btn-ghost" onClick={enterEditMode}>Edit</button>
               </div>
 
               <div className="detail-grid">
                 <div><span className="detail-label">Event</span><div>{booking.event}</div></div>
-                <div><span className="detail-label">Tanggal acara</span><div>{formatTanggal(booking.tanggal_acara)}</div></div>
-                <div><span className="detail-label">Jam mulai</span><div>{booking.jam_start_makeup ? booking.jam_start_makeup.slice(0, 5) : '-'}</div></div>
+                <div><span className="detail-label">Tanggal Acara</span><div>{formatTanggal(booking.tanggal_acara)}</div></div>
+                <div><span className="detail-label">Jam Mulai</span><div>{booking.jam_start_makeup ? booking.jam_start_makeup.slice(0, 5) : '-'}</div></div>
                 <div><span className="detail-label">Lokasi</span><div>{booking.lokasi || '-'}</div></div>
-                <div><span className="detail-label">No. WhatsApp</span><div>{booking.nomor_whatsapp || '-'}</div></div>
+                <div><span className="detail-label">Nomor WhatsApp</span><div>{booking.nomor_whatsapp || '-'}</div></div>
                 <div><span className="detail-label">Sumber</span><div>{booking.sumber || '-'}</div></div>
               </div>
 
               <div className="section-label">Pembayaran</div>
               <div className="pay-summary">
-                <div><span className="detail-label">Total tagihan</span><div className="pay-value">{formatRupiah(booking.belanja_klien)}</div></div>
-                <div><span className="detail-label">Sudah dibayar</span><div className="pay-value" style={{ color: 'var(--mint-tx)' }}>{formatRupiah(booking.belanja_klien - sisa)}</div></div>
-                <div><span className="detail-label">Sisa</span><div className="pay-value" style={{ color: sisa > 0 ? 'var(--coral-tx)' : 'var(--mint-tx)' }}>{formatRupiah(sisa)}</div></div>
+                <div><span className="detail-label">Total Tagihan</span><div className="pay-value" style={{ color: 'var(--ink-faint-value)' }}>{formatRupiah(booking.belanja_klien)}</div></div>
+                <div><span className="detail-label">Sudah Dibayar</span><div className="pay-value" style={{ color: 'var(--value-done)' }}>{formatRupiah(booking.belanja_klien - sisa)}</div></div>
+                <div><span className="detail-label">Sisa Kekurangan</span><div className="pay-value" style={{ color: sisa > 0 ? 'var(--value-sisa)' : 'var(--mint-tx)' }}>{formatRupiah(sisa)}</div></div>
               </div>
 
+              <div className="detail-label-history">Riwayat Pembayaran</div>
               {payments.length > 0 && (
                 <div className="pay-history">
                   {payments.map((p) => (
@@ -304,7 +305,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                           <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" value={formatAngkaInput(editPayAmount)} onChange={(e) => setEditPayAmount(parseAngkaInput(e.target.value))} /></div>
                         </div>
                         <div className="field">
-                          <label>Metode</label>
+                          <label>Metode Pembayaran</label>
                           <CustomSelect
                             options={['Transfer Bank', 'E-Wallet', 'QRIS', 'Cash']}
                             value={editPayMethod}
@@ -332,7 +333,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
               )}
 
               {!showAddPayment ? (
-                <button type="button" className="add-peserta" onClick={() => setShowAddPayment(true)}>+ Tambah pembayaran</button>
+                <button type="button" className="add-peserta" onClick={() => setShowAddPayment(true)}>+ Tambah Pembayaran</button>
               ) : (
                 <form onSubmit={handleAddPayment} className="peserta-card" style={{ marginTop: 8 }}>
                   <div className="field-grid cols-2">
@@ -341,7 +342,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                   </div>
                   <div className="field-grid cols-2">
                     <div className="field">
-                      <label>Metode</label>
+                      <label>Metode Pembayaran</label>
                       <CustomSelect
                         options={['Transfer Bank', 'E-Wallet', 'QRIS', 'Cash']}
                         value={payMethod}
@@ -382,10 +383,10 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
 
           {!loading && editMode && (
             <>
-              <div className="section-label">Info booking</div>
+              <div className="section-label">Info Booking</div>
               <div className="field-grid">
-                <div className="field"><label>Nama klien</label><input type="text" value={namaKlien} onChange={(e) => setNamaKlien(e.target.value)} /></div>
-                <div className="field"><label>No. WhatsApp</label><input type="text" value={nomorWhatsApp} onChange={(e) => setNomorWhatsApp(e.target.value)} /></div>
+                <div className="field"><label>Nama Klien</label><input type="text" value={namaKlien} onChange={(e) => setNamaKlien(e.target.value)} /></div>
+                <div className="field"><label>Nomor WhatsApp</label><input type="text" value={nomorWhatsApp} onChange={(e) => setNomorWhatsApp(e.target.value)} /></div>
                 <div className="field">
                   <label>Sumber</label>
                   <CustomSelect
@@ -396,8 +397,8 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 </div>
               </div>
               <div className="field-grid" style={{ marginTop: 12 }}>
-                <div className="field"><label>Tanggal acara</label><input type="date" value={tanggalAcara} onChange={(e) => setTanggalAcara(e.target.value)} /></div>
-                <div className="field"><label>Jam mulai</label><input type="time" value={jamStartMakeup} onChange={(e) => setJamStartMakeup(e.target.value)} /></div>
+                <div className="field"><label>Tanggal Acara</label><input type="date" value={tanggalAcara} onChange={(e) => setTanggalAcara(e.target.value)} /></div>
+                <div className="field"><label>Jam Mulai</label><input type="time" value={jamStartMakeup} onChange={(e) => setJamStartMakeup(e.target.value)} /></div>
                 <div className="field">
                   <label>Event</label>
                   <CustomSelect
@@ -418,7 +419,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
               </div>
               <div className="field-grid cols-2" style={{ marginTop: 12 }}>
                 <div className="field"><label>Lokasi</label><input type="text" value={lokasi} onChange={(e) => setLokasi(e.target.value)} /></div>
-                <div className="field"><label>Biaya transport</label><input type="text" inputMode="numeric" value={formatAngkaInput(biayaTransport)} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} /></div>
+                <div className="field"><label>Biaya Transport</label><input type="text" inputMode="numeric" value={formatAngkaInput(biayaTransport)} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} /></div>
               </div>
               <div className="field" style={{ marginTop: 12 }}><label>Catatan</label><textarea value={catatan} onChange={(e) => setCatatan(e.target.value)} /></div>
 
@@ -439,7 +440,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       <div className={`toggle-opt${p.jenis_paket === 'VIP' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'jenis_paket', 'VIP')}>VIP</div>
                     </div>
                     <div className="field-grid cols-2">
-                      <div className="field"><label>Biaya makeup</label><input type="text" inputMode="numeric" value={formatAngkaInput(p.biaya_makeup)} onChange={(e) => updateEditPeserta(i, 'biaya_makeup', parseAngkaInput(e.target.value))} /></div>
+                      <div className="field"><label>Biaya Makeup</label><input type="text" inputMode="numeric" value={formatAngkaInput(p.biaya_makeup)} onChange={(e) => updateEditPeserta(i, 'biaya_makeup', parseAngkaInput(e.target.value))} /></div>
                       <div className="field">
                         <label>&nbsp;</label>
                         <div className="toggle-row">
@@ -458,7 +459,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                     </div>
                     {p.layanan_tambahan !== 'Tidak Ada' && (
                       <div className="field-grid cols-2">
-                        <div className="field"><label>Biaya tambahan</label><input type="text" inputMode="numeric" value={formatAngkaInput(p.biaya_tambahan)} onChange={(e) => updateEditPeserta(i, 'biaya_tambahan', parseAngkaInput(e.target.value))} /></div>
+                        <div className="field"><label>Biaya Tambahan</label><input type="text" inputMode="numeric" value={formatAngkaInput(p.biaya_tambahan)} onChange={(e) => updateEditPeserta(i, 'biaya_tambahan', parseAngkaInput(e.target.value))} /></div>
                         <div className="field">
                           <label>&nbsp;</label>
                           <div className="toggle-row">
@@ -471,7 +472,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                   </div>
                 </div>
               ))}
-              <button type="button" className="add-peserta" onClick={addEditPeserta}>+ Tambah peserta</button>
+              <button type="button" className="add-peserta" onClick={addEditPeserta}>+ Tambah Peserta</button>
             </>
           )}
         </div>
@@ -479,7 +480,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
         {confirmDeleteBooking && (
           <div className="delete-confirm-banner">
             <div className="delete-confirm-text">
-              <b>Hapus booking {booking.nama_klien}?</b>
+              <b>Hapus Booking {booking.nama_klien}?</b>
               <span>{peserta.length} peserta dan {payments.length} catatan pembayaran juga akan ikut terhapus. Tindakan ini tidak bisa dibatalkan.</span>
             </div>
           </div>

@@ -36,6 +36,8 @@
   --garis: #633480;
   --toggle-opt-sel: #F4E9F9;
   --toggle-opt-hover: #F0E7FB;
+  --value-done: #ee890d;
+  --value-sisa: #df2825;
 
   --shadow-modal: 0 24px 60px -12px rgba(43, 36, 56, 0.35);
   --shadow-card: 0 6px 16px -6px rgba(43, 36, 56, 0.06);
@@ -81,6 +83,8 @@
   --garis: #FFFFFF;
   --toggle-opt-sel: #a087c0;
   --toggle-opt-hover: #81679f;
+  --value-done: #9bdf25;
+  --value-sisa: #dfae25;
 
   --shadow-modal: 0 24px 60px -12px rgba(0, 0, 0, 0.65);
   --shadow-card: 0 6px 18px -6px rgba(0, 0, 0, 0.4);
