@@ -125,7 +125,7 @@
   color: var(--violet-tx); font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 4px; background: none;
   width: 100%; transition: background 0.15s, border-color 0.15s;
 }
-.booking-modal-overlay .add-peserta:hover { background: var(--violet-bg); border-color: #C4A4F0; }
+.booking-modal-overlay .add-peserta:hover { background: var(--toggle-opt-hover); border-color: #C4A4F0; }
 
 .booking-modal-overlay .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 26px; flex-shrink: 0; }
 .booking-modal-overlay .btn-ghost {

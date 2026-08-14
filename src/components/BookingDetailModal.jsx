@@ -257,7 +257,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
   const sisa = (booking.belanja_klien || 0) - payments.reduce((s, p) => s + Number(p.jumlah), 0)
 
   return (
-    <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
+    <div className="modal-overlay booking-detail-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
       <div className="modal">
         <div className="modal-head">
           <h2>{editMode ? 'Edit booking' : booking.nama_klien}</h2>
@@ -274,7 +274,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 <span className={`status-pill ${booking.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
                   {booking.status_pembayaran}
                 </span>
-                <button className="btn-ghost" style={{ marginLeft: 'auto' }} onClick={() => setShowInvoice(true)}>Invoice</button>
+                <button className="btn-ghost" style={{ marginLeft: 'auto', }} onClick={() => setShowInvoice(true)}>Invoice</button>
                 <button className="btn-ghost" onClick={enterEditMode}>Edit</button>
               </div>
 

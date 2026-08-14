@@ -1,12 +1,41 @@
-.detail-header { display: flex; align-items: center; margin-bottom: 18px; }
-.detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 4px; }
-.detail-label { font-size: 11.5px; font-weight: 600; color: var(--ink-faint); display: block; margin-bottom: 2px; }
+/* Selector di bawah ini di-scope pakai .booking-detail-overlay (ditempel di
+   pembungkus terluar BookingDetailModal.jsx). Ini biar tampilan tombol close
+   & btn-ghost konsisten sama BookingModal.css, dan nggak numpang/bentrok
+   sama Klien.css. */
+
+.booking-detail-overlay .modal-close {
+  width: 32px; height: 32px; border-radius: 10px; border: none; background: var(--violet-bg);
+  color: var(--violet-tx); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.booking-detail-overlay .modal-close:hover { background: var(--theme-ops); color: var(--violet-tx); }
+
+.booking-detail-overlay .btn-ghost {
+  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
+  font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+.booking-detail-overlay .btn-ghost:hover { background: var(--theme-ops); }
+
+/* Titik A: jarak sebelum badge status (di bawah judul modal) */
+.booking-detail-overlay .detail-header { display: flex; align-items: center; margin-top: 22px; margin-bottom: 0; }
+
+/* Sumber jarak TUNGGAL sebelum tiap section-label (INFO BOOKING/PEMBAYARAN/PESERTA) --
+   ini yang bikin titik B dan C otomatis seragam sama titik A di atas. Elemen
+   yang ada SEBELUM section-label sengaja nggak dikasih margin-bottom sendiri,
+   biar nggak numpuk kayak kasus field-grid dulu. */
+.booking-detail-overlay .section-label { margin: 22px 0 10px; }
+.booking-detail-overlay .detail-grid { margin-bottom: 0; }
+.booking-detail-overlay .add-peserta { margin-bottom: 0; }
+.booking-detail-overlay .pay-history { margin-bottom: 0; }
+.detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 10px; }
+.detail-label { font-size: 11.5px; font-weight: 600; color: var(--ink-faint); display: block; margin-bottom: 10px; }
 .detail-grid > div { font-size: 13.5px; }
 
 .pay-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: var(--page-a); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; }
 .pay-value { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; margin-top: 2px; }
 
-.pay-history { margin-bottom: 12px; }
+.pay-history { margin-bottom: 10px; }
 .pay-row {
   display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 10px; align-items: center;
   padding: 9px 4px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink-soft);

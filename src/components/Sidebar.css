@@ -72,7 +72,7 @@
 .nav-item.active { background: var(--violet-bg, #F0E7FB); color: var(--violet-tx, #7C4FA8); }
 .nav-item:not(.active):hover { background: var(--violet-bg); color: var(--ink); }
 
-.sidebar-bottom { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+.sidebar-bottom { margin-top: auto; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); }
 
 .theme-toggle {
   display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 14px;
