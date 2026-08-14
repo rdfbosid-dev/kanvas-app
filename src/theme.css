@@ -38,6 +38,7 @@
   --toggle-opt-hover: #F0E7FB;
   --value-done: #ee890d;
   --value-sisa: #df2825;
+  --button: #ecd8f5;
 
   --shadow-modal: 0 24px 60px -12px rgba(43, 36, 56, 0.35);
   --shadow-card: 0 6px 16px -6px rgba(43, 36, 56, 0.06);
@@ -85,6 +86,7 @@
   --toggle-opt-hover: #81679f;
   --value-done: #9bdf25;
   --value-sisa: #dfae25;
+  --button: #ab8dcb;
 
   --shadow-modal: 0 24px 60px -12px rgba(0, 0, 0, 0.65);
   --shadow-card: 0 6px 18px -6px rgba(0, 0, 0, 0.4);

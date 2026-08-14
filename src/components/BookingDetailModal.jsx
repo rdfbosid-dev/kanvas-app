@@ -260,7 +260,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
     <div className="modal-overlay booking-detail-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
       <div className="modal">
         <div className="modal-head">
-          <h2>{editMode ? 'Edit booking' : booking.nama_klien}</h2>
+          <h2>{editMode ? 'Edit Booking' : booking.nama_klien}</h2>
           <button className="modal-close" onClick={onClose} type="button">&times;</button>
         </div>
 
@@ -289,9 +289,9 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
 
               <div className="section-label">Pembayaran</div>
               <div className="pay-summary">
-                <div><span className="detail-label">Total Tagihan</span><div className="pay-value" style={{ color: 'var(--ink-faint-value)' }}>{formatRupiah(booking.belanja_klien)}</div></div>
-                <div><span className="detail-label">Sudah Dibayar</span><div className="pay-value" style={{ color: 'var(--value-done)' }}>{formatRupiah(booking.belanja_klien - sisa)}</div></div>
-                <div><span className="detail-label">Sisa Kekurangan</span><div className="pay-value" style={{ color: sisa > 0 ? 'var(--value-sisa)' : 'var(--mint-tx)' }}>{formatRupiah(sisa)}</div></div>
+                <div><span className="detail-label-summary">Total Tagihan</span><div className="pay-value" style={{ color: 'var(--ink-faint)' }}>{formatRupiah(booking.belanja_klien)}</div></div>
+                <div><span className="detail-label-summary">Sudah Dibayar</span><div className="pay-value" style={{ color: 'var(--value-done)' }}>{formatRupiah(booking.belanja_klien - sisa)}</div></div>
+                <div><span className="detail-label-summary">Sisa Tagihan</span><div className="pay-value" style={{ color: sisa > 0 ? 'var(--value-sisa)' : 'var(--mint)' }}>{formatRupiah(sisa)}</div></div>
               </div>
 
               <div className="detail-label-history">Riwayat Pembayaran</div>
@@ -301,9 +301,10 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                     editingPaymentId === p.id ? (
                       <div className="pay-edit-row" key={p.id}>
                         <div className="field-grid cols-2">
-                          <div className="field"><label>Tanggal</label><input type="date" value={editPayDate} onChange={(e) => setEditPayDate(e.target.value)} /></div>
+                          <div className="field"><label>Tanggal Pembayaran</label><input type="date" value={editPayDate} onChange={(e) => setEditPayDate(e.target.value)} /></div>
                           <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" value={formatAngkaInput(editPayAmount)} onChange={(e) => setEditPayAmount(parseAngkaInput(e.target.value))} /></div>
                         </div>
+                        <div className="field-grid cols-2">
                         <div className="field">
                           <label>Metode Pembayaran</label>
                           <CustomSelect
@@ -312,9 +313,11 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                             onChange={setEditPayMethod}
                           />
                         </div>
+                        <div className="field"><label>Catatan</label><input type="text" placeholder="Opsional" value={payNote} onChange={(e) => setPayNote(e.target.value)} /></div>
+                        </div>
                         <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-                          <button type="button" className="btn-ghost" onClick={() => setEditingPaymentId(null)}>Batal</button>
-                          <button type="button" className="btn-primary" onClick={() => handleSaveEditPayment(p.id)} disabled={saving}>Simpan</button>
+                          <button type="button" className="btn-payment" onClick={() => setEditingPaymentId(null)}>Batal</button>
+                          <button type="button" className="btn-payment" onClick={() => handleSaveEditPayment(p.id)} disabled={saving}>Simpan</button>
                         </div>
                       </div>
                     ) : (
@@ -323,8 +326,8 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                         <span>{p.metode}</span>
                         <span className="pay-amount">{formatRupiah(p.jumlah)}</span>
                         <div className="pay-actions">
-                          <button type="button" onClick={() => startEditPayment(p)} title="Edit">✏️</button>
-                          <button type="button" onClick={() => handleDeletePayment(p.id)} title="Hapus">🗑️</button>
+                          <button type="button" onClick={() => startEditPayment(p)}>Edit</button>
+                          <button type="button" onClick={() => handleDeletePayment(p.id)}>Hapus</button>
                         </div>
                       </div>
                     )
@@ -333,11 +336,11 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
               )}
 
               {!showAddPayment ? (
-                <button type="button" className="add-peserta" onClick={() => setShowAddPayment(true)}>+ Tambah Pembayaran</button>
+                <button type="button" className="add-payment" onClick={() => setShowAddPayment(true)}>+ Tambah Pembayaran</button>
               ) : (
-                <form onSubmit={handleAddPayment} className="peserta-card" style={{ marginTop: 8 }}>
+                <form onSubmit={handleAddPayment} className="add-payment-card" style={{ marginTop: 8 }}>
                   <div className="field-grid cols-2">
-                    <div className="field"><label>Tanggal</label><input type="date" value={payDate} onChange={(e) => setPayDate(e.target.value)} /></div>
+                    <div className="field"><label>Tanggal Pembayaran</label><input type="date" value={payDate} onChange={(e) => setPayDate(e.target.value)} /></div>
                     <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(payAmount)} onChange={(e) => setPayAmount(parseAngkaInput(e.target.value))} /></div>
                   </div>
                   <div className="field-grid cols-2">
@@ -351,19 +354,19 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                     </div>
                     <div className="field"><label>Catatan</label><input type="text" placeholder="Opsional" value={payNote} onChange={(e) => setPayNote(e.target.value)} /></div>
                   </div>
-                  <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
-                    <button type="button" className="btn-ghost" onClick={() => setShowAddPayment(false)}>Batal</button>
-                    <button type="submit" className="btn-primary" disabled={saving}>{saving ? 'Menyimpan...' : 'Simpan pembayaran'}</button>
+                  <div style={{ display: 'flex', gap: 5, marginTop: 4 }}>
+                    <button type="button" className="btn-payment" onClick={() => setShowAddPayment(false)}>Batal</button>
+                    <button type="submit" className="btn-payment" disabled={saving}>{saving ? 'Menyimpan...' : 'Simpan Pembayaran'}</button>
                   </div>
                 </form>
               )}
 
-              <div className="section-label">Peserta ({peserta.length})</div>
+              <div className="section-label">Klien ({peserta.length})</div>
               {peserta.map((p) => (
                 <div className="peserta-view-row" key={p.id}>
                   <div className="b-avatar">{(p.nama_anggota || '?').slice(0, 2).toUpperCase()}</div>
                   <div className="b-info">
-                    <div className="b-name">{p.nama_anggota} {p.peran ? `· ${p.peran}` : ''}</div>
+                    <div className="b-name">{p.nama_anggota} {p.peran ? `— (${p.peran})` : ''}</div>
                     <div className="b-meta">
                       {p.jenis_paket} ({p.dikerjakan_oleh_makeup}) — {formatRupiah(p.biaya_makeup)}
                       {p.layanan_tambahan !== 'Tidak Ada' ? ` · ${p.layanan_tambahan} (${p.dikerjakan_oleh_tambahan})` : ''}
@@ -490,11 +493,11 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
           {editMode ? (
             <>
               <button className="btn-ghost" onClick={() => setEditMode(false)}>Batal</button>
-              <button className="btn-primary" onClick={handleSaveEdit} disabled={saving}>{saving ? 'Menyimpan...' : 'Simpan perubahan'}</button>
+              <button className="btn-primary" onClick={handleSaveEdit} disabled={saving}>{saving ? 'Menyimpan...' : 'Simpan Perubahan'}</button>
             </>
           ) : confirmDeleteBooking ? (
             <>
-              <button className="btn-ghost" onClick={() => setConfirmDeleteBooking(false)}>Batal</button>
+              <button className="btn-ghost-delete" onClick={() => setConfirmDeleteBooking(false)}>Batal</button>
               <button className="btn-danger" onClick={handleDeleteBooking} disabled={saving}>
                 {saving ? 'Menghapus...' : 'Ya, Hapus Permanen'}
               </button>
