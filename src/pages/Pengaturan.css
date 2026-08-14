@@ -29,11 +29,11 @@
 .msg-error { background: var(--coral-bg); color: var(--coral-tx); font-size: 12.5px; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; }
 
 .danger-text { font-size: 13px; color: var(--ink-faint); margin-bottom: 16px; }
-.btn-danger-ghost {
+.btn-keluar-ghost {
   padding: 10px 20px; border-radius: 11px; background: var(--logout);
   font-size: 13.5px; font-weight: 600; color: var(--coral-tx); cursor: pointer;
 }
-.btn-danger-ghost:hover { background: var(--logout-hover); border-radius: 11px;  border: 1px solid var(--logout-hover); }
+.btn-keluar-ghost:hover { background: var(--logout-hover); border-radius: 11px;  border: 1px solid var(--logout-hover); }
 
 @media (max-width: 700px) {
   .field-row { grid-template-columns: 1fr; }

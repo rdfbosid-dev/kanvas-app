@@ -170,8 +170,8 @@
 }
 .booking-detail-overlay .btn-danger-ghost:hover { background: var(--coral-bg); }
 .booking-detail-overlay .btn-danger {
-  padding: 10px 20px; border-radius: 11px; border: none; background: var(--coral-tx); color: #fff;
-  font-size: 13.5px; font-weight: 600; cursor: pointer; font-family: inherit;
+  padding: 5px 10px; border-radius: 11px; border: none; background: var(--coral-tx); color: #fff;
+  font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit;
   transition: background 0.15s;
 }
 .booking-detail-overlay .btn-danger:hover { background: #A93A40; }
