@@ -56,6 +56,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
   const [editPayAmount, setEditPayAmount] = useState('')
   const [editPayMethod, setEditPayMethod] = useState('')
   const [editPayDate, setEditPayDate] = useState('')
+  const [editPayNote, setEditPayNote] = useState('')
 
   useEffect(() => {
     loadDetail()
@@ -190,6 +191,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
     setEditPayAmount(p.jumlah)
     setEditPayMethod(p.metode || 'Transfer Bank')
     setEditPayDate(p.tanggal)
+    setEditPayNote(p.catatan || '')
   }
 
   async function handleSaveEditPayment(paymentId) {
@@ -198,7 +200,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
     setError('')
     const { error: err } = await supabase
       .from('payments')
-      .update({ jumlah: Number(editPayAmount), metode: editPayMethod, tanggal: editPayDate })
+      .update({ jumlah: Number(editPayAmount), metode: editPayMethod, tanggal: editPayDate, catatan: editPayNote.trim() })
       .eq('id', paymentId)
     setSaving(false)
     if (err) { setError(err.message); return }
@@ -313,7 +315,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                             onChange={setEditPayMethod}
                           />
                         </div>
-                        <div className="field"><label>Catatan</label><input type="text" placeholder="Opsional" value={payNote} onChange={(e) => setPayNote(e.target.value)} /></div>
+                        <div className="field"><label>Catatan</label><input type="text" placeholder="Opsional" value={editPayNote} onChange={(e) => setEditPayNote(e.target.value)} /></div>
                         </div>
                         <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
                           <button type="button" className="btn-payment" onClick={() => setEditingPaymentId(null)}>Batal</button>
@@ -325,6 +327,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                         <span>{formatTanggal(p.tanggal)}</span>
                         <span>{p.metode}</span>
                         <span className="pay-amount">{formatRupiah(p.jumlah)}</span>
+                        <span className="pay-note">{p.catatan || '-'}</span>
                         <div className="pay-actions">
                           <button type="button" onClick={() => startEditPayment(p)}>Edit</button>
                           <button type="button" onClick={() => handleDeletePayment(p.id)}>Hapus</button>
