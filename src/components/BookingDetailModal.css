@@ -33,12 +33,12 @@
 .booking-detail-overlay .btn-ghost {
   padding: 5px 10px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
   font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
-  transition: background 0.15s, border-color 0.15s; margin-bottom: 10px;
+  transition: background 0.15s, border-color 0.15s; margin-bottom: 10px; line-height: 1.4;
 }
 .booking-detail-overlay .btn-ghost:hover { background: var(--theme-ops); }
 .booking-detail-overlay .btn-primary {
   background: var(--grad); color: #fff; border: none; border-radius: 10px;
-  padding: 10px 18px; font-size: 12px; font-weight: 600; font-family: inherit;
+  padding: 10px 18px; font-size: 12px; font-weight: 600; font-family: inherit; line-height: 1.4;
   display: flex; align-items: center; gap: 6px; cursor: pointer;
   box-shadow: 0 6px 14px -8px rgba(196,164,240,0.7);
   transition: transform 0.12s, box-shadow 0.12s;
@@ -166,12 +166,12 @@
 .booking-detail-overlay .btn-danger-ghost {
   padding: 5px 10px; border-radius: 11px; border: 1px solid var(--coral-bg); background: var(--white);
   font-size: 12px; font-weight: 600; color: var(--coral-tx); cursor: pointer; font-family: inherit;
-  transition: background 0.15s;
+  transition: background 0.15s; line-height: 1.4;
 }
 .booking-detail-overlay .btn-danger-ghost:hover { background: var(--coral-bg); }
 .booking-detail-overlay .btn-danger {
   padding: 5px 10px; border-radius: 11px; border: none; background: var(--coral-tx); color: #fff;
-  font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit;
+  font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; line-height: 1.4;
   transition: background 0.15s;
 }
 .booking-detail-overlay .btn-danger:hover { background: #A93A40; }
