@@ -6,7 +6,7 @@
 }
 .klien-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
 
-.b-avatar.big {
+.klien-avatar-big {
   width: 56px; height: 56px; font-size: 18px; margin: 0 auto 12px;
   border-radius: 50%; background: var(--grad-soft); display: flex; align-items: center; justify-content: center;
   font-weight: 700; color: var(--violet-tx);
@@ -20,51 +20,6 @@
 
 .klien-outstanding { position: absolute; top: 14px; right: 14px; font-size: 9.5px; padding: 3px 8px; }
 
-/* ---- Elemen di bawah ini sengaja didefinisiin sendiri (bukan cuma
-   ngandelin CSS dari halaman lain), biar halaman ini tetap tampil
-   benar walau dibuka langsung tanpa lewat Dashboard/Booking dulu. ---- */
-
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(43,36,56,0.45);
-  display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
-}
-.modal {
-  background: var(--white); border-radius: 24px; width: 100%; max-width: 560px;
-  max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: var(--shadow-modal);
-}
-.modal-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 26px; flex-shrink: 0; }
-.modal-head h2 { font-size: 18px; }
-.modal-close {
-  width: 32px; height: 32px; border-radius: 10px; border: none; background: var(--violet-bg);
-  color: var(--violet-tx); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
-.modal-body { padding: 22px 26px; overflow-y: auto; flex: 1; }
-.modal-foot { display: flex; justify-content: flex-end; padding: 16px 26px; }
-.btn-ghost {
-  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--line); background: var(--white);
-  font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
-}
-
-.section-label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--violet-tx); margin: 4px 0 12px; }
-.detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.detail-label { font-size: 11.5px; font-weight: 600; color: var(--ink-faint); display: block; margin-bottom: 2px; }
-.detail-grid > div { font-size: 13.5px; }
-
-.booking-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); border-radius: 10px; }
-.booking-row:hover { background: var(--page-a); }
-.booking-row:last-child { border-bottom: none; }
-.b-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--grad-soft); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--violet-tx); }
-.b-info { flex: 1; min-width: 0; }
-.b-name { font-size: 14px; font-weight: 600; }
-.b-meta { font-size: 12.5px; color: var(--ink-soft); margin-top: 1px; }
-
-.status-pill { font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; white-space: nowrap; }
-.status-pill.belum { background: var(--coral-bg); color: var(--coral-tx); }
-.status-pill.lunas { background: var(--mint-bg); color: var(--mint-tx); }
-
-.empty-state { text-align: center; padding: 32px 16px; color: var(--ink-faint); font-size: 13px; }
-.loading-state { text-align: center; padding: 60px; color: var(--ink-soft); font-size: 14px; }
 .filter-bar { margin-bottom: 20px; }
 .search-box {
   max-width: 360px; display: flex; align-items: center; gap: 10px;
@@ -74,11 +29,59 @@
 .search-box input { border: none; outline: none; font-size: 12px; font-family: inherit; color: var(--ink); flex: 1; background: none; }
 .search-box input::placeholder { color: var(--ink-faint); }
 
+/* ---- Modal "Riwayat Booking" klien -- SENGAJA mandiri sepenuhnya, semua
+   selector di-scope di bawah .klien-modal-overlay (ditempel di pembungkus
+   terluar modal ini). Nggak numpang ke BookingModal.css / BookingDetailModal.css
+   sama sekali, jadi aman diedit sendiri tanpa nyenggol file lain. ---- */
+
+.klien-modal-overlay {
+  position: fixed; inset: 0; background: rgba(43,36,56,0.45);
+  display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
+}
+.klien-modal-overlay .modal {
+  background: var(--white); border-radius: 24px; width: 100%; max-width: 560px;
+  max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: var(--shadow-modal);
+}
+.klien-modal-overlay .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 26px; flex-shrink: 0; }
+.klien-modal-overlay .modal-head h2 { font-size: 18px; }
+.klien-modal-overlay .modal-close {
+  width: 32px; height: 32px; border-radius: 10px; border: none; background: var(--violet-bg);
+  color: var(--violet-tx); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.klien-modal-overlay .modal-close:hover { background: var(--theme-ops); }
+.klien-modal-overlay .modal-body { padding: 22px 26px; overflow-y: auto; flex: 1; }
+.klien-modal-overlay .modal-foot { display: flex; justify-content: flex-end; padding: 16px 26px; }
+.klien-modal-overlay .btn-ghost {
+  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
+  font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+.klien-modal-overlay .btn-ghost:hover { background: var(--theme-ops); }
+
+.klien-modal-overlay .section-label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--violet-tx); margin: 4px 0 12px; }
+.klien-modal-overlay .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.klien-modal-overlay .detail-label { font-size: 11.5px; font-weight: 600; color: var(--ink-faint); display: block; margin-bottom: 2px; }
+.klien-modal-overlay .detail-grid > div { font-size: 13.5px; }
+
+.klien-modal-overlay .booking-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); border-radius: 10px; }
+.klien-modal-overlay .booking-row:hover { background: var(--page-a); }
+.klien-modal-overlay .booking-row:last-child { border-bottom: none; }
+.klien-modal-overlay .b-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--grad-soft); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--violet-tx); }
+.klien-modal-overlay .b-info { flex: 1; min-width: 0; }
+.klien-modal-overlay .b-name { font-size: 14px; font-weight: 600; }
+.klien-modal-overlay .b-meta { font-size: 12.5px; color: var(--ink-soft); margin-top: 1px; }
+
+.klien-modal-overlay .status-pill { font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; white-space: nowrap; }
+.klien-modal-overlay .status-pill.belum { background: var(--coral-bg); color: var(--coral-tx); }
+.klien-modal-overlay .status-pill.lunas { background: var(--mint-bg); color: var(--mint-tx); }
+
 @media (max-width: 640px) {
-  .modal-overlay { padding: 0; align-items: flex-end; }
-  .modal { max-width: 100%; max-height: 92vh; border-radius: 22px 22px 0 0; }
-  .modal-head { padding: 16px 18px; }
-  .modal-body { padding: 16px 18px; }
-  .detail-grid { grid-template-columns: repeat(2, 1fr); }
+  .klien-modal-overlay { padding: 0; align-items: flex-end; }
+  .klien-modal-overlay .modal { max-width: 100%; max-height: 92vh; border-radius: 22px 22px 0 0; }
+  .klien-modal-overlay .modal-head { padding: 16px 18px; }
+  .klien-modal-overlay .modal-body { padding: 16px 18px; }
+  .klien-modal-overlay .detail-grid { grid-template-columns: repeat(2, 1fr); }
   .search-box { max-width: 100%; }
 }

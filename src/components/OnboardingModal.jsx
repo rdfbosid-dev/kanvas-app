@@ -5,7 +5,7 @@ export default function OnboardingModal({ onClose, onBookingBaru }) {
   const navigate = useNavigate()
 
   return (
-    <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
+    <div className="modal-overlay onboarding-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
       <div className="onboard-modal">
         <div className="onboard-hero">
           <div className="onboard-emoji">👋</div>

@@ -132,7 +132,7 @@ export default function Klien() {
             <div className="klien-grid">
               {filtered.map((c) => (
                 <div className="klien-card" key={c.id} onClick={() => setSelectedClient(c)}>
-                  <div className="b-avatar big">{initialsOf(c.nama)}</div>
+                  <div className="klien-avatar-big">{initialsOf(c.nama)}</div>
                   <div className="klien-name">{c.nama}</div>
                   <div className="klien-wa">{c.whatsapp || '-'}</div>
                   <div className="klien-stats">
@@ -150,7 +150,7 @@ export default function Klien() {
       </div>
 
       {selectedClient && (
-        <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setSelectedClient(null) }}>
+        <div className="modal-overlay klien-modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setSelectedClient(null) }}>
           <div className="modal">
             <div className="modal-head">
               <h2>{selectedClient.nama}</h2>
