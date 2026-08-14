@@ -185,14 +185,14 @@ export default function BookingModal({ onClose, onSaved }) {
           <div className="modal-body">
             {error && <div className="modal-error">{error}</div>}
 
-            <div className="section-label">Info Booking</div>
+            <div className="section-label">IINFO BOOKING</div>
             <div className="field-grid">
               <div className="field">
-                <label>Tanggal Booking <span className="req">*</span></label>
+                <label>Tanggal Booking</label>
                 <input type="date" value={tanggalBooking} onChange={(e) => setTanggalBooking(e.target.value)} required />
               </div>
               <div className="field" style={{ position: 'relative' }}>
-                <label>Nama Klien <span className="req">*</span></label>
+                <label>Nama Klien</label>
                 <input
                   type="text"
                   placeholder="contoh: Jenny Black Pink"
@@ -251,10 +251,10 @@ export default function BookingModal({ onClose, onSaved }) {
               </div>
             </div>
 
-            <div className="section-label">Detail Acara</div>
+            <div className="section-label">DETAIL ACARA</div>
             <div className="field-grid detail-acara-grid">
               <div className="field">
-                <label>Tanggal Acara <span className="req">*</span></label>
+                <label>Tanggal Acara</label>
                 <input type="date" value={tanggalAcara} onChange={(e) => setTanggalAcara(e.target.value)} required />
               </div>
               <div className="field">
@@ -267,7 +267,7 @@ export default function BookingModal({ onClose, onSaved }) {
               </div>
             </div>
 
-            <div className="section-label">Biaya Tambahan</div>
+            <div className="section-label">BIAYA TAMBAHAN</div>
             <div className="field-grid cols-2">
               <div className="field">
                 <label>Biaya Transport</label>
@@ -326,7 +326,7 @@ export default function BookingModal({ onClose, onSaved }) {
                         </div>
                         <div className="field">
                           <label>Peran</label>
-                          <input type="text" placeholder="contoh: KLien Utama/Wisudawati" value={p.peran} onChange={(e) => updatePeserta(i, 'peran', e.target.value)} />
+                          <input type="text" placeholder="contoh: Klien Utama/Wisudawati" value={p.peran} onChange={(e) => updatePeserta(i, 'peran', e.target.value)} />
                         </div>
                       </div>
 
@@ -369,7 +369,7 @@ export default function BookingModal({ onClose, onSaved }) {
                         <>
                           <div className="field-grid cols-2">
                             <div className="field">
-                              <label>Biaya Tambahan</label>
+                              <label>Biaya Layanan Tambahan</label>
                               <input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(p.biayaTambahan)} onChange={(e) => updatePeserta(i, 'biayaTambahan', parseAngkaInput(e.target.value))} />
                             </div>
                             <div className="field">

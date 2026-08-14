@@ -33,6 +33,9 @@
   --disable-field: #E8D8F0;
   --logout: #EE727E;
   --logout-hover: #c33e4b;
+  --garis: #633480;
+  --toggle-opt-sel: #F4E9F9;
+  --toggle-opt-hover: #F0E7FB;
 
   --shadow-modal: 0 24px 60px -12px rgba(43, 36, 56, 0.35);
   --shadow-card: 0 6px 16px -6px rgba(43, 36, 56, 0.06);
@@ -75,6 +78,9 @@
   --disable-field: #44365d;
   --logout: #EE727E;
   --logout-hover: #c33e4b;
+  --garis: #FFFFFF;
+  --toggle-opt-sel: #a087c0;
+  --toggle-opt-hover: #81679f;
 
   --shadow-modal: 0 24px 60px -12px rgba(0, 0, 0, 0.65);
   --shadow-card: 0 6px 18px -6px rgba(0, 0, 0, 0.4);
