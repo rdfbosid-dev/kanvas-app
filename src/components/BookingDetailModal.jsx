@@ -465,15 +465,6 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                         <div className="field">
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                             <label>Nama Klien</label>
-                            {i === 0 && namaKlien.trim() && (
-                              <button
-                                type="button"
-                                className="quickfill-btn"
-                                onClick={() => updateEditPeserta(0, 'nama_anggota', namaKlien.trim())}
-                              >
-                                Pakai nama klien utama
-                              </button>
-                            )}
                           </div>
                           <input type="text" placeholder="contoh: Jenny Black Pink" value={p.nama_anggota} onChange={(e) => updateEditPeserta(i, 'nama_anggota', e.target.value)} />
                         </div>

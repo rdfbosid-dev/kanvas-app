@@ -58,8 +58,9 @@
 .booking-modal-overlay .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 5px; }
 .booking-modal-overlay .field label { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
 .booking-modal-overlay .quickfill-btn {
-  font-size: 12px; font-weight: 600; color: var(--violet-tx); background: var(--violet-bg);
+  font-size: 12px; font-weight: 500; color: var(--violet-tx); background: var(--violet-bg);
   border: none; border-radius: 5px; padding: 4px 10px; cursor: pointer; transition: background 0.15s;
+  margin-top: -4px;
 }
 .booking-modal-overlay .quickfill-btn:hover { background: var(--theme-ops); }
 .booking-modal-overlay .field input,
