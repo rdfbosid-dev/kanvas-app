@@ -364,14 +364,12 @@ export default function BookingModal({ onClose, onSaved }) {
                         <div className="field">
                         <div className="sb-label">Tambahan Layanan Rambut</div>
                           <div className="toggle-row">
-                          <div className={`toggle-opt${p.layananTambahan === 'Tidak Ada' ? ' sel' : ''}`} onClick={() => updatePeserta(i, 'layananTambahan', 'Tidak Ada')}>Tidak ada</div>
+                          <div className={`toggle-opt${p.layananTambahan === 'Tidak Ada' ? ' sel' : ''}`} onClick={() => updatePeserta(i, 'layananTambahan', 'Tidak Ada')}>Tidak Ada</div>
                           <div className={`toggle-opt${p.layananTambahan === 'Hairdo' ? ' sel' : ''}`} onClick={() => updatePeserta(i, 'layananTambahan', 'Hairdo')}>Hairdo</div>
                           <div className={`toggle-opt${p.layananTambahan === 'Hijabdo Plus' ? ' sel' : ''}`} onClick={() => updatePeserta(i, 'layananTambahan', 'Hijabdo Plus')}>Hijabdo+</div>
                         </div>
                         </div>
-                      </div>
 
-                      <div className="field-grid-peserta-lima">
                         {p.layananTambahan !== 'Tidak Ada' && (
                         <>
                         <div className="field">
@@ -386,7 +384,7 @@ export default function BookingModal({ onClose, onSaved }) {
                       </div>
 
                       {p.layananTambahan !== 'Tidak Ada' && (
-                      <div className="field-grid-peserta-enam">
+                      <div className="field-grid-peserta-lima">
                         <div className="field">
                           <label>Biaya Layanan Tambahan</label>
                           <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.biayaTambahan ? `Rp ${formatAngkaInput(p.biayaTambahan)}` : ''} onChange={(e) => updatePeserta(i, 'biayaTambahan', parseAngkaInput(e.target.value))} />

@@ -67,7 +67,9 @@
 .booking-modal-overlay .field textarea {
   border: 1px solid var(--border-field); border-radius: 11px; padding: 10px 10px;
   font-size: 12px; font-family: inherit; color: var(--ink-soft);; background: var(--white);
+  height: 40px;
 }
+.booking-modal-overlay .field textarea { height: auto; }
 .booking-modal-overlay .field input::placeholder {
   color: var(--placeholder);
   opacity: 1;
@@ -78,6 +80,7 @@
   outline: none; border-color: #C4A4F0; box-shadow: 0 0 0 3px var(--violet-bg);
 }
 .booking-modal-overlay .field textarea { resize: vertical; min-height: 56px; }
+.booking-modal-overlay .cselect-trigger { height: 40px; }
 
 .booking-modal-overlay .field input[type="date"],
 .booking-modal-overlay .field input[type="time"] {
@@ -108,6 +111,9 @@
 .booking-modal-overlay .field-grid-peserta-satu { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
 .booking-modal-overlay .field-grid-peserta-dua { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
 .booking-modal-overlay .field-grid-peserta-tiga { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
+.booking-modal-overlay .field-grid-peserta-empat { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
+.booking-modal-overlay .field-grid-peserta-lima { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
+.booking-modal-overlay .field-grid-peserta-enam { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
 .booking-modal-overlay .peserta-remove {
   font-size: 12px; font-weight: 550; color: var(--ink-faint); cursor: pointer; background: none; border: 1px solid var(--border);
   padding: 4px 8px; border-radius: 7px; transition: background 0.15s;
