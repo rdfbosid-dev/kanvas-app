@@ -10,7 +10,7 @@
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .booking-detail-overlay .modal {
-  background: var(--white); border-radius: 24px; width: 100%; max-width: 720px;
+  background: var(--white); border-radius: 24px; width: 100%; max-width: 600px;
   max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
   box-shadow: 0 24px 60px -12px rgba(43,36,56,0.35);
 }
@@ -18,7 +18,20 @@
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 26px 0; flex-shrink: 0; margin-bottom: 10px;
 }
-.booking-detail-overlay .modal-head h2 { font-size: 18px; }
+.booking-detail-overlay .modal-head h2 {
+  font-size: 18px;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.booking-detail-overlay .modal-head h2::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--grad);
+}
 .booking-detail-overlay .modal-close {
   width: 32px; height: 32px; border-radius: 10px; border: none; background: var(--violet-bg);
   color: var(--violet-tx); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
@@ -59,7 +72,7 @@
 .booking-detail-overlay .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
 /* Titik A: jarak sebelum badge status (di bawah judul modal) */
-.booking-detail-overlay .detail-header { display: flex; align-items: center; margin-top: 0; margin-bottom: 10px; }
+.booking-detail-overlay .detail-header { display: flex; align-items: center; margin-top: 0; margin-bottom: 5px; }
 
 /* Sumber jarak TUNGGAL sebelum tiap section-label (INFO BOOKING/PEMBAYARAN/PESERTA) --
    ini yang bikin titik B dan C otomatis seragam sama titik A di atas. Elemen
@@ -67,7 +80,7 @@
    biar nggak numpuk kayak kasus field-grid dulu. */
 .booking-detail-overlay .section-label {
   font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--violet-tx); margin: 20px 0 10px;
+  color: var(--violet-tx); margin: 10px 0 10px;
 }
 .booking-detail-overlay .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 10px; }
 .booking-detail-overlay .detail-label { font-size: 12px; font-weight: 600; color: var(--ink-faint); display: block; margin-bottom: 10px;
@@ -130,7 +143,10 @@
 .booking-detail-overlay .add-payment-card { margin-left: 10px; background: color-mix(in srgb, var(--hover-row) 50%, transparent); border-radius: 16px; padding: 10px 15px; margin-bottom: 12px; }
 
 /* ---- Field & form (dipakai pas edit booking / edit pembayaran / edit peserta) ---- */
-.booking-detail-overlay .field-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.booking-detail-overlay .field-grid-edit-satu { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.booking-detail-overlay .field-grid-edit-dua { display: grid; grid-template-columns: 0.6fr 0.4fr 2fr; gap: 12px; }
+.booking-detail-overlay .field-grid-edit-tiga { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.booking-detail-overlay .field-grid-edit-empat { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; }
 .booking-detail-overlay .field-grid.cols-2 { grid-template-columns: repeat(2, 1fr); margin-bottom: 5px; }
 .booking-detail-overlay .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
 .booking-detail-overlay .field label { font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 5px; }
@@ -138,17 +154,17 @@
 .booking-detail-overlay .field select,
 .booking-detail-overlay .field textarea {
   border: 1px solid var(--border-field); border-radius: 11px; padding: 9px 12px;
-  font-size: 13px; font-family: inherit; color: var(--ink); background: var(--white);
+  font-size: 12px; font-family: inherit; color: var(--ink); background: var(--white);
   height: 40px;
 }
-.booking-detail-overlay .field textarea { height: auto; }
+
 .booking-detail-overlay .field input::placeholder { color: var(--placeholder); opacity: 1; }
 .booking-detail-overlay .field input:focus,
 .booking-detail-overlay .field select:focus,
 .booking-detail-overlay .field textarea:focus {
   outline: none; border-color: #C4A4F0; box-shadow: 0 0 0 3px var(--violet-bg);
 }
-.booking-detail-overlay .field textarea { resize: vertical; min-height: 56px; }
+.booking-detail-overlay .field textarea { resize: vertical; min-height: 40px; }
 .booking-detail-overlay .cselect-trigger { height: 40px; }
 .booking-detail-overlay .field input[type="date"],
 .booking-detail-overlay .field input[type="time"] {
@@ -163,31 +179,39 @@
   margin-left: 8px; padding: 2px; cursor: pointer; opacity: 0.75;
 }
 
-.booking-detail-overlay .peserta-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
-.booking-detail-overlay .peserta-title { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700; }
+.booking-detail-overlay .peserta-card { background: var(--hover-row); border: 1px solid var(--hover-row); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.booking-detail-overlay .peserta-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.booking-detail-overlay .peserta-title { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; }
 .booking-detail-overlay .peserta-num {
   width: 22px; height: 22px; border-radius: 50%; background: #C4A4F0; color: #fff;
   display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0;
 }
+.booking-detail-overlay .field-grid-peserta-satu { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
+.booking-detail-overlay .field-grid-peserta-dua { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
+.booking-detail-overlay .field-grid-peserta-tiga { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
+.booking-detail-overlay .field-grid-peserta-empat { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
+.booking-detail-overlay .field-grid-peserta-lima { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
+.booking-detail-overlay .field-grid-peserta-enam { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
 .booking-detail-overlay .peserta-remove {
-  font-size: 12px; font-weight: 600; color: var(--coral-tx); cursor: pointer; background: none; border: none;
+  font-size: 12px; font-weight: 550; color: var(--ink-faint); cursor: pointer; background: none; border: 1px solid var(--border);
   padding: 4px 8px; border-radius: 7px; transition: background 0.15s;
 }
-.booking-detail-overlay .peserta-remove:hover { background: var(--coral-bg); }
+.booking-detail-overlay .peserta-remove:hover { background: var(--coral-bg); border: 1px solid var(--coral-bg); color: var(--tooltip-tx); }
 .booking-detail-overlay .peserta-body { background: var(--white); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .booking-detail-overlay .toggle-row { display: flex; gap: 6px; }
 .booking-detail-overlay .toggle-opt {
   flex: 1; text-align: center; padding: 7px; border-radius: 9px; font-size: 12px; font-weight: 600;
-  background: var(--page-a); color: var(--ink-soft); cursor: pointer; border: 1px solid var(--line);
+  background: var(--toggle-opt-sel); color: var(--ink-soft); cursor: pointer; border: 1px;
   transition: background 0.15s, color 0.15s;
 }
-.booking-detail-overlay .toggle-opt:not(.sel):hover { background: var(--violet-bg); color: var(--violet-tx); }
+.booking-detail-overlay .toggle-opt:not(.sel):hover { background: var(--toggle-opt-hover); color: var(--violet-tx); }
 .booking-detail-overlay .toggle-opt.sel { background: #C4A4F0; color: #fff; border-color: transparent; }
+.booking-detail-overlay .sb-label { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); margin-bottom: 10px; }
 
 .booking-detail-overlay .add-peserta {
   text-align: center; padding: 12px; border-radius: 14px; border: 1.5px dashed #D9C9F0;
-  color: var(--violet-tx); font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 4px; background: none;
-  width: 100%; transition: background 0.15s, border-color 0.15s; margin-bottom: 0;
+  color: var(--violet-tx); font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 5px; background: none;
+  width: 100%; transition: background 0.15s, border-color 0.15s;
 }
 .booking-detail-overlay .add-peserta:hover { background: var(--toggle-opt-hover); border-color: #C4A4F0; }
 

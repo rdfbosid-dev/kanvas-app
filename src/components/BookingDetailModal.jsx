@@ -286,7 +286,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 <div><span className="detail-label">Jam Mulai</span><div>{booking.jam_start_makeup ? booking.jam_start_makeup.slice(0, 5) : '-'}</div></div>
                 <div><span className="detail-label">Lokasi</span><div>{booking.lokasi || '-'}</div></div>
                 <div><span className="detail-label">Nomor WhatsApp</span><div>{booking.nomor_whatsapp || '-'}</div></div>
-                <div><span className="detail-label">Sumber</span><div>{booking.sumber || '-'}</div></div>
+                <div><span className="detail-label">Sumber Kanal Booking</span><div>{booking.sumber || '-'}</div></div>
               </div>
 
               <div className="section-label">Pembayaran</div>
@@ -389,22 +389,26 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
 
           {!loading && editMode && (
             <>
-              <div className="section-label">Info Booking</div>
-              <div className="field-grid">
-                <div className="field"><label>Nama Klien</label><input type="text" value={namaKlien} onChange={(e) => setNamaKlien(e.target.value)} /></div>
-                <div className="field"><label>Nomor WhatsApp</label><input type="text" value={nomorWhatsApp} onChange={(e) => setNomorWhatsApp(e.target.value)} /></div>
+              <div className="field-grid-edit-satu">
                 <div className="field">
-                  <label>Sumber</label>
-                  <CustomSelect
-                    options={['Instagram', 'WhatsApp', 'TikTok', 'Facebook', 'Referral']}
-                    value={sumber}
-                    onChange={setSumber}
-                  />
+                  <label>Nama Klien</label>
+                  <input type="text" value={namaKlien} onChange={(e) => setNamaKlien(e.target.value)} />
+                </div>
+                <div className="field">
+                  <label>Nomor WhatsApp</label>
+                  <input type="text" value={nomorWhatsApp} onChange={(e) => setNomorWhatsApp(e.target.value)} />
                 </div>
               </div>
-              <div className="field-grid" style={{ marginTop: 12 }}>
-                <div className="field"><label>Tanggal Acara</label><input type="date" value={tanggalAcara} onChange={(e) => setTanggalAcara(e.target.value)} /></div>
-                <div className="field"><label>Jam Mulai</label><input type="time" value={jamStartMakeup} onChange={(e) => setJamStartMakeup(e.target.value)} /></div>
+
+              <div className="field-grid-edit-dua" style={{ marginTop: 12 }}>
+                <div className="field">
+                  <label>Tanggal Acara</label>
+                  <input type="date" value={tanggalAcara} onChange={(e) => setTanggalAcara(e.target.value)} />
+                </div>
+                <div className="field">
+                  <label>Jam Mulai</label>
+                  <input type="time" value={jamStartMakeup} onChange={(e) => setJamStartMakeup(e.target.value)} />
+                </div>
                 <div className="field">
                   <label>Event</label>
                   <CustomSelect
@@ -423,62 +427,133 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                   )}
                 </div>
               </div>
-              <div className="field-grid cols-2" style={{ marginTop: 12 }}>
-                <div className="field"><label>Lokasi</label><input type="text" value={lokasi} onChange={(e) => setLokasi(e.target.value)} /></div>
-                <div className="field"><label>Biaya Transport</label><input type="text" inputMode="numeric" value={formatAngkaInput(biayaTransport)} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} /></div>
-              </div>
-              <div className="field" style={{ marginTop: 12 }}><label>Catatan</label><textarea value={catatan} onChange={(e) => setCatatan(e.target.value)} /></div>
 
-              <div className="section-label">Peserta</div>
+              <div className="field-grid-edit-tiga" style={{ marginTop: 12 }}>
+                <div className="field">
+                  <label>Lokasi</label><input type="text" value={lokasi} onChange={(e) => setLokasi(e.target.value)} />
+                </div>
+                <div className="field">
+                  <label>Sumber Kanal Booking</label>
+                  <CustomSelect
+                    options={['Instagram', 'WhatsApp', 'TikTok', 'Facebook', 'Referral']}
+                    value={sumber}
+                    onChange={setSumber}
+                  />
+                </div>
+              </div>
+
+              <div className="field-grid-edit-empat">
+                <div className="field">
+                  <label>Biaya Transport</label>
+                  <input type="text" inputMode="numeric" value={formatAngkaInput(biayaTransport)} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} />
+                </div>
+                <div className="field">
+                  <label>Catatan</label>
+                  <textarea value={catatan} onChange={(e) => setCatatan(e.target.value)} />
+                </div>
+              </div>
+
+            <div className="section-label">Klien</div>
               {editPeserta.map((p, i) => (
                 <div className="peserta-card" key={p.id || `new-${i}`}>
                   <div className="peserta-head">
-                    <div className="peserta-title"><span className="peserta-num">{i + 1}</span>Peserta {i + 1}</div>
+                    <div className="peserta-title"><span className="peserta-num">{i + 1}</span>Klien {i + 1}</div>
                     <button type="button" className="peserta-remove" onClick={() => removeEditPeserta(i)}>Hapus</button>
                   </div>
                   <div className="peserta-body">
-                    <div className="field-grid cols-2">
-                      <div className="field"><label>Nama</label><input type="text" value={p.nama_anggota} onChange={(e) => updateEditPeserta(i, 'nama_anggota', e.target.value)} /></div>
-                      <div className="field"><label>Peran</label><input type="text" value={p.peran} onChange={(e) => updateEditPeserta(i, 'peran', e.target.value)} /></div>
-                    </div>
-                    <div className="toggle-row">
-                      <div className={`toggle-opt${p.jenis_paket === 'Reguler' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'jenis_paket', 'Reguler')}>Reguler</div>
-                      <div className={`toggle-opt${p.jenis_paket === 'VIP' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'jenis_paket', 'VIP')}>VIP</div>
-                    </div>
-                    <div className="field-grid cols-2">
-                      <div className="field"><label>Biaya Makeup</label><input type="text" inputMode="numeric" value={formatAngkaInput(p.biaya_makeup)} onChange={(e) => updateEditPeserta(i, 'biaya_makeup', parseAngkaInput(e.target.value))} /></div>
-                      <div className="field">
-                        <label>&nbsp;</label>
-                        <div className="toggle-row">
-                          <div className={`toggle-opt${p.dikerjakan_oleh_makeup === 'Me' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'dikerjakan_oleh_makeup', 'Me')}>Me</div>
-                          <div className={`toggle-opt${p.dikerjakan_oleh_makeup === 'Tim' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'dikerjakan_oleh_makeup', 'Tim')}>Tim</div>
+                  <div className="field-grid-peserta-satu">
+                        <div className="field">
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <label>Nama Klien</label>
+                            {i === 0 && namaKlien.trim() && (
+                              <button
+                                type="button"
+                                className="quickfill-btn"
+                                onClick={() => updateEditPeserta(0, 'nama_anggota', namaKlien.trim())}
+                              >
+                                Pakai nama klien utama
+                              </button>
+                            )}
+                          </div>
+                          <input type="text" placeholder="contoh: Jenny Black Pink" value={p.nama_anggota} onChange={(e) => updateEditPeserta(i, 'nama_anggota', e.target.value)} />
+                        </div>
+                        <div className="field">
+                          <label>Peran</label>
+                          <input type="text" placeholder="contoh: Klien Utama/Wisudawati" value={p.peran} onChange={(e) => updateEditPeserta(i, 'peran', e.target.value)} />
                         </div>
                       </div>
-                    </div>
-                    {p.dikerjakan_oleh_makeup === 'Tim' && (
-                      <div className="field"><label>Komisi</label><input type="text" inputMode="numeric" value={formatAngkaInput(p.komisi_makeup_tim)} onChange={(e) => updateEditPeserta(i, 'komisi_makeup_tim', parseAngkaInput(e.target.value))} /></div>
-                    )}
-                    <div className="toggle-row">
-                      <div className={`toggle-opt${p.layanan_tambahan === 'Tidak Ada' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Tidak Ada')}>Tidak ada</div>
-                      <div className={`toggle-opt${p.layanan_tambahan === 'Hairdo' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Hairdo')}>Hairdo</div>
-                      <div className={`toggle-opt${p.layanan_tambahan === 'Hijabdo Plus' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Hijabdo Plus')}>Hijabdo+</div>
-                    </div>
-                    {p.layanan_tambahan !== 'Tidak Ada' && (
-                      <div className="field-grid cols-2">
-                        <div className="field"><label>Biaya Tambahan</label><input type="text" inputMode="numeric" value={formatAngkaInput(p.biaya_tambahan)} onChange={(e) => updateEditPeserta(i, 'biaya_tambahan', parseAngkaInput(e.target.value))} /></div>
+
+                      <div className="field-grid-peserta-dua">
                         <div className="field">
-                          <label>&nbsp;</label>
+                          <div className="sb-label">Jenis Makeup</div>
+                            <div className="toggle-row">
+                            <div className={`toggle-opt${p.jenis_paket === 'Reguler' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'jenis_paket', 'Reguler')}>Reguler</div>
+                            <div className={`toggle-opt${p.jenis_paket === 'VIP' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'jenis_paket', 'VIP')}>VIP</div>
+                          </div>
+                        </div>
+                        <div className="field">
+                          <label>Dikerjakan oleh</label>
                           <div className="toggle-row">
-                            <div className={`toggle-opt${p.dikerjakan_oleh_tambahan === 'Me' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'dikerjakan_oleh_tambahan', 'Me')}>Me</div>
-                            <div className={`toggle-opt${p.dikerjakan_oleh_tambahan === 'Tim' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'dikerjakan_oleh_tambahan', 'Tim')}>Tim</div>
+                            <div className={`toggle-opt${p.dikerjakan_oleh_makeup === 'Me' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'dikerjakan_oleh_makeup', 'Me')}>Me</div>
+                            <div className={`toggle-opt${p.dikerjakan_oleh_makeup === 'Tim' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'dikerjakan_oleh_makeup', 'Tim')}>Tim</div>
                           </div>
                         </div>
                       </div>
-                    )}
+                      <div className="field-grid-peserta-tiga">
+                        <div className="field">
+                          <label>Biaya Makeup</label>
+                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.biaya_makeup ? `Rp ${formatAngkaInput(p.biaya_makeup)}` : ''} onChange={(e) => updateEditPeserta(i, 'biaya_makeup', parseAngkaInput(e.target.value))} />
+                        </div>
+                        {p.dikerjakan_oleh_makeup === 'Tim' && (
+                        <div className="field">
+                          <label>Komisi untuk Kamu</label>
+                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.komisi_makeup_tim ? `Rp ${formatAngkaInput(p.komisi_makeup_tim)}` : ''} onChange={(e) => updateEditPeserta(i, 'komisi_makeup_tim', parseAngkaInput(e.target.value))} />
+                        </div>
+                        )}
+                      </div>
+
+                      <div className="field-grid-peserta-empat">
+                        <div className="field">
+                        <div className="sb-label">Tambahan Layanan Rambut</div>
+                          <div className="toggle-row">
+                          <div className={`toggle-opt${p.layanan_tambahan === 'Tidak Ada' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Tidak Ada')}>Tidak Ada</div>
+                          <div className={`toggle-opt${p.layanan_tambahan === 'Hairdo' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Hairdo')}>Hairdo</div>
+                          <div className={`toggle-opt${p.layanan_tambahan === 'Hijabdo Plus' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Hijabdo Plus')}>Hijabdo+</div>
+                        </div>
+                        </div>
+
+                        {p.layanan_tambahan !== 'Tidak Ada' && (
+                        <>
+                        <div className="field">
+                        <div className="sb-label">Dikerjakan oleh</div>
+                          <div className="toggle-row">
+                          <div className={`toggle-opt${p.dikerjakan_oleh_tambahan === 'Me' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'dikerjakan_oleh_tambahan', 'Me')}>Me</div>
+                          <div className={`toggle-opt${p.dikerjakan_oleh_tambahan === 'Tim' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'dikerjakan_oleh_tambahan', 'Tim')}>Tim</div>
+                        </div>
+                        </div>
+                        </>
+                        )}
+                      </div>
+
+                      {p.layanan_tambahan !== 'Tidak Ada' && (
+                      <div className="field-grid-peserta-lima">
+                        <div className="field">
+                          <label>Biaya Layanan Tambahan</label>
+                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.biaya_tambahan ? `Rp ${formatAngkaInput(p.biaya_tambahan)}` : ''} onChange={(e) => updateEditPeserta(i, 'biaya_tambahan', parseAngkaInput(e.target.value))} />
+                        </div>
+                        {p.dikerjakan_oleh_tambahan === 'Tim' && (
+                        <div className="field">
+                          <label>Komisi untuk Kamu</label>
+                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.komisi_tambahan ? `Rp ${formatAngkaInput(p.komisi_tambahan)}` : ''} onChange={(e) => updateEditPeserta(i, 'komisi_tambahan', parseAngkaInput(e.target.value))} />
+                        </div>
+                          )}
+                      </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-              <button type="button" className="add-peserta" onClick={addEditPeserta}>+ Tambah Peserta</button>
+                )
+              )}
+              <button type="button" className="add-peserta" onClick={addEditPeserta}>+ Tambah Klien</button>
             </>
           )}
         </div>
