@@ -215,6 +215,11 @@
 }
 .booking-detail-overlay .add-peserta:hover { background: var(--toggle-opt-hover); border-color: #C4A4F0; }
 
+.booking-detail-overlay .quickfill-btn {
+  font-size: 12px; font-weight: 600; color: var(--violet-tx); background: var(--violet-bg);
+  border: none; border-radius: 5px; padding: 4px 10px; cursor: pointer; transition: background 0.15s;
+}
+.booking-detail-overlay .quickfill-btn:hover { background: var(--theme-ops); }
 /* ---- Konfirmasi hapus booking ---- */
 .booking-detail-overlay .delete-confirm-banner {
   background: var(--coral-bg); border-top: 1px solid #F4C7CA;

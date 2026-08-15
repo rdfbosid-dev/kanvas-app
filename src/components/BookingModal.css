@@ -58,10 +58,10 @@
 .booking-modal-overlay .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 5px; }
 .booking-modal-overlay .field label { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
 .booking-modal-overlay .quickfill-btn {
-  font-size: 12px; font-weight: 700; color: var(--violet-tx); background: var(--violet-bg);
-  border: none; border-radius: 20px; padding: 3px 9px; cursor: pointer; transition: background 0.15s;
+  font-size: 12px; font-weight: 600; color: var(--violet-tx); background: var(--violet-bg);
+  border: none; border-radius: 5px; padding: 4px 10px; cursor: pointer; transition: background 0.15s;
 }
-.booking-modal-overlay .quickfill-btn:hover { background: #E3D2F5; }
+.booking-modal-overlay .quickfill-btn:hover { background: var(--theme-ops); }
 .booking-modal-overlay .field input,
 .booking-modal-overlay .field select,
 .booking-modal-overlay .field textarea {
