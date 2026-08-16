@@ -59,6 +59,14 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
   const [editPayDate, setEditPayDate] = useState('')
   const [editPayNote, setEditPayNote] = useState('')
 
+  // `booking` (prop dari halaman induk) itu cuma "foto" sekali pas modal ini
+  // pertama dibuka -- nggak otomatis ke-update walau kita udah nyimpen
+  // perubahan peserta/pembayaran di sini. `liveBooking` ini yang jadi sumber
+  // data buat ditampilin di mode lihat, di-refresh ulang dari database
+  // (bukan dihitung sendiri di frontend) tiap kali loadDetail() jalan --
+  // biar angkanya PASTI sama kayak yang muncul di tabel Booking di luar.
+  const [liveBooking, setLiveBooking] = useState(booking)
+
   useEffect(() => {
     loadDetail()
   }, [booking.id])
@@ -67,9 +75,10 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
     setLoading(true)
     setError('')
 
-    const [{ data: pesertaData, error: pesertaErr }, { data: paymentData, error: paymentErr }] = await Promise.all([
+    const [{ data: pesertaData, error: pesertaErr }, { data: paymentData, error: paymentErr }, { data: bookingData, error: bookingErr }] = await Promise.all([
       supabase.from('peserta').select('*').eq('booking_id', booking.id).order('created_at'),
       supabase.from('payments').select('*').eq('booking_id', booking.id).order('tanggal', { ascending: false }),
+      supabase.from('booking_summary').select('*').eq('id', booking.id).single(),
     ])
 
     if (pesertaErr || paymentErr) {
@@ -77,28 +86,29 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
     } else {
       setPeserta(pesertaData || [])
       setPayments(paymentData || [])
+      if (!bookingErr && bookingData) setLiveBooking(bookingData)
     }
     setLoading(false)
   }
 
   function enterEditMode() {
     setConfirmDeleteBooking(false)
-    setTanggalBooking(booking.tanggal_booking || '')
-    setNamaKlien(booking.nama_klien || '')
-    setNomorWhatsApp(booking.nomor_whatsapp || '')
-    setSumber(booking.sumber || 'Instagram')
-    setTanggalAcara(booking.tanggal_acara || '')
-    setJamStartMakeup(booking.jam_start_makeup || '')
-    setLokasi(booking.lokasi || '')
-    if (EVENT_OPTIONS.includes(booking.event)) {
-      setEvent(booking.event)
+    setTanggalBooking(liveBooking.tanggal_booking || '')
+    setNamaKlien(liveBooking.nama_klien || '')
+    setNomorWhatsApp(liveBooking.nomor_whatsapp || '')
+    setSumber(liveBooking.sumber || 'Instagram')
+    setTanggalAcara(liveBooking.tanggal_acara || '')
+    setJamStartMakeup(liveBooking.jam_start_makeup || '')
+    setLokasi(liveBooking.lokasi || '')
+    if (EVENT_OPTIONS.includes(liveBooking.event)) {
+      setEvent(liveBooking.event)
       setEventCustom('')
     } else {
       setEvent(EVENT_CUSTOM_SENTINEL)
-      setEventCustom(booking.event || '')
+      setEventCustom(liveBooking.event || '')
     }
-    setBiayaTransport(booking.biaya_transport ?? '')
-    setCatatan(booking.catatan || '')
+    setBiayaTransport(liveBooking.biaya_transport ?? '')
+    setCatatan(liveBooking.catatan || '')
     setEditPeserta(peserta.map((p) => ({ ...p })))
     setRemovedPesertaIds([])
     setEditMode(true)
@@ -260,18 +270,13 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
     onChanged()
   }
 
-  // Dihitung langsung dari `peserta` (state lokal, selalu fresh abis loadDetail())
-  // -- bukan dari `booking.belanja_klien` (prop dari halaman induk), soalnya
-  // prop itu nggak ikut ke-refresh otomatis abis Simpan Perubahan, cuma
-  // ke-refresh kalau modal ini ditutup-buka ulang.
-  const belanjaKlien = peserta.reduce((sum, p) => sum + (Number(p.biaya_makeup) || 0) + (Number(p.biaya_tambahan) || 0), 0)
-  const sisa = belanjaKlien - payments.reduce((s, p) => s + Number(p.jumlah), 0)
+  const sisa = (liveBooking.belanja_klien || 0) - payments.reduce((s, p) => s + Number(p.jumlah), 0)
 
   return (
     <div className="modal-overlay booking-detail-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
       <div className="modal">
         <div className="modal-head">
-          <h2>{editMode ? 'Edit Booking' : booking.nama_klien}</h2>
+          <h2>{editMode ? 'Edit Booking' : liveBooking.nama_klien}</h2>
           <button className="modal-close" onClick={onClose} type="button">&times;</button>
         </div>
 
@@ -282,26 +287,26 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
           {!loading && !editMode && (
             <>
               <div className="detail-header">
-                <span className={`status-pill ${booking.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
-                  {booking.status_pembayaran}
+                <span className={`status-pill ${liveBooking.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
+                  {liveBooking.status_pembayaran}
                 </span>
                 <button className="btn-ghost" style={{ marginLeft: 'auto', marginRight: 10}} onClick={() => setShowInvoice(true)}>Invoice</button>
                 <button className="btn-ghost" onClick={enterEditMode}>Edit Booking</button>
               </div>
 
               <div className="detail-grid">
-                <div><span className="detail-label">Event</span><div>{booking.event}</div></div>
-                <div><span className="detail-label">Tanggal Acara</span><div>{formatTanggal(booking.tanggal_acara)}</div></div>
-                <div><span className="detail-label">Jam Mulai</span><div>{booking.jam_start_makeup ? booking.jam_start_makeup.slice(0, 5) : '-'}</div></div>
-                <div><span className="detail-label">Lokasi</span><div>{booking.lokasi || '-'}</div></div>
-                <div><span className="detail-label">Nomor WhatsApp</span><div>{booking.nomor_whatsapp || '-'}</div></div>
-                <div><span className="detail-label">Sumber Kanal Booking</span><div>{booking.sumber || '-'}</div></div>
+                <div><span className="detail-label">Event</span><div>{liveBooking.event}</div></div>
+                <div><span className="detail-label">Tanggal Acara</span><div>{formatTanggal(liveBooking.tanggal_acara)}</div></div>
+                <div><span className="detail-label">Jam Mulai</span><div>{liveBooking.jam_start_makeup ? liveBooking.jam_start_makeup.slice(0, 5) : '-'}</div></div>
+                <div><span className="detail-label">Lokasi</span><div>{liveBooking.lokasi || '-'}</div></div>
+                <div><span className="detail-label">Nomor WhatsApp</span><div>{liveBooking.nomor_whatsapp || '-'}</div></div>
+                <div><span className="detail-label">Sumber Kanal Booking</span><div>{liveBooking.sumber || '-'}</div></div>
               </div>
 
               <div className="section-label">Pembayaran</div>
               <div className="pay-summary">
-                <div><span className="detail-label-summary">Total Tagihan</span><div className="pay-value" style={{ color: 'var(--ink-faint)' }}>{formatRupiah(belanjaKlien)}</div></div>
-                <div><span className="detail-label-summary">Sudah Dibayar</span><div className="pay-value" style={{ color: 'var(--value-done)' }}>{formatRupiah(belanjaKlien - sisa)}</div></div>
+                <div><span className="detail-label-summary">Total Tagihan</span><div className="pay-value" style={{ color: 'var(--ink-faint)' }}>{formatRupiah(liveBooking.belanja_klien)}</div></div>
+                <div><span className="detail-label-summary">Sudah Dibayar</span><div className="pay-value" style={{ color: 'var(--value-done)' }}>{formatRupiah(liveBooking.belanja_klien - sisa)}</div></div>
                 <div><span className="detail-label-summary">Sisa Tagihan</span><div className="pay-value" style={{ color: sisa > 0 ? 'var(--value-sisa)' : 'var(--mint)' }}>{formatRupiah(sisa)}</div></div>
               </div>
 
@@ -387,10 +392,10 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 </div>
               ))}
 
-              {booking.catatan && (
+              {liveBooking.catatan && (
                 <>
                   <div className="section-label">Catatan</div>
-                  <div style={{ fontSize: 13, color: 'var(--ink-soft)' }}>{booking.catatan}</div>
+                  <div style={{ fontSize: 13, color: 'var(--ink-soft)' }}>{liveBooking.catatan}</div>
                 </>
               )}
             </>
@@ -567,7 +572,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
         {confirmDeleteBooking && (
           <div className="delete-confirm-banner">
             <div className="delete-confirm-text">
-              <b>Hapus Booking {booking.nama_klien}?</b>
+              <b>Hapus Booking {liveBooking.nama_klien}?</b>
               <span>{peserta.length} peserta dan {payments.length} catatan pembayaran juga akan ikut terhapus. Tindakan ini tidak bisa dibatalkan.</span>
             </div>
           </div>
