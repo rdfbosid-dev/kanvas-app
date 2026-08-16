@@ -28,6 +28,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
   const [editMode, setEditMode] = useState(false)
   const [showInvoice, setShowInvoice] = useState(false)
   const [confirmDeleteBooking, setConfirmDeleteBooking] = useState(false)
+  const [confirmDeletePaymentId, setConfirmDeletePaymentId] = useState(null)
   const [saving, setSaving] = useState(false)
 
   // form state buat mode edit
@@ -224,11 +225,11 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
   }
 
   async function handleDeletePayment(paymentId) {
-    if (!window.confirm('Hapus catatan pembayaran ini?')) return
     setSaving(true)
     setError('')
     const { error: err } = await supabase.from('payments').delete().eq('id', paymentId)
     setSaving(false)
+    setConfirmDeletePaymentId(null)
     if (err) { setError(err.message); return }
     await loadDetail()
     onChanged()
@@ -342,10 +343,20 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                         <span>{p.metode}</span>
                         <span className="pay-amount">{formatRupiah(p.jumlah)}</span>
                         <span className="pay-note">{p.catatan || '-'}</span>
-                        <div className="pay-actions">
-                          <button type="button" onClick={() => startEditPayment(p)}>Edit</button>
-                          <button type="button" onClick={() => handleDeletePayment(p.id)}>Hapus</button>
-                        </div>
+                        {confirmDeletePaymentId === p.id ? (
+                          <div className="pay-confirm-delete">
+                            <span>Yakin hapus?</span>
+                            <button type="button" className="pay-confirm-yes" onClick={() => handleDeletePayment(p.id)} disabled={saving}>
+                              {saving ? '...' : 'Ya, Hapus'}
+                            </button>
+                            <button type="button" className="pay-confirm-cancel" onClick={() => setConfirmDeletePaymentId(null)}>Batal</button>
+                          </div>
+                        ) : (
+                          <div className="pay-actions">
+                            <button type="button" onClick={() => startEditPayment(p)}>Edit</button>
+                            <button type="button" onClick={() => setConfirmDeletePaymentId(p.id)}>Hapus</button>
+                          </div>
+                        )}
                       </div>
                     )
                   ))}
@@ -572,8 +583,9 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
         {confirmDeleteBooking && (
           <div className="delete-confirm-banner">
             <div className="delete-confirm-text">
-              <b>Hapus Booking {liveBooking.nama_klien}?</b>
-              <span>{peserta.length} peserta dan {payments.length} catatan pembayaran juga akan ikut terhapus. Tindakan ini tidak bisa dibatalkan.</span>
+              <b>Yakin menghapus data booking {liveBooking.nama_klien}?</b>
+              <span>{peserta.length} peserta dan {payments.length} catatan pembayaran juga akan ikut terhapus.< br/>
+              Data yang sudah dihapus tidak bisa dikembalikan.</span>
             </div>
           </div>
         )}
@@ -581,14 +593,14 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
         <div className="modal-foot">
           {editMode ? (
             <>
-              <button className="btn-ghost" onClick={() => setEditMode(false)}>Batal</button>
+              <button className="btn-batal" onClick={() => setEditMode(false)}>Batal</button>
               <button className="btn-primary" onClick={handleSaveEdit} disabled={saving}>{saving ? 'Menyimpan...' : 'Simpan Perubahan'}</button>
             </>
           ) : confirmDeleteBooking ? (
             <>
-              <button className="btn-danger" onClick={() => setConfirmDeleteBooking(false)}>Batal</button>
+              <button className="btn-danger batal" onClick={() => setConfirmDeleteBooking(false)}>Batal</button>
               <button className="btn-danger" onClick={handleDeleteBooking} disabled={saving}>
-                {saving ? 'Menghapus...' : 'Ya, Hapus Permanen'}
+                {saving ? 'Menghapus...' : 'Ya, hapus permanen'}
               </button>
             </>
           ) : (

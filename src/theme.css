@@ -41,6 +41,8 @@
   --button: #ecd8f5;
   --delete: #de5e6b;
   --delete-hover: #c33e4b;
+  --danger: #d26065;
+  --danger-hover: #A93A40;
 
   --shadow-modal: 0 24px 60px -12px rgba(43, 36, 56, 0.35);
   --shadow-card: 0 6px 16px -6px rgba(43, 36, 56, 0.06);
@@ -91,6 +93,8 @@
   --button: #ab8dcb;
   --delete: #de5e6b;
   --delete-hover: #c33e4b;
+  --danger: #cd454c;
+  --danger-hover: #A93A40;
 
   --shadow-modal: 0 24px 60px -12px rgba(0, 0, 0, 0.65);
   --shadow-card: 0 6px 18px -6px rgba(0, 0, 0, 0.4);
