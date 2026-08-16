@@ -195,10 +195,10 @@
 }
 .booking-detail-overlay .field-grid-peserta.cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
 .booking-detail-overlay .peserta-remove {
-  font-size: 12px; font-weight: 550; color: var(--ink-faint); cursor: pointer; background: none; border: 1px solid var(--border);
+  font-size: 12px; font-weight: 550; color: var(--coral-tx); cursor: pointer; background: var(--delete); border: 1px solid var(--delete);
   padding: 4px 8px; border-radius: 7px; transition: background 0.15s;
 }
-.booking-detail-overlay .peserta-remove:hover { background: var(--coral-bg); border: 1px solid var(--coral-bg); color: var(--tooltip-tx); }
+.booking-detail-overlay .peserta-remove:hover { background: var(--delete-hover); border: 1px solid var(--delete-hover); color: var(--coral-tx); }
 .booking-detail-overlay .peserta-body { background: var(--white); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .booking-detail-overlay .toggle-row { display: flex; gap: 6px; }
 .booking-detail-overlay .toggle-opt {

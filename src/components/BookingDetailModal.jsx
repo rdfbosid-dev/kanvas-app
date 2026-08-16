@@ -260,7 +260,12 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
     onChanged()
   }
 
-  const sisa = (booking.belanja_klien || 0) - payments.reduce((s, p) => s + Number(p.jumlah), 0)
+  // Dihitung langsung dari `peserta` (state lokal, selalu fresh abis loadDetail())
+  // -- bukan dari `booking.belanja_klien` (prop dari halaman induk), soalnya
+  // prop itu nggak ikut ke-refresh otomatis abis Simpan Perubahan, cuma
+  // ke-refresh kalau modal ini ditutup-buka ulang.
+  const belanjaKlien = peserta.reduce((sum, p) => sum + (Number(p.biaya_makeup) || 0) + (Number(p.biaya_tambahan) || 0), 0)
+  const sisa = belanjaKlien - payments.reduce((s, p) => s + Number(p.jumlah), 0)
 
   return (
     <div className="modal-overlay booking-detail-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
@@ -295,8 +300,8 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
 
               <div className="section-label">Pembayaran</div>
               <div className="pay-summary">
-                <div><span className="detail-label-summary">Total Tagihan</span><div className="pay-value" style={{ color: 'var(--ink-faint)' }}>{formatRupiah(booking.belanja_klien)}</div></div>
-                <div><span className="detail-label-summary">Sudah Dibayar</span><div className="pay-value" style={{ color: 'var(--value-done)' }}>{formatRupiah(booking.belanja_klien - sisa)}</div></div>
+                <div><span className="detail-label-summary">Total Tagihan</span><div className="pay-value" style={{ color: 'var(--ink-faint)' }}>{formatRupiah(belanjaKlien)}</div></div>
+                <div><span className="detail-label-summary">Sudah Dibayar</span><div className="pay-value" style={{ color: 'var(--value-done)' }}>{formatRupiah(belanjaKlien - sisa)}</div></div>
                 <div><span className="detail-label-summary">Sisa Tagihan</span><div className="pay-value" style={{ color: sisa > 0 ? 'var(--value-sisa)' : 'var(--mint)' }}>{formatRupiah(sisa)}</div></div>
               </div>
 

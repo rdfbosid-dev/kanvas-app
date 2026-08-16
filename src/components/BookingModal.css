@@ -116,7 +116,7 @@
   font-size: 12px; font-weight: 550; color: var(--coral-tx); cursor: pointer; background: var(--delete); border: 1px solid var(--delete);
   padding: 4px 8px; border-radius: 7px; transition: background 0.15s;
 }
-.booking-modal-overlay .peserta-remove:hover { background: var(--delete-hover); border: 1px solid var(--delete-hover); color: var(--tooltip-tx); }
+.booking-modal-overlay .peserta-remove:hover { background: var(--delete-hover); border: 1px solid var(--delete-hover); color: var(--coral-tx); }
 .booking-modal-overlay .peserta-body { background: var(--white); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .booking-modal-overlay .toggle-row { display: flex; gap: 6px; }
 .booking-modal-overlay .toggle-opt {
