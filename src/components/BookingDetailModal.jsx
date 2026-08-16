@@ -308,7 +308,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       <div className="pay-edit-row" key={p.id}>
                         <div className="field-grid-detail add-edit-pay-cols-3">
                           <div className="field"><label>Tanggal Pembayaran</label><input type="date" value={editPayDate} onChange={(e) => setEditPayDate(e.target.value)} /></div>
-                          <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" value={formatAngkaInput(editPayAmount)} onChange={(e) => setEditPayAmount(parseAngkaInput(e.target.value))} /></div>
+                          <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="Rp 0" value={editPayAmount ? `Rp ${formatAngkaInput(editPayAmount)}` : ''} onChange={(e) => setEditPayAmount(parseAngkaInput(e.target.value))} /></div>
                           <div className="field">
                           <label>Metode Pembayaran</label>
                           <CustomSelect
@@ -348,7 +348,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 <form onSubmit={handleAddPayment} className="add-payment-card" style={{ marginTop: 8 }}>
                   <div className="field-grid-detail add-edit-pay-cols-3">
                     <div className="field"><label>Tanggal Pembayaran</label><input type="date" value={payDate} onChange={(e) => setPayDate(e.target.value)} /></div>
-                    <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(payAmount)} onChange={(e) => setPayAmount(parseAngkaInput(e.target.value))} /></div>
+                    <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="Rp 0" value={payAmount ? `Rp ${formatAngkaInput(payAmount)}` : ''} onChange={(e) => setPayAmount(parseAngkaInput(e.target.value))} /></div>
                     <div className="field">
                       <label>Metode Pembayaran</label>
                       <CustomSelect
@@ -453,7 +453,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
               <div className="field-grid-booking cols-transport-catatan">
                 <div className="field">
                   <label>Biaya Transport</label>
-                  <input type="text" inputMode="numeric" value={formatAngkaInput(biayaTransport)} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} />
+                  <input type="text" inputMode="numeric" placeholder="Rp 0" value={biayaTransport ? `Rp ${formatAngkaInput(biayaTransport)}` : ''} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} />
                 </div>
                 <div className="field">
                   <label>Catatan</label>
