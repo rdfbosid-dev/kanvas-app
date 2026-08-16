@@ -343,20 +343,21 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                         <span>{p.metode}</span>
                         <span className="pay-amount">{formatRupiah(p.jumlah)}</span>
                         <span className="pay-note">{p.catatan || '-'}</span>
-                        {confirmDeletePaymentId === p.id ? (
-                          <div className="pay-confirm-delete">
-                            <span>Yakin hapus?</span>
-                            <button type="button" className="pay-confirm-yes" onClick={() => handleDeletePayment(p.id)} disabled={saving}>
-                              {saving ? '...' : 'Ya, Hapus'}
-                            </button>
-                            <button type="button" className="pay-confirm-cancel" onClick={() => setConfirmDeletePaymentId(null)}>Batal</button>
-                          </div>
-                        ) : (
-                          <div className="pay-actions">
-                            <button type="button" onClick={() => startEditPayment(p)}>Edit</button>
-                            <button type="button" onClick={() => setConfirmDeletePaymentId(p.id)}>Hapus</button>
-                          </div>
-                        )}
+                        <div className="pay-actions">
+                          <button type="button" onClick={() => startEditPayment(p)}>Edit</button>
+                          <button type="button" onClick={() => setConfirmDeletePaymentId(p.id)}>Hapus</button>
+                          {confirmDeletePaymentId === p.id && (
+                            <div className="pay-confirm-popup">
+                              <p>Yakin mau hapus catatan pembayaran ini?</p>
+                              <div className="pay-confirm-popup-actions">
+                                <button type="button" className="pay-confirm-cancel" onClick={() => setConfirmDeletePaymentId(null)}>Batal</button>
+                                <button type="button" className="pay-confirm-yes" onClick={() => handleDeletePayment(p.id)} disabled={saving}>
+                                  {saving ? '...' : 'Ya, Hapus'}
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     )
                   ))}
