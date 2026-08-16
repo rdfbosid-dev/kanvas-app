@@ -352,7 +352,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                               <div className="pay-confirm-popup-actions">
                                 <button type="button" className="pay-confirm-cancel" onClick={() => setConfirmDeletePaymentId(null)}>Batal</button>
                                 <button type="button" className="pay-confirm-yes" onClick={() => handleDeletePayment(p.id)} disabled={saving}>
-                                  {saving ? '...' : 'Ya, Hapus'}
+                                  {saving ? '...' : 'Ya, hapus'}
                                 </button>
                               </div>
                             </div>
