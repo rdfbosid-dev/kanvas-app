@@ -50,7 +50,7 @@
   display: inline-block;
 }
 
-.booking-modal-overlay .field-grid-booking { display: grid; gap: 12px; margin-bottom: 10px; }
+.booking-modal-overlay .field-grid-booking { display: grid; gap: 12px; margin-bottom: 5px; }
 
 .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: 0.6fr 1.4fr 1fr; }
 .booking-modal-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: 0.6fr 0.4fr 2fr; }

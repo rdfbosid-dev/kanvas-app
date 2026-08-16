@@ -302,7 +302,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                   {payments.map((p) => (
                     editingPaymentId === p.id ? (
                       <div className="pay-edit-row" key={p.id}>
-                        <div className="field-grid-edit-pay-satu">
+                        <div className="field-grid-detail add-edit-pay-cols-3">
                           <div className="field"><label>Tanggal Pembayaran</label><input type="date" value={editPayDate} onChange={(e) => setEditPayDate(e.target.value)} /></div>
                           <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" value={formatAngkaInput(editPayAmount)} onChange={(e) => setEditPayAmount(parseAngkaInput(e.target.value))} /></div>
                           <div className="field">
@@ -314,7 +314,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                           />
                         </div>
                         </div>
-                        <div className="field-grid-edit-pay-dua">
+                        <div className="field-grid-detail add-edit-pay-cols-1">
                         <div className="field"><label>Catatan</label><input type="text" placeholder="Opsional" value={editPayNote} onChange={(e) => setEditPayNote(e.target.value)} /></div>
                         </div>
                         <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
@@ -342,7 +342,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 <button type="button" className="add-payment" onClick={() => setShowAddPayment(true)}>+ Tambah Pembayaran</button>
               ) : (
                 <form onSubmit={handleAddPayment} className="add-payment-card" style={{ marginTop: 8 }}>
-                  <div className="field-grid-edit-pay-satu">
+                  <div className="field-grid-detail add-edit-pay-cols-3">
                     <div className="field"><label>Tanggal Pembayaran</label><input type="date" value={payDate} onChange={(e) => setPayDate(e.target.value)} /></div>
                     <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(payAmount)} onChange={(e) => setPayAmount(parseAngkaInput(e.target.value))} /></div>
                     <div className="field">
@@ -354,7 +354,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       />
                     </div>
                   </div>
-                  <div className="field-grid-edit-pay-dua">
+                  <div className="field-grid-detail add-edit-pay-cols-1">
                     <div className="field"><label>Catatan</label><input type="text" placeholder="Opsional" value={payNote} onChange={(e) => setPayNote(e.target.value)} /></div>
                   </div>
                   <div style={{ display: 'flex', gap: 5, marginTop: 4 }}>
@@ -389,8 +389,8 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
 
           {!loading && editMode && (
             <>
-              <div className="field-grid-edit-satu">
-                <div className="field">
+              <div className="field-grid-booking cols-nama-wa">
+                <div className="field" style={{ position: 'relative' }}>
                   <label>Nama Klien</label>
                   <input type="text" value={namaKlien} onChange={(e) => setNamaKlien(e.target.value)} />
                 </div>
@@ -400,7 +400,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 </div>
               </div>
 
-              <div className="field-grid-edit-dua" style={{ marginTop: 12 }}>
+              <div className="field-grid-booking cols-tanggal-jam-event" style={{ marginTop: 12 }}>
                 <div className="field">
                   <label>Tanggal Acara</label>
                   <input type="date" value={tanggalAcara} onChange={(e) => setTanggalAcara(e.target.value)} />
@@ -428,7 +428,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 </div>
               </div>
 
-              <div className="field-grid-edit-tiga" style={{ marginTop: 12 }}>
+              <div className="field-grid-booking cols-lokasi-sumber" style={{ marginTop: 12 }}>
                 <div className="field">
                   <label>Lokasi</label><input type="text" value={lokasi} onChange={(e) => setLokasi(e.target.value)} />
                 </div>
@@ -442,7 +442,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 </div>
               </div>
 
-              <div className="field-grid-edit-empat">
+              <div className="field-grid-booking cols-transport-catatan">
                 <div className="field">
                   <label>Biaya Transport</label>
                   <input type="text" inputMode="numeric" value={formatAngkaInput(biayaTransport)} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} />
@@ -461,7 +461,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                     <button type="button" className="peserta-remove" onClick={() => removeEditPeserta(i)}>Hapus</button>
                   </div>
                   <div className="peserta-body">
-                  <div className="field-grid-peserta-satu">
+                  <div className="field-grid-peserta cols-2">
                         <div className="field">
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                             <label>Nama Klien</label>
@@ -474,7 +474,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                         </div>
                       </div>
 
-                      <div className="field-grid-peserta-dua">
+                      <div className="field-grid-peserta cols-2">
                         <div className="field">
                           <div className="sb-label">Jenis Makeup</div>
                             <div className="toggle-row">
@@ -490,7 +490,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                           </div>
                         </div>
                       </div>
-                      <div className="field-grid-peserta-tiga">
+                      <div className="field-grid-peserta cols-2">
                         <div className="field">
                           <label>Biaya Makeup</label>
                           <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.biaya_makeup ? `Rp ${formatAngkaInput(p.biaya_makeup)}` : ''} onChange={(e) => updateEditPeserta(i, 'biaya_makeup', parseAngkaInput(e.target.value))} />
@@ -503,7 +503,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                         )}
                       </div>
 
-                      <div className="field-grid-peserta-empat">
+                      <div className="field-grid-peserta cols-2">
                         <div className="field">
                         <div className="sb-label">Tambahan Layanan Rambut</div>
                           <div className="toggle-row">
@@ -527,7 +527,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       </div>
 
                       {p.layanan_tambahan !== 'Tidak Ada' && (
-                      <div className="field-grid-peserta-lima">
+                      <div className="field-grid-peserta cols-2">
                         <div className="field">
                           <label>Biaya Layanan Tambahan</label>
                           <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.biaya_tambahan ? `Rp ${formatAngkaInput(p.biaya_tambahan)}` : ''} onChange={(e) => updateEditPeserta(i, 'biaya_tambahan', parseAngkaInput(e.target.value))} />
