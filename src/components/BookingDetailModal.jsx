@@ -31,6 +31,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
   const [saving, setSaving] = useState(false)
 
   // form state buat mode edit
+  const [tanggalBooking, setTanggalBooking] = useState('')
   const [namaKlien, setNamaKlien] = useState('')
   const [nomorWhatsApp, setNomorWhatsApp] = useState('')
   const [sumber, setSumber] = useState('')
@@ -82,6 +83,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
 
   function enterEditMode() {
     setConfirmDeleteBooking(false)
+    setTanggalBooking(booking.tanggal_booking || '')
     setNamaKlien(booking.nama_klien || '')
     setNomorWhatsApp(booking.nomor_whatsapp || '')
     setSumber(booking.sumber || 'Instagram')
@@ -113,6 +115,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
     }])
   }
   function removeEditPeserta(i) {
+    if (i === 0) return // Klien 1 nggak boleh dihapus -- dia yang jadi "Nama Klien" utama di form atas
     const p = editPeserta[i]
     if (p.id) setRemovedPesertaIds((ids) => [...ids, p.id])
     setEditPeserta((list) => list.filter((_, idx) => idx !== i))
@@ -135,6 +138,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
       .from('bookings')
       .update({
         klien_id: klienId,
+        tanggal_booking: tanggalBooking,
         nama_klien: namaKlien.trim(),
         nomor_whatsapp: nomorWhatsApp.trim(),
         sumber,
@@ -389,7 +393,11 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
 
           {!loading && editMode && (
             <>
-              <div className="field-grid-booking cols-nama-wa">
+              <div className="field-grid-booking cols-tanggal-nama-wa">
+                <div className="field">
+                  <label>Tanggal Booking</label>
+                  <input type="date" value={tanggalBooking} onChange={(e) => setTanggalBooking(e.target.value)} required />
+                </div>
                 <div className="field" style={{ position: 'relative' }}>
                   <label>Nama Klien</label>
                   <input type="text" value={namaKlien} onChange={(e) => setNamaKlien(e.target.value)} />
@@ -458,7 +466,9 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 <div className="peserta-card" key={p.id || `new-${i}`}>
                   <div className="peserta-head">
                     <div className="peserta-title"><span className="peserta-num">{i + 1}</span>Klien {i + 1}</div>
-                    <button type="button" className="peserta-remove" onClick={() => removeEditPeserta(i)}>Hapus</button>
+                    {i > 0 && (
+                      <button type="button" className="peserta-remove" onClick={() => removeEditPeserta(i)}>Hapus</button>
+                    )}
                   </div>
                   <div className="peserta-body">
                   <div className="field-grid-peserta cols-2">

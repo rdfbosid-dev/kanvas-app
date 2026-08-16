@@ -150,7 +150,7 @@
 
 .booking-detail-overlay .field-grid-booking { display: grid; gap: 12px; margin-bottom: 5px; }
 
-.booking-detail-overlay .field-grid-booking.cols-nama-wa { grid-template-columns: 1.6fr 1fr; }
+.booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: 0.6fr 1.4fr 1fr; }
 .booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: 0.6fr 0.4fr 2fr; }
 .booking-detail-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 2fr 1fr; }
 .booking-detail-overlay .field-grid-booking.cols-transport-catatan { grid-template-columns: 1fr 2fr; }
@@ -252,7 +252,7 @@
   .booking-detail-overlay .pay-row { grid-template-columns: 1fr 1fr auto; font-size: 11.5px; gap: 6px; }
   .booking-detail-overlay .pay-note { display: none; }
   .booking-detail-overlay .delete-confirm-banner { padding: 14px 18px; }
-  .booking-detail-overlay .field-grid-booking.cols-nama-wa,
+  .booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa,
   .booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event,
   .booking-detail-overlay .field-grid-booking.cols-lokasi-sumber,
   .booking-detail-overlay .field-grid-booking.cols-transport-catatan,
