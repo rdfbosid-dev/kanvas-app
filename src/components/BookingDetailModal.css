@@ -130,7 +130,7 @@
 }
 .booking-detail-overlay .pay-row:hover { background: linear-gradient(80deg, var(--hover-row) 0%, var(--white) 100%) }
 .booking-detail-overlay .pay-row:last-child { border-bottom: none; }
-.booking-detail-overlay .pay-amount { font-weight: 700; color: var(--ink); text-align: right; }
+.booking-detail-overlay .pay-amount { font-weight: 700; color: var(--ink-faint); text-align: right; }
 .booking-detail-overlay .pay-actions { position: relative; display: flex; gap: 5px; }
 .booking-detail-overlay .pay-actions button {
   background: var(--hover-row); border: none; cursor: pointer; font-size: 10px; color: var(--ink-soft); padding: 3px 5px; border-radius: 5px;
@@ -148,13 +148,13 @@
 }
 .booking-detail-overlay .pay-confirm-popup-actions { display: flex; gap: 8px; justify-content: flex-end; }
 .booking-detail-overlay .pay-confirm-yes {
-  background: var(--delete); border: var(--delete); cursor: pointer; font-size: 11px; font-weight: 500; color: var(--ink-faint);
+  background: var(--delete); border: 1px solid var(--delete); cursor: pointer; font-size: 11px; font-weight: 500; color: var(--ink-faint);
   padding: 5px 10px; border-radius: 7px; transition: background 0.15s;
 }
 .booking-detail-overlay .pay-confirm-yes:hover { background: #A93A40; }
 .booking-detail-overlay .pay-confirm-yes:disabled { opacity: 0.6; cursor: not-allowed; }
 .booking-detail-overlay .pay-confirm-cancel {
-  background: var(--delete); border: var(--delete); cursor: pointer; font-size: 11px; font-weight: 500; color: var(--ink-faint);
+  background: var(--delete); border: 1px solid var(--delete); cursor: pointer; font-size: 11px; font-weight: 500; color: var(--ink-faint);
   padding: 5px 10px; border-radius: 7px; transition: background 0.15s;
 }
 .booking-detail-overlay .pay-confirm-cancel:hover { background: var(--delete-hover); }
