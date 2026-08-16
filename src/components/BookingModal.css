@@ -50,11 +50,13 @@
   display: inline-block;
 }
 
-.booking-modal-overlay .field-grid-satu { display: grid; grid-template-columns: 0.6fr 1.4fr 1fr; gap: 12px; margin-bottom: 10px; }
-.booking-modal-overlay .field-grid-dua { display: grid; grid-template-columns: 0.6fr 0.4fr 2fr; gap: 12px; margin-bottom: 10px; }
-.booking-modal-overlay .field-grid-tiga { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 10px; }
-.booking-modal-overlay .field-grid-empat { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 10px; }
-.booking-modal-overlay .field-grid-lima { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 10px; }
+.booking-modal-overlay .field-grid-booking { display: grid; gap: 12px; margin-bottom: 10px; }
+
+.booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: 0.6fr 1.4fr 1fr; }
+.booking-modal-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: 0.6fr 0.4fr 2fr; }
+.booking-modal-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 2fr 1fr; }
+.booking-modal-overlay .field-grid-booking.cols-transport-dp-metode { grid-template-columns: 1fr 1fr 1fr; }
+.booking-modal-overlay .field-grid-booking.cols-catatan { grid-template-columns: 1fr; }
 .booking-modal-overlay .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 5px; }
 .booking-modal-overlay .field label { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
 .booking-modal-overlay .quickfill-btn {
@@ -109,17 +111,12 @@
   width: 22px; height: 22px; border-radius: 50%; background: #C4A4F0; color: #fff;
   display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0;
 }
-.booking-modal-overlay .field-grid-peserta-satu { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
-.booking-modal-overlay .field-grid-peserta-dua { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
-.booking-modal-overlay .field-grid-peserta-tiga { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
-.booking-modal-overlay .field-grid-peserta-empat { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
-.booking-modal-overlay .field-grid-peserta-lima { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
-.booking-modal-overlay .field-grid-peserta-enam { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
+.booking-modal-overlay .field-grid-peserta.cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px; }
 .booking-modal-overlay .peserta-remove {
-  font-size: 12px; font-weight: 550; color: var(--ink-faint); cursor: pointer; background: none; border: 1px solid var(--border);
+  font-size: 12px; font-weight: 550; color: var(--coral-tx); cursor: pointer; background: var(--delete); border: 1px solid var(--delete);
   padding: 4px 8px; border-radius: 7px; transition: background 0.15s;
 }
-.booking-modal-overlay .peserta-remove:hover { background: var(--coral-bg); border: 1px solid var(--coral-bg); color: var(--tooltip-tx); }
+.booking-modal-overlay .peserta-remove:hover { background: var(--delete-hover); border: 1px solid var(--delete-hover); color: var(--tooltip-tx); }
 .booking-modal-overlay .peserta-body { background: var(--white); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .booking-modal-overlay .toggle-row { display: flex; gap: 6px; }
 .booking-modal-overlay .toggle-opt {
@@ -132,11 +129,11 @@
 .booking-modal-overlay .sb-label { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); margin-bottom: 10px; }
 
 .booking-modal-overlay .add-peserta {
-  text-align: center; padding: 12px; border-radius: 14px; border: 1.5px dashed #D9C9F0;
-  color: var(--violet-tx); font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 5px; background: none;
+  text-align: center; padding: 8px; border-radius: 10px; border: 1.5px dashed var(--violet-tx);
+  color: var(--violet-tx); font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 5px; background: none;
   width: 100%; transition: background 0.15s, border-color 0.15s;
 }
-.booking-modal-overlay .add-peserta:hover { background: var(--toggle-opt-hover); border-color: #C4A4F0; }
+.booking-modal-overlay .add-peserta:hover { background: var(--toggle-opt-hover); border-color: var(--garis); }
 
 .booking-modal-overlay .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 26px; flex-shrink: 0; }
 .booking-modal-overlay .btn-ghost {
@@ -153,8 +150,10 @@
   .booking-modal-overlay .modal-head { padding: 16px 18px; }
   .booking-modal-overlay .modal-body { padding: 16px 18px; }
   .booking-modal-overlay .modal-foot { padding: 12px 18px 18px; }
-  .booking-modal-overlay .field-grid,
-  .booking-modal-overlay .field-grid.cols-2,
-  .booking-modal-overlay .field-grid.detail-acara-grid { grid-template-columns: 1fr; }
-  .booking-modal-overlay .peserta-body .field-grid.cols-2 { grid-template-columns: 1fr; }
+  .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa,
+  .booking-modal-overlay .field-grid-booking.cols-tanggal-jam-event,
+  .booking-modal-overlay .field-grid-booking.cols-lokasi-sumber,
+  .booking-modal-overlay .field-grid-booking.cols-transport-dp-metode,
+  .booking-modal-overlay .field-grid-booking.cols-catatan,
+  .booking-modal-overlay .field-grid-peserta.cols-2 { grid-template-columns: 1fr; }
 }

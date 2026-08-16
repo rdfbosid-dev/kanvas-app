@@ -277,7 +277,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                   {booking.status_pembayaran}
                 </span>
                 <button className="btn-ghost" style={{ marginLeft: 'auto', marginRight: 10}} onClick={() => setShowInvoice(true)}>Invoice</button>
-                <button className="btn-ghost" onClick={enterEditMode}>Edit</button>
+                <button className="btn-ghost" onClick={enterEditMode}>Edit Booking</button>
               </div>
 
               <div className="detail-grid">
@@ -302,12 +302,10 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                   {payments.map((p) => (
                     editingPaymentId === p.id ? (
                       <div className="pay-edit-row" key={p.id}>
-                        <div className="field-grid cols-2">
+                        <div className="field-grid-edit-pay-satu">
                           <div className="field"><label>Tanggal Pembayaran</label><input type="date" value={editPayDate} onChange={(e) => setEditPayDate(e.target.value)} /></div>
                           <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" value={formatAngkaInput(editPayAmount)} onChange={(e) => setEditPayAmount(parseAngkaInput(e.target.value))} /></div>
-                        </div>
-                        <div className="field-grid cols-2">
-                        <div className="field">
+                          <div className="field">
                           <label>Metode Pembayaran</label>
                           <CustomSelect
                             options={['Transfer Bank', 'E-Wallet', 'QRIS', 'Cash']}
@@ -315,6 +313,8 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                             onChange={setEditPayMethod}
                           />
                         </div>
+                        </div>
+                        <div className="field-grid-edit-pay-dua">
                         <div className="field"><label>Catatan</label><input type="text" placeholder="Opsional" value={editPayNote} onChange={(e) => setEditPayNote(e.target.value)} /></div>
                         </div>
                         <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
@@ -342,11 +342,9 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 <button type="button" className="add-payment" onClick={() => setShowAddPayment(true)}>+ Tambah Pembayaran</button>
               ) : (
                 <form onSubmit={handleAddPayment} className="add-payment-card" style={{ marginTop: 8 }}>
-                  <div className="field-grid cols-2">
+                  <div className="field-grid-edit-pay-satu">
                     <div className="field"><label>Tanggal Pembayaran</label><input type="date" value={payDate} onChange={(e) => setPayDate(e.target.value)} /></div>
                     <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="0" value={formatAngkaInput(payAmount)} onChange={(e) => setPayAmount(parseAngkaInput(e.target.value))} /></div>
-                  </div>
-                  <div className="field-grid cols-2">
                     <div className="field">
                       <label>Metode Pembayaran</label>
                       <CustomSelect
@@ -355,6 +353,8 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                         onChange={setPayMethod}
                       />
                     </div>
+                  </div>
+                  <div className="field-grid-edit-pay-dua">
                     <div className="field"><label>Catatan</label><input type="text" placeholder="Opsional" value={payNote} onChange={(e) => setPayNote(e.target.value)} /></div>
                   </div>
                   <div style={{ display: 'flex', gap: 5, marginTop: 4 }}>
@@ -566,7 +566,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
             </>
           ) : confirmDeleteBooking ? (
             <>
-              <button className="btn-ghost-delete" onClick={() => setConfirmDeleteBooking(false)}>Batal</button>
+              <button className="btn-danger" onClick={() => setConfirmDeleteBooking(false)}>Batal</button>
               <button className="btn-danger" onClick={handleDeleteBooking} disabled={saving}>
                 {saving ? 'Menghapus...' : 'Ya, Hapus Permanen'}
               </button>
@@ -574,7 +574,6 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
           ) : (
             <>
               <button className="btn-danger-ghost" onClick={() => setConfirmDeleteBooking(true)}>Hapus Booking</button>
-              <button className="btn-ghost" style={{ marginLeft: 'auto' }} onClick={onClose}>Tutup</button>
             </>
           )}
         </div>

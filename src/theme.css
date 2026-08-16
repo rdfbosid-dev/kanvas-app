@@ -39,6 +39,8 @@
   --value-done: #ee890d;
   --value-sisa: #df2825;
   --button: #ecd8f5;
+  --delete: #de5e6b;
+  --delete-hover: #c33e4b;
 
   --shadow-modal: 0 24px 60px -12px rgba(43, 36, 56, 0.35);
   --shadow-card: 0 6px 16px -6px rgba(43, 36, 56, 0.06);
@@ -87,6 +89,8 @@
   --value-done: #9bdf25;
   --value-sisa: #dfae25;
   --button: #ab8dcb;
+  --delete: #de5e6b;
+  --delete-hover: #c33e4b;
 
   --shadow-modal: 0 24px 60px -12px rgba(0, 0, 0, 0.65);
   --shadow-card: 0 6px 18px -6px rgba(0, 0, 0, 0.4);
