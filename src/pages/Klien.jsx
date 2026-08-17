@@ -50,14 +50,21 @@ export default function Klien() {
   async function loadData() {
     setLoading(true)
     setError('')
-    const [bookingRes, klienRes] = await Promise.all([
+    const [bookingRes, klienRes, klienIdRes] = await Promise.all([
       supabase.from('booking_summary').select('*').order('tanggal_acara', { ascending: false }),
       supabase.from('klien').select('id, nama, nomor_whatsapp, created_at'),
+      // `booking_summary` (VIEW) ternyata nggak nyertain kolom `klien_id` di
+      // definisinya -- jadi diambil terpisah langsung dari tabel `bookings`
+      // asli, terus "ditempel" manual ke data booking_summary di bawah.
+      supabase.from('bookings').select('id, klien_id'),
     ])
     if (bookingRes.error) setError(bookingRes.error.message)
     else if (klienRes.error) setError(klienRes.error.message)
+    else if (klienIdRes.error) setError(klienIdRes.error.message)
     else {
-      setBookings(bookingRes.data || [])
+      const klienIdMap = new Map((klienIdRes.data || []).map((r) => [r.id, r.klien_id]))
+      const mergedBookings = (bookingRes.data || []).map((b) => ({ ...b, klien_id: klienIdMap.get(b.id) }))
+      setBookings(mergedBookings)
       setKlienRows(klienRes.data || [])
     }
     setLoading(false)
@@ -69,8 +76,6 @@ export default function Klien() {
   // kebetulan namanya sama (nomor WA beda) bakal tetap muncul sebagai
   // 2 kartu terpisah.
   const clients = useMemo(() => {
-    console.log('DEBUG klien.id dari tabel klien:', klienRows.map((k) => `${k.nama} -> "${k.id}"`))
-    console.log('DEBUG bookings.klien_id (Mutia Maharani):', bookings.filter((b) => b.nama_klien === 'Mutia Maharani').map((b) => `"${b.klien_id}"`))
     const map = new Map()
     klienRows.forEach((k) => {
       map.set(String(k.id).trim().toLowerCase(), {
