@@ -71,7 +71,7 @@ export default function Klien() {
   const clients = useMemo(() => {
     const map = new Map()
     klienRows.forEach((k) => {
-      map.set(k.id, {
+      map.set(String(k.id).trim().toLowerCase(), {
         id: k.id,
         nama: k.nama,
         whatsapp: k.nomor_whatsapp,
@@ -90,7 +90,7 @@ export default function Klien() {
     const fallbackMap = new Map()
 
     bookings.forEach((b) => {
-      let clientKey = b.klien_id
+      let clientKey = b.klien_id ? String(b.klien_id).trim().toLowerCase() : null
       if (!clientKey || !map.has(clientKey)) {
         const nameKey = (b.nama_klien || '').trim().toLowerCase()
         if (!nameKey) return
