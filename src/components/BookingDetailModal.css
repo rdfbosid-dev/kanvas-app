@@ -140,24 +140,24 @@
 
 .booking-detail-overlay .pay-confirm-popup {
   position: absolute; top: calc(100% + 8px); right: 0; z-index: 30;
-  background: var(--hover-row); border: 1px solid (--hover-row); border-radius: 8px;
+  background: var(--hover-row); border: 1px solid var(--hover-row); border-radius: 8px;
   padding: 10px; width: 240px; box-shadow: var(--shadow-card);
 }
 .booking-detail-overlay .pay-confirm-popup p {
   font-size: 11px; font-weight: 500; color: var(--ink-faint); margin: 5px 0 10px; line-height: 1.4; text-align: center;
 }
 .booking-detail-overlay .pay-confirm-popup-actions { display: flex; gap: 8px; justify-content: flex-end; }
-.booking-detail-overlay .pay-confirm-yes {
+.booking-detail-overlay button.pay-confirm-yes {
   background: var(--delete); border: 1px solid var(--delete); cursor: pointer; font-size: 11px; font-weight: 500; color: var(--ink-faint);
   padding: 5px 10px; border-radius: 7px; transition: background 0.15s;
 }
-.booking-detail-overlay .pay-confirm-yes:hover { background: #A93A40; }
-.booking-detail-overlay .pay-confirm-yes:disabled { opacity: 0.6; cursor: not-allowed; }
-.booking-detail-overlay .pay-confirm-cancel {
-  background: var(--delete); border: 1px solid var(--delete); cursor: pointer; font-size: 11px; font-weight: 500; color: var(--ink-faint);
+.booking-detail-overlay button.pay-confirm-yes:hover { background: #A93A40; }
+.booking-detail-overlay button.pay-confirm-yes:disabled { opacity: 0.6; cursor: not-allowed; }
+.booking-detail-overlay button.pay-confirm-cancel {
+  background: transparent; border: 1px solid var(--delete); cursor: pointer; font-size: 11px; font-weight: 500; color: var(--ink-faint);
   padding: 5px 10px; border-radius: 7px; transition: background 0.15s;
 }
-.booking-detail-overlay .pay-confirm-cancel:hover { background: var(--delete-hover); }
+.booking-detail-overlay button.pay-confirm-cancel:hover { background: var(--delete-hover); }
 
 .booking-detail-overlay .peserta-view-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 50%, transparent); }
 .booking-detail-overlay .peserta-view-row:last-child { border-bottom: none; }
