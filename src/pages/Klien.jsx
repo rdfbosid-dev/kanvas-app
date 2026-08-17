@@ -15,12 +15,35 @@ function initialsOf(name) {
   return (name || '?').split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()
 }
 
+// Sama persis rumus "Selesai" yang udah dipakai di Dashboard & BookingList --
+// booking dianggap Selesai kalau tanggalnya udah lewat, atau kalau hari ini
+// tapi udah lebih dari 4 jam dari jam mulai makeup.
+function isBookingSelesai(tanggalAcara, jamStartMakeup) {
+  if (!tanggalAcara) return false
+  const now = new Date()
+  const todayStr = now.toISOString().slice(0, 10)
+  if (tanggalAcara < todayStr) return true
+  if (tanggalAcara > todayStr) return false
+  if (!jamStartMakeup) return false
+  const [h, m] = jamStartMakeup.slice(0, 5).split(':').map(Number)
+  const start = new Date(now)
+  start.setHours(h, m, 0, 0)
+  const cutoff = new Date(start.getTime() + 4 * 60 * 60 * 1000)
+  return now >= cutoff
+}
+
+const PAGE_SIZE = 8
+
 export default function Klien() {
   const [bookings, setBookings] = useState([])
   const [klienRows, setKlienRows] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
+  const [statusFilter, setStatusFilter] = useState('semua') // semua | selesai | akan-datang
+  const [sortBy, setSortBy] = useState('terbaru') // terbaru | nama | belanja
+  const [viewMode, setViewMode] = useState('list') // list | grid
+  const [page, setPage] = useState(1)
   const [selectedClient, setSelectedClient] = useState(null)
   const [selectedBooking, setSelectedBooking] = useState(null)
 
@@ -29,7 +52,7 @@ export default function Klien() {
     setError('')
     const [bookingRes, klienRes] = await Promise.all([
       supabase.from('booking_summary').select('*').order('tanggal_acara', { ascending: false }),
-      supabase.from('klien').select('id, nama, nomor_whatsapp'),
+      supabase.from('klien').select('id, nama, nomor_whatsapp, created_at'),
     ])
     if (bookingRes.error) setError(bookingRes.error.message)
     else if (klienRes.error) setError(klienRes.error.message)
@@ -52,6 +75,7 @@ export default function Klien() {
         id: k.id,
         nama: k.nama,
         whatsapp: k.nomor_whatsapp,
+        createdAt: k.created_at,
         bookingList: [],
         totalBelanja: 0,
         totalSisa: 0,
@@ -77,6 +101,7 @@ export default function Klien() {
             id: fallbackMap.get(nameKey),
             nama: b.nama_klien,
             whatsapp: b.nomor_whatsapp,
+            createdAt: null,
             bookingList: [],
             totalBelanja: 0,
             totalSisa: 0,
@@ -95,12 +120,54 @@ export default function Klien() {
 
     return Array.from(map.values())
       .filter((c) => c.bookingList.length > 0)
-      .sort((a, b) => new Date(b.lastTanggal) - new Date(a.lastTanggal))
+      .map((c) => {
+        const selesaiCount = c.bookingList.filter((b) => isBookingSelesai(b.tanggal_acara, b.jam_start_makeup)).length
+        const totalCount = c.bookingList.length
+        const latest = c.bookingList.reduce((a, b) => (new Date(b.tanggal_acara) > new Date(a.tanggal_acara) ? b : a))
+        const latestSelesai = isBookingSelesai(latest.tanggal_acara, latest.jam_start_makeup)
+        return {
+          ...c,
+          selesaiCount,
+          totalCount,
+          isFullySelesai: selesaiCount === totalCount,
+          hasUpcoming: selesaiCount < totalCount,
+          statusTerakhir: latestSelesai ? 'Selesai' : 'Akan Datang',
+        }
+      })
   }, [bookings, klienRows])
 
-  const filtered = clients.filter((c) =>
-    !search.trim() || c.nama?.toLowerCase().includes(search.trim().toLowerCase())
-  )
+  // Ringkasan buat 4 kartu statistik di atas
+  const summary = useMemo(() => ({
+    totalKlien: clients.length,
+    klienAktif: clients.filter((c) => c.hasUpcoming).length,
+    klienSelesai: clients.filter((c) => c.isFullySelesai).length,
+    totalBelanja: clients.reduce((s, c) => s + c.totalBelanja, 0),
+  }), [clients])
+
+  const filtered = useMemo(() => {
+    let list = clients.filter((c) =>
+      !search.trim() || c.nama?.toLowerCase().includes(search.trim().toLowerCase())
+    )
+    if (statusFilter === 'selesai') list = list.filter((c) => c.statusTerakhir === 'Selesai')
+    if (statusFilter === 'akan-datang') list = list.filter((c) => c.statusTerakhir === 'Akan Datang')
+
+    const sorted = [...list]
+    if (sortBy === 'nama') sorted.sort((a, b) => (a.nama || '').localeCompare(b.nama || ''))
+    else if (sortBy === 'belanja') sorted.sort((a, b) => b.totalBelanja - a.totalBelanja)
+    else sorted.sort((a, b) => new Date(b.lastTanggal) - new Date(a.lastTanggal))
+
+    return sorted
+  }, [clients, search, statusFilter, sortBy])
+
+  // Reset ke halaman 1 tiap kali filter/pencarian/urutan berubah, biar nggak
+  // nyangkut di halaman yang udah nggak ada datanya.
+  useEffect(() => { setPage(1) }, [search, statusFilter, sortBy])
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+  const pageSafe = Math.min(page, totalPages)
+  const paged = filtered.slice((pageSafe - 1) * PAGE_SIZE, pageSafe * PAGE_SIZE)
+  const rangeStart = filtered.length === 0 ? 0 : (pageSafe - 1) * PAGE_SIZE + 1
+  const rangeEnd = Math.min(pageSafe * PAGE_SIZE, filtered.length)
 
   return (
     <div className="app-shell">
@@ -109,14 +176,77 @@ export default function Klien() {
         <div className="topbar">
           <div>
             <div className="greeting">Klien</div>
-            <div className="greeting-date">{clients.length} klien unik tercatat</div>
+            <div className="greeting-date">Kelola semua data klien Anda</div>
           </div>
         </div>
 
-        <div className="filter-bar">
+        <div className="klien-stat-row">
+          <div className="klien-stat-card">
+            <div className="klien-stat-icon violet">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+            </div>
+            <div>
+              <div className="klien-stat-label">Total Klien</div>
+              <div className="klien-stat-num">{summary.totalKlien}</div>
+              <div className="klien-stat-sub">Klien terdaftar</div>
+            </div>
+          </div>
+          <div className="klien-stat-card">
+            <div className="klien-stat-icon gold">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
+            </div>
+            <div>
+              <div className="klien-stat-label">Klien Aktif</div>
+              <div className="klien-stat-num">{summary.klienAktif}</div>
+              <div className="klien-stat-sub">Punya booking mendatang</div>
+            </div>
+          </div>
+          <div className="klien-stat-card">
+            <div className="klien-stat-icon mint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><path d="M22 4L12 14.01l-3-3" /></svg>
+            </div>
+            <div>
+              <div className="klien-stat-label">Klien Selesai</div>
+              <div className="klien-stat-num">{summary.klienSelesai}</div>
+              <div className="klien-stat-sub">Selesai semua booking</div>
+            </div>
+          </div>
+          <div className="klien-stat-card">
+            <div className="klien-stat-icon coral">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v12M15 9.5c0-1.38-1.34-2.5-3-2.5s-3 1.12-3 2.5 1.34 2.5 3 2.5 3 1.12 3 2.5-1.34 2.5-3 2.5-3-1.12-3-2.5" /></svg>
+            </div>
+            <div>
+              <div className="klien-stat-label">Total Belanja</div>
+              <div className="klien-stat-num">{formatRupiah(summary.totalBelanja)}</div>
+              <div className="klien-stat-sub">Dari semua klien</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="klien-toolbar">
           <div className="search-box">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
             <input type="text" placeholder="Cari nama klien..." value={search} onChange={(e) => setSearch(e.target.value)} />
+          </div>
+          <div className="klien-toolbar-right">
+            <select className="klien-select" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+              <option value="semua">Semua Status</option>
+              <option value="selesai">Selesai</option>
+              <option value="akan-datang">Akan Datang</option>
+            </select>
+            <select className="klien-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <option value="terbaru">Terbaru</option>
+              <option value="nama">Nama A-Z</option>
+              <option value="belanja">Total Belanja</option>
+            </select>
+            <div className="klien-view-toggle">
+              <button type="button" className={viewMode === 'list' ? 'sel' : ''} onClick={() => setViewMode('list')} title="Tampilan tabel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" /></svg>
+              </button>
+              <button type="button" className={viewMode === 'grid' ? 'sel' : ''} onClick={() => setViewMode('grid')} title="Tampilan kartu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -126,17 +256,17 @@ export default function Klien() {
         {!loading && !error && (
           filtered.length === 0 ? (
             <div className="card"><div className="empty-state">
-              {clients.length === 0 ? 'Belum ada klien tercatat.' : 'Tidak ada klien yang cocok dengan pencarian.'}
+              {clients.length === 0 ? 'Belum ada klien tercatat.' : 'Tidak ada klien yang cocok dengan pencarian/filter.'}
             </div></div>
-          ) : (
+          ) : viewMode === 'grid' ? (
             <div className="klien-grid">
-              {filtered.map((c) => (
+              {paged.map((c) => (
                 <div className="klien-card" key={c.id} onClick={() => setSelectedClient(c)}>
                   <div className="klien-avatar-big">{initialsOf(c.nama)}</div>
                   <div className="klien-name">{c.nama}</div>
                   <div className="klien-wa">{c.whatsapp || '-'}</div>
                   <div className="klien-stats">
-                    <div><span className="klien-stat-val">{c.bookingList.length}</span><span className="klien-stat-lab">Booking</span></div>
+                    <div><span className="klien-stat-val">{c.totalCount}</span><span className="klien-stat-lab">Booking</span></div>
                     <div><span className="klien-stat-val">{formatRupiah(c.totalBelanja)}</span><span className="klien-stat-lab">Total Belanja</span></div>
                   </div>
                   {c.totalSisa > 0 && (
@@ -144,6 +274,70 @@ export default function Klien() {
                   )}
                 </div>
               ))}
+            </div>
+          ) : (
+            <div className="klien-table-card">
+              <table className="klien-table">
+                <thead>
+                  <tr>
+                    <th>Klien</th>
+                    <th>Kontak</th>
+                    <th>Statistik</th>
+                    <th>Total Belanja</th>
+                    <th>Status Terakhir</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {paged.map((c) => (
+                    <tr key={c.id}>
+                      <td>
+                        <div className="klien-table-name-cell">
+                          <div className="klien-avatar-big klien-avatar-sm">{initialsOf(c.nama)}</div>
+                          <div>
+                            <div className="klien-table-name">{c.nama}</div>
+                            <div className="klien-table-sub">{c.createdAt ? `Klien sejak ${formatTanggal(c.createdAt)}` : '-'}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>{c.whatsapp || '-'}</td>
+                      <td>
+                        <div className="klien-stat-dot"><span className="dot violet" />{c.totalCount} Booking</div>
+                        <div className="klien-stat-dot"><span className="dot mint" />{c.selesaiCount} Selesai</div>
+                      </td>
+                      <td className="klien-table-belanja">{formatRupiah(c.totalBelanja)}</td>
+                      <td>
+                        <span className={`status-pill ${c.statusTerakhir === 'Selesai' ? 'lunas' : 'akan-datang'}`}>{c.statusTerakhir}</span>
+                      </td>
+                      <td>
+                        <div className="klien-table-actions">
+                          <button type="button" title="Lihat detail" onClick={() => setSelectedClient(c)}>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                          </button>
+                          <button type="button" title="Lihat & kelola" onClick={() => setSelectedClient(c)}>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <div className="klien-pagination">
+                <div className="klien-pagination-info">Menampilkan {rangeStart}–{rangeEnd} dari {filtered.length} klien</div>
+                <div className="klien-pagination-buttons">
+                  <button type="button" disabled={pageSafe <= 1} onClick={() => setPage(pageSafe - 1)}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
+                  </button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                    <button type="button" key={n} className={n === pageSafe ? 'sel' : ''} onClick={() => setPage(n)}>{n}</button>
+                  ))}
+                  <button type="button" disabled={pageSafe >= totalPages} onClick={() => setPage(pageSafe + 1)}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+                  </button>
+                </div>
+              </div>
             </div>
           )
         )}

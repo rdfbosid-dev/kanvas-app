@@ -408,7 +408,7 @@ export default function BookingModal({ onClose, onSaved }) {
           <div className="modal-foot">
             <button type="button" className="btn-ghost" onClick={onClose}>Batal</button>
             <button type="submit" className="btn-primary" disabled={saving}>
-              {saving ? 'Menyimpan...' : 'Simpan booking'}
+              {saving ? 'Menyimpan...' : 'Simpan Booking'}
             </button>
           </div>
         </form>

@@ -1,3 +1,42 @@
+/* ---- Kartu ringkasan statistik di atas (Total Klien, Klien Aktif, dst) ---- */
+.klien-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+.klien-stat-card {
+  background: var(--white); border: 1px solid var(--line); border-radius: 18px;
+  padding: 18px; display: flex; align-items: center; gap: 14px;
+}
+.klien-stat-icon {
+  width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.klien-stat-icon svg { width: 20px; height: 20px; }
+.klien-stat-icon.violet { background: var(--violet-bg); color: var(--violet-tx); }
+.klien-stat-icon.gold { background: var(--gold-bg); color: var(--gold-tx); }
+.klien-stat-icon.mint { background: var(--mint-bg); color: var(--mint-tx); }
+.klien-stat-icon.coral { background: var(--coral-bg); color: var(--coral-tx); }
+.klien-stat-label { font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
+.klien-stat-num { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.klien-stat-sub { font-size: 11px; color: var(--ink-faint); margin-top: 3px; }
+
+/* ---- Toolbar: search, filter status, sort, toggle tampilan ---- */
+.klien-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+.klien-toolbar-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.klien-select {
+  border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
+  font-size: 12px; font-family: inherit; color: var(--ink-soft); background: var(--white); cursor: pointer;
+}
+
+.klien-view-toggle { display: flex; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.klien-view-toggle button {
+  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+  background: var(--white); border: none; cursor: pointer; color: var(--ink-faint); transition: background 0.15s, color 0.15s;
+}
+.klien-view-toggle button svg { width: 16px; height: 16px; }
+.klien-view-toggle button + button { border-left: 1px solid var(--line); }
+.klien-view-toggle button:hover { background: var(--page-a); }
+.klien-view-toggle button.sel { background: var(--violet-bg); color: var(--violet-tx); }
+
+/* ---- Kartu grid (tampilan lama, dipertahankan buat mode "grid") ---- */
 .klien-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
 
 .klien-card {
@@ -20,14 +59,56 @@
 
 .klien-outstanding { position: absolute; top: 14px; right: 14px; font-size: 9.5px; padding: 3px 8px; }
 
-.filter-bar { margin-bottom: 20px; }
 .search-box {
-  max-width: 360px; display: flex; align-items: center; gap: 10px;
+  max-width: 360px; width: 100%; display: flex; align-items: center; gap: 10px;
   background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
 }
 .search-box svg { width: 16px; height: 16px; color: var(--ink-faint); flex-shrink: 0; }
 .search-box input { border: none; outline: none; font-size: 12px; font-family: inherit; color: var(--ink); flex: 1; background: none; }
 .search-box input::placeholder { color: var(--ink-faint); }
+
+/* ---- Tampilan tabel (mode "list", default) ---- */
+.klien-table-card { background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.klien-table { width: 100%; border-collapse: collapse; }
+.klien-table th {
+  text-align: left; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--ink-faint); padding: 14px 18px; border-bottom: 1px solid var(--line);
+}
+.klien-table td { padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink-soft); vertical-align: middle; }
+.klien-table tr:last-child td { border-bottom: none; }
+.klien-table tr:hover td { background: var(--page-a); }
+
+.klien-table-name-cell { display: flex; align-items: center; gap: 12px; }
+.klien-avatar-sm { width: 40px; height: 40px; font-size: 13px; margin: 0; flex-shrink: 0; }
+.klien-table-name { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+.klien-table-sub { font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+.klien-table-belanja { font-family: 'Poppins', sans-serif; font-weight: 700; color: var(--ink); }
+
+.klien-stat-dot { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.klien-stat-dot + .klien-stat-dot { margin-top: 3px; }
+.klien-stat-dot .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.klien-stat-dot .dot.violet { background: var(--violet-tx); }
+.klien-stat-dot .dot.mint { background: var(--mint-tx); }
+
+.klien-table-actions { display: flex; gap: 6px; }
+.klien-table-actions button {
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); border-radius: 9px; background: var(--white); color: var(--ink-soft); cursor: pointer; transition: background 0.15s;
+}
+.klien-table-actions button svg { width: 14px; height: 14px; }
+.klien-table-actions button:hover { background: var(--page-a); }
+
+.klien-pagination { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; flex-wrap: wrap; gap: 10px; }
+.klien-pagination-info { font-size: 12px; color: var(--ink-faint); }
+.klien-pagination-buttons { display: flex; align-items: center; gap: 6px; }
+.klien-pagination-buttons button {
+  min-width: 32px; height: 32px; padding: 0 6px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); border-radius: 9px; background: var(--white); color: var(--ink-soft); cursor: pointer; font-size: 12px; transition: background 0.15s, color 0.15s;
+}
+.klien-pagination-buttons button svg { width: 14px; height: 14px; }
+.klien-pagination-buttons button:hover:not(:disabled) { background: var(--page-a); }
+.klien-pagination-buttons button.sel { background: var(--violet-bg); color: var(--violet-tx); border-color: transparent; font-weight: 700; }
+.klien-pagination-buttons button:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* ---- Modal "Riwayat Booking" klien -- SENGAJA mandiri sepenuhnya, semua
    selector di-scope di bawah .klien-modal-overlay (ditempel di pembungkus
@@ -77,11 +158,27 @@
 .klien-modal-overlay .status-pill.belum { background: var(--coral-bg); color: var(--coral-tx); }
 .klien-modal-overlay .status-pill.lunas { background: var(--mint-bg); color: var(--mint-tx); }
 
+/* Status "Selesai / Akan Datang" dipakai juga di luar modal (kolom tabel) --
+   makanya .status-pill.lunas & .akan-datang sengaja didefinisikan tanpa
+   scope .klien-modal-overlay juga, di bawah ini. */
+.status-pill { font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; white-space: nowrap; display: inline-block; }
+.status-pill.lunas { background: var(--mint-bg); color: var(--mint-tx); }
+.status-pill.belum { background: var(--coral-bg); color: var(--coral-tx); }
+.status-pill.akan-datang { background: var(--violet-bg); color: var(--violet-tx); }
+
+@media (max-width: 900px) {
+  .klien-stat-row { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 640px) {
   .klien-modal-overlay { padding: 0; align-items: flex-end; }
   .klien-modal-overlay .modal { max-width: 100%; max-height: 92vh; border-radius: 22px 22px 0 0; }
   .klien-modal-overlay .modal-head { padding: 16px 18px; }
   .klien-modal-overlay .modal-body { padding: 16px 18px; }
   .klien-modal-overlay .detail-grid { grid-template-columns: repeat(2, 1fr); }
+  .klien-stat-row { grid-template-columns: 1fr; }
   .search-box { max-width: 100%; }
+  .klien-toolbar { flex-direction: column; align-items: stretch; }
+  .klien-toolbar-right { justify-content: space-between; }
+  .klien-table { display: block; overflow-x: auto; white-space: nowrap; }
 }
