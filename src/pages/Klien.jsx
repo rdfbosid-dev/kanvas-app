@@ -69,6 +69,8 @@ export default function Klien() {
   // kebetulan namanya sama (nomor WA beda) bakal tetap muncul sebagai
   // 2 kartu terpisah.
   const clients = useMemo(() => {
+    console.log('DEBUG klien.id dari tabel klien:', klienRows.map((k) => `${k.nama} -> "${k.id}"`))
+    console.log('DEBUG bookings.klien_id (Mutia Maharani):', bookings.filter((b) => b.nama_klien === 'Mutia Maharani').map((b) => `"${b.klien_id}"`))
     const map = new Map()
     klienRows.forEach((k) => {
       map.set(String(k.id).trim().toLowerCase(), {
