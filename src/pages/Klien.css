@@ -23,26 +23,7 @@
 
 .filter-select { width: 170px; }
 
-.klien-view-toggle { display: flex; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-.klien-view-toggle button {
-  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
-  background: var(--white); border: none; cursor: pointer; color: var(--ink-faint); transition: background 0.15s, color 0.15s;
-}
-
-.klien-view-toggle button svg { width: 16px; height: 16px; }
-.klien-view-toggle button + button { border-left: 1px solid var(--line); }
-.klien-view-toggle button:hover { background: var(--theme-ops); border: 1px solid var(--border); }
-.klien-view-toggle button.sel { background: var(--violet-bg); color: var(--violet-tx); }
-
 /* ---- Kartu grid (tampilan lama, dipertahankan buat mode "grid") ---- */
-.klien-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-
-.klien-card {
-  background: var(--white); border-radius: 20px; border: 1px solid var(--line); padding: 22px;
-  cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; text-align: center; position: relative;
-}
-.klien-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
-
 .klien-avatar-big {
   width: 56px; height: 56px; font-size: 18px; margin: 0 auto 12px;
   border-radius: 50%; background: var(--grad-soft); display: flex; align-items: center; justify-content: center;
@@ -52,14 +33,6 @@
    klien yang seluruh booking-nya udah Selesai, avatarnya berubah gradasi
    ijo (grad-soft-alt) + warna font ijo (mint-tx). */
 .klien-avatar-big.selesai { background: var(--grad-soft-alt); color: var(--mint-tx); }
-.klien-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
-.klien-wa { font-size: 12px; color: var(--ink-faint); margin-bottom: 16px; font-family: 'Space Mono', monospace; }
-
-.klien-stats { display: flex; justify-content: center; gap: 22px; padding-top: 14px; border-top: 1px solid var(--line); }
-.klien-stat-val { display: block; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink); }
-.klien-stat-lab { display: block; font-size: 10.5px; color: var(--ink-faint); margin-top: 2px; }
-
-.klien-outstanding { position: absolute; top: 14px; right: 14px; font-size: 9.5px; padding: 3px 8px; }
 
 .search-box-klien {
   max-width: 310px; width: 100%; display: flex; align-items: center; gap: 10px;
@@ -100,16 +73,16 @@
 .klien-stat-dot { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; }
 .klien-stat-dot + .klien-stat-dot { margin-top: 3px; }
 .klien-stat-dot .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.klien-stat-dot .dot.violet { background: var(--violet-tx); }
-.klien-stat-dot .dot.mint { background: var(--mint-tx); }
+.klien-stat-dot .dot.orange { background: var(--icon-attention); }
+.klien-stat-dot .dot.green { background: var(--mint-tx); }
 
 .klien-table-actions { display: flex; justify-content: center; gap: 6px; }
 .klien-table-actions button {
   width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--line); border-radius: 9px; background: var(--white); color: var(--ink-soft); cursor: pointer; transition: background 0.15s;
+  border: 1px solid var(--border); border-radius: 9px; background: var(--white); color: var(--ink-soft); cursor: pointer; transition: background 0.15s;
 }
 .klien-table-actions button svg { width: 14px; height: 14px; }
-.klien-table-actions button:hover { background: var(--page-a); }
+.klien-table-actions button:hover { background: var(--theme-ops); border: 1px solid var(--theme-ops)}
 
 .klien-pagination { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; flex-wrap: wrap; gap: 10px; }
 .klien-pagination-info { font-size: 12px; color: var(--ink-faint); }

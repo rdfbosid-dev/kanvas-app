@@ -43,7 +43,6 @@ export default function Klien() {
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState('Semua Status') // Semua Status | Selesai | Akan Datang
   const [sortBy, setSortBy] = useState('Terbaru') // Terbaru | Nama A-Z | Total Belanja
-  const [viewMode, setViewMode] = useState('list') // list | grid
   const [page, setPage] = useState(1)
   const [selectedClient, setSelectedClient] = useState(null)
   const [selectedBooking, setSelectedBooking] = useState(null)
@@ -257,14 +256,6 @@ export default function Klien() {
                 }
               />
             </div>
-            <div className="klien-view-toggle">
-              <button type="button" className={viewMode === 'list' ? 'sel' : ''} onClick={() => setViewMode('list')} title="Tampilan tabel">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" /></svg>
-              </button>
-              <button type="button" className={viewMode === 'grid' ? 'sel' : ''} onClick={() => setViewMode('grid')} title="Tampilan kartu">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg>
-              </button>
-            </div>
           </div>
         </div>
 
@@ -276,23 +267,6 @@ export default function Klien() {
             <div className="card"><div className="empty-state">
               {clients.length === 0 ? 'Belum ada klien tercatat.' : 'Tidak ada klien yang cocok dengan pencarian/filter.'}
             </div></div>
-          ) : viewMode === 'grid' ? (
-            <div className="klien-grid">
-              {paged.map((c) => (
-                <div className="klien-card" key={c.id} onClick={() => setSelectedClient(c)}>
-                  <div className={`klien-avatar-big${c.isFullySelesai ? ' selesai' : ''}`}>{initialsOf(c.nama)}</div>
-                  <div className="klien-name">{c.nama}</div>
-                  <div className="klien-wa">{c.whatsapp || '-'}</div>
-                  <div className="klien-stats">
-                    <div><span className="klien-stat-val">{c.totalCount}</span><span className="klien-stat-lab">Booking</span></div>
-                    <div><span className="klien-stat-val">{formatRupiah(c.totalBelanja)}</span><span className="klien-stat-lab">Total Belanja</span></div>
-                  </div>
-                  {c.totalSisa > 0 && (
-                    <span className="status-pill belum klien-outstanding">Sisa {formatRupiah(c.totalSisa)}</span>
-                  )}
-                </div>
-              ))}
-            </div>
           ) : (
             <>
               <div className="klien-table-card klien-table-head-card">
@@ -342,8 +316,8 @@ export default function Klien() {
                         </td>
                         <td>{c.whatsapp || '-'}</td>
                         <td className="klien-table-stats">
-                          <div className="klien-stat-dot"><span className="dot violet" />{c.totalCount} Booking</div>
-                          <div className="klien-stat-dot"><span className="dot mint" />{c.selesaiCount} Selesai</div>
+                          <div className="klien-stat-dot"><span className="dot orange" />— {c.totalCount} Booking</div>
+                          <div className="klien-stat-dot"><span className="dot green" />— {c.selesaiCount} Selesai</div>
                         </td>
                         <td className="klien-table-belanja">{formatRupiah(c.totalBelanja)}</td>
                         <td className="klien-table-status">
