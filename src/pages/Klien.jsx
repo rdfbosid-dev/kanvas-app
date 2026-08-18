@@ -272,9 +272,9 @@ export default function Klien() {
               <div className="klien-table-card klien-table-head-card">
                 <table className="klien-table klien-table-head">
                   <colgroup>
-                    <col style={{ width: '25%' }} />
+                    <col style={{ width: '30%' }} />
                     <col style={{ width: '15%' }} />
-                    <col style={{ width: '20%' }} />
+                    <col style={{ width: '15%' }} />
                     <col style={{ width: '15%' }} />
                     <col style={{ width: '15%' }} />
                     <col style={{ width: '10%' }} />
@@ -283,7 +283,7 @@ export default function Klien() {
                     <tr>
                       <th>Nama Klien</th>
                       <th>Kontak</th>
-                      <th className="center">Statistik</th>
+                      <th className>Statistik</th>
                       <th className="right">Total Belanja</th>
                       <th className="center">Status Terakhir</th>
                       <th className="center">Lihat Data</th>
@@ -295,9 +295,9 @@ export default function Klien() {
               <div className="klien-table-card">
                 <table className="klien-table">
                   <colgroup>
-                    <col style={{ width: '25%' }} />
+                    <col style={{ width: '30%' }} />
                     <col style={{ width: '15%' }} />
-                    <col style={{ width: '20%' }} />
+                    <col style={{ width: '15%' }} />
                     <col style={{ width: '15%' }} />
                     <col style={{ width: '15%' }} />
                     <col style={{ width: '10%' }} />
@@ -316,8 +316,8 @@ export default function Klien() {
                         </td>
                         <td>{c.whatsapp || '-'}</td>
                         <td className="klien-table-stats">
-                          <div className="klien-stat-dot"><span className="dot orange" />— {c.totalCount} Booking</div>
-                          <div className="klien-stat-dot"><span className="dot green" />— {c.selesaiCount} Selesai</div>
+                          <div className="klien-stat-dot"><span className="dot orange" />{c.totalCount} Booking</div>
+                          <div className="klien-stat-dot"><span className="dot green" />{c.selesaiCount} Selesai</div>
                         </td>
                         <td className="klien-table-belanja">{formatRupiah(c.totalBelanja)}</td>
                         <td className="klien-table-status">
@@ -364,24 +364,23 @@ export default function Klien() {
             </div>
             <div className="modal-body">
               <div className="detail-grid" style={{ marginBottom: 18 }}>
+                <div><span className="detail-label">ID Klien</span><div>{selectedClient.id.slice(0, 8)}</div></div>
                 <div><span className="detail-label">No. WhatsApp</span><div>{selectedClient.whatsapp || '-'}</div></div>
                 <div><span className="detail-label">Total Booking</span><div>{selectedClient.bookingList.length}</div></div>
                 <div><span className="detail-label">Total Belanja</span><div>{formatRupiah(selectedClient.totalBelanja)}</div></div>
-                <div><span className="detail-label">ID Klien</span><div style={{ fontFamily: 'monospace', fontSize: 12 }}>{selectedClient.id.slice(0, 8)}</div></div>
               </div>
               <div className="section-label">Riwayat Booking</div>
-              {selectedClient.bookingList.map((b) => (
-                <div className="booking-row" key={b.id} onClick={() => setSelectedBooking(b)} style={{ cursor: 'pointer' }}>
-                  <div className="b-avatar">{b.event?.slice(0, 2).toUpperCase() || '??'}</div>
-                  <div className="b-info">
-                    <div className="b-name">{b.event || 'Booking'}</div>
-                    <div className="b-meta">{b.kode_booking} · {formatTanggal(b.tanggal_acara)}</div>
+              <div className="riwayat-list">
+                {selectedClient.bookingList.map((b) => (
+                  <div className="riwayat-row" key={b.id} onClick={() => setSelectedBooking(b)}>
+                    <span className="riwayat-event">{b.event || 'Booking'}</span>
+                    <span className="riwayat-tanggal">{formatTanggal(b.tanggal_acara)}</span>
+                    <span className={`status-pill ${b.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
+                      {b.status_pembayaran}
+                    </span>
                   </div>
-                  <span className={`status-pill ${b.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
-                    {b.status_pembayaran}
-                  </span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
             <div className="modal-foot">
               <button className="btn-ghost" onClick={() => setSelectedClient(null)}>Tutup</button>

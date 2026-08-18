@@ -47,7 +47,7 @@
 .klien-table { width: 100%; border-collapse: collapse; }
 .klien-table th {
   text-align: left; font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-  color: var(--ink-faint); padding: 14px 24px;
+  color: var(--ink-faint); padding: 12px 24px;
 }
 /* Header tabel Klien sengaja dijadiin <table> & kotak (card) TERPISAH dari
    body, sama persis konsepnya kayak BookingList.css -- lebar kolom disamain
@@ -58,19 +58,19 @@
 .klien-table-head thead th { border-bottom: none; }
 .klien-table-head thead th.center {text-align: center; }
 .klien-table-head thead th.right { text-align: right; }
-.klien-table td { padding: 14px 24px; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent); font-size: 13px; color: var(--ink-soft); vertical-align: middle; }
+.klien-table td { padding: 10px 24px; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent); font-size: 13px; color: var(--ink-soft); vertical-align: middle; }
 .klien-table tr:last-child td { border-bottom: none; }
 .klien-table tr:hover td { background: color-mix(in srgb, var(--hover-row) 60%, transparent); }
 
 .klien-table-name-cell { display: flex; align-items: center; gap: 12px; }
 .klien-avatar-sm { width: 40px; height: 40px; font-size: 13px; margin: 0; flex-shrink: 0; }
-.klien-table-name { font-size: 13.5px; font-weight: 700; color: var(--ink); }
-.klien-table-sub { font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
-.klien-table-stats { text-align: center; }
+.klien-table-name { font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+.klien-table-sub { font-size: 11px; color: var(--ink-faint); }
+.klien-table-stats { text-align: left; }
 .klien-table-belanja { font-weight: 700; color: var(--ink); text-align: right; }
 .klien-table-status { text-align: center; }
 
-.klien-stat-dot { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; }
+.klien-stat-dot { display: flex; align-items: center; justify-content: left; gap: 6px; font-size: 12px; }
 .klien-stat-dot + .klien-stat-dot { margin-top: 3px; }
 .klien-stat-dot .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .klien-stat-dot .dot.orange { background: var(--icon-attention); }
@@ -79,20 +79,20 @@
 .klien-table-actions { display: flex; justify-content: center; gap: 6px; }
 .klien-table-actions button {
   width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--border); border-radius: 9px; background: var(--white); color: var(--ink-soft); cursor: pointer; transition: background 0.15s;
+  border: 1px solid var(--hover-row); border-radius: 9px; background: var(--hover-row); color: var(--ink-faint); cursor: pointer; transition: background 0.15s;
 }
 .klien-table-actions button svg { width: 14px; height: 14px; }
-.klien-table-actions button:hover { background: var(--theme-ops); border: 1px solid var(--theme-ops)}
+.klien-table-actions button:hover { background: var(--border); border: 1px solid var(--border)}
 
 .klien-pagination { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; flex-wrap: wrap; gap: 10px; }
 .klien-pagination-info { font-size: 12px; color: var(--ink-faint); }
 .klien-pagination-buttons { display: flex; align-items: center; gap: 6px; }
 .klien-pagination-buttons button {
   min-width: 32px; height: 32px; padding: 0 6px; display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--line); border-radius: 9px; background: var(--white); color: var(--ink-soft); cursor: pointer; font-size: 12px; transition: background 0.15s, color 0.15s;
+  border: 1px solid var(--border); border-radius: 9px; background: var(--white); color: var(--ink-soft); cursor: pointer; font-size: 12px; transition: background 0.15s, color 0.15s;
 }
 .klien-pagination-buttons button svg { width: 14px; height: 14px; }
-.klien-pagination-buttons button:hover:not(:disabled) { background: var(--page-a); }
+.klien-pagination-buttons button:hover:not(:disabled) { background: var(--violet-bg); }
 .klien-pagination-buttons button.sel { background: var(--violet-bg); color: var(--violet-tx); border-color: transparent; font-weight: 700; }
 .klien-pagination-buttons button:disabled { opacity: 0.4; cursor: not-allowed; }
 
@@ -106,39 +106,66 @@
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .klien-modal-overlay .modal {
-  background: var(--white); border-radius: 24px; width: 100%; max-width: 560px;
-  max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: var(--shadow-modal);
+  background: var(--white); border-radius: 24px; width: 100%; max-width: 400px;
+  max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 0 24px 60px -12px rgba(43,36,56,0.35);
 }
-.klien-modal-overlay .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 26px; flex-shrink: 0; }
-.klien-modal-overlay .modal-head h2 { font-size: 18px; }
+.klien-modal-overlay .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 26px; flex-shrink: 0; margin-bottom: 5px; }
+.klien-modal-overlay .modal-head h2 {
+  font-size: 18px;
+  position: relative;
+  padding-bottom: 5px;
+}
+.klien-modal-overlay .modal-head h2::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--grad);
+}
 .klien-modal-overlay .modal-close {
   width: 32px; height: 32px; border-radius: 10px; border: none; background: var(--violet-bg);
   color: var(--violet-tx); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: background 0.15s;
 }
 .klien-modal-overlay .modal-close:hover { background: var(--theme-ops); }
-.klien-modal-overlay .modal-body { padding: 22px 26px; overflow-y: auto; flex: 1; }
-.klien-modal-overlay .modal-foot { display: flex; justify-content: flex-end; padding: 16px 26px; }
+.klien-modal-overlay .modal-body { padding: 10px 26px 20px; overflow-y: auto; flex: 1; }
+.klien-modal-overlay .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 10px 26px 20px; flex-shrink: 0; }
 .klien-modal-overlay .btn-ghost {
-  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
-  font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
-  transition: background 0.15s, border-color 0.15s;
+  padding: 5px 10px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
+  font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
+  transition: background 0.15s, border-color 0.15s; line-height: 1.4;
 }
-.klien-modal-overlay .btn-ghost:hover { background: var(--theme-ops); }
+.klien-modal-overlay .btn-ghost:hover { background: var(--theme-ops); border: 1px solid var(--theme-ops); }
 
 .klien-modal-overlay .section-label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--violet-tx); margin: 4px 0 12px; }
-.klien-modal-overlay .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.klien-modal-overlay .detail-label { font-size: 11.5px; font-weight: 600; color: var(--ink-faint); display: block; margin-bottom: 2px; }
-.klien-modal-overlay .detail-grid > div { font-size: 13.5px; }
+.klien-modal-overlay .detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.klien-modal-overlay .detail-label {
+  font-size: 12px; font-weight: 600; color: var(--ink-faint); display: block; margin-bottom: 10px;
+  text-decoration: underline;
+  text-decoration-color: var(--violet-tx);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+.klien-modal-overlay .detail-grid > div { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
 
-.klien-modal-overlay .booking-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); border-radius: 10px; }
-.klien-modal-overlay .booking-row:hover { background: var(--page-a); }
-.klien-modal-overlay .booking-row:last-child { border-bottom: none; }
-.klien-modal-overlay .b-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--grad-soft); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--violet-tx); }
-.klien-modal-overlay .b-info { flex: 1; min-width: 0; }
-.klien-modal-overlay .b-name { font-size: 14px; font-weight: 600; }
-.klien-modal-overlay .b-meta { font-size: 12.5px; color: var(--ink-soft); margin-top: 1px; }
+/* Riwayat Booking -- konsep desain baris/kolomnya sengaja disamain
+   kayak .pay-row "Riwayat Pembayaran" di BookingDetailModal.css (grid
+   dengan garis pembatas tipis antar baris + hover gradient), tapi
+   isi kolomnya beda: Event, Tanggal Acara, Status (bukan tanggal
+   pembayaran/metode/jumlah/catatan). */
+.klien-modal-overlay .riwayat-list { margin-bottom: 5px; }
+.klien-modal-overlay .riwayat-row {
+  display: grid; grid-template-columns: 1fr 140px auto; gap: 16px; align-items: center;
+  padding: 10px; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent);
+  font-size: 12.5px; color: var(--ink-soft); border-radius: 8px; transition: background 0.15s; cursor: pointer;
+}
+.klien-modal-overlay .riwayat-row:hover { background: linear-gradient(80deg, var(--hover-row) 0%, var(--white) 100%); }
+.klien-modal-overlay .riwayat-row:last-child { border-bottom: none; }
+.klien-modal-overlay .riwayat-event { font-weight: 600; color: var(--ink); text-align: left; }
+.klien-modal-overlay .riwayat-tanggal { text-align: left; }
+.klien-modal-overlay .riwayat-row .status-pill { justify-self: end; }
 
 .klien-modal-overlay .status-pill { font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; white-space: nowrap; }
 .klien-modal-overlay .status-pill.belum { background: var(--coral-bg); color: var(--coral-tx); }

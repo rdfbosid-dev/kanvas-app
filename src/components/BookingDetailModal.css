@@ -58,7 +58,7 @@
 .booking-detail-overlay .btn-ghost {
   padding: 5px 10px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
   font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
-  transition: background 0.15s, border-color 0.15s; margin-bottom: 10px; line-height: 1.4;
+  transition: background 0.15s, border-color 0.15s; margin-bottom: 20px; line-height: 1.4;
 }
 .booking-detail-overlay .btn-ghost:hover { background: var(--theme-ops); border: 1px solid var(--theme-ops); }
 
@@ -101,7 +101,7 @@
 }
 .booking-detail-overlay .detail-grid > div { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
 
-.booking-detail-overlay .status-pill { font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 11px; white-space: nowrap; margin-bottom: 10px; }
+.booking-detail-overlay .status-pill { font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 11px; white-space: nowrap; margin-bottom: 20px; }
 .booking-detail-overlay .status-pill.belum { background: var(--coral-bg); color: var(--coral-tx); }
 .booking-detail-overlay .status-pill.lunas { background: var(--mint-bg); color: var(--mint-tx); }
 
