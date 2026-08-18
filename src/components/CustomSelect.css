@@ -19,6 +19,7 @@
   background: var(--white); border: 1px solid var(--line); border-radius: 12px;
   padding: 6px; box-shadow: 0 16px 36px -12px rgba(43,36,56,0.25);
   max-height: 220px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 4px;
 }
 
 .cselect-option {

@@ -57,7 +57,7 @@
 .klien-outstanding { position: absolute; top: 14px; right: 14px; font-size: 9.5px; padding: 3px 8px; }
 
 .search-box-klien {
-  max-width: 220px; width: 100%; display: flex; align-items: center; gap: 10px;
+  max-width: 310px; width: 100%; display: flex; align-items: center; gap: 10px;
   background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
 }
 .search-box-klien svg { width: 16px; height: 16px; color: var(--ink-faint); flex-shrink: 0; }
