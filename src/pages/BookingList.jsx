@@ -135,11 +135,11 @@ export default function BookingList() {
             <div className="card table-card table-head-card">
               <table className="booking-table booking-table-head">
                 <colgroup>
-                  <col style={{ width: '26%' }} />
+                  <col style={{ width: '20%' }} />
                   <col style={{ width: '15%' }} />
                   <col style={{ width: '15%' }} />
-                  <col style={{ width: '19%' }} />
-                  <col style={{ width: '12%' }} />
+                  <col style={{ width: '25%' }} />
+                  <col style={{ width: '10%' }} />
                   <col style={{ width: '13%' }} />
                 </colgroup>
                 <thead>
@@ -149,7 +149,7 @@ export default function BookingList() {
                     <th>Tanggal Acara</th>
                     <th>Lokasi</th>
                     <th className="right">Tagihan</th>
-                    <th>Status</th>
+                    <th className="center">Status</th>
                   </tr>
                 </thead>
               </table>
@@ -158,11 +158,11 @@ export default function BookingList() {
             <div className="card table-card">
               <table className="booking-table">
                 <colgroup>
-                  <col style={{ width: '26%' }} />
+                  <col style={{ width: '20%' }} />
                   <col style={{ width: '15%' }} />
                   <col style={{ width: '15%' }} />
-                  <col style={{ width: '19%' }} />
-                  <col style={{ width: '12%' }} />
+                  <col style={{ width: '25%' }} />
+                  <col style={{ width: '10%' }} />
                   <col style={{ width: '13%' }} />
                 </colgroup>
                 <tbody>
@@ -184,7 +184,7 @@ export default function BookingList() {
                       <td className="mono">{formatTanggal(b.tanggal_acara)}</td>
                       <td>{b.lokasi || '-'}</td>
                       <td className="right mono">{formatRupiah(b.sisa_kekurangan)}</td>
-                      <td>
+                      <td className="center mono">
                         <span className={`status-pill ${b.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
                           {b.status_pembayaran}
                         </span>

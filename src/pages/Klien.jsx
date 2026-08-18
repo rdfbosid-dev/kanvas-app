@@ -10,7 +10,7 @@ function formatRupiah(n) {
 }
 function formatTanggal(dateStr) {
   if (!dateStr) return '-'
-  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
+  return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })
 }
 function initialsOf(name) {
   return (name || '?').split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()
@@ -298,21 +298,21 @@ export default function Klien() {
               <div className="klien-table-card klien-table-head-card">
                 <table className="klien-table klien-table-head">
                   <colgroup>
-                    <col style={{ width: '26%' }} />
-                    <col style={{ width: '13%' }} />
-                    <col style={{ width: '17%' }} />
+                    <col style={{ width: '25%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '20%' }} />
                     <col style={{ width: '15%' }} />
                     <col style={{ width: '15%' }} />
-                    <col style={{ width: '14%' }} />
+                    <col style={{ width: '10%' }} />
                   </colgroup>
                   <thead>
                     <tr>
                       <th>Nama Klien</th>
                       <th>Kontak</th>
-                      <th>Statistik</th>
-                      <th>Total Belanja</th>
-                      <th>Status Terakhir</th>
-                      <th>Aksi</th>
+                      <th className="center">Statistik</th>
+                      <th className="right">Total Belanja</th>
+                      <th className="center">Status Terakhir</th>
+                      <th className="center">Lihat Data</th>
                     </tr>
                   </thead>
                 </table>
@@ -321,12 +321,12 @@ export default function Klien() {
               <div className="klien-table-card">
                 <table className="klien-table">
                   <colgroup>
-                    <col style={{ width: '26%' }} />
-                    <col style={{ width: '13%' }} />
-                    <col style={{ width: '17%' }} />
+                    <col style={{ width: '25%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '20%' }} />
                     <col style={{ width: '15%' }} />
                     <col style={{ width: '15%' }} />
-                    <col style={{ width: '14%' }} />
+                    <col style={{ width: '10%' }} />
                   </colgroup>
                   <tbody>
                     {paged.map((c) => (
@@ -341,21 +341,18 @@ export default function Klien() {
                           </div>
                         </td>
                         <td>{c.whatsapp || '-'}</td>
-                        <td>
+                        <td className="klien-table-stats">
                           <div className="klien-stat-dot"><span className="dot violet" />{c.totalCount} Booking</div>
                           <div className="klien-stat-dot"><span className="dot mint" />{c.selesaiCount} Selesai</div>
                         </td>
                         <td className="klien-table-belanja">{formatRupiah(c.totalBelanja)}</td>
-                        <td>
+                        <td className="klien-table-status">
                           <span className={`status-pill ${c.statusTerakhir === 'Selesai' ? 'lunas' : 'akan-datang'}`}>{c.statusTerakhir}</span>
                         </td>
                         <td>
                           <div className="klien-table-actions">
                             <button type="button" title="Lihat detail" onClick={() => setSelectedClient(c)}>
                               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
-                            </button>
-                            <button type="button" title="Lihat & kelola" onClick={() => setSelectedClient(c)}>
-                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>
                             </button>
                           </div>
                         </td>
