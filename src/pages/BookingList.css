@@ -10,7 +10,7 @@
 
 .filter-select { width: 170px; }
 
-.table-card { padding: 0; overflow: hidden; }
+.card.table-card { padding: 0; overflow: hidden; }
 
 /* Header tabel sengaja dijadiin <table> & kotak (card) TERPISAH dari body --
    bukan cuma dikasih jarak doang. Makanya lebar tiap kolom di kedua tabel
