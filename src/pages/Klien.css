@@ -23,14 +23,15 @@
 
 .filter-select { width: 170px; }
 
-.klien-view-toggle { display: flex; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.klien-view-toggle { display: flex; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
 .klien-view-toggle button {
   width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
   background: var(--white); border: none; cursor: pointer; color: var(--ink-faint); transition: background 0.15s, color 0.15s;
 }
+
 .klien-view-toggle button svg { width: 16px; height: 16px; }
 .klien-view-toggle button + button { border-left: 1px solid var(--line); }
-.klien-view-toggle button:hover { background: var(--page-a); }
+.klien-view-toggle button:hover { background: var(--theme-ops); border: 1px solid var(--border); }
 .klien-view-toggle button.sel { background: var(--violet-bg); color: var(--violet-tx); }
 
 /* ---- Kartu grid (tampilan lama, dipertahankan buat mode "grid") ---- */
@@ -45,8 +46,12 @@
 .klien-avatar-big {
   width: 56px; height: 56px; font-size: 18px; margin: 0 auto 12px;
   border-radius: 50%; background: var(--grad-soft); display: flex; align-items: center; justify-content: center;
-  font-weight: 700; color: var(--violet-tx);
+  font-weight: 700; color: var(--ink-faint-value);
 }
+/* Sama persis konsepnya kayak .bl-avatar.selesai di BookingList.css --
+   klien yang seluruh booking-nya udah Selesai, avatarnya berubah gradasi
+   ijo (grad-soft-alt) + warna font ijo (mint-tx). */
+.klien-avatar-big.selesai { background: var(--grad-soft-alt); color: var(--mint-tx); }
 .klien-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
 .klien-wa { font-size: 12px; color: var(--ink-faint); margin-bottom: 16px; font-family: 'Space Mono', monospace; }
 
@@ -68,12 +73,15 @@
 .klien-table-card { background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
 .klien-table { width: 100%; border-collapse: collapse; }
 .klien-table th {
-  text-align: left; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  text-align: left; font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
   color: var(--ink-faint); padding: 14px 18px; border-bottom: 1px solid var(--line);
 }
-.klien-table td { padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink-soft); vertical-align: middle; }
+/* Jarak antara header dan body tabel -- sama persis polanya kayak
+   BookingList.css, biar konsisten di kedua tabel. */
+.klien-table tbody::before { content: ""; display: table-row; height: 10px; }
+.klien-table td { padding: 14px 18px; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent); font-size: 13px; color: var(--ink-soft); vertical-align: middle; }
 .klien-table tr:last-child td { border-bottom: none; }
-.klien-table tr:hover td { background: var(--page-a); }
+.klien-table tr:hover td { background: color-mix(in srgb, var(--hover-row) 60%, transparent); }
 
 .klien-table-name-cell { display: flex; align-items: center; gap: 12px; }
 .klien-avatar-sm { width: 40px; height: 40px; font-size: 13px; margin: 0; flex-shrink: 0; }

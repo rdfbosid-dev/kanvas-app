@@ -131,7 +131,7 @@ export default function BookingList() {
               <table className="booking-table">
                 <thead>
                   <tr>
-                    <th>Klien</th>
+                    <th>Nama Klien</th>
                     <th>Event</th>
                     <th>Tanggal Acara</th>
                     <th>Lokasi</th>

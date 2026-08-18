@@ -19,6 +19,12 @@
 }
 .booking-table thead th.right { text-align: right; }
 
+/* Jarak antara header dan body tabel -- disisipin "baris kosong" pakai
+   pseudo-element ::before di tbody, bukan margin/padding biasa, soalnya
+   thead & tbody itu row-group jadi nggak bisa dikasih margin langsung.
+   Tetap 1 <table> yang sama jadi lebar kolom header & body tetap sejajar. */
+.booking-table tbody::before { content: ""; display: table-row; height: 10px; }
+
 .booking-table tbody tr { cursor: pointer; transition: background 0.15s; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent); }
 .booking-table tbody tr:last-child { border-bottom: none; }
 .booking-table tbody tr:hover { background: color-mix(in srgb, var(--hover-row) 60%, transparent); }

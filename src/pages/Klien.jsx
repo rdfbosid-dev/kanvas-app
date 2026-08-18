@@ -280,7 +280,7 @@ export default function Klien() {
             <div className="klien-grid">
               {paged.map((c) => (
                 <div className="klien-card" key={c.id} onClick={() => setSelectedClient(c)}>
-                  <div className="klien-avatar-big">{initialsOf(c.nama)}</div>
+                  <div className={`klien-avatar-big${c.isFullySelesai ? ' selesai' : ''}`}>{initialsOf(c.nama)}</div>
                   <div className="klien-name">{c.nama}</div>
                   <div className="klien-wa">{c.whatsapp || '-'}</div>
                   <div className="klien-stats">
@@ -298,7 +298,7 @@ export default function Klien() {
               <table className="klien-table">
                 <thead>
                   <tr>
-                    <th>Klien</th>
+                    <th>Nama Klien</th>
                     <th>Kontak</th>
                     <th>Statistik</th>
                     <th>Total Belanja</th>
@@ -311,7 +311,7 @@ export default function Klien() {
                     <tr key={c.id}>
                       <td>
                         <div className="klien-table-name-cell">
-                          <div className="klien-avatar-big klien-avatar-sm">{initialsOf(c.nama)}</div>
+                          <div className={`klien-avatar-big klien-avatar-sm${c.isFullySelesai ? ' selesai' : ''}`}>{initialsOf(c.nama)}</div>
                           <div>
                             <div className="klien-table-name">{c.nama}</div>
                             <div className="klien-table-sub">{c.createdAt ? `Klien sejak ${formatTanggal(c.createdAt)}` : '-'}</div>
