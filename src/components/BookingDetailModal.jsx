@@ -607,6 +607,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
           ) : (
             <>
               <button className="btn-danger-ghost" onClick={() => setConfirmDeleteBooking(true)}>Hapus Booking</button>
+              <button className="btn-ghost" onClick={onClose}>Tutup</button>
             </>
           )}
         </div>
