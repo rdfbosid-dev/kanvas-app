@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import Sidebar from '../components/Sidebar'
 import BookingDetailModal from '../components/BookingDetailModal'
+import CustomSelect from '../components/CustomSelect'
 import './Klien.css'
 
 function formatRupiah(n) {
@@ -40,8 +41,8 @@ export default function Klien() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
-  const [statusFilter, setStatusFilter] = useState('semua') // semua | selesai | akan-datang
-  const [sortBy, setSortBy] = useState('terbaru') // terbaru | nama | belanja
+  const [statusFilter, setStatusFilter] = useState('Semua Status') // Semua Status | Selesai | Akan Datang
+  const [sortBy, setSortBy] = useState('Terbaru') // Terbaru | Nama A-Z | Total Belanja
   const [viewMode, setViewMode] = useState('list') // list | grid
   const [page, setPage] = useState(1)
   const [selectedClient, setSelectedClient] = useState(null)
@@ -155,12 +156,12 @@ export default function Klien() {
     let list = clients.filter((c) =>
       !search.trim() || c.nama?.toLowerCase().includes(search.trim().toLowerCase())
     )
-    if (statusFilter === 'selesai') list = list.filter((c) => c.statusTerakhir === 'Selesai')
-    if (statusFilter === 'akan-datang') list = list.filter((c) => c.statusTerakhir === 'Akan Datang')
+    if (statusFilter === 'Selesai') list = list.filter((c) => c.statusTerakhir === 'Selesai')
+    if (statusFilter === 'Akan Datang') list = list.filter((c) => c.statusTerakhir === 'Akan Datang')
 
     const sorted = [...list]
-    if (sortBy === 'nama') sorted.sort((a, b) => (a.nama || '').localeCompare(b.nama || ''))
-    else if (sortBy === 'belanja') sorted.sort((a, b) => b.totalBelanja - a.totalBelanja)
+    if (sortBy === 'Nama A-Z') sorted.sort((a, b) => (a.nama || '').localeCompare(b.nama || ''))
+    else if (sortBy === 'Total Belanja') sorted.sort((a, b) => b.totalBelanja - a.totalBelanja)
     else sorted.sort((a, b) => new Date(b.lastTanggal) - new Date(a.lastTanggal))
 
     return sorted
@@ -231,21 +232,25 @@ export default function Klien() {
         </div>
 
         <div className="klien-toolbar">
-          <div className="search-box">
+          <div className="search-box-klien">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
-            <input type="text" placeholder="Cari nama klien..." value={search} onChange={(e) => setSearch(e.target.value)} />
+            <input type="text" placeholder="Cari nama klien ...." value={search} onChange={(e) => setSearch(e.target.value)} />
           </div>
           <div className="klien-toolbar-right">
-            <select className="klien-select" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-              <option value="semua">Semua Status</option>
-              <option value="selesai">Selesai</option>
-              <option value="akan-datang">Akan Datang</option>
-            </select>
-            <select className="klien-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-              <option value="terbaru">Terbaru</option>
-              <option value="nama">Nama A-Z</option>
-              <option value="belanja">Total Belanja</option>
-            </select>
+            <div className="filter-select">
+              <CustomSelect
+                options={['Semua Status', 'Selesai', 'Akan Datang']}
+                value={statusFilter}
+                onChange={setStatusFilter}
+              />
+            </div>
+            <div className="filter-select">
+              <CustomSelect
+                options={['Terbaru', 'Nama A-Z', 'Total Belanja']}
+                value={sortBy}
+                onChange={setSortBy}
+              />
+            </div>
             <div className="klien-view-toggle">
               <button type="button" className={viewMode === 'list' ? 'sel' : ''} onClick={() => setViewMode('list')} title="Tampilan tabel">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" /></svg>
