@@ -76,9 +76,13 @@
   text-align: left; font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
   color: var(--ink-faint); padding: 14px 18px; border-bottom: 1px solid var(--line);
 }
-/* Jarak antara header dan body tabel -- sama persis polanya kayak
-   BookingList.css, biar konsisten di kedua tabel. */
-.klien-table tbody::before { content: ""; display: table-row; height: 10px; }
+/* Header tabel Klien sengaja dijadiin <table> & kotak (card) TERPISAH dari
+   body, sama persis konsepnya kayak BookingList.css -- lebar kolom disamain
+   manual pakai <colgroup> di Klien.jsx + table-layout: fixed biar kolom
+   header & body tetap sejajar walau 2 tabel yang beda. */
+.klien-table, .klien-table-head { table-layout: fixed; }
+.klien-table-head-card { margin-bottom: 10px; }
+.klien-table-head thead th { border-bottom: none; }
 .klien-table td { padding: 14px 18px; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent); font-size: 13px; color: var(--ink-soft); vertical-align: middle; }
 .klien-table tr:last-child td { border-bottom: none; }
 .klien-table tr:hover td { background: color-mix(in srgb, var(--hover-row) 60%, transparent); }

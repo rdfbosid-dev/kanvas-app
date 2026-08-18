@@ -12,18 +12,22 @@
 
 .table-card { padding: 0; overflow: hidden; }
 
+/* Header tabel sengaja dijadiin <table> & kotak (card) TERPISAH dari body --
+   bukan cuma dikasih jarak doang. Makanya lebar tiap kolom di kedua tabel
+   itu WAJIB disamain manual pakai <colgroup> (lihat BookingList.jsx), plus
+   table-layout: fixed biar browser nggak nge-resize kolom sesuai isi teks
+   masing-masing tabel secara independen (yang bisa bikin kolom "geser"
+   nggak sejajar antara header & body). */
+.booking-table, .booking-table-head { table-layout: fixed; }
+.table-head-card { margin-bottom: 10px; }
+.booking-table-head thead th { border-bottom: none; }
+
 .booking-table { width: 100%; border-collapse: collapse; }
 .booking-table thead th {
   text-align: left; font-size: 11.5px; font-weight: 700; color: var(--ink-faint);
   text-transform: uppercase; letter-spacing: 0.04em; padding: 16px 20px; border-bottom: 1px solid var(--ink-soft);
 }
 .booking-table thead th.right { text-align: right; }
-
-/* Jarak antara header dan body tabel -- disisipin "baris kosong" pakai
-   pseudo-element ::before di tbody, bukan margin/padding biasa, soalnya
-   thead & tbody itu row-group jadi nggak bisa dikasih margin langsung.
-   Tetap 1 <table> yang sama jadi lebar kolom header & body tetap sejajar. */
-.booking-table tbody::before { content: ""; display: table-row; height: 10px; }
 
 .booking-table tbody tr { cursor: pointer; transition: background 0.15s; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent); }
 .booking-table tbody tr:last-child { border-bottom: none; }

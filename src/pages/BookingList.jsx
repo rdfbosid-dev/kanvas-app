@@ -121,14 +121,25 @@ export default function BookingList() {
         <div className="card table-card">
           {loading && <div className="loading-state">Memuat data...</div>}
           {error && <div className="empty-state" style={{ color: 'var(--coral-tx)' }}>Gagal memuat data: {error}</div>}
+          {!loading && !error && filtered.length === 0 && (
+            <div className="empty-state">
+              {bookings.length === 0 ? 'Belum ada booking tercatat.' : 'Tidak ada booking yang cocok dengan pencarian/filter.'}
+            </div>
+          )}
+        </div>
 
-          {!loading && !error && (
-            filtered.length === 0 ? (
-              <div className="empty-state">
-                {bookings.length === 0 ? 'Belum ada booking tercatat.' : 'Tidak ada booking yang cocok dengan pencarian/filter.'}
-              </div>
-            ) : (
-              <table className="booking-table">
+        {!loading && !error && filtered.length > 0 && (
+          <>
+            <div className="card table-card table-head-card">
+              <table className="booking-table booking-table-head">
+                <colgroup>
+                  <col style={{ width: '26%' }} />
+                  <col style={{ width: '15%' }} />
+                  <col style={{ width: '15%' }} />
+                  <col style={{ width: '19%' }} />
+                  <col style={{ width: '12%' }} />
+                  <col style={{ width: '13%' }} />
+                </colgroup>
                 <thead>
                   <tr>
                     <th>Nama Klien</th>
@@ -139,6 +150,19 @@ export default function BookingList() {
                     <th>Status</th>
                   </tr>
                 </thead>
+              </table>
+            </div>
+
+            <div className="card table-card">
+              <table className="booking-table">
+                <colgroup>
+                  <col style={{ width: '26%' }} />
+                  <col style={{ width: '15%' }} />
+                  <col style={{ width: '15%' }} />
+                  <col style={{ width: '19%' }} />
+                  <col style={{ width: '12%' }} />
+                  <col style={{ width: '13%' }} />
+                </colgroup>
                 <tbody>
                   {filtered.map((b) => (
                     <tr key={b.id} onClick={() => setSelectedBooking(b)}>
@@ -167,9 +191,9 @@ export default function BookingList() {
                   ))}
                 </tbody>
               </table>
-            )
-          )}
-        </div>
+            </div>
+          </>
+        )}
       </div>
 
       {showModal && (

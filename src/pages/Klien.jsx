@@ -294,69 +294,92 @@ export default function Klien() {
               ))}
             </div>
           ) : (
-            <div className="klien-table-card">
-              <table className="klien-table">
-                <thead>
-                  <tr>
-                    <th>Nama Klien</th>
-                    <th>Kontak</th>
-                    <th>Statistik</th>
-                    <th>Total Belanja</th>
-                    <th>Status Terakhir</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {paged.map((c) => (
-                    <tr key={c.id}>
-                      <td>
-                        <div className="klien-table-name-cell">
-                          <div className={`klien-avatar-big klien-avatar-sm${c.isFullySelesai ? ' selesai' : ''}`}>{initialsOf(c.nama)}</div>
-                          <div>
-                            <div className="klien-table-name">{c.nama}</div>
-                            <div className="klien-table-sub">{c.createdAt ? `Klien sejak ${formatTanggal(c.createdAt)}` : '-'}</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>{c.whatsapp || '-'}</td>
-                      <td>
-                        <div className="klien-stat-dot"><span className="dot violet" />{c.totalCount} Booking</div>
-                        <div className="klien-stat-dot"><span className="dot mint" />{c.selesaiCount} Selesai</div>
-                      </td>
-                      <td className="klien-table-belanja">{formatRupiah(c.totalBelanja)}</td>
-                      <td>
-                        <span className={`status-pill ${c.statusTerakhir === 'Selesai' ? 'lunas' : 'akan-datang'}`}>{c.statusTerakhir}</span>
-                      </td>
-                      <td>
-                        <div className="klien-table-actions">
-                          <button type="button" title="Lihat detail" onClick={() => setSelectedClient(c)}>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
-                          </button>
-                          <button type="button" title="Lihat & kelola" onClick={() => setSelectedClient(c)}>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>
-                          </button>
-                        </div>
-                      </td>
+            <>
+              <div className="klien-table-card klien-table-head-card">
+                <table className="klien-table klien-table-head">
+                  <colgroup>
+                    <col style={{ width: '26%' }} />
+                    <col style={{ width: '13%' }} />
+                    <col style={{ width: '17%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '14%' }} />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>Nama Klien</th>
+                      <th>Kontak</th>
+                      <th>Statistik</th>
+                      <th>Total Belanja</th>
+                      <th>Status Terakhir</th>
+                      <th>Aksi</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                </table>
+              </div>
 
-              <div className="klien-pagination">
-                <div className="klien-pagination-info">Menampilkan {rangeStart}–{rangeEnd} dari {filtered.length} klien</div>
-                <div className="klien-pagination-buttons">
-                  <button type="button" disabled={pageSafe <= 1} onClick={() => setPage(pageSafe - 1)}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
-                  </button>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
-                    <button type="button" key={n} className={n === pageSafe ? 'sel' : ''} onClick={() => setPage(n)}>{n}</button>
-                  ))}
-                  <button type="button" disabled={pageSafe >= totalPages} onClick={() => setPage(pageSafe + 1)}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
-                  </button>
+              <div className="klien-table-card">
+                <table className="klien-table">
+                  <colgroup>
+                    <col style={{ width: '26%' }} />
+                    <col style={{ width: '13%' }} />
+                    <col style={{ width: '17%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '14%' }} />
+                  </colgroup>
+                  <tbody>
+                    {paged.map((c) => (
+                      <tr key={c.id}>
+                        <td>
+                          <div className="klien-table-name-cell">
+                            <div className={`klien-avatar-big klien-avatar-sm${c.isFullySelesai ? ' selesai' : ''}`}>{initialsOf(c.nama)}</div>
+                            <div>
+                              <div className="klien-table-name">{c.nama}</div>
+                              <div className="klien-table-sub">{c.createdAt ? `Klien sejak ${formatTanggal(c.createdAt)}` : '-'}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>{c.whatsapp || '-'}</td>
+                        <td>
+                          <div className="klien-stat-dot"><span className="dot violet" />{c.totalCount} Booking</div>
+                          <div className="klien-stat-dot"><span className="dot mint" />{c.selesaiCount} Selesai</div>
+                        </td>
+                        <td className="klien-table-belanja">{formatRupiah(c.totalBelanja)}</td>
+                        <td>
+                          <span className={`status-pill ${c.statusTerakhir === 'Selesai' ? 'lunas' : 'akan-datang'}`}>{c.statusTerakhir}</span>
+                        </td>
+                        <td>
+                          <div className="klien-table-actions">
+                            <button type="button" title="Lihat detail" onClick={() => setSelectedClient(c)}>
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                            </button>
+                            <button type="button" title="Lihat & kelola" onClick={() => setSelectedClient(c)}>
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+
+                <div className="klien-pagination">
+                  <div className="klien-pagination-info">Menampilkan {rangeStart}–{rangeEnd} dari {filtered.length} klien</div>
+                  <div className="klien-pagination-buttons">
+                    <button type="button" disabled={pageSafe <= 1} onClick={() => setPage(pageSafe - 1)}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
+                    </button>
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                      <button type="button" key={n} className={n === pageSafe ? 'sel' : ''} onClick={() => setPage(n)}>{n}</button>
+                    ))}
+                    <button type="button" disabled={pageSafe >= totalPages} onClick={() => setPage(pageSafe + 1)}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </>
           )
         )}
       </div>
