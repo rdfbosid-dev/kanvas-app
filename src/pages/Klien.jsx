@@ -249,6 +249,12 @@ export default function Klien() {
                 options={['Terbaru', 'Nama A-Z', 'Total Belanja']}
                 value={sortBy}
                 onChange={setSortBy}
+                icon={
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 8l4-4 4 4" /><path d="M7 4v16" />
+                    <path d="M21 16l-4 4-4-4" /><path d="M17 20V4" />
+                  </svg>
+                }
               />
             </div>
             <div className="klien-view-toggle">

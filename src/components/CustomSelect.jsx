@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './CustomSelect.css'
 
-export default function CustomSelect({ options, value, onChange, placeholder = 'Pilih' }) {
+export default function CustomSelect({ options, value, onChange, placeholder = 'Pilih', icon = null }) {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
@@ -20,7 +20,7 @@ export default function CustomSelect({ options, value, onChange, placeholder = '
         className={`cselect-trigger${open ? ' open' : ''}`}
         onClick={() => setOpen((o) => !o)}
       >
-        <span>{value || placeholder}</span>
+        <span>{icon && <span className="cselect-icon">{icon}</span>}{value || placeholder}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M6 9l6 6 6-6" />
         </svg>

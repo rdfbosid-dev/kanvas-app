@@ -14,11 +14,19 @@
 }
 .cselect-trigger.open svg { transform: rotate(180deg); color: var(--violet-tx); }
 
+.cselect-icon {
+  display: inline-flex; align-items: center; margin-right: 7px; vertical-align: -3px;
+}
+.cselect-icon svg {
+  width: 14px; height: 14px; color: var(--ink-faint); margin-left: 0; transition: none;
+}
+.cselect-trigger.open .cselect-icon svg { transform: none; color: var(--ink-faint); }
+
 .cselect-menu {
   position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30;
   background: var(--white); border: 1px solid var(--line); border-radius: 12px;
   padding: 6px; box-shadow: 0 16px 36px -12px rgba(43,36,56,0.25);
-  max-height: 220px; overflow-y: auto; 
+  max-height: 220px; overflow-y: auto;
   display: flex; flex-direction: column; gap: 4px;
 }
 
