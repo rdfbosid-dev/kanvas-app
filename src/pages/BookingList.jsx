@@ -118,15 +118,17 @@ export default function BookingList() {
           <div className="filter-select"><CustomSelect options={['Semua Bulan', ...BULAN_PENUH]} value={filterBulan} onChange={setFilterBulan} /></div>
         </div>
 
-        <div className="card table-card">
-          {loading && <div className="loading-state">Memuat data...</div>}
-          {error && <div className="empty-state" style={{ color: 'var(--coral-tx)' }}>Gagal memuat data: {error}</div>}
-          {!loading && !error && filtered.length === 0 && (
-            <div className="empty-state">
-              {bookings.length === 0 ? 'Belum ada booking tercatat.' : 'Tidak ada booking yang cocok dengan pencarian/filter.'}
-            </div>
-          )}
-        </div>
+        {(loading || error || (!loading && !error && filtered.length === 0)) && (
+          <div className="card table-card">
+            {loading && <div className="loading-state">Memuat data...</div>}
+            {error && <div className="empty-state" style={{ color: 'var(--coral-tx)' }}>Gagal memuat data: {error}</div>}
+            {!loading && !error && filtered.length === 0 && (
+              <div className="empty-state">
+                {bookings.length === 0 ? 'Belum ada booking tercatat.' : 'Tidak ada booking yang cocok dengan pencarian/filter.'}
+              </div>
+            )}
+          </div>
+        )}
 
         {!loading && !error && filtered.length > 0 && (
           <>
