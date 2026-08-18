@@ -39,7 +39,7 @@
 }
 .booking-detail-overlay .modal-close:hover { background: var(--theme-ops); color: var(--violet-tx); }
 .booking-detail-overlay .modal-body { padding: 10px 26px 20px; overflow-y: auto; flex: 1; }
-.booking-detail-overlay .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 10px 26px 20px; flex-shrink: 0; }
+.booking-detail-overlay .modal-foot { display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 10px 26px 20px; flex-shrink: 0; }
 .booking-detail-overlay .modal-error { background: var(--coral-bg); color: var(--coral-tx); font-size: 12.5px; padding: 10px 14px; border-radius: 10px; margin-bottom: 10px; }
 .booking-detail-overlay .empty-state { text-align: center; padding: 32px 16px; color: var(--ink-faint); font-size: 13px; }
 
