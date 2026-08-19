@@ -60,7 +60,7 @@
 
 .hero-preview {
   display: flex; flex-direction: column; gap: 12px; max-width: 360px; margin: 0 auto;
-  background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--line); border-radius: 24px; padding: 20px;
+  background: var(--white); border: 1px solid var(--line); border-radius: 24px; padding: 20px;
   box-shadow: var(--shadow-modal); text-align: left;
 }
 .hp-card.hp-kpi { padding: 4px; }
@@ -85,7 +85,7 @@
 
 .landing-fitur { padding: 20px 60px 60px; }
 .fitur-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1100px; margin: 0 auto; }
-.fitur-card { background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+.fitur-card { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
 .fitur-icon {
   width: 46px; height: 46px; border-radius: 13px; background: var(--violet-bg); color: var(--violet-tx);
   display: flex; align-items: center; justify-content: center; margin-bottom: 16px;

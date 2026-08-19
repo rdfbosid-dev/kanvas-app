@@ -4,7 +4,7 @@
 .kalender-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
 .kalender-title { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; flex: 1; text-align: center; }
 .nav-btn {
-  width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--line); background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--line); background: var(--white);
   display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft);
   transition: background 0.15s;
 }

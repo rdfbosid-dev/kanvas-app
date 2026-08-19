@@ -10,9 +10,9 @@
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .booking-modal-overlay .modal {
-  background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: 24px; width: 100%; max-width: 600px;
-  max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow-modal);
+  background: var(--white); border-radius: 24px; width: 100%; max-width: 600px;
+  max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 0 24px 60px -12px rgba(43,36,56,0.35);
 }
 .booking-modal-overlay .modal-head {
   display: flex; align-items: center; justify-content: space-between;
@@ -69,7 +69,7 @@
 .booking-modal-overlay .field select,
 .booking-modal-overlay .field textarea {
   border: 1px solid var(--border-field); border-radius: 11px; padding: 10px 10px;
-  font-size: 12px; font-family: inherit; color: var(--ink-soft);; background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  font-size: 12px; font-family: inherit; color: var(--ink-soft);; background: var(--white);
   height: 40px;
 }
 .booking-modal-overlay .field textarea { height: auto; }
@@ -117,7 +117,7 @@
   padding: 4px 8px; border-radius: 7px; transition: background 0.15s;
 }
 .booking-modal-overlay .peserta-remove:hover { background: var(--delete-hover); border: 1px solid var(--delete-hover); color: var(--coral-tx); }
-.booking-modal-overlay .peserta-body { background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.booking-modal-overlay .peserta-body { background: var(--white); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .booking-modal-overlay .toggle-row { display: flex; gap: 6px; }
 .booking-modal-overlay .toggle-opt {
   flex: 1; text-align: center; padding: 7px; border-radius: 9px; font-size: 12px; font-weight: 600;
@@ -137,7 +137,7 @@
 
 .booking-modal-overlay .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 26px; flex-shrink: 0; }
 .booking-modal-overlay .btn-ghost {
-  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
   font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s;
 }

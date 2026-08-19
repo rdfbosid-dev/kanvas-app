@@ -10,9 +10,9 @@
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .booking-detail-overlay .modal {
-  background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: 24px; width: 100%; max-width: 600px;
-  max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow-modal);
+  background: var(--white); border-radius: 24px; width: 100%; max-width: 600px;
+  max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 0 24px 60px -12px rgba(43,36,56,0.35);
 }
 .booking-detail-overlay .modal-head {
   display: flex; align-items: center; justify-content: space-between;
@@ -57,14 +57,14 @@
 }
 
 .booking-detail-overlay .btn-ghost {
-  padding: 5px 10px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  padding: 5px 10px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
   font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s; margin-bottom: 20px; line-height: 1.4;
 }
 .booking-detail-overlay .btn-ghost:hover { background: var(--theme-ops); border: 1px solid var(--theme-ops); }
 
 .booking-detail-overlay .btn-batal {
-  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
   font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s;
 }
@@ -190,7 +190,7 @@
 .booking-detail-overlay .field select,
 .booking-detail-overlay .field textarea {
   border: 1px solid var(--border-field); border-radius: 11px; padding: 9px 12px;
-  font-size: 12px; font-family: inherit; color: var(--ink); background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  font-size: 12px; font-family: inherit; color: var(--ink); background: var(--white);
   height: 40px;
 }
 
@@ -228,7 +228,7 @@
   padding: 4px 8px; border-radius: 7px; transition: background 0.15s;
 }
 .booking-detail-overlay .peserta-remove:hover { background: var(--delete-hover); border: 1px solid var(--delete-hover); color: var(--coral-tx); }
-.booking-detail-overlay .peserta-body { background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.booking-detail-overlay .peserta-body { background: var(--white); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .booking-detail-overlay .toggle-row { display: flex; gap: 6px; }
 .booking-detail-overlay .toggle-opt {
   flex: 1; text-align: center; padding: 7px; border-radius: 9px; font-size: 12px; font-weight: 600;
@@ -263,7 +263,7 @@
 .booking-detail-overlay .btn-danger-ghost:hover { background: var(--delete-hover); border: 1px solid var(--delete-hover) }
 
 .booking-detail-overlay .btn-danger.batal {
-  padding: 8px 10px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  padding: 8px 10px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
   font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s;
 }

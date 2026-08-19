@@ -3,9 +3,9 @@
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .invoice-overlay .modal {
-  background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: 24px; width: 100%; max-width: 720px;
-  max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow-modal);
+  background: var(--white); border-radius: 24px; width: 100%; max-width: 720px;
+  max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 0 24px 60px -12px rgba(43,36,56,0.35);
 }
 .invoice-overlay .modal-head {
   display: flex; align-items: center; justify-content: space-between;
@@ -21,14 +21,14 @@
 .invoice-overlay .modal-body { padding: 22px 26px; overflow-y: auto; flex: 1; }
 .invoice-overlay .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 26px; flex-shrink: 0; }
 .invoice-overlay .btn-ghost {
-  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
   font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s;
 }
 .invoice-overlay .btn-ghost:hover { background: var(--theme-ops); }
 
 .invoice-modal { max-width: 640px; }
-.invoice-paper { background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); }
+.invoice-paper { background: var(--white); }
 
 .inv-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
 .inv-studio { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); }
@@ -69,7 +69,7 @@
 @media print {
   body * { visibility: hidden; }
   .invoice-paper, .invoice-paper * { visibility: visible; }
-  .invoice-paper { position: absolute; top: 0; left: 0; width: 100%; padding: 20px; background: #FFFFFF !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .invoice-paper { position: absolute; top: 0; left: 0; width: 100%; padding: 20px; }
   .invoice-no-print { display: none !important; }
   .invoice-overlay { position: static; background: none; padding: 0; }
   .invoice-modal { box-shadow: none; max-height: none; max-width: 100%; }
