@@ -2,7 +2,7 @@
 
 .search-box-booking {
   flex: 1; max-width: 350px; display: flex; align-items: center; gap: 10px;
-  background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
+  background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
 }
 .search-box-booking svg { width: 16px; height: 16px; color: var(--ink-faint); flex-shrink: 0; }
 .search-box-booking input { border: none; outline: none; font-size: 12px; font-family: inherit; color: var(--ink); flex: 1; background: none; }

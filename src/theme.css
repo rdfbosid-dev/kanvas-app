@@ -2,7 +2,7 @@
   --grad: linear-gradient(135deg, #DC7F9B 0%, #F7A1C4 100%);
   --grad-soft: linear-gradient(135deg, #F7A1C4 0%, #ECACBE 100%);
   --grad-soft-alt: linear-gradient(135deg, #6FA383 0%, #C3E0D0 100%);
-  --white: #FFFFFF;
+  --white: rgba(255, 255, 255, 0.55);
   --notif: #B16B80;
   --page-a: #FBF2F5;
   --page-b: #F5E4EA;
@@ -47,7 +47,9 @@
 
   --shadow-modal: 0 24px 60px -12px rgba(47, 47, 47, 0.35);
   --shadow-card: 0 6px 16px -6px rgba(47, 47, 47, 0.06);
-  --sidebar-bg: rgba(255, 255, 255, 0.6);
+  --sidebar-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-blur: blur(20px);
   --tooltip-bg: #2F2F2F;
   --tooltip-tx: #FFFFFF;
 }
@@ -56,7 +58,7 @@
   --grad: linear-gradient(135deg, #F7A1C4 0%, #ECACBE 100%);
   --grad-soft: linear-gradient(135deg, #F7A1C4 0%, #ECACBE 100%);
   --grad-soft-alt: linear-gradient(135deg, #6FA383 0%, #C3E0D0 100%);
-  --white: #6B4552;
+  --white: rgba(107, 69, 82, 0.55);
   --notif: #B16B80;
   --page-a: #211519;
   --page-b: #120B0D;
@@ -100,7 +102,9 @@
 
   --shadow-modal: 0 24px 60px -12px rgba(0, 0, 0, 0.65);
   --shadow-card: 0 6px 18px -6px rgba(0, 0, 0, 0.4);
-  --sidebar-bg: rgba(18, 11, 13, 0.85);
+  --sidebar-bg: rgba(107, 69, 82, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(20px);
 }
 
 body {

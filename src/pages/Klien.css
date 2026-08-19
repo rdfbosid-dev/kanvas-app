@@ -1,7 +1,7 @@
 /* ---- Kartu ringkasan statistik di atas (Total Klien, Klien Aktif, dst) ---- */
 .klien-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
 .klien-stat-card {
-  background: var(--white); border: 1px solid var(--line); border-radius: 18px;
+  background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--line); border-radius: 18px;
   padding: 18px; display: flex; align-items: center; gap: 14px;
 }
 .klien-stat-icon {
@@ -36,14 +36,14 @@
 
 .search-box-klien {
   max-width: 310px; width: 100%; display: flex; align-items: center; gap: 10px;
-  background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
+  background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
 }
 .search-box-klien svg { width: 16px; height: 16px; color: var(--ink-faint); flex-shrink: 0; }
 .search-box-klien input { border: none; outline: none; font-size: 12px; font-family: inherit; color: var(--ink); flex: 1; background: none; }
 .search-box-klien input::placeholder { color: var(--ink-faint); }
 
 /* ---- Tampilan tabel (mode "list", default) ---- */
-.klien-table-card { background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.klien-table-card { background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-card); }
 .klien-table { width: 100%; border-collapse: collapse; }
 .klien-table th {
   text-align: left; font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
@@ -89,7 +89,7 @@
 .klien-pagination-buttons { display: flex; align-items: center; gap: 6px; }
 .klien-pagination-buttons button {
   min-width: 32px; height: 32px; padding: 0 6px; display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--border); border-radius: 9px; background: var(--white); color: var(--ink-soft); cursor: pointer; font-size: 12px; transition: background 0.15s, color 0.15s;
+  border: 1px solid var(--border); border-radius: 9px; background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); color: var(--ink-soft); cursor: pointer; font-size: 12px; transition: background 0.15s, color 0.15s;
 }
 .klien-pagination-buttons button svg { width: 14px; height: 14px; }
 .klien-pagination-buttons button:hover:not(:disabled) { background: var(--violet-bg); }
@@ -106,9 +106,9 @@
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .klien-modal-overlay .modal {
-  background: var(--white); border-radius: 24px; width: 100%; max-width: 400px;
-  max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: 0 24px 60px -12px rgba(43,36,56,0.35);
+  background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: 24px; width: 100%; max-width: 400px;
+  max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-modal);
 }
 .klien-modal-overlay .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 26px; flex-shrink: 0; margin-bottom: 5px; }
 .klien-modal-overlay .modal-head h2 {
@@ -133,7 +133,7 @@
 .klien-modal-overlay .modal-body { padding: 10px 26px 20px; overflow-y: auto; flex: 1; }
 .klien-modal-overlay .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 10px 26px 20px; flex-shrink: 0; }
 .klien-modal-overlay .btn-ghost {
-  padding: 5px 10px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white);
+  padding: 5px 10px; border-radius: 11px; border: 1px solid var(--border-field); background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
   font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s; line-height: 1.4;
 }

@@ -3,7 +3,7 @@
 .cselect-trigger {
   width: 100%; display: flex; align-items: center; justify-content: space-between;
   border: 1px solid var(--border-field); border-radius: 11px; padding: 9px 10px 9px 12px;
-  font-size: 12px; font-family: inherit; color: var(--ink); background: var(--white);
+  font-size: 12px; font-family: inherit; color: var(--ink); background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
   cursor: pointer; text-align: left; transition: border-color 0.15s, box-shadow 0.15s;
 }
 .cselect-trigger:hover { border-color: #D9C9F0; }
@@ -24,7 +24,7 @@
 
 .cselect-menu {
   position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30;
-  background: var(--white); border: 1px solid var(--line); border-radius: 12px;
+  background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--line); border-radius: 12px;
   padding: 6px; box-shadow: 0 16px 36px -12px rgba(43,36,56,0.25);
   max-height: 220px; overflow-y: auto;
   display: flex; flex-direction: column; gap: 4px;

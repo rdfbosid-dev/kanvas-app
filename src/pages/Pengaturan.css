@@ -3,14 +3,14 @@
 
 .pengaturan-layout { display: flex; flex-direction: column; gap: 18px; max-width: 640px; }
 
-.card { background: var(--white); border-radius: 20px; padding: 24px; border: 1px solid var(--line); }
+.card { background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: 20px; padding: 24px; border: 1px solid var(--line); }
 .card-head h3 { font-size: 16px; margin-bottom: 18px; }
 
 .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
 .field label { font-size: 12.5px; font-weight: 600; color: var(--ink-faint); margin-bottom: 5px; }
 .field input {
   border: 1px solid var(--border-field); border-radius: 11px; padding: 10px 14px;
-  font-size: 13.5px; font-family: inherit; color: var(--ink); background: var(--white);
+  font-size: 13.5px; font-family: inherit; color: var(--ink); background: var(--white); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
 }
 .field input::placeholder { color: var(--placeholder); opacity: 1; }
 .field input:focus { outline: none; border-color: #C4A4F0; box-shadow: 0 0 0 3px var(--violet-bg); }
