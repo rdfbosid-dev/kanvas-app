@@ -73,7 +73,7 @@ export default function Landing() {
         <div className="landing-nav-actions">
           <ThemeToggleButton />
           <Link to="/login" className="btn-text">Masuk</Link>
-          <Link to="/register" className="btn-primary">Coba Gratis</Link>
+          <Link to="/register" className="btn-landing">Coba Gratis</Link>
         </div>
       </header>
 
@@ -85,7 +85,7 @@ export default function Landing() {
           Nggak ada lagi data tercecer dan lupa jadwal!
         </p>
         <div className="hero-actions">
-          <Link to="/register" className="btn-primary large">Mulai Gratis Sekarang →</Link>
+          <Link to="/register" className="btn-landing large">Mulai Gratis Sekarang →</Link>
           <a href="#fitur" className="btn-text large">Lihat fitur ↓</a>
         </div>
 
@@ -157,7 +157,7 @@ export default function Landing() {
       <section className="landing-cta">
         <h2>Siap rapiin bisnis makeup kamu?</h2>
         <p>Gratis buat mulai — nggak perlu ribet.</p>
-        <Link to="/register" className="btn-primary large">Coba Dapur MUA Sekarang →</Link>
+        <Link to="/register" className="btn-landing large">Coba Dapur MUA Sekarang →</Link>
       </section>
 
       <footer className="landing-footer">
