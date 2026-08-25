@@ -97,7 +97,7 @@ export default function BookingList() {
             <div className="greeting-date">{filtered.length} dari {bookings.length} total booking</div>
           </div>
           <div className="topbar-actions">
-            <button className="btn-primary" onClick={() => setShowModal(true)} type="button">
+            <button className="btn-booking-primary" onClick={() => setShowModal(true)} type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 5v14M5 12h14" /></svg>
               Booking Baru
             </button>
@@ -119,7 +119,7 @@ export default function BookingList() {
         </div>
 
         {(loading || error || (!loading && !error && filtered.length === 0)) && (
-          <div className="card table-card">
+          <div className="table-card">
             {loading && <div className="loading-state">Memuat data...</div>}
             {error && <div className="empty-state" style={{ color: 'var(--coral-tx)' }}>Gagal memuat data: {error}</div>}
             {!loading && !error && filtered.length === 0 && (
@@ -132,7 +132,7 @@ export default function BookingList() {
 
         {!loading && !error && filtered.length > 0 && (
           <>
-            <div className="card table-card table-head-card">
+            <div className="table-card table-head-card">
               <table className="booking-table booking-table-head">
                 <colgroup>
                   <col style={{ width: '20%' }} />
@@ -155,7 +155,7 @@ export default function BookingList() {
               </table>
             </div>
 
-            <div className="card table-card">
+            <div className="table-card">
               <table className="booking-table">
                 <colgroup>
                   <col style={{ width: '20%' }} />

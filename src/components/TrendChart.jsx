@@ -63,7 +63,7 @@ export default function TrendChart({ series, months, area = false, mounted }) {
         {area && (
           <defs>
             <linearGradient id="trendAreaFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={series[0].color} stopOpacity="0.4" />
+              <stop offset="70%" stopColor={series[0].color} stopOpacity="0.4" />
               <stop offset="100%" stopColor={series[0].color} stopOpacity="0.02" />
             </linearGradient>
           </defs>
@@ -105,7 +105,7 @@ export default function TrendChart({ series, months, area = false, mounted }) {
             <circle
               key={s.label + i}
               cx={x} cy={y} r={hoverIdx === i ? 5 : 3.5}
-              fill={s.color} stroke="#fff" strokeWidth="1.5"
+              fill={s.color} stroke="#fff" strokeWidth="1"
               className="trendchart-dot"
               style={{ opacity: mounted ? 1 : 0, transitionDelay: mounted ? `${(i / n) * 0.9}s` : '0s' }}
             />

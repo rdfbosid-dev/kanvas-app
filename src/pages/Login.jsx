@@ -44,24 +44,34 @@ export default function Login() {
 
         <form onSubmit={handleSubmit}>
           <div className="auth-field">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="nama@email.com"
-              required
-            />
+            <div className="auth-field-control">
+              <input
+                id="login-email"
+                name="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder=" "
+                autoComplete="email"
+                required
+              />
+              <label htmlFor="login-email">Email</label>
+            </div>
           </div>
           <div className="auth-field">
-            <label>Kata sandi</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
+            <div className="auth-field-control">
+              <input
+                id="login-password"
+                name="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder=" "
+                autoComplete="current-password"
+                required
+              />
+              <label htmlFor="login-password">Kata sandi</label>
+            </div>
             <Link to="/lupa-password" className="auth-forgot">Lupa kata sandi?</Link>
           </div>
           <button className="auth-btn" type="submit" disabled={loading}>

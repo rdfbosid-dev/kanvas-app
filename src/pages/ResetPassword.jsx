@@ -73,24 +73,34 @@ export default function ResetPassword() {
 
         <form onSubmit={handleSubmit}>
           <div className="auth-field">
-            <label>Kata sandi baru</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Minimal 6 karakter"
-              required
-            />
+            <div className="auth-field-control">
+              <input
+                id="reset-password"
+                name="new-password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder=" "
+                autoComplete="new-password"
+                required
+              />
+              <label htmlFor="reset-password">Kata sandi baru</label>
+            </div>
           </div>
           <div className="auth-field">
-            <label>Konfirmasi kata sandi</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Ketik ulang kata sandi barumu"
-              required
-            />
+            <div className="auth-field-control">
+              <input
+                id="reset-confirm-password"
+                name="confirm-password"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder=" "
+                autoComplete="new-password"
+                required
+              />
+              <label htmlFor="reset-confirm-password">Konfirmasi kata sandi</label>
+            </div>
           </div>
           <button className="auth-btn" type="submit" disabled={loading}>
             {loading ? 'Menyimpan...' : 'Simpan Kata Sandi Baru'}

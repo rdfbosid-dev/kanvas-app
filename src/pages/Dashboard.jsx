@@ -195,14 +195,14 @@ export default function Dashboard() {
     return [...top, ['Lainnya', othersTotal]]
   }
 
-  const eventCounts = topNWithOthers(countBy(bookingBulanIni, 'event'), 5)
+  const eventCounts = topNWithOthers(countBy(bookingBulanIni, 'event'), 7)
   const sumberCounts = countBy(bookingBulanIni, 'sumber')
   const lokasiCounts = countBy(bookingBulanIni, 'lokasi').slice(0, 5)
-  const CHART_COLORS = ['#C4A4F0', '#F0A0C0', '#E7B655', '#6FC79A', '#8E9FE8']
+  const CHART_COLORS = ['#C4A4F0', '#F0A0C0', '#E7B655', '#6FC79A', '#8E9FE8', '#4FC1B0', '#E8776C']
   // Warna garis tren dibedain per tema -- versi terang butuh warna gelap
   // biar kebaca di atas kartu putih, versi dark butuh warna cerah biar
   // nggak "ilang" ketelen background gelap.
-  const trendColorA = isDark ? '#C9A8F0' : '#7C4FA8'
+  const trendColorA = isDark ? '#5792a7' : '#3d4a9a'
   const trendColorB = isDark ? '#F5C368' : '#E7A33D'
 
   const SUMBER_BRAND_COLORS = {
@@ -329,9 +329,9 @@ export default function Dashboard() {
                 </>
               )}
             </div>
-            <button className="btn-primary" onClick={() => setShowModal(true)} type="button">
+            <button className="btn-booking-primary" onClick={() => setShowModal(true)} type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 5v14M5 12h14"/></svg>
-              Booking baru
+              Booking Baru
             </button>
           </div>
         </div>
@@ -342,60 +342,60 @@ export default function Dashboard() {
         {!loading && !error && (
           <>
             <div className="kpi-grid">
-              <div className="kpi-card">
+              <div className="kpi-card-today">
                 <div className="kpi-top">
-                  <span className="kpi-label">Hari Ini</span>
-                  <div className="kpi-icon" style={{ background: 'var(--coral-bg)' }}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--coral-tx)" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                  <span className="kpi-label-today">Hari Ini</span>
+                  <div className="kpi-icon" style={{ background: '#3e77b4' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--h7)" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
                   </div>
                 </div>
-                <div className="kpi-value">{bookingHariIni.length}</div>
-                <div className="kpi-sub">Booking terjadwal</div>
+                <div className="kpi-value-today">{bookingHariIni.length}</div>
+                <div className="kpi-sub-today">Booking terjadwal</div>
               </div>
 
-              <div className="kpi-card">
+              <div className="kpi-card-month">
                 <div className="kpi-top">
-                  <span className="kpi-label">Booking Bulan Ini</span>
-                  <div className="kpi-icon" style={{ background: 'var(--violet-bg)' }}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--violet-tx)" strokeWidth="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
+                  <span className="kpi-label-month">Booking Bulan Ini</span>
+                  <div className="kpi-icon" style={{ background: '#9057bc' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--h7)" strokeWidth="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
                   </div>
                 </div>
-                <div className="kpi-value">{bookingBulanIni.length} <span className="kpi-unit">booking</span></div>
-                <div className="kpi-sub">{pesertaBulanIni} klien</div>
+                <div className="kpi-value-month">{bookingBulanIni.length} <span className="kpi-unit">booking</span></div>
+                <div className="kpi-sub-month">{pesertaBulanIni} klien</div>
               </div>
 
-              <div className="kpi-card">
+              <div className="kpi-card-penghasilan">
                 <div className="kpi-top">
-                  <span className="kpi-label">Penghasilan</span>
-                  <div className="kpi-icon" style={{ background: 'var(--mint-bg)' }}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--mint-tx)" strokeWidth="2"><path d="M3 3v18h18"/><path d="M7 14l4-5 3 3 5-7"/></svg>
+                  <span className="kpi-label-penghasilan">Penghasilan</span>
+                  <div className="kpi-icon" style={{ background: '#2b8d76' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--h7)" strokeWidth="2"><path d="M3 3v18h18"/><path d="M7 14l4-5 3 3 5-7"/></svg>
                   </div>
                 </div>
-                <div className="kpi-value">{formatRupiah(penghasilanBulanIni)}</div>
-                <div className="kpi-sub">Total bulan ini</div>
+                <div className="kpi-value-penghasilan">{formatRupiah(penghasilanBulanIni)}</div>
+                <div className="kpi-sub-penghasilan">Total bulan ini</div>
               </div>
 
-              <div className="kpi-card">
+              <div className="kpi-card-status">
                 <div className="kpi-top">
-                  <span className="kpi-label">Belum Lunas</span>
-                  <div className="kpi-icon" style={{ background: 'var(--icon-attention)' }}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-tx)" strokeWidth="2"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v6M12 18v.01"/></svg>
+                  <span className="kpi-label-status">Belum Lunas</span>
+                  <div className="kpi-icon" style={{ background: '#c54c61' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--h7)" strokeWidth="2"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v6M12 18v.01"/></svg>
                   </div>
                 </div>
-                <div className="kpi-value">{belumLunas.length}</div>
-                <div className="kpi-sub">Klien perlu ditagih</div>
+                <div className="kpi-value-status">{belumLunas.length}</div>
+                <div className="kpi-sub-status">Klien perlu ditagih</div>
               </div>
             </div>
 
             <div className="content-grid">
-              <div className="card">
-                <div className="card-head">
+              <div className="card-dashboard">
+                <div className="card-dashboard-head">
                   <h3>Booking Terdekat</h3>
                   <a href="/booking">Lihat semua →</a>
                 </div>
 
                 {bookingTerdekat.length === 0 ? (
-                  <div className="empty-state">Belum ada booking mendatang.</div>
+                  <div className="empty-state-dashboard-grid">Belum ada booking mendatang.</div>
                 ) : (
                   bookingTerdekat.map((b) => {
                     const day = dayLabel(b.tanggal_acara, b.jam_start_makeup)
@@ -410,8 +410,8 @@ export default function Dashboard() {
                           </div>
                         </div>
                         <div className="dash-booking-row-right">
-                          <span className={`day-pill ${day.cls}`}>{day.text}</span>
-                          <span className={`status-pill ${b.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
+                          <span className={`dashboard-day-pill ${day.cls}`}>{day.text}</span>
+                          <span className={`dashboard-status-pill ${b.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
                             {b.status_pembayaran}
                           </span>
                         </div>
@@ -421,8 +421,8 @@ export default function Dashboard() {
                 )}
               </div>
 
-              <div className="card">
-                <div className="card-head"><h3>Ringkasan Keuangan</h3></div>
+              <div className="card-dashboard">
+                <div className="card-dashboard-head"><h3>Ringkasan Keuangan</h3></div>
                 <div className="fin-row">
                   <span className="fin-label">Total Belanja Klien Bulan {namaBulanIni}</span>
                   <span className="fin-value">{formatRupiah(belanjaKlienBulanIni)}</span>
@@ -465,8 +465,8 @@ export default function Dashboard() {
             </div>
 
             <div className="grid-2">
-              <div className="card">
-                <div className="card-head">
+              <div className="card-dashboard">
+                <div className="card-dashboard-head">
                   <h3>Tren Booking &amp; Klien</h3>
                   <span className="chart-tag">{curYear}</span>
                 </div>
@@ -484,8 +484,8 @@ export default function Dashboard() {
                 )}
               </div>
 
-              <div className="card">
-                <div className="card-head">
+              <div className="card-dashboard">
+                <div className="card-dashboard-head">
                   <h3>Tren Omzet &amp; Penghasilan</h3>
                   <span className="chart-tag">{curYear}</span>
                 </div>
@@ -506,8 +506,8 @@ export default function Dashboard() {
             </div>
 
             <div className="grid-3">
-              <div className="card">
-                <div className="card-head"><h3>Event</h3></div>
+              <div className="card-dashboard">
+                <div className="card-dashboard-head"><h3>Event</h3></div>
                 {eventCounts.length === 0 ? (
                   <div className="empty-state">Belum ada data</div>
                 ) : (
@@ -530,8 +530,8 @@ export default function Dashboard() {
                 )}
               </div>
 
-              <div className="card">
-                <div className="card-head"><h3>Sumber Booking</h3></div>
+              <div className="card-dashboard">
+                <div className="card-dashboard-head"><h3>Sumber Booking</h3></div>
                 {sumberCounts.length === 0 ? (
                   <div className="empty-state">Belum ada data</div>
                 ) : (
@@ -554,8 +554,8 @@ export default function Dashboard() {
                 )}
               </div>
 
-              <div className="card">
-                <div className="card-head"><h3>Top 5 Lokasi</h3></div>
+              <div className="card-dashboard">
+                <div className="card-dashboard-head"><h3>Top 5 Lokasi</h3></div>
                 {lokasiCounts.length === 0 ? (
                   <div className="empty-state">Belum ada data</div>
                 ) : (
@@ -584,7 +584,7 @@ export default function Dashboard() {
                   Booking terbanyak dari <b>{sumberCounts[0]?.[0]} ({Math.round((sumberCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>
                   {' · '}Event <b>{eventCounts[0]?.[0]} mendominasi ({Math.round((eventCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>
                   {belumLunas.length > 0
-                    ? ` · Ingatkan ${belumLunas.length} klien yang belum lunas, ya!`
+                    ? <> · Ingatkan <b>{belumLunas.length} klien</b> yang belum lunas, ya!</>
                     : ' · Semua booking sudah lunas 🎉'}
                 </span>
               </div>

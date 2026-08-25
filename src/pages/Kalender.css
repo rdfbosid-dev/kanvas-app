@@ -4,14 +4,14 @@
 .kalender-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
 .kalender-title { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; flex: 1; text-align: center; }
 .nav-btn {
-  width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--line); background: var(--white);
+  width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--button-border); background: var(--white);
   display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft);
   transition: background 0.15s;
 }
-.nav-btn:hover { background: var(--violet-bg); color: var(--violet-tx); }
+.nav-btn:hover { background: color-mix(in srgb, var(--h3) 18%, transparent); color: var(--h3); }
 .nav-btn svg { width: 15px; height: 15px; }
 .today-btn {
-  font-size: 12px; font-weight: 600; color: var(--violet-tx); background: var(--violet-bg);
+  font-size: 12px; font-weight: 600; color: var(--h3); background: color-mix(in srgb, var(--h3) 18%, transparent);
   border: none; border-radius: 20px; padding: 7px 14px; cursor: pointer; transition: background 0.15s;
 }
 .today-btn:hover { filter: brightness(0.95); }
@@ -31,22 +31,22 @@
   position: relative; transition: transform 0.15s, box-shadow 0.15s;
 }
 .kalender-cell:hover .cell-circle { transform: scale(1.08); }
-.kalender-cell.selected .cell-circle { box-shadow: 0 0 0 2px var(--violet-tx); }
+.kalender-cell.selected .cell-circle { box-shadow: 0 0 0 2px var(--h3); }
 
 .cell-date { font-size: 13px; font-weight: 600; color: var(--ink); }
 
 /* Level kepadatan -- warna soft, bukan blok solid */
 .density-0 { background: transparent; }
-.density-1 { background: var(--mint-bg); }
-.density-1 .cell-date { color: var(--mint-tx); font-weight: 700; }
-.density-2 { background: var(--gold-bg); }
-.density-2 .cell-date { color: var(--gold-tx); font-weight: 700; }
-.density-3 { background: var(--coral-bg); }
-.density-3 .cell-date { color: var(--coral-tx); font-weight: 700; }
+.density-1 { background: var(--pill-alt); }
+.density-1 .cell-date { color: var(--h7); font-weight: 700; }
+.density-2 { background: color-mix(in srgb, var(--h5) 20%, transparent); }
+.density-2 .cell-date { color: var(--h5); font-weight: 700; }
+.density-3 { background: var(--pill); }
+.density-3 .cell-date { color: var(--h8); font-weight: 700; }
 
 .today-dot {
   position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%);
-  width: 5px; height: 5px; border-radius: 50%; background: var(--coral);
+  width: 5px; height: 5px; border-radius: 50%; background: var(--pill);
 }
 
 .agenda-card { padding: 22px; min-height: 200px; }

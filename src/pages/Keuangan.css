@@ -16,12 +16,12 @@
 .keuangan-table { width: 100%; border-collapse: collapse; min-width: 860px; }
 .keuangan-table thead th {
   text-align: left; font-size: 11px; font-weight: 700; color: var(--ink-faint);
-  text-transform: uppercase; letter-spacing: 0.03em; padding: 14px 16px; border-bottom: 1px solid var(--line);
+  text-transform: uppercase; letter-spacing: 0.03em; padding: 14px 16px; border-bottom: 1px solid var(--button-border);
   white-space: nowrap;
 }
 .keuangan-table thead th.right { text-align: right; }
 .keuangan-table thead th.center { text-align: center; }
-.keuangan-table td { padding: 11px 16px; font-size: 13px; color: var(--ink-soft); border-bottom: 1px solid var(--line); }
+.keuangan-table td { padding: 11px 16px; font-size: 13px; color: var(--ink-soft); border-bottom: 1px solid var(--button-border); }
 .keuangan-table td.right { text-align: right; }
 .keuangan-table td.center { text-align: center; }
 .keuangan-table td.mono { font-family: 'Space Mono', monospace; font-size: 12px; }
@@ -32,13 +32,13 @@
 .keuangan-table tbody tr:hover { background: var(--page-a); }
 .keuangan-table tbody tr:hover td { opacity: 1; color: var(--ink); }
 .keuangan-table tfoot td {
-  border-bottom: none; border-top: 2px solid var(--line); font-weight: 700; color: var(--ink);
+  border-bottom: none; border-top: 2px solid var(--button-border); font-weight: 700; color: var(--ink);
   background: var(--page-a);
 }
 
 .trend-arrow { width: 20px; height: 20px; display: inline-block; }
-.trend-arrow.trend-up { color: var(--mint-tx); }
-.trend-arrow.trend-down { color: var(--coral-tx); }
+.trend-arrow.trend-up { color: var(--h7); }
+.trend-arrow.trend-down { color: var(--h8); }
 .trend-arrow.trend-flat { color: var(--ink-faint); }
 
 @media (max-width: 900px) {

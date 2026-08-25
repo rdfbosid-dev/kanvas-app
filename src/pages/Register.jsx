@@ -82,33 +82,48 @@ export default function Register() {
 
         <form onSubmit={handleSubmit}>
           <div className="auth-field">
-            <label>Nama Brand MUA</label>
-            <input
-              type="text"
-              value={studioName}
-              onChange={(e) => setStudioName(e.target.value)}
-              placeholder="contoh: MUA by Jennie"
-            />
+            <div className="auth-field-control">
+              <input
+                id="register-studio"
+                name="organization"
+                type="text"
+                value={studioName}
+                onChange={(e) => setStudioName(e.target.value)}
+                placeholder=" "
+                autoComplete="organization"
+              />
+              <label htmlFor="register-studio">Nama Brand MUA</label>
+            </div>
           </div>
           <div className="auth-field">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="nama@email.com"
-              required
-            />
+            <div className="auth-field-control">
+              <input
+                id="register-email"
+                name="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder=" "
+                autoComplete="email"
+                required
+              />
+              <label htmlFor="register-email">Email</label>
+            </div>
           </div>
           <div className="auth-field">
-            <label>Kata sandi</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Minimal 6 karakter"
-              required
-            />
+            <div className="auth-field-control">
+              <input
+                id="register-password"
+                name="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder=" "
+                autoComplete="new-password"
+                required
+              />
+              <label htmlFor="register-password">Kata sandi</label>
+            </div>
           </div>
           <button className="auth-btn" type="submit" disabled={loading}>
             {loading ? 'Memproses...' : 'Daftar'}

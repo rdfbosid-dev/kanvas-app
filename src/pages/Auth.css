@@ -6,19 +6,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(160deg, var(--page-a) 0%, var(--page-b) 100%);
+  background: linear-gradient(160deg, var(--page-a) 0%, var(--page-b) 70%);
   font-family: 'Plus Jakarta Sans', sans-serif;
-  color: var(--ink);
+  color: var(--ink-soft);
   padding: 24px;
 }
 
 .auth-card {
-  background: var(--white);
+  background: color-mix(in srgb, var(--box) var(--mix-box), transparent);
+  border: 1.5px solid color-mix(in srgb, var(--button-prm) var(--mix-border), transparent);
   border-radius: 24px;
   padding: 36px 32px;
   width: 100%;
   max-width: 380px;
-  box-shadow: 0 24px 60px -20px rgba(43, 36, 56, 0.2);
+  box-shadow: var(--shadow-modal);
 }
 
 .auth-brand {
@@ -32,7 +33,7 @@
   width: 36px;
   height: 36px;
   border-radius: 12px;
-  background: var(--grad);
+  background: var(--brand);
   flex-shrink: 0;
 }
 
@@ -51,7 +52,7 @@
 
 .auth-subtitle {
   font-size: 13.5px;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
   margin-bottom: 24px;
 }
 
@@ -62,39 +63,67 @@
   margin-bottom: 14px;
 }
 
+.auth-field-control {
+  position: relative;
+}
+
 .auth-field label {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--ink-faint);
-  margin-bottom: 5px;
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: left top;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  pointer-events: none;
+  transition: top 0.15s ease, transform 0.15s ease, font-size 0.15s ease, color 0.15s ease;
 }
 
 .auth-field input {
-  border: 1px solid var(--border-field);
+  width: 100%;
+  border: 1px solid var(--button-tx);
   border-radius: 12px;
-  padding: 11px 14px;
+  padding: 22px 14px 8px 14px;
   font-size: 14px;
+  font-weight: 700;
   font-family: inherit;
-  color: var(--ink-faint);
-  background: var(--white);
+  color: var(--button-tx);
+  background: var(--placeholder);
 }
 
 .auth-field input::placeholder {
-  color: var(--placeholder);
-  opacity: 1;
+  color: transparent;
+}
+
+.auth-field input:focus + label,
+.auth-field input:not(:placeholder-shown) + label {
+  top: 5px;
+  transform: translateY(0) scale(0.8);
+  color: var(--ink-soft);
 }
 
 .auth-field input:focus {
   outline: none;
-  border-color: #629c91;
-  box-shadow: 0 0 0 3px var(--violet-bg);
+  border-color: var(--h5);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--h2) 20%, transparent);
+}
+
+.auth-field input:-webkit-autofill,
+.auth-field input:-webkit-autofill:hover,
+.auth-field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--button-tx);
+  -webkit-box-shadow: 0 0 0 1000px var(--white) inset;
+  box-shadow: 0 0 0 1000px var(--placeholder) inset;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: var(--button-tx);
 }
 
 .auth-btn {
   width: 100%;
-  background: var(--grad);
-  color: #fff;
-  border: none;
+  background: color-mix(in srgb, var(--button-prm) var(--mix-btn-a), transparent);
+  color: var(--button-tx);
+  border: 1.5px solid color-mix(in srgb, var(--button-border) var(--mix-border), transparent);
   border-radius: 12px;
   padding: 12px;
   font-size: 14px;
@@ -102,7 +131,15 @@
   font-family: inherit;
   cursor: pointer;
   margin-top: 6px;
-  box-shadow: 0 10px 22px -10px #61938b 70%;
+  box-shadow: var(--shadow-button);
+  transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+  background: color-mix(in srgb, var(--button-prm-hover) 80%, transparent);
+  color: var(--button-tx-hover);
+  border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) var(--mix-border), transparent);
+  transform:translateY(-2px);
 }
 
 .auth-btn:disabled {
@@ -111,8 +148,8 @@
 }
 
 .auth-error {
-  background: var(--delete);
-  color: var(--coral-tx);
+  background: var(--notif);
+  color: var(--h8);
   font-size: 12.5px;
   font-weight: 500;
   padding: 10px 14px;
@@ -121,8 +158,8 @@
 }
 
 .auth-success {
-  background: var(--mint-bg);
-  color: var(--mint-tx);
+  background: var(--pill-alt);
+  color: var(--h7);
   font-size: 12.5px;
   font-weight: 500;
   padding: 10px 14px;
@@ -132,7 +169,7 @@
 
 .auth-forgot {
   display: block; text-align: right; font-size: 12px; font-weight: 600;
-  color: var(--violet-tx); text-decoration: none; margin-top: 6px;
+  color: var(--ink-soft); text-decoration: none; margin-top: 6px;
 }
 .auth-forgot:hover { text-decoration: underline; }
 
@@ -146,7 +183,11 @@
 }
 
 .auth-switch a {
-  color: var(--violet-tx);
+  color: var(--ink);
   font-weight: 600;
   text-decoration: none;
+}
+
+.auth-switch a:hover {
+  color: var(--h3);
 }

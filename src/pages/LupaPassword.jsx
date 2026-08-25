@@ -65,14 +65,19 @@ export default function LupaPassword() {
 
         <form onSubmit={handleSubmit}>
           <div className="auth-field">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="nama@email.com"
-              required
-            />
+            <div className="auth-field-control">
+              <input
+                id="lupa-email"
+                name="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder=" "
+                autoComplete="email"
+                required
+              />
+              <label htmlFor="lupa-email">Email</label>
+            </div>
           </div>
           <button className="auth-btn" type="submit" disabled={loading}>
             {loading ? 'Mengirim...' : 'Kirim Link Reset'}

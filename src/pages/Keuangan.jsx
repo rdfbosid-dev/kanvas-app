@@ -38,7 +38,7 @@ function TrendArrow({ curr, prev, isFirst }) {
 export default function Keuangan() {
   const { theme } = useTheme()
   const isDark = theme === 'dark'
-  const trendColorA = isDark ? '#C9A8F0' : '#7C4FA8'
+  const trendColorA = isDark ? '#5792a7' : '#3d4a9a'
   const trendColorB = isDark ? '#F5C368' : '#E7A33D'
 
   const [bookings, setBookings] = useState([])
