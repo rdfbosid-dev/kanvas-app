@@ -16,7 +16,10 @@ export default function MonthlyBarChart({ months, values, color, format, mounted
             onMouseLeave={() => setHoverIdx(null)}
           >
             {hoverIdx === i && (
-              <div className="mbar-tooltip">
+              <div
+                className="mbar-tooltip"
+                style={{ background: `color-mix(in srgb, ${color} 60%, transparent)` }}
+              >
                 <div className="tt-month">{months[i]}</div>
                 <div className="tt-val">{format ? format(v) : v}</div>
               </div>

@@ -10,7 +10,7 @@
   --mix-btn-a: 90%;
   --mix-btn-b: 90%;
   --mix-btn-c: 60%;
-  --mix-border: 70%;
+  --mix-border: 90%;
   --button-prm-hover: rgb(100, 117, 202);
   --mix-btn-hover: 80%;
   --button-tx: #515fba;
@@ -23,10 +23,11 @@
   --h6: #FFFFFF;
   --h7: #FFFFFF;
   --h8: #FFFFFF;
+  --h9: #2b3eb6;
   --line-animation: linear-gradient(130deg, #4653aa 0%, #a6aee6 50%, #4653aa 100%);
   --button-theme: rgb(167, 176, 232);
-  --page-a: #e5eaf7;
-  --page-b: #ced3f5;
+  --page-a: #f6f8ff;
+  --page-b: #dcdef3;
   --mix-page-b: 90%;
   --ink: #5f6cbc;
   --ink-soft: #5260b8;
@@ -36,15 +37,15 @@
   --pill-alt: #5568df;
   --footer: #adb3dc;
   --box: #7886ca;
-  --mix-box: 30%;
+  --mix-box: 20%;
   --panel: rgb(223, 226, 245);
-  --mix-panel: 90%;
-  --placeholder: #d3d8f3;
+  --mix-panel: 100%;
+  --placeholder: #9099d2;
   --notif: #e74767;
-  --active-nav: #969edc;
-  --mix-active-nav: 30%;
-  --mix-hover-nav: 20%;
-  --mix-hover-panel: 15%;
+  --active-nav: #c1c7f1;
+  --mix-active-nav: 90%;
+  --mix-hover-nav: 90%;
+  --mix-hover-panel: 40%;
   --grad1: linear-gradient(45deg, rgb(255, 255, 255) 0%, rgba(86, 180, 220, 0.7) 100%);
   --grad2: linear-gradient(45deg, rgb(255, 255, 255) 0%, rgba(196, 158, 226, 0.7) 100%);
   --grad3: linear-gradient(45deg, rgb(255, 255, 255) 0%, rgb(134, 209, 192, 0.7) 100%);
@@ -59,6 +60,16 @@
   --label4: #c54c61;
   --pill-later: #7ea44f;
   --growth-up-circle: #475ad6;
+  --modal-overlay: #0d1f2d;
+  --sidebar: #c9cff6;
+  --box-dashboard: #f2f3fc;
+  --bar-fill: linear-gradient(130deg, #bec5ef 0%, #a8b0ec 100%);
+  --dot: #7ea44f;
+  --field: #eaebf6;
+  --bar-belanja: #ef5b36;
+  --bar-transport: #3ea346;
+  --bar-komisi: #475ad6;
+  --table-body: #f2f3fc;
 
   --shadow-modal: 0 24px 60px -12px rgb(29, 33, 58, 0.35);
   --shadow-button: 0 10px 18px -10px rgba(40, 48, 96, 0.35);
@@ -92,6 +103,7 @@
   --h6: #083549;
   --h7: #FFFFFF;
   --h8: #FFFFFF;
+  --h9: #FFFFFF;
   --line-animation: linear-gradient(130deg, #99b2bc 0%, #cee2e9 50%, #99b2bc 100%);
   --button-theme: rgb(17, 30, 35);
   --page-a: #42535a;
@@ -107,8 +119,8 @@
   --box: rgb(36, 55, 62);
   --mix-box: 15%;
   --panel: rgb(13, 31, 45);
-  --mix-panel: 90%;
-  --placeholder: #142226;
+  --mix-panel: 100%;
+  --placeholder: #8fb1bb;
   --notif: #e74767;
   --active-nav: #5792a7;
   --mix-active-nav: 30%;
@@ -128,6 +140,16 @@
   --label4: #c54c61;
   --pill-later: #7ea44f;
   --growth-up-circle: #49aad4;
+  --modal-overlay: #0d1f2d;
+  --sidebar: rgb(13, 31, 45);
+  --box-dashboard: rgb(13, 31, 45);
+  --bar-fill: linear-gradient(130deg, #8ebbcd 0%, #587e8c 100%);
+  --dot: #FFFFFF;
+  --field: #2a3f46;
+  --bar-belanja: #F5C368;
+  --bar-transport: #63cc6c;
+  --bar-komisi: #c98eee;
+  --table-body: rgb(19, 44, 63);
 
   --shadow-modal: 0 24px 60px -12px rgb(142, 187, 205, 0.35);
   --shadow-button: 0 6px 18px -6px rgb(142, 187, 205, 0.35);

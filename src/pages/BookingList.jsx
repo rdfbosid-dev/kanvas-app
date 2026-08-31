@@ -9,8 +9,11 @@ import './BookingList.css'
 const BULAN_PENUH = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
 
 function formatRupiah(n) {
-  return 'Rp' + (Number(n) || 0).toLocaleString('id-ID')
+  const num = Number(n) || 0
+  const sign = num < 0 ? '-' : ''
+  return sign + 'Rp' + Math.abs(num).toLocaleString('id-ID')
 }
+
 function formatTanggal(dateStr) {
   if (!dateStr) return '-'
   return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })
@@ -119,11 +122,11 @@ export default function BookingList() {
         </div>
 
         {(loading || error || (!loading && !error && filtered.length === 0)) && (
-          <div className="table-card">
+          <div>
             {loading && <div className="loading-state">Memuat data...</div>}
-            {error && <div className="empty-state" style={{ color: 'var(--coral-tx)' }}>Gagal memuat data: {error}</div>}
+            {error && <div className="empty-state-bookinglist" style={{ color: 'var(--ink-soft)' }}>Gagal memuat data: {error}</div>}
             {!loading && !error && filtered.length === 0 && (
-              <div className="empty-state">
+              <div className="empty-state-bookinglist">
                 {bookings.length === 0 ? 'Belum ada booking tercatat.' : 'Tidak ada booking yang cocok dengan pencarian/filter.'}
               </div>
             )}
@@ -139,8 +142,8 @@ export default function BookingList() {
                   <col style={{ width: '15%' }} />
                   <col style={{ width: '15%' }} />
                   <col style={{ width: '25%' }} />
-                  <col style={{ width: '10%' }} />
                   <col style={{ width: '13%' }} />
+                  <col style={{ width: '12%' }} />
                 </colgroup>
                 <thead>
                   <tr>
@@ -162,8 +165,8 @@ export default function BookingList() {
                   <col style={{ width: '15%' }} />
                   <col style={{ width: '15%' }} />
                   <col style={{ width: '25%' }} />
-                  <col style={{ width: '10%' }} />
                   <col style={{ width: '13%' }} />
+                  <col style={{ width: '12%' }} />
                 </colgroup>
                 <tbody>
                   {filtered.map((b) => (

@@ -3,37 +3,44 @@
 
 .pengaturan-layout { display: flex; flex-direction: column; gap: 18px; max-width: 640px; }
 
-.card { background: var(--white); border-radius: 20px; padding: 24px; border: 1px solid var(--button-border); }
-.card-head h3 { font-size: 16px; margin-bottom: 18px; }
+.card-pengaturan { background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border-radius: 20px; padding: 24px; border: 1px solid var(--button-border); }
+.card-head-pengaturan h3 { font-size: 16px; margin-bottom: 18px; color: var(--ink-soft); }
 
 .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-.field label { font-size: 12.5px; font-weight: 600; color: var(--ink-faint); margin-bottom: 5px; }
+.field label { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-bottom: 5px; }
 .field input {
-  border: 1px solid var(--button-tx); border-radius: 11px; padding: 10px 14px;
-  font-size: 13.5px; font-family: inherit; color: var(--ink); background: var(--white);
+  border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); border-radius: 11px; padding: 10px 14px;
+  font-size: 13.5px; font-family: inherit; color: var(--button-tx); background: var(--field);
 }
 .field input::placeholder { color: var(--placeholder); opacity: 1; }
 .field input:focus { outline: none; border-color: var(--h3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--h3) 18%, transparent); }
-.field input:disabled { color: var(--ink-faint); background: color-mix(in srgb, var(--button-tx) 15%, transparent); cursor: not-allowed; }
+.field input:disabled { color: var(--ink); background: var(--field); cursor: not-allowed; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.field-hint { font-size: 11px; color: var(--ink-faint); }
+.field-hint { font-size: 11px; color: var(--ink); }
 
 .btn-primary {
-  background: var(--grad); color: #fff; border: none; border-radius: 11px;
-  padding: 11px 22px; font-size: 13.5px; font-weight: 600; font-family: inherit; cursor: pointer;
-  box-shadow: 0 8px 18px -8px rgba(196,164,240,0.7);
+  background: var(--button-prm-hover); color: var(--button-tx-hover); border: none; border-radius: 11px;
+  padding: 10px 20px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer;
+  display: flex; align-items: center; gap: 6px; cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease, box-shadow 0.12s;
+
+}
+.btn-primary:hover {
+  background: var(--h3);
 }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
-.msg-success { background: var(--pill-alt); color: var(--h7); font-size: 12.5px; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; }
+.msg-success { display: inline-block; background: color-mix(in srgb, var(--pill-alt) 70%, transparent); color: var(--h7); font-size: 12.5px; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; }
 .msg-error { background: var(--pill); color: var(--h8); font-size: 12.5px; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; }
 
-.danger-text { font-size: 13px; color: var(--ink-faint); margin-bottom: 16px; }
+.danger-text { font-size: 13px; color: var(--ink-soft); margin-bottom: 16px; }
 .btn-keluar-ghost {
-  padding: 10px 20px; border-radius: 11px; background: var(--notif);
-  font-size: 13.5px; font-weight: 600; color: var(--h8); cursor: pointer;
+  padding: 8px 16px; border-radius: 11px; border: 1px solid var(--notif); background: var(--notif);
+  font-size: 13px; font-weight: 600; color: var(--h8); cursor: pointer; font-family: inherit;
+  transition: background 0.15s; line-height: 1.4; margin-right: auto;
 }
-.btn-keluar-ghost:hover { background: color-mix(in srgb, var(--notif) 85%, black); border-radius: 11px;  border: 1px solid color-mix(in srgb, var(--notif) 85%, black); }
+.btn-keluar-ghost:hover { background: color-mix(in srgb, var(--notif) 85%, black); border: 1px solid color-mix(in srgb, var(--notif) 85%, black); }
 
 @media (max-width: 700px) {
   .field-row { grid-template-columns: 1fr; }

@@ -13,7 +13,7 @@
 }
 
 .auth-card {
-  background: color-mix(in srgb, var(--box) var(--mix-box), transparent);
+  background: color-mix(in srgb, var(--box-dashboard) var(--mix-box), transparent);
   border: 1.5px solid color-mix(in srgb, var(--button-prm) var(--mix-border), transparent);
   border-radius: 24px;
   padding: 36px 32px;
@@ -89,7 +89,7 @@
   font-weight: 700;
   font-family: inherit;
   color: var(--button-tx);
-  background: var(--placeholder);
+  background: var(--field);
 }
 
 .auth-field input::placeholder {

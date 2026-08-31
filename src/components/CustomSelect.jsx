@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './CustomSelect.css'
 
-export default function CustomSelect({ options, value, onChange, placeholder = 'Pilih', icon = null }) {
+export default function CustomSelect({ options, value, onChange, placeholder = 'Pilih', icon = null, variant = null }) {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
@@ -17,7 +17,7 @@ export default function CustomSelect({ options, value, onChange, placeholder = '
     <div className="cselect" ref={ref}>
       <button
         type="button"
-        className={`cselect-trigger${open ? ' open' : ''}`}
+        className={`cselect-trigger${variant ? ` cselect-trigger--${variant}` : ''}${open ? ' open' : ''}`}
         onClick={() => setOpen((o) => !o)}
       >
         <span>{icon && <span className="cselect-icon">{icon}</span>}{value || placeholder}</span>

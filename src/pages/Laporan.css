@@ -1,25 +1,34 @@
 .filter-select { width: 130px; }
 
 .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
-.kpi-card { background: var(--h7); border-radius: 20px; padding: 20px; border: 1px solid var(--button-border); }
-.kpi-label { font-size: 12.5px; color: var(--ink-soft); font-weight: 600; margin-bottom: 10px; }
-.kpi-value { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); }
+.kpi-card-booking { background: var(--grad1); border-radius: 20px; padding: 20px; border: 5px solid var(--border1); }
+.kpi-card-klien { background: var(--grad2); border-radius: 20px; padding: 20px; border: 5px solid var(--border2); }
+.kpi-card-omzet { background: var(--grad3); border-radius: 20px; padding: 20px; border: 5px solid var(--border3); }
+.kpi-card-penghasilan { background: var(--grad4); border-radius: 20px; padding: 20px; border: 5px solid var(--border4); }
+.kpi-label-booking { font-size: 12.5px; color: var(--label1); font-weight: 600; margin-bottom: 10px; }
+.kpi-label-klien { font-size: 12.5px; color: var(--label2); font-weight: 600; margin-bottom: 10px; }
+.kpi-label-omzet { font-size: 12.5px; color: var(--label3); font-weight: 600; margin-bottom: 10px; }
+.kpi-label-penghasilan { font-size: 12.5px; color: var(--label4); font-weight: 600; margin-bottom: 10px; }
+.kpi-value-booking { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--label1); }
+.kpi-value-klien { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--label2); }
+.kpi-value-omzet { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--label3); }
+.kpi-value-penghasilan { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--label4); }
 
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 18px; }
-.card { background: var(--white); border-radius: 20px; padding: 22px; border: 1px solid var(--button-border); }
-.card-head h3 { font-size: 16px; margin-bottom: 4px; }
+.card { background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border-radius: 20px; padding: 22px; border: 2px solid var(--button-border); }
+.card-head h3 { font-size: 16px; margin-bottom: 4px; color: var(--ink-soft); }
 
 .legend { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
-.legend-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--h2); }
+.legend-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); }
 .legend-row b { margin-left: auto; color: var(--h5); font-weight: 700; }
 .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
 
-.insight-strip {
-  display: flex; align-items: center; gap: 12px; background: color-mix(in srgb, var(--page-b) 90%, transparent); border: 1px solid var(--button-border);
-  border-radius: 16px; padding: 16px 20px; font-size: 13px; color: var(--ink-soft);
+.laporan-insight-strip {
+  display: flex; align-items: center; gap: 5px; background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border: 2px solid var(--button-border);
+  border-radius: 16px; padding: 16px 20px; margin-top: 18px; font-size: 13px; color: var(--ink-soft);
 }
-.insight-strip svg { width: 20px; height: 20px; flex-shrink: 0; }
-.insight-strip b { color: var(--h5); }
+.laporan-insight-strip svg { width: 20px; height: 20px; flex-shrink: 0; }
+.laporan-insight-strip b { color: var(--h5); }
 
 @media (max-width: 900px) {
   .kpi-grid { grid-template-columns: repeat(2, 1fr); }

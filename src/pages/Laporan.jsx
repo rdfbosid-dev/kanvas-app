@@ -9,7 +9,32 @@ function formatRupiah(n) {
   return 'Rp' + (Number(n) || 0).toLocaleString('id-ID')
 }
 
-const CHART_COLORS = ['#C4A4F0', '#F0A0C0', '#E7B655', '#6FC79A', '#8E9FE8']
+const CHART_COLORS = ['#C4A4F0', '#F0A0C0', '#E7B655', '#6FC79A', '#2868d7ff', '#f4e226ff', '#E8776C']
+
+// "Lainnya" (hasil gabungan sisa kategori dari topNWithOthers) sengaja
+// dikasih warna NETRAL sendiri, dipisah dari rotasi CHART_COLORS -- soalnya
+// kalau ikut rotasi, dia gampang "numbuk" balik ke warna kategori pertama
+// begitu jumlah kategori pas kelipatan panjang array warnanya.
+const OTHERS_COLOR = '#978ba8ff'
+function chartColor(label, i) {
+  if (label === 'Lainnya') return OTHERS_COLOR
+  return CHART_COLORS[i % CHART_COLORS.length]
+}
+
+// Sama persis konsepnya kayak di Dashboard.jsx -- chart "Sumber Kanal" pakai
+// warna brand asli tiap platform (bukan warna generik), biar user langsung
+// ngenalin sekilas mata. Platform yang nggak ada di daftar ini fallback ke
+// CHART_COLORS biasa.
+const SUMBER_BRAND_COLORS = {
+  Instagram: '#C13584',
+  WhatsApp: '#25D366',
+  Facebook: '#1877F2',
+  TikTok: '#000000',
+  Referral: '#E7B655',
+}
+function sumberColor(label, i) {
+  return SUMBER_BRAND_COLORS[label] || CHART_COLORS[i % CHART_COLORS.length]
+}
 
 function countBy(arr, key) {
   const counts = {}
@@ -65,7 +90,7 @@ export default function Laporan() {
   const totalPenghasilan = bookingTahunIni.reduce((s, b) => s + (Number(b.penghasilan) || 0), 0)
   const totalBelumLunas = bookingTahunIni.filter((b) => b.status_pembayaran === 'Belum Lunas').length
 
-  const eventCounts = topNWithOthers(countBy(bookingTahunIni, 'event'), 5)
+  const eventCounts = topNWithOthers(countBy(bookingTahunIni, 'event'), 7)
   const sumberCounts = countBy(bookingTahunIni, 'sumber')
   const paketCounts = countBy(pesertaTahunIni, 'jenis_paket')
 
@@ -89,21 +114,21 @@ export default function Laporan() {
         {!loading && !error && (
           <>
             <div className="kpi-grid">
-              <div className="kpi-card">
-                <div className="kpi-label">Total Booking {filterTahun}</div>
-                <div className="kpi-value">{totalBooking}</div>
+              <div className="kpi-card-booking">
+                <div className="kpi-label-booking">Total Booking {filterTahun}</div>
+                <div className="kpi-value-booking">{totalBooking}</div>
               </div>
-              <div className="kpi-card">
-                <div className="kpi-label">Total Klien {filterTahun}</div>
-                <div className="kpi-value">{totalKlien}</div>
+              <div className="kpi-card-klien">
+                <div className="kpi-label-klien">Total Klien {filterTahun}</div>
+                <div className="kpi-value-klien">{totalKlien}</div>
               </div>
-              <div className="kpi-card">
-                <div className="kpi-label">Total Omzet {filterTahun}</div>
-                <div className="kpi-value">{formatRupiah(totalOmzet)}</div>
+              <div className="kpi-card-omzet">
+                <div className="kpi-label-omzet">Total Omzet {filterTahun}</div>
+                <div className="kpi-value-omzet">{formatRupiah(totalOmzet)}</div>
               </div>
-              <div className="kpi-card">
-                <div className="kpi-label">Total Penghasilan {filterTahun}</div>
-                <div className="kpi-value">{formatRupiah(totalPenghasilan)}</div>
+              <div className="kpi-card-penghasilan">
+                <div className="kpi-label-penghasilan">Total Penghasilan {filterTahun}</div>
+                <div className="kpi-value-penghasilan">{formatRupiah(totalPenghasilan)}</div>
               </div>
             </div>
 
@@ -114,11 +139,15 @@ export default function Laporan() {
                 <div className="grid-3">
                   <div className="card">
                     <div className="card-head"><h3>Event</h3></div>
-                    <DonutChart data={eventCounts} colors={CHART_COLORS} centerValue={totalBooking} centerLabel="ORDER" />
+                    <DonutChart
+                      data={eventCounts}
+                      colors={eventCounts.map(([label], i) => chartColor(label, i))}
+                      centerValue={totalBooking} centerLabel="ORDER"
+                    />
                     <div className="legend">
                       {eventCounts.map(([label, count], i) => (
                         <div className="legend-row" key={label}>
-                          <span className="legend-dot" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }}></span>
+                          <span className="legend-dot" style={{ background: chartColor(label, i) }}></span>
                           {label}<b>{Math.round((count / totalBooking) * 100)}%</b>
                         </div>
                       ))}
@@ -130,13 +159,13 @@ export default function Laporan() {
                     {paketCounts.length === 0 ? <div className="empty-state">Belum ada data</div> : (
                       <>
                         <DonutChart
-                          data={paketCounts} colors={CHART_COLORS}
+                          data={paketCounts} colors={paketCounts.map(([label], i) => chartColor(label, i))}
                           centerValue={pesertaTahunIni.length} centerLabel="PESERTA"
                         />
                         <div className="legend">
                           {paketCounts.map(([label, count], i) => (
                             <div className="legend-row" key={label}>
-                              <span className="legend-dot" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }}></span>
+                              <span className="legend-dot" style={{ background: chartColor(label, i) }}></span>
                               {label}<b>{Math.round((count / pesertaTahunIni.length) * 100)}%</b>
                             </div>
                           ))}
@@ -147,11 +176,15 @@ export default function Laporan() {
 
                   <div className="card">
                     <div className="card-head"><h3>Sumber Kanal</h3></div>
-                    <DonutChart data={sumberCounts} colors={CHART_COLORS} centerValue={totalBooking} centerLabel="ORDER" />
+                    <DonutChart
+                      data={sumberCounts}
+                      colors={sumberCounts.map(([label], i) => sumberColor(label, i))}
+                      centerValue={totalBooking} centerLabel="ORDER"
+                    />
                     <div className="legend">
                       {sumberCounts.map(([label, count], i) => (
                         <div className="legend-row" key={label}>
-                          <span className="legend-dot" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }}></span>
+                          <span className="legend-dot" style={{ background: sumberColor(label, i) }}></span>
                           {label}<b>{Math.round((count / totalBooking) * 100)}%</b>
                         </div>
                       ))}
@@ -159,11 +192,13 @@ export default function Laporan() {
                   </div>
                 </div>
 
-                <div className="insight-strip">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--violet-tx)" strokeWidth="2"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1.1.9 1.9v.2h5.2v-.2c0-.8.3-1.5.9-1.9A6 6 0 0 0 12 3Z" /></svg>
+                <div className="laporan-insight-strip">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--h5)" strokeWidth="2"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1.1.9 1.9v.2h5.2v-.2c0-.8.3-1.5.9-1.9A6 6 0 0 0 12 3Z" /></svg>
                   <span>
                     Sepanjang {filterTahun}, tercatat <b>{totalBooking} booking</b> dari <b>{totalKlien} klien</b>.
-                    {totalBelumLunas > 0 ? ` Masih ada ${totalBelumLunas} booking yang belum lunas.` : ' Semua booking sudah lunas 🎉'}
+                    {totalBelumLunas > 0
+                      ? <> Masih ada <b>{totalBelumLunas} booking</b> yang belum lunas.</>
+                      : ' Semua booking sudah lunas 🎉'}
                   </span>
                 </div>
               </>

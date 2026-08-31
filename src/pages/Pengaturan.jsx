@@ -101,8 +101,8 @@ export default function Pengaturan() {
           <div className="loading-state">Memuat data...</div>
         ) : (
           <div className="pengaturan-layout">
-            <div className="card">
-              <div className="card-head"><h3>Profil Dapur MUA</h3></div>
+            <div className="card-pengaturan">
+              <div className="card-head-pengaturan"><h3>Profil Dapur MUA</h3></div>
 
               {message && (
                 <div className={message.type === 'success' ? 'msg-success' : 'msg-error'}>{message.text}</div>
@@ -117,7 +117,7 @@ export default function Pengaturan() {
                   <div className="field">
                     <label>Kode Prefix Booking</label>
                     <input type="text" value={kodePrefix} onChange={(e) => setKodePrefix(e.target.value)} placeholder="contoh: Book" maxLength={5} />
-                    <span className="field-hint">Dipakai buat kode otomatis, misal "{kodePrefix || 'Book'}-0001"</span>
+                    <span className="field-hint">Dipakai buat kode otomatis, contoh: "{kodePrefix || 'Book'}-0001"</span>
                   </div>
                   <div className="field">
                     <label>Email</label>
@@ -140,8 +140,8 @@ export default function Pengaturan() {
               </form>
             </div>
 
-            <div className="card">
-              <div className="card-head"><h3>Ubah Kata Sandi</h3></div>
+            <div className="card-pengaturan">
+              <div className="card-head-pengaturan"><h3>Ubah Kata Sandi</h3></div>
               {passwordMessage && (
                 <div className={passwordMessage.type === 'success' ? 'msg-success' : 'msg-error'}>{passwordMessage.text}</div>
               )}
@@ -161,8 +161,8 @@ export default function Pengaturan() {
               </form>
             </div>
 
-            <div className="card danger-card">
-              <div className="card-head"><h3>Keluar Akun</h3></div>
+            <div className="card-pengaturan">
+              <div className="card-head-pengaturan"><h3>Keluar Akun</h3></div>
               <p className="danger-text">Kamu akan keluar dari sesi ini dan perlu login ulang buat mengakses Dapur MUA lagi.</p>
               <button className="btn-keluar-ghost" onClick={signOut} type="button">Keluar</button>
             </div>

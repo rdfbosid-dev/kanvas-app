@@ -12,10 +12,35 @@ function formatRupiah(n) {
   return 'Rp' + (Number(n) || 0).toLocaleString('id-ID')
 }
 function initialsOf(name) {
-  return (name || '?').split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()
+  return (name || '?')
+    .split(' ')
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase()
 }
+
 function sameDate(a, b) {
   return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
+}
+
+// Sama persis logikanya kayak di BookingList.jsx -- booking dianggap
+// "selesai" kalau tanggalnya udah lewat, ATAU hari ini tapi udah lewat 4
+// jam dari jam mulai makeup.
+function isSelesai(dateStr, jamStartMakeup) {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const target = new Date(dateStr)
+  target.setHours(0, 0, 0, 0)
+
+  if (target < today) return true
+  if (target > today) return false
+
+  if (!jamStartMakeup) return false
+  const [jam, menit] = jamStartMakeup.split(':').map(Number)
+  const mulai = new Date(dateStr)
+  mulai.setHours(jam, menit || 0, 0, 0)
+  return (new Date() - mulai) / 3600000 >= 4
 }
 
 // Bikin grid 6x7 (42 sel) buat 1 bulan, termasuk tanggal numpang dari
@@ -108,14 +133,14 @@ export default function Kalender() {
             <div className="greeting-date">Lihat & kelola jadwal booking-mu</div>
           </div>
           <div className="topbar-actions">
-            <button className="btn-primary" onClick={() => setShowModal(true)} type="button">
+            <button className="btn-booking-primary" onClick={() => setShowModal(true)} type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 5v14M5 12h14" /></svg>
               Booking Baru
             </button>
           </div>
         </div>
 
-        {error && <div className="empty-state" style={{ color: 'var(--coral-tx)' }}>Gagal memuat data: {error}</div>}
+        {error && <div className="empty-state" style={{ color: 'var(--ink-soft)' }}>Gagal memuat data: {error}</div>}
 
         <div className="kalender-layout">
           <div className="card kalender-card">
@@ -159,7 +184,7 @@ export default function Kalender() {
 
           <div className="card agenda-card">
             <div className="card-head">
-              <h3>Agenda {selectedDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</h3>
+              <h3>Agenda — {selectedDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</h3>
             </div>
             {loading ? (
               <div className="loading-state">Memuat...</div>
@@ -167,8 +192,8 @@ export default function Kalender() {
               <div className="empty-state">Tidak ada agenda makeup di tanggal ini.</div>
             ) : (
               agendaHariIni.map((b) => (
-                <div className="booking-row" key={b.id} onClick={() => setSelectedBooking(b)} style={{ cursor: 'pointer' }}>
-                  <div className="b-avatar">{initialsOf(b.nama_klien)}</div>
+                <div className="dash-booking-row" key={b.id} onClick={() => setSelectedBooking(b)} style={{ cursor: 'pointer' }}>
+                  <div className={`dash-b-avatar${isSelesai(b.tanggal_acara, b.jam_start_makeup) ? ' selesai' : ''}`}>{initialsOf(b.nama_klien)}</div>
                   <div className="b-info">
                     <div className="b-name">{b.nama_klien}</div>
                     <div className="b-meta">

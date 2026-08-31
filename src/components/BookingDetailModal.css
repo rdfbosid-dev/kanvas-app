@@ -6,13 +6,13 @@
    sebaliknya, file lain nggak akan pernah nyenggol tampilan modal ini. */
 
 .booking-detail-overlay {
-  position: fixed; inset: 0; background: rgba(43,36,56,0.45);
+  position: fixed; inset: 0; background: rgb(36, 55, 62, 0.45);
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .booking-detail-overlay .modal {
-  background: var(--white); border-radius: 24px; width: 100%; max-width: 600px;
+  background: var(--box-dashboard); border-radius: 24px; width: 100%; max-width: 600px;
   max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: 0 24px 60px -12px rgba(43,36,56,0.35);
+  box-shadow: 0 24px 60px -12px var(--shadow-modal);
 }
 .booking-detail-overlay .modal-head {
   display: flex; align-items: center; justify-content: space-between;
@@ -22,6 +22,7 @@
   font-size: 18px;
   position: relative;
   padding-bottom: 5px;
+  color: var(--ink-soft);
 }
 
 .booking-detail-overlay .modal-head h2::after {
@@ -30,54 +31,52 @@
   left: 0; right: 0; bottom: 0;
   height: 4px;
   border-radius: 2px;
-  background: var(--grad);
+  background: var(--line-animation);
 }
 .booking-detail-overlay .modal-close {
-  width: 32px; height: 32px; border-radius: 10px; border: none; background: color-mix(in srgb, var(--h3) 18%, transparent);
+  width: 32px; height: 32px; border-radius: 10px; border: none; background: color-mix(in srgb, var(--h3) 20%, transparent);
   color: var(--h3); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: background 0.15s;
 }
-.booking-detail-overlay .modal-close:hover { background: var(--button-theme); color: var(--h3); }
+.booking-detail-overlay .modal-close:hover { background: color-mix(in srgb, var(--h3) 50%, transparent); color: var(--h3); }
 .booking-detail-overlay .modal-body { padding: 10px 26px 20px; overflow-y: auto; flex: 1; }
 .booking-detail-overlay .modal-foot { display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 10px 26px 20px; flex-shrink: 0; }
 .booking-detail-overlay .modal-foot .btn-ghost { margin-bottom: 0; }
 .booking-detail-overlay .modal-error { background: var(--pill); color: var(--h8); font-size: 12.5px; padding: 10px 14px; border-radius: 10px; margin-bottom: 10px; }
-.booking-detail-overlay .empty-state { text-align: center; padding: 32px 16px; color: var(--ink-faint); font-size: 13px; }
+.booking-detail-overlay .empty-state { text-align: center; padding: 32px 16px; color: var(--ink-soft); font-size: 12px; }
 
 .booking-detail-overlay .btn-payment {
-  padding: 5px 10px; border-radius: 8px; border: 1px solid var(--box); background: var(--box);
-  font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
+  padding: 5px 10px; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--button-prm-hover) 50%, transparent); background: color-mix(in srgb, var(--button-prm-hover) 50%, transparent);
+  font-size: 12px; font-weight: 600; color: var(--h7); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s; line-height: 1.4;
 }
 
 .booking-detail-overlay .btn-payment:hover {
-  padding: 5px 10px; border-radius: 8px; border: 1px solid var(--button-theme); background: var(--button-theme);
-  font-size: 12px; font-weight: 600; color: var(--h3); cursor: pointer; font-family: inherit;
-  transition: background 0.15s, border-color 0.15s; line-height: 1.4;
+  background: var(--button-prm-hover); color: var(--h7);
 }
 
 .booking-detail-overlay .btn-ghost {
-  padding: 5px 10px; border-radius: 11px; border: 1px solid var(--button-tx); background: var(--white);
+  padding: 5px 10px; border-radius: 8px; border: 1.5px solid var(--button-border); background: var(--box-dashboard);
   font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s; margin-bottom: 20px; line-height: 1.4;
 }
-.booking-detail-overlay .btn-ghost:hover { background: var(--button-theme); border: 1px solid var(--button-theme); }
+.booking-detail-overlay .btn-ghost:hover {
+  background: color-mix(in srgb, var(--button-prm-hover) 50%, transparent); border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) 50%, transparent);
+}
 
 .booking-detail-overlay .btn-batal {
-  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--button-tx); background: var(--white);
+  padding: 10px 18px; border-radius: 11px; border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); background: var(--box-dashboard);
   font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s;
 }
-.booking-detail-overlay .btn-batal:hover { background: var(--button-theme); border: 1px solid var(--button-theme); }
-.booking-detail-overlay .btn-primary {
-  background: var(--grad); color: #fff; border: none; border-radius: 10px;
-  padding: 10px 18px; font-size: 12px; font-weight: 600; font-family: inherit; line-height: 1.4;
-  display: flex; align-items: center; gap: 6px; cursor: pointer;
-  box-shadow: 0 6px 14px -8px rgba(196,164,240,0.7);
-  transition: transform 0.12s, box-shadow 0.12s;
+.booking-detail-overlay .btn-batal:hover { background: color-mix(in srgb, var(--button-prm-hover) 50%, transparent); border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) 50%, transparent); }
+.booking-detail-overlay .btn-primary-detail {
+  padding: 10px 18px; border-radius: 11px; border: 1.5px solid var(--button-prm-hover); background: var(--button-prm-hover);
+  font-size: 13.5px; font-weight: 600; color: var(--button-tx-hover); cursor: pointer; font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
 }
-.booking-detail-overlay .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 20px -8px rgba(196,164,240,0.85); }
-.booking-detail-overlay .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.booking-detail-overlay .btn-primary-detail:hover { background: var(--h3); }
+.booking-detail-overlay .btn-primary-detail:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
 /* Titik A: jarak sebelum badge status (di bawah judul modal) */
 .booking-detail-overlay .detail-header { display: flex; align-items: center; margin-top: 0; margin-bottom: 5px; }
@@ -88,33 +87,33 @@
    biar nggak numpuk kayak kasus field-grid dulu. */
 .booking-detail-overlay .section-label {
   font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--h3); margin: 20px 0 10px;
+  color: var(--ink-soft); margin: 20px 0 10px;
 }
 .booking-detail-overlay .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
-.booking-detail-overlay .detail-label { font-size: 12px; font-weight: 600; color: var(--ink-faint); display: block; margin-bottom: 10px;
+.booking-detail-overlay .detail-label { font-size: 12px; font-weight: 600; color: var(--ink-soft); display: block; margin-bottom: 10px;
   text-decoration: underline;
-  text-decoration-color: var(--h3);
+  text-decoration-color: var(--ink-soft);
   text-decoration-thickness: 1px;
   text-underline-offset: 5px;
 }
 .booking-detail-overlay .detail-label-summary {
-  font-size: 12px; font-weight: 600; color: var(--ink-faint); display: block; margin-bottom: 10px;
+  font-size: 12px; font-weight: 600; color: var(--ink-soft); display: block; margin-bottom: 10px;
 }
-.booking-detail-overlay .detail-grid > div { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
+.booking-detail-overlay .detail-grid > div { font-size: 12px; font-weight: 600; color: var(--h5); }
 
-.booking-detail-overlay .status-pill { font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 11px; white-space: nowrap; margin-bottom: 20px; }
+.booking-detail-overlay .status-pill { font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 8px; white-space: nowrap; margin-bottom: 20px; }
 .booking-detail-overlay .status-pill.belum { background: var(--pill); color: var(--h8); }
 .booking-detail-overlay .status-pill.lunas { background: var(--pill-alt); color: var(--h7); }
 
-.booking-detail-overlay .b-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--ava-grad); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--h3); }
+.booking-detail-overlay .b-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--ava-grad); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--h7); }
 .booking-detail-overlay .b-info { flex: 1; min-width: 0; }
-.booking-detail-overlay .b-name { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
-.booking-detail-overlay .b-meta { font-size: 11px; color: var(--ink-soft); }
+.booking-detail-overlay .b-name { font-size: 12px; font-weight: 600; margin-bottom: 5px; color: var(--ink-soft); }
+.booking-detail-overlay .b-meta { font-size: 11px; color: var(--h5); }
 
-.booking-detail-overlay .pay-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: linear-gradient(80deg, var(--button-prm) 0%, var(--white) 100%); border-radius: 14px; padding: 10px 16px; margin-bottom: 12px; }
+.booking-detail-overlay .pay-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: linear-gradient(80deg, var(--active-nav) 0%, var(--box-dashboard) 80%); border-radius: 14px; padding: 10px 16px; margin-bottom: 12px; color: var(--ink-soft); }
 .booking-detail-overlay .pay-value { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; margin-top: 5px; }
 
-.booking-detail-overlay .detail-label-history { margin-left: 10px; padding: 5px 5px 0; font-size: 12px; font-weight: 600; color: var(--ink-faint); }
+.booking-detail-overlay .detail-label-history { margin-left: 10px; padding: 5px 5px 0; font-size: 12px; font-weight: 600; color: var(--ink-soft); }
 .booking-detail-overlay .pay-history { margin-left: 10px; padding: 5px 5px; margin-bottom: 5px; }
 .booking-detail-overlay .pay-row {
   display: grid; grid-template-columns: 120px 90px 80px 1fr auto; gap: 20px; align-items: center;
@@ -125,27 +124,27 @@
 .booking-detail-overlay .pay-row > span:nth-child(1) { text-align: left; }
 .booking-detail-overlay .pay-row > span:nth-child(2) { text-align: left; }
 .booking-detail-overlay .pay-note {
-  color: var(--ink-faint); font-size: 11.5px;
+  color: var(--ink-soft); font-size: 11.5px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   text-align: left;
 }
-.booking-detail-overlay .pay-row:hover { background: linear-gradient(80deg, var(--button-prm) 0%, var(--white) 100%) }
+.booking-detail-overlay .pay-row:hover { background: linear-gradient(80deg, var(--active-nav) 0%, var(--box-dashboard) 100%); }
 .booking-detail-overlay .pay-row:last-child { border-bottom: none; }
-.booking-detail-overlay .pay-amount { font-weight: 700; color: var(--ink-faint); text-align: right; }
+.booking-detail-overlay .pay-amount { font-weight: 700; color: var(--ink-soft); text-align: right; }
 .booking-detail-overlay .pay-actions { position: relative; display: flex; gap: 5px; }
 .booking-detail-overlay .pay-actions button {
-  background: var(--button-prm); border: none; cursor: pointer; font-size: 10px; color: var(--ink-soft); padding: 3px 5px; border-radius: 5px;
+  background: color-mix(in srgb, var(--button-prm-hover) 50%, transparent); border: none; cursor: pointer; font-size: 10px; color: var(--h2); padding: 3px 5px; border-radius: 5px;
 }
-.booking-detail-overlay .pay-actions button:hover { background: var(--button-theme); }
-.booking-detail-overlay .pay-edit-row { margin-top: 10px; background: color-mix(in srgb, var(--button-prm) 50%, transparent); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.booking-detail-overlay .pay-actions button:hover { background: var(--button-prm-hover); color: var(--h7); }
+.booking-detail-overlay .pay-edit-row { margin-top: 10px; background: color-mix(in srgb, var(--active-nav) 20%, transparent); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
 
 .booking-detail-overlay .pay-confirm-popup {
   position: absolute; top: calc(100% + 8px); right: 0; z-index: 30;
-  background: var(--button-prm); border: 1px solid var(--button-prm); border-radius: 8px;
+  background: color-mix(in srgb, var(--active-nav) 50%, transparent); border: none; border-radius: 8px;
   padding: 10px; width: 240px; box-shadow: var(--shadow-button);
 }
 .booking-detail-overlay .pay-confirm-popup p {
-  font-size: 11px; font-weight: 500; color: var(--ink-faint); margin: 5px 0 10px; line-height: 1.4; text-align: center;
+  font-size: 11px; font-weight: 500; color: var(--ink-soft); margin: 5px 0 10px; line-height: 1.4; text-align: center;
 }
 .booking-detail-overlay .pay-confirm-popup-actions { display: flex; gap: 8px; justify-content: flex-end; }
 .booking-detail-overlay button.pay-confirm-yes {
@@ -155,22 +154,22 @@
 .booking-detail-overlay button.pay-confirm-yes:hover { background: color-mix(in srgb, var(--notif) 85%, black); border: 1px solid color-mix(in srgb, var(--notif) 85%, black); }
 .booking-detail-overlay button.pay-confirm-yes:disabled { opacity: 0.6; cursor: not-allowed; }
 .booking-detail-overlay button.pay-confirm-cancel {
-  background: var(--button-prm); border: 1px solid var(--ink-faint); cursor: pointer; font-size: 10px; font-weight: 500; color: var(--ink-faint);
+  background: color-mix(in srgb, var(--active-nav) 50%, transparent); border: 1px solid var(--ink-soft); cursor: pointer; font-size: 10px; font-weight: 500; color: var(--ink-soft);
   padding: 5px 10px; border-radius: 7px; transition: background 0.15s;
 }
-.booking-detail-overlay button.pay-confirm-cancel:hover { background: var(--notif); border: 1px solid var(--notif); color: var(--h8); }
+.booking-detail-overlay button.pay-confirm-cancel:hover { background: var(--button-prm-hover); border: 1px solid var(--button-prm-hover); color: var(--h8); }
 
 .booking-detail-overlay .peserta-view-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 50%, transparent); }
 .booking-detail-overlay .peserta-view-row:last-child { border-bottom: none; }
 
-.booking-detail-overlay .add-payment { margin-left: 15px; padding: 5px 5px; background: var(--button-prm); border-radius: 5px; border: none;
-  color: var(--h3); font-size: 12px; font-weight: 500; cursor: pointer; text-align: center; transition: background 0.15s;
+.booking-detail-overlay .add-payment { margin-left: 15px; padding: 5px 5px; background: color-mix(in srgb, var(--active-nav) 50%, transparent); border-radius: 5px; border: none;
+  color: var(--ink-soft); font-size: 12px; font-weight: 500; cursor: pointer; text-align: center; transition: background 0.15s;
   margin-bottom: 5px;
 }
 .booking-detail-overlay .add-payment:hover {
-  background: color-mix(in srgb, var(--button-prm) 12%, transparent);
+  background: color-mix(in srgb, var(--active-nav) 90%, transparent);
 }
-.booking-detail-overlay .add-payment-card { margin-left: 10px; background: color-mix(in srgb, var(--button-prm) 50%, transparent); border-radius: 16px; padding: 15px 15px; }
+.booking-detail-overlay .add-payment-card { margin-left: 10px; background: color-mix(in srgb, var(--active-nav) 20%, transparent); border-radius: 16px; padding: 15px 15px; }
 
 .booking-detail-overlay .field-grid-detail { display: grid; gap: 12px; margin-bottom: 5px; }
 
@@ -189,8 +188,8 @@
 .booking-detail-overlay .field input,
 .booking-detail-overlay .field select,
 .booking-detail-overlay .field textarea {
-  border: 1px solid var(--button-tx); border-radius: 11px; padding: 9px 12px;
-  font-size: 12px; font-family: inherit; color: var(--ink); background: var(--white);
+  border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); border-radius: 11px; padding: 9px 12px;
+  font-size: 12px; font-family: inherit; color: var(--ink-soft); background: var(--field);
   height: 40px;
 }
 
@@ -215,9 +214,9 @@
   margin-left: 8px; padding: 2px; cursor: pointer; opacity: 0.75;
 }
 
-.booking-detail-overlay .peserta-card { background: var(--button-prm); border: 1px solid var(--button-prm); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.booking-detail-overlay .peserta-card { background: color-mix(in srgb, var(--button-prm-hover) 60%, transparent); border: none; border-radius: 16px; padding: 16px; margin-bottom: 10px; }
 .booking-detail-overlay .peserta-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.booking-detail-overlay .peserta-title { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; }
+.booking-detail-overlay .peserta-title { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--ink-soft); }
 .booking-detail-overlay .peserta-num {
   width: 22px; height: 22px; border-radius: 50%; background: var(--h3); color: #fff;
   display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0;
@@ -228,20 +227,20 @@
   padding: 4px 8px; border-radius: 7px; transition: background 0.15s;
 }
 .booking-detail-overlay .peserta-remove:hover { background: color-mix(in srgb, var(--notif) 85%, black); border: 1px solid color-mix(in srgb, var(--notif) 85%, black); color: var(--h8); }
-.booking-detail-overlay .peserta-body { background: var(--white); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.booking-detail-overlay .peserta-body { background: var(--box-dashboard); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; }
 .booking-detail-overlay .toggle-row { display: flex; gap: 6px; }
 .booking-detail-overlay .toggle-opt {
-  flex: 1; text-align: center; padding: 7px; border-radius: 9px; font-size: 12px; font-weight: 600;
-  background: color-mix(in srgb, var(--button-prm) 20%, transparent); color: var(--ink-soft); cursor: pointer; border: 1px;
+  flex: 1; text-align: center; padding: 7px; border-radius: 6px; font-size: 12px; font-weight: 600;
+  background: var(--ink-faint); color: var(--ink-soft); cursor: pointer; border: 1px;
   transition: background 0.15s, color 0.15s;
 }
-.booking-detail-overlay .toggle-opt:not(.sel):hover { background: color-mix(in srgb, var(--button-prm) 12%, transparent); color: var(--h3); }
+.booking-detail-overlay .toggle-opt:not(.sel):hover { background: color-mix(in srgb, var(--ink-faint) 50%, transparent); color: var(--ink-soft); }
 .booking-detail-overlay .toggle-opt.sel { background: var(--h3); color: #fff; border-color: transparent; }
-.booking-detail-overlay .sb-label { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); margin-bottom: 10px; }
+.booking-detail-overlay .sb-label { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); margin-bottom: 5px; }
 
 .booking-detail-overlay .add-peserta {
   text-align: center; padding: 8px; border-radius: 10px; border: 1.5px dashed var(--h3);
-  color: var(--h3); font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 5px; background: none;
+  color: var(--ink-soft); font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 5px; background: none;
   width: 100%; transition: background 0.15s, border-color 0.15s;
 }
 .booking-detail-overlay .add-peserta:hover { background: color-mix(in srgb, var(--button-prm) 12%, transparent); border-color: var(--button-border); }
@@ -260,18 +259,18 @@
   font-size: 12px; font-weight: 500; color: var(--h8); cursor: pointer; font-family: inherit;
   transition: background 0.15s; line-height: 1.4; margin-right: auto;
 }
-.booking-detail-overlay .btn-danger-ghost:hover { background: color-mix(in srgb, var(--notif) 85%, black); border: 1px solid color-mix(in srgb, var(--notif) 85%, black) }
+.booking-detail-overlay .btn-danger-ghost:hover { background: color-mix(in srgb, var(--notif) 85%, black); border: 1px solid color-mix(in srgb, var(--notif) 85%, black); }
 
 .booking-detail-overlay .btn-danger.batal {
-  padding: 8px 10px; border-radius: 11px; border: 1px solid var(--button-tx); background: var(--white);
-  font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
+  padding: 8px 10px; border-radius: 11px; border: 1.5px solid var(--button-tx); background: var(--white);
+  font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s;
 }
 .booking-detail-overlay .btn-danger.batal:hover {
-  background: var(--button-theme); border: 1px solid var(--button-theme)
+  background:color-mix(in srgb, var(--button-prm-hover) 50%, transparent); border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) 50%, transparent);
 } 
 .booking-detail-overlay .btn-danger {
-  padding: 8px 10px; border-radius: 11px; border: none; background: var(--notif); color: #fff;
+  padding: 8px 10px; border-radius: 11px; border: 1.5px solid var(--notif); background: var(--notif); color: #fff;
   font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; line-height: 1.4;
   transition: background 0.15s;
 }

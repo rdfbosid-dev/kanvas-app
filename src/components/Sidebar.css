@@ -1,6 +1,6 @@
 .sidebar {
   width: 244px;
-  background: color-mix(in srgb, var(--page-b) 60%, transparent);
+  background: color-mix(in srgb, var(--sidebar) 90%, transparent);
   backdrop-filter: blur(6px);
   border-right: 1px solid var(--page-b);
   display: flex;

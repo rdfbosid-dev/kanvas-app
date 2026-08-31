@@ -198,11 +198,19 @@ export default function Dashboard() {
   const eventCounts = topNWithOthers(countBy(bookingBulanIni, 'event'), 7)
   const sumberCounts = countBy(bookingBulanIni, 'sumber')
   const lokasiCounts = countBy(bookingBulanIni, 'lokasi').slice(0, 5)
-  const CHART_COLORS = ['#C4A4F0', '#F0A0C0', '#E7B655', '#6FC79A', '#8E9FE8', '#4FC1B0', '#E8776C']
+  const CHART_COLORS = ['#C4A4F0', '#F0A0C0', '#E7B655', '#6FC79A', '#2868d7ff', '#f4e226ff', '#E8776C']
+  // "Lainnya" sengaja dikasih warna netral sendiri (bukan ikut rotasi
+  // CHART_COLORS) -- biar nggak numbuk balik ke warna kategori pertama kalau
+  // jumlah kategorinya pas kelipatan panjang array warnanya.
+  const OTHERS_COLOR = '#978ba8ff'
+  function chartColor(label, i) {
+    if (label === 'Lainnya') return OTHERS_COLOR
+    return CHART_COLORS[i % CHART_COLORS.length]
+  }
   // Warna garis tren dibedain per tema -- versi terang butuh warna gelap
   // biar kebaca di atas kartu putih, versi dark butuh warna cerah biar
   // nggak "ilang" ketelen background gelap.
-  const trendColorA = isDark ? '#5792a7' : '#3d4a9a'
+  const trendColorA = isDark ? '#6eb4ceff' : '#3d4a9a'
   const trendColorB = isDark ? '#F5C368' : '#E7A33D'
 
   const SUMBER_BRAND_COLORS = {
@@ -514,14 +522,14 @@ export default function Dashboard() {
                   <>
                     <DonutChart
                       data={eventCounts}
-                      colors={CHART_COLORS}
+                      colors={eventCounts.map(([label], i) => chartColor(label, i))}
                       centerValue={bookingBulanIni.length}
                       centerLabel="ORDER"
                     />
                     <div className="legend">
                       {eventCounts.map(([label, count], i) => (
                         <div className="legend-row" key={label}>
-                          <span className="legend-dot" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }}></span>
+                          <span className="legend-dot" style={{ background: chartColor(label, i) }}></span>
                           {label}<b>{Math.round((count / bookingBulanIni.length) * 100)}%</b>
                         </div>
                       ))}
@@ -578,8 +586,8 @@ export default function Dashboard() {
             </div>
 
             {bookingBulanIni.length > 0 && (
-              <div className="insight-strip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--violet-tx)" strokeWidth="2"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1.1.9 1.9v.2h5.2v-.2c0-.8.3-1.5.9-1.9A6 6 0 0 0 12 3Z"/></svg>
+              <div className="dashboard-insight-strip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--h5)" strokeWidth="2"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1.1.9 1.9v.2h5.2v-.2c0-.8.3-1.5.9-1.9A6 6 0 0 0 12 3Z"/></svg>
                 <span>
                   Booking terbanyak dari <b>{sumberCounts[0]?.[0]} ({Math.round((sumberCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>
                   {' · '}Event <b>{eventCounts[0]?.[0]} mendominasi ({Math.round((eventCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>

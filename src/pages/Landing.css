@@ -84,7 +84,7 @@
 .hp-kpi-sub { font-size: 12px; color: var(--value); font-weight: 700; margin-top: 2px; }
 .hp-row { display: flex; align-items: center; gap: 10px; padding: 10px; background: color-mix(in srgb, var(--page-b) var(--mix-page-b), transparent); border: 1px solid color-mix(in srgb, var(--button-prm) var(--mix-btn-b), transparent); border-radius: 14px; }
 .hp-avatar {
-  width: 34px; height: 34px; border-radius: 50%; background: var(--ava-grad); color: var(--h6);
+  width: 34px; height: 34px; border-radius: 50%; background: var(--ava-grad); color: var(--h7);
   display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;
 }
 .hp-avatar.alt { background: var(--ava-grad-alt); color: var(--h7); }

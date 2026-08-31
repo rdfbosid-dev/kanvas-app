@@ -100,22 +100,40 @@ export default function TrendChart({ series, months, area = false, mounted }) {
           )
         })}
 
-        {series.map((s, si) =>
-          seriesPts[si].map(([x, y], i) => (
-            <circle
-              key={s.label + i}
-              cx={x} cy={y} r={hoverIdx === i ? 5 : 3.5}
-              fill={s.color} stroke="#fff" strokeWidth="1"
-              className="trendchart-dot"
-              style={{ opacity: mounted ? 1 : 0, transitionDelay: mounted ? `${(i / n) * 0.9}s` : '0s' }}
-            />
-          ))
-        )}
-
         {hoverX !== null && (
           <line x1={hoverX} y1="0" x2={hoverX} y2={H} className="trendchart-crosshair" />
         )}
       </svg>
+
+      {/* Titik data SENGAJA dirender di luar <svg>, sebagai <div> HTML biasa
+          yang ditumpuk pakai posisi persen (bukan <circle> SVG). Soalnya
+          <svg> di atas pakai preserveAspectRatio="none" biar garis/area-nya
+          bisa stretch selebar card -- tapi itu bikin <circle> ikut ke-stretch
+          nggak proporsional juga (jadi lonjong/gepeng). <div> HTML biasa
+          ukurannya didefinisiin lewat CSS pixel (bukan ikut sistem koordinat
+          SVG yang di-stretch), jadi PASTI bulat sempurna berapapun rasio
+          box-nya. Posisi kiri/atasnya dihitung persen dari x/W & y/H --
+          matematikanya sama persis kayak yang dipakai svg buat nge-plot
+          titik itu sendiri, jadi tetep presisi nempel di garis. */}
+      <div className="trendchart-dots">
+        {series.map((s, si) =>
+          seriesPts[si].map(([x, y], i) => (
+            <div
+              key={s.label + i}
+              className="trendchart-dot"
+              style={{
+                left: `${(x / W) * 100}%`,
+                top: `${(y / H) * 100}%`,
+                width: hoverIdx === i ? 10 : 7,
+                height: hoverIdx === i ? 10 : 7,
+                background: s.color,
+                opacity: mounted ? 1 : 0,
+                transitionDelay: mounted ? `${(i / n) * 0.9}s` : '0s',
+              }}
+            />
+          ))
+        )}
+      </div>
 
       {hoverIdx !== null && (
         <div

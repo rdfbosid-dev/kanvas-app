@@ -38,7 +38,7 @@ function TrendArrow({ curr, prev, isFirst }) {
 export default function Keuangan() {
   const { theme } = useTheme()
   const isDark = theme === 'dark'
-  const trendColorA = isDark ? '#5792a7' : '#3d4a9a'
+  const trendColorA = isDark ? '#6eb4ceff' : '#3d4a9a'
   const trendColorB = isDark ? '#F5C368' : '#E7A33D'
 
   const [bookings, setBookings] = useState([])
@@ -122,13 +122,13 @@ export default function Keuangan() {
 
         {!loading && !error && (
           <>
-            <div className="card" style={{ marginBottom: 18 }}>
-              <div className="card-head"><h3>Tren Omzet &amp; Penghasilan {filterTahun}</h3></div>
+            <div className="card-keuangan" style={{ marginBottom: 18 }}>
+              <div className="card-head-keuangan"><h3>Tren Omzet &amp; Penghasilan {filterTahun}</h3></div>
               {!adaData ? (
                 <div className="empty-state">Belum ada data di tahun ini.</div>
               ) : (
                 <TrendChart
-                  months={BULAN_SINGKAT}
+                  months={BULAN_PENUH}
                   mounted={true}
                   area
                   series={[
@@ -140,51 +140,62 @@ export default function Keuangan() {
             </div>
 
             <div className="bar-grid">
-              <div className="card">
-                <div className="card-head">
+              <div className="card-keuangan">
+                <div className="card-head-keuangan">
                   <h3>Total Belanja Klien {filterTahun}</h3>
-                  <span className="chart-total">{formatRupiah(totalTahun.belanja)}</span>
+                  <span className="chart-total-belanja">{formatRupiah(totalTahun.belanja)}</span>
                 </div>
                 <MonthlyBarChart
                   months={BULAN_SINGKAT}
                   values={monthlyStats.map((m) => m.belanja)}
-                  color="var(--violet-tx)"
+                  color="var(--bar-belanja)"
                   format={formatRupiah}
                   mounted={chartsIn}
                 />
               </div>
 
-              <div className="card">
-                <div className="card-head">
+              <div className="card-keuangan">
+                <div className="card-head-keuangan">
                   <h3>Total Biaya Transport {filterTahun}</h3>
-                  <span className="chart-total">{formatRupiah(totalTahun.transport)}</span>
+                  <span className="chart-total-transport">{formatRupiah(totalTahun.transport)}</span>
                 </div>
                 <MonthlyBarChart
                   months={BULAN_SINGKAT}
                   values={monthlyStats.map((m) => m.transport)}
-                  color="var(--gold-tx)"
+                  color="var(--bar-transport)"
                   format={formatRupiah}
                   mounted={chartsIn}
                 />
               </div>
 
-              <div className="card">
-                <div className="card-head">
+              <div className="card-keuangan">
+                <div className="card-head-keuangan">
                   <h3>Total Komisi dari Tim {filterTahun}</h3>
-                  <span className="chart-total">{formatRupiah(totalTahun.komisi)}</span>
+                  <span className="chart-total-komisi">{formatRupiah(totalTahun.komisi)}</span>
                 </div>
                 <MonthlyBarChart
                   months={BULAN_SINGKAT}
                   values={monthlyStats.map((m) => m.komisi)}
-                  color="var(--mint-tx)"
+                  color="var(--bar-komisi)"
                   format={formatRupiah}
                   mounted={chartsIn}
                 />
               </div>
             </div>
 
-            <div className="card table-card">
-              <table className="keuangan-table">
+            <div className="table-card table-head-card">
+              <table className="keuangan-table keuangan-table-head">
+                <colgroup>
+                  <col style={{ width: '13%' }} />
+                  <col style={{ width: '9%' }} />
+                  <col style={{ width: '8%' }} />
+                  <col style={{ width: '13%' }} />
+                  <col style={{ width: '11%' }} />
+                  <col style={{ width: '11%' }} />
+                  <col style={{ width: '11%' }} />
+                  <col style={{ width: '14%' }} />
+                  <col style={{ width: '10%' }} />
+                </colgroup>
                 <thead>
                   <tr>
                     <th>Bulan</th>
@@ -198,6 +209,22 @@ export default function Keuangan() {
                     <th className="center">Tren</th>
                   </tr>
                 </thead>
+              </table>
+            </div>
+
+            <div className="table-card table-body-card">
+              <table className="keuangan-table keuangan-table-body">
+                <colgroup>
+                  <col style={{ width: '13%' }} />
+                  <col style={{ width: '9%' }} />
+                  <col style={{ width: '8%' }} />
+                  <col style={{ width: '13%' }} />
+                  <col style={{ width: '11%' }} />
+                  <col style={{ width: '11%' }} />
+                  <col style={{ width: '11%' }} />
+                  <col style={{ width: '14%' }} />
+                  <col style={{ width: '10%' }} />
+                </colgroup>
                 <tbody>
                   {monthlyStats.map((m, i) => (
                     <tr key={m.label} className={m.booking === 0 ? 'row-empty' : ''}>
@@ -215,6 +242,21 @@ export default function Keuangan() {
                     </tr>
                   ))}
                 </tbody>
+              </table>
+            </div>
+            <div className="table-card table-foot-card">
+              <table className="keuangan-table keuangan-table-foot">
+                <colgroup>
+                  <col style={{ width: '13%' }} />
+                  <col style={{ width: '9%' }} />
+                  <col style={{ width: '8%' }} />
+                  <col style={{ width: '13%' }} />
+                  <col style={{ width: '11%' }} />
+                  <col style={{ width: '11%' }} />
+                  <col style={{ width: '11%' }} />
+                  <col style={{ width: '14%' }} />
+                  <col style={{ width: '10%' }} />
+                </colgroup>
                 <tfoot>
                   <tr>
                     <td className="bulan-cell">Total</td>

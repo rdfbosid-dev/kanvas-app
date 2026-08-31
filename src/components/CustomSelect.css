@@ -2,17 +2,24 @@
 
 .cselect-trigger {
   width: 100%; display: flex; align-items: center; justify-content: space-between;
-  border: 1px solid var(--button-tx); border-radius: 11px; padding: 9px 10px 9px 12px;
-  font-size: 12px; font-family: inherit; color: var(--ink); background: var(--white);
+  border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); border-radius: 11px; padding: 8px 10px 8px 12px;
+  font-size: 12px; font-family: inherit; color: color-mix(in srgb, var(--ink-soft) 70%, transparent); background: color-mix(in srgb, var(--box-dashboard) 90%, transparent);
   cursor: pointer; text-align: left; transition: border-color 0.15s, box-shadow 0.15s;
 }
-.cselect-trigger:hover { border-color: color-mix(in srgb, var(--h3) 60%, transparent); }
+.cselect-trigger:hover { border-color: color-mix(in srgb, var(--h2) 90%, transparent); }
 .cselect-trigger.open { border-color: var(--h3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--h3) 18%, transparent); }
+
+/* Varian khusus buat dipakai DI DALAM modal overlay (BookingModal,
+   BookingDetailModal, dst) -- background disamain PERSIS sama field
+   input/textarea lain yang ada di modal yang sama (var(--field)), biar
+   nggak keliatan beda kayak yang dikeluhin. Dropdown filter biasa (di
+   halaman Booking/Klien/dll) TETEP pakai warna default, nggak kesentuh. */
+.cselect-trigger--modal { background: var(--field); color: var(--ink-soft); }
 .cselect-trigger svg {
-  width: 15px; height: 15px; color: var(--ink-faint); flex-shrink: 0; margin-left: 8px;
+  width: 15px; height: 15px; color: var(--h5); flex-shrink: 0; margin-left: 8px;
   transition: transform 0.15s;
 }
-.cselect-trigger.open svg { transform: rotate(180deg); color: var(--h3); }
+.cselect-trigger.open svg { transform: rotate(180deg); color: var(--h5); }
 
 .cselect-icon {
   display: inline-flex; align-items: center; margin-right: 7px; vertical-align: -3px;
@@ -24,7 +31,7 @@
 
 .cselect-menu {
   position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30;
-  background: var(--white); border: 1px solid var(--button-border); border-radius: 12px;
+  background: color-mix(in srgb, var(--page-b) 90%, transparent); border: 1px solid color-mix(in srgb, var(--button-border) var(--mix-border), transparent); border-radius: 12px;
   padding: 6px; box-shadow: 0 16px 36px -12px rgba(43,36,56,0.25);
   max-height: 220px; overflow-y: auto;
   display: flex; flex-direction: column; gap: 4px;
@@ -35,6 +42,6 @@
   padding: 8px 10px; border-radius: 8px; font-size: 12px; color: var(--ink-soft);
   cursor: pointer; transition: background 0.12s, color 0.12s;
 }
-.cselect-option:hover { background: color-mix(in srgb, var(--h3) 18%, transparent); color: var(--h3); }
-.cselect-option.sel { background: color-mix(in srgb, var(--h3) 18%, transparent); color: var(--h3); font-weight: 600; }
+.cselect-option:hover { background: color-mix(in srgb, var(--h3) 18%, transparent); color: var(--h5); }
+.cselect-option.sel { background: color-mix(in srgb, var(--h3) 18%, transparent); color: var(--ink-soft); font-weight: 600; }
 .cselect-option svg { width: 14px; height: 14px; flex-shrink: 0; }

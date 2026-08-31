@@ -33,7 +33,7 @@ function isBookingSelesai(tanggalAcara, jamStartMakeup) {
   return now >= cutoff
 }
 
-const PAGE_SIZE = 8
+const PAGE_SIZE = 10
 
 export default function Klien() {
   const [bookings, setBookings] = useState([])
@@ -188,44 +188,44 @@ export default function Klien() {
         </div>
 
         <div className="klien-stat-row">
-          <div className="klien-stat-card">
+          <div className="klien-stat-card-totalklien">
             <div className="klien-stat-icon violet">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
             </div>
             <div>
-              <div className="klien-stat-label">Total Klien</div>
-              <div className="klien-stat-num">{summary.totalKlien}</div>
-              <div className="klien-stat-sub">Klien terdaftar</div>
+              <div className="klien-stat-label1">Total Klien</div>
+              <div className="klien-stat-num1">{summary.totalKlien}</div>
+              <div className="klien-stat-sub1">Klien terdaftar</div>
             </div>
           </div>
-          <div className="klien-stat-card">
+          <div className="klien-stat-card-klienaktif">
             <div className="klien-stat-icon gold">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
             </div>
             <div>
-              <div className="klien-stat-label">Klien Aktif</div>
-              <div className="klien-stat-num">{summary.klienAktif}</div>
-              <div className="klien-stat-sub">Punya booking mendatang</div>
+              <div className="klien-stat-label2">Klien Aktif</div>
+              <div className="klien-stat-num2">{summary.klienAktif}</div>
+              <div className="klien-stat-sub2">Punya booking mendatang</div>
             </div>
           </div>
-          <div className="klien-stat-card">
+          <div className="klien-stat-card-klienselesai">
             <div className="klien-stat-icon mint">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><path d="M22 4L12 14.01l-3-3" /></svg>
             </div>
             <div>
-              <div className="klien-stat-label">Klien Selesai</div>
-              <div className="klien-stat-num">{summary.klienSelesai}</div>
-              <div className="klien-stat-sub">Selesai semua booking</div>
+              <div className="klien-stat-label3">Klien Selesai</div>
+              <div className="klien-stat-num3">{summary.klienSelesai}</div>
+              <div className="klien-stat-sub3">Selesai semua booking</div>
             </div>
           </div>
-          <div className="klien-stat-card">
+          <div className="klien-stat-card-totalbelanja">
             <div className="klien-stat-icon coral">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v12M15 9.5c0-1.38-1.34-2.5-3-2.5s-3 1.12-3 2.5 1.34 2.5 3 2.5 3 1.12 3 2.5-1.34 2.5-3 2.5-3-1.12-3-2.5" /></svg>
             </div>
             <div>
-              <div className="klien-stat-label">Total Belanja</div>
-              <div className="klien-stat-num">{formatRupiah(summary.totalBelanja)}</div>
-              <div className="klien-stat-sub">Dari semua klien</div>
+              <div className="klien-stat-label4">Total Belanja</div>
+              <div className="klien-stat-num4">{formatRupiah(summary.totalBelanja)}</div>
+              <div className="klien-stat-sub4">Dari semua klien</div>
             </div>
           </div>
         </div>
@@ -235,15 +235,14 @@ export default function Klien() {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
             <input type="text" placeholder="Cari nama klien ...." value={search} onChange={(e) => setSearch(e.target.value)} />
           </div>
-          <div className="klien-toolbar-right">
-            <div className="filter-select">
+          <div className="filter-select">
               <CustomSelect
                 options={['Semua Status', 'Selesai', 'Akan Datang']}
                 value={statusFilter}
                 onChange={setStatusFilter}
               />
-            </div>
-            <div className="filter-select">
+          </div>
+          <div className="filter-select">
               <CustomSelect
                 options={['Terbaru', 'Nama A-Z', 'Total Belanja']}
                 value={sortBy}
@@ -255,18 +254,17 @@ export default function Klien() {
                   </svg>
                 }
               />
-            </div>
           </div>
         </div>
 
-        {error && <div className="empty-state" style={{ color: 'var(--coral-tx)' }}>Gagal memuat data: {error}</div>}
+        {error && <div className="empty-state-klien" style={{ color: 'var(--ink-soft)' }}>Gagal memuat data: {error}</div>}
         {loading && <div className="loading-state">Memuat data...</div>}
 
         {!loading && !error && (
           filtered.length === 0 ? (
-            <div className="card"><div className="empty-state">
+            <div className="empty-state-klien">
               {clients.length === 0 ? 'Belum ada klien tercatat.' : 'Tidak ada klien yang cocok dengan pencarian/filter.'}
-            </div></div>
+            </div>
           ) : (
             <>
               <div className="klien-table-card klien-table-head-card">
@@ -314,7 +312,7 @@ export default function Klien() {
                             </div>
                           </div>
                         </td>
-                        <td>{c.whatsapp || '-'}</td>
+                        <td className="klien-table-whatsapp">{c.whatsapp || '-'}</td>
                         <td className="klien-table-stats">
                           <div className="klien-stat-dot"><span className="dot orange" />{c.totalCount} Booking</div>
                           <div className="klien-stat-dot"><span className="dot green" />{c.selesaiCount} Selesai</div>
@@ -334,6 +332,7 @@ export default function Klien() {
                     ))}
                   </tbody>
                 </table>
+              </div>
 
                 <div className="klien-pagination">
                   <div className="klien-pagination-info">Menampilkan {rangeStart}–{rangeEnd} dari {filtered.length} klien</div>
@@ -349,7 +348,7 @@ export default function Klien() {
                     </button>
                   </div>
                 </div>
-              </div>
+              
             </>
           )
         )}

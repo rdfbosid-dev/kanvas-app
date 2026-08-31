@@ -1,45 +1,75 @@
 .filter-select { width: 130px; }
 
-.card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.card-head h3 { font-size: 15.5px; }
-.chart-total { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; color: var(--ink); }
+.card-keuangan { background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border-radius: 20px; padding: 22px; border: 2px solid var(--button-border); }
+.card-head-keuangan { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.card-head-keuangan h3 { font-size: 15.5px; color: var(--ink-soft); }
 
-.bar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 18px; }
-.bar-grid .card-head h3 { font-size: 13.5px; }
-.bar-grid .chart-total { font-size: 15px; }
+.bar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 30px; }
+.bar-grid .card-head-keuangan h3 { font-size: 13.5px; }
+.bar-grid .chart-total-belanja { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: var(--bar-belanja); filter: brightness(1.08); }
+.bar-grid .chart-total-transport { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: var(--bar-transport); filter: brightness(1.08); }
+.bar-grid .chart-total-komisi { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: var(--bar-komisi); filter: brightness(1.08); }
 
 @media (max-width: 1100px) {
   .bar-grid { grid-template-columns: 1fr; }
 }
 
-.table-card { padding: 0; overflow-x: auto; }
+/* .table-card & pola 3-kotak-terpisah (head/body/foot) ini SENGAJA disamain
+   konsepnya kayak BookingList.css, biar konsisten satu tema. Padding
+   horizontal SEMUA bagian (head/body/foot) WAJIB sama (24px) -- walau lebar
+   kolom udah disamain lewat <colgroup>, kalau padding beda, teksnya tetep
+   keliatan "geser" nggak sejajar antar bagian. */
+.table-card {
+  background: color-mix(in srgb, var(--page-b) 60%, transparent);
+  border: 2px solid var(--button-border);
+  border-radius: 20px;
+  padding: 0;
+  overflow-x: auto;
+}
+.table-head-card, .table-body-card { margin-bottom: 10px; }
+.keuangan-table { table-layout: fixed; }
+.keuangan-table-head thead th { border-bottom: none; }
+
 .keuangan-table { width: 100%; border-collapse: collapse; min-width: 860px; }
 .keuangan-table thead th {
-  text-align: left; font-size: 11px; font-weight: 700; color: var(--ink-faint);
-  text-transform: uppercase; letter-spacing: 0.03em; padding: 14px 16px; border-bottom: 1px solid var(--button-border);
+  text-align: left; font-size: 12px; font-weight: 700; color: var(--h4);
+  text-transform: uppercase; letter-spacing: 0.03em; padding: 14px 24px;
+  background: color-mix(in srgb, var(--sidebar) 90%, transparent);
   white-space: nowrap;
 }
 .keuangan-table thead th.right { text-align: right; }
 .keuangan-table thead th.center { text-align: center; }
-.keuangan-table td { padding: 11px 16px; font-size: 13px; color: var(--ink-soft); border-bottom: 1px solid var(--button-border); }
+.keuangan-table tbody tr {
+  background: var(--table-body);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 50%, transparent);
+  transition: background 0.15s;
+}
+.keuangan-table tbody tr:last-child { border-bottom: none; }
+.keuangan-table tbody tr:hover { background: color-mix(in srgb, var(--active-nav) var(--mix-box), transparent); }
+.keuangan-table td { padding: 11px 24px; font-size: 13px; font-family: 'Poppins', sans-serif; color: var(--ink-soft); }
 .keuangan-table td.right { text-align: right; }
 .keuangan-table td.center { text-align: center; }
-.keuangan-table td.mono { font-family: 'Space Mono', monospace; font-size: 12px; }
-.keuangan-table td.strong { font-weight: 700; color: var(--ink); }
-.keuangan-table .bulan-cell { font-weight: 600; color: var(--ink); white-space: nowrap; }
-.keuangan-table tr.row-empty td { opacity: 0.4; }
-.keuangan-table tbody tr { transition: background 0.15s; }
-.keuangan-table tbody tr:hover { background: var(--page-a); }
+.keuangan-table td.mono { font-size: 12px; font-weight: 700; }
+.keuangan-table td.strong { font-weight: 700; }
+.keuangan-table .bulan-cell { font-weight: 700; white-space: nowrap; }
+.keuangan-table tr.row-empty td { opacity: 0.6; }
 .keuangan-table tbody tr:hover td { opacity: 1; color: var(--ink); }
+
+/* Foot sengaja dibikin "kembaran" head (bookend atas-bawah buat body) --
+   alignment tiap kolom udah dihandle otomatis lewat class .right/.center
+   di tiap <td> (lihat Keuangan.jsx), jadi rule ini nggak perlu set
+   text-align sendiri. */
 .keuangan-table tfoot td {
-  border-bottom: none; border-top: 2px solid var(--button-border); font-weight: 700; color: var(--ink);
-  background: var(--page-a);
+  font-size: 12px; font-weight: 700; color: var(--h4);
+  text-transform: uppercase; letter-spacing: 0.03em; padding: 14px 24px;
+  background: color-mix(in srgb, var(--sidebar) 90%, transparent);
+  white-space: nowrap;
 }
 
 .trend-arrow { width: 20px; height: 20px; display: inline-block; }
-.trend-arrow.trend-up { color: var(--h7); }
-.trend-arrow.trend-down { color: var(--h8); }
-.trend-arrow.trend-flat { color: var(--ink-faint); }
+.trend-arrow.trend-up { color: var(--bar-transport); }
+.trend-arrow.trend-down { color: var(--pill); }
+.trend-arrow.trend-flat { color: var(--ink-soft); }
 
 @media (max-width: 900px) {
   .keuangan-table { min-width: 860px; }

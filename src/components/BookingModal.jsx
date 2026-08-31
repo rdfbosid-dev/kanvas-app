@@ -238,6 +238,7 @@ export default function BookingModal({ onClose, onSaved }) {
                   options={EVENT_OPTIONS}
                   value={event}
                   onChange={setEvent}
+                  variant="modal"
                 />
                 {event === EVENT_CUSTOM_SENTINEL && (
                   <input
@@ -262,6 +263,7 @@ export default function BookingModal({ onClose, onSaved }) {
                   options={['Instagram', 'WhatsApp', 'TikTok', 'Facebook', 'Referral']}
                   value={sumber}
                   onChange={setSumber}
+                  variant="modal"
                 />
               </div>
             </div>
@@ -283,6 +285,7 @@ export default function BookingModal({ onClose, onSaved }) {
                     options={['Transfer Bank', 'E-Wallet', 'QRIS', 'Cash']}
                     value={dpMetode}
                     onChange={setDpMetode}
+                    variant="modal"
                   />
                 </div>
               )}
@@ -407,7 +410,7 @@ export default function BookingModal({ onClose, onSaved }) {
 
           <div className="modal-foot">
             <button type="button" className="btn-ghost" onClick={onClose}>Batal</button>
-            <button type="submit" className="btn-primary" disabled={saving}>
+            <button type="submit" className="btn-primary-booking" disabled={saving}>
               {saving ? 'Menyimpan...' : 'Simpan Booking'}
             </button>
           </div>
