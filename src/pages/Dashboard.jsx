@@ -453,19 +453,23 @@ export default function Dashboard() {
                   <span className="fin-value">{formatRupiah(penghasilanBulanIni)}</span>
                 </div>
 
-                <div className={`fin-growth ${isGrowthUp ? 'up' : 'down'}`}>
+                <div className={`fin-growth ${status === 'up' ? 'up' : status === 'down' ? 'down' : 'empty'}`}>
                   <div className="fin-growth-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                      {isGrowthUp
-                        ? <path d="M3 17l6-6 4 4 8-8M15 7h6v6" />
-                        : <path d="M3 7l6 6 4-4 8 8M15 17h6v-6" />}
+                      {status === 'up' && <path d="M3 17l6-6 4 4 8-8M15 7h6v6" />}
+                      {status === 'down' && <path d="M3 7l6 6 4-4 8 8M15 17h6v-6" />}
+                      {status === 'empty' && <path d="M5 12h14" />}
                     </svg>
                   </div>
                   <div className="fin-growth-text">
-                    <div className="fin-growth-pct">{isGrowthUp ? '+' : ''}{growthPct}%</div>
+                    <div className="fin-growth-pct">
+                    {status === 'up' ? `+${growthPct}%` : status === 'down' ? `${growthPct}%` : '—'}
+                    </div>
                     <div className="fin-growth-desc">
-                      {isGrowthUp ? 'Meningkat' : 'Menurun'} dari {namaBulanLalu}
-                      <span className="fin-growth-sub"> ({formatRupiah(penghasilanBulanLalu)})</span>
+                      {status === 'up' && `Meningkat dari ${namaBulanLalu}`}
+                      {status === 'down' && `Menurun dari ${namaBulanLalu}`}
+                      {status === 'empty' && 'Belum ada data masuk'}
+                      {status !== 'empty' && <span className="fin-growth-sub"> ({formatRupiah(penghasilanBulanLalu)})</span>}
                     </div>
                   </div>
                 </div>
