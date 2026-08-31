@@ -1,69 +1,69 @@
 .invoice-overlay {
-  position: fixed; inset: 0; background: rgba(43,36,56,0.45);
+  position: fixed; inset: 0; background: rgb(36, 55, 62, 0.45);
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .invoice-overlay .modal {
-  background: var(--white); border-radius: 24px; width: 100%; max-width: 720px;
+  background: var(--box-dashboard); border-radius: 24px; width: 100%; max-width: 720px;
   max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: 0 24px 60px -12px rgba(43,36,56,0.35);
+  box-shadow: 0 24px 60px -12px var(--shadow-modal);
 }
-.invoice-overlay .modal-head {
+.invoice-overlay .modal-head.invoice-no-print {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 26px; flex-shrink: 0;
+  padding: 20px 26px; flex-shrink: 0; margin-bottom: 5px;
 }
 .invoice-overlay .modal-head h2 { font-size: 18px; }
 .invoice-overlay .modal-close {
-  width: 32px; height: 32px; border-radius: 10px; border: none; background: color-mix(in srgb, var(--h3) 18%, transparent);
+  width: 32px; height: 32px; border-radius: 10px; border: none; background: color-mix(in srgb, var(--h3) 20%, transparent);
   color: var(--h3); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: background 0.15s;
 }
-.invoice-overlay .modal-close:hover { background: var(--button-theme); color: var(--h3); }
+.invoice-overlay .modal-close:hover { background: color-mix(in srgb, var(--h3) 50%, transparent); color: var(--h3); }
 .invoice-overlay .modal-body { padding: 22px 26px; overflow-y: auto; flex: 1; }
 .invoice-overlay .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 26px; flex-shrink: 0; }
 .invoice-overlay .btn-ghost {
-  padding: 10px 18px; border-radius: 11px; border: 1px solid var(--button-tx); background: var(--white);
-  font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
-  transition: background 0.15s, border-color 0.15s;
+  padding: 5px 0; border-radius: 8px; border: 1.5px solid var(--button-border); background: var(--box-dashboard);
+  font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
+  transition: background 0.15s, border-color 0.15s; margin-bottom: 20px; line-height: 1.4;
 }
-.invoice-overlay .btn-ghost:hover { background: var(--button-theme); }
+.invoice-overlay .btn-ghost:hover { background: color-mix(in srgb, var(--button-prm-hover) 50%, transparent); border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) 50%, transparent); }
 
 .invoice-modal { max-width: 640px; }
-.invoice-paper { background: var(--white); }
+.invoice-paper { background: var(--table-body); }
 
 .inv-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-.inv-studio { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); }
+.inv-studio { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-soft); }
 .inv-studio-meta { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
 .inv-title-block { text-align: right; }
-.inv-title { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--h3); letter-spacing: 0.04em; }
-.inv-kode { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-faint); margin-top: 2px; }
+.inv-title { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--h5); letter-spacing: 0.04em; }
+.inv-kode { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink); margin-top: 2px; }
 
 .inv-divider { height: 1px; background: var(--button-border); margin: 16px 0; }
 
 .inv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-.inv-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; }
-.inv-value { font-size: 14px; font-weight: 600; color: var(--ink); }
+.inv-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; }
+.inv-value { font-size: 14px; font-weight: 600; color: var(--h5); }
 .inv-sub { font-size: 12.5px; color: var(--ink-soft); margin-top: 1px; }
 
 .inv-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
 .inv-table thead th {
   text-align: left; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-  color: var(--ink-faint); padding: 8px 4px; border-bottom: 1.5px solid var(--button-border);
+  color: var(--ink-soft); padding: 8px 4px; border-bottom: 1.5px solid var(--button-border);
 }
 .inv-table thead th.right { text-align: right; }
-.inv-table td { padding: 7px 4px; font-size: 13px; color: var(--ink-soft); border-bottom: 1px solid var(--button-border); }
-.inv-table td.right { text-align: right; font-family: 'Space Mono', monospace; font-size: 12.5px; }
+.inv-table td { padding: 7px 4px; font-size: 13px; color: var(--ink-soft); border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); }
+.inv-table td.right { text-align: right; font-size: 12.5px; }
 
-.inv-summary { background: var(--page-a); border-radius: 14px; padding: 14px 18px; margin-bottom: 16px; }
+.inv-summary { background: color-mix(in srgb, var(--button-prm-hover) 10%, transparent); border-radius: 14px; padding: 14px 18px; margin-bottom: 16px; }
 .inv-summary-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-soft); padding: 4px 0; }
-.inv-summary-row b { color: var(--ink); font-family: 'Space Mono', monospace; font-size: 13px; }
+.inv-summary-row b { color: var(--h5); font-size: 13px; }
 .inv-summary-final { border-top: 1px solid var(--button-border); margin-top: 6px; padding-top: 10px; font-weight: 700; }
-.inv-summary-final span { color: var(--h8); font-weight: 700; }
-.inv-summary-final b { color: var(--h8); font-size: 15px; }
+.inv-summary-final span { color: var(--ink-soft); font-weight: 700; }
+.inv-summary-final b { color: var(--h5); font-size: 15px; }
 
 .inv-pay-row { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; color: var(--ink-soft); padding: 5px 4px; border-bottom: 1px solid var(--button-border); }
 
 .inv-note { margin-top: 16px; }
-.inv-footer { text-align: center; font-size: 12.5px; color: var(--ink-faint); margin-top: 28px; padding-top: 16px; border-top: 1px dashed var(--button-border); }
+.inv-footer { text-align: center; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-top: 28px; padding: 10px; }
 
 /* ===== Cetak / Simpan PDF ===== */
 @media print {

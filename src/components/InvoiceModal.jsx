@@ -94,7 +94,7 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
               {Number(booking.biaya_transport) > 0 && (
                 <tr>
                   <td></td>
-                  <td>Biaya Transport</td>
+                  <td>Transport</td>
                   <td className="right">{formatRupiah(booking.biaya_transport)}</td>
                 </tr>
               )}
@@ -127,13 +127,13 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
             </div>
           )}
 
-          <div className="inv-footer">Terima kasih atas kepercayaannya 🙏</div>
+          <div className="inv-footer">Terima kasih atas kepercayaan Anda karena telah menggunakan jasa kami.</div>
         </div>
 
         <div className="modal-foot invoice-no-print">
           <button className="btn-ghost" onClick={onClose}>Tutup</button>
           <button className="btn-ghost" onClick={handleWhatsApp} type="button">Kirim ke WhatsApp</button>
-          <button className="btn-primary" onClick={handlePrint} type="button">Cetak / Simpan PDF</button>
+          <button className="btn-ghost" onClick={handlePrint} type="button">Cetak / Simpan PDF</button>
         </div>
       </div>
     </div>

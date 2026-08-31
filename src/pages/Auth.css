@@ -112,9 +112,10 @@
 .auth-field input:-webkit-autofill,
 .auth-field input:-webkit-autofill:hover,
 .auth-field input:-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--button-tx);
+  font-weight: 700 !important;
+  -webkit-text-fill-color: var(--button-tx); 
   -webkit-box-shadow: 0 0 0 1000px var(--white) inset;
-  box-shadow: 0 0 0 1000px var(--placeholder) inset;
+  box-shadow: 0 0 0 1000px var(--page-b) inset;
   transition: background-color 5000s ease-in-out 0s;
   caret-color: var(--button-tx);
 }
