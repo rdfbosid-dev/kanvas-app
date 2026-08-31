@@ -23,7 +23,7 @@
   .mobile-topbar {
     display: flex; align-items: center; gap: 12px;
     position: sticky; top: 0; z-index: 90;
-    background: var(--white);
+    background: var(--sidebar);
     padding: 14px 18px;
   }
   .hamburger-btn {
