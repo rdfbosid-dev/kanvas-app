@@ -229,6 +229,51 @@
 @media (max-width: 900px) {
   .app-shell { flex-direction: column; }
   .main { padding: 18px; }
-  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
   .content-grid { grid-template-columns: 1fr; }
+
+  /* Penyesuaian khusus untuk KPI card 4 warna di HP */
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  
+  .kpi-card-today,
+  .kpi-card-month,
+  .kpi-card-hasil,
+  .kpi-card-status {
+    padding: 12px 14px;
+    border-radius: 16px;
+    border-width: 3.5px;
+  }
+  
+  .kpi-label-today,
+  .kpi-label-month,
+  .kpi-label-hasil,
+  .kpi-label-status {
+    font-size: 12.5px;
+  }
+  
+  .kpi-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+  
+  .kpi-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .kpi-value-today,
+  .kpi-value-month,
+  .kpi-value-hasil,
+  .kpi-value-status {
+    font-size: 17px;
+    margin-top: 2px;
+  }
+  
+  .kpi-sub-today,
+  .kpi-sub-month,
+  .kpi-sub-hasil,
+  .kpi-sub-status {
+    font-size: 11px;
+    margin-top: 2px;
+  }
 }
