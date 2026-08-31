@@ -82,8 +82,8 @@
 
   --ava-grad: linear-gradient(130deg, #e26e86 0%, #e2c5cb 100%);
   --ava-grad-alt: linear-gradient(130deg, #3f95ba 0%, #91c4d8 100%);
-  --grad: linear-gradient(130deg, #8ebbcd 0%, #587e8c 100%);
-  --brand: linear-gradient(45deg, #587e8c 0%, #8ebbcd 100%);
+  --grad: linear-gradient(130deg, #8ebbcd 0%, #4e95af 100%);
+  --brand: linear-gradient(45deg, #4e95af 0%, #8ebbcd 100%);
   --white: #24373e;
   --button-prm: rgb(255, 255, 255);
   --button-border: rgb(255, 255, 255);
