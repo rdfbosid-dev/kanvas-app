@@ -9,7 +9,7 @@
 }
 
 .topbar { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 26px; flex-wrap: wrap; gap: 14px; }
-.greeting { font-size: 24px; font-weight: 700; font-family: 'Poppins', sans-serif; color: var(--button-tx); }
+.greeting { font-size: 24px; font-weight: 700; font-family: 'Poppins', sans-serif; color: var(--h9); }
 .greeting-date { font-size: 13.5px; color: var(--ink-soft); margin-top: 4px; }
 .topbar-actions { display: flex; align-items: center; gap: 12px; }
 
@@ -52,7 +52,7 @@
 }
 .notif-icon svg { width: 16px; height: 16px; }
 .notif-icon.booking { background: var(--ink-faint); color: var(--ink-soft); }
-.notif-icon.laporan { background: var(--pill); color: var(--ink-soft); }
+.notif-icon.laporan { background: var(--pill); color: var(--h7); }
 .notif-item-title { font-size: 13px; font-weight: 700; color: var(--ink-soft); }
 .notif-item-desc { font-size: 11px; color: var(--ink); margin-top: 1px; }
 .notif-item-loc { font-size: 11px; color: var(--ink); margin-top: 1px; }
@@ -98,23 +98,23 @@
 .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 22px; }
 .kpi-card-today { background: var(--grad1); border-radius: 20px; padding: 20px; border: 5px solid var(--border1); }
 .kpi-card-month { background: var(--grad2); border-radius: 20px; padding: 20px; border: 5px solid var(--border2); }
-.kpi-card-penghasilan { background: var(--grad3); border-radius: 20px; padding: 20px; border: 5px solid var(--border3); }
+.kpi-card-hasil { background: var(--grad3); border-radius: 20px; padding: 20px; border: 5px solid var(--border3); }
 .kpi-card-status { background: var(--grad4); border-radius: 20px; padding: 20px; border: 5px solid var(--border4); }
 .kpi-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5px; }
 .kpi-label-today { font-size: 16px; color: var(--label1); font-weight: 600; }
 .kpi-label-month { font-size: 16px; color: var(--label2); font-weight: 600; }
-.kpi-label-penghasilan { font-size: 16px; color: var(--label3); font-weight: 600; }
+.kpi-label-hasil { font-size: 16px; color: var(--label3); font-weight: 600; }
 .kpi-label-status { font-size: 16px; color: var(--label4); font-weight: 600; }
 .kpi-icon { width: 40px; height: 40px; border-radius: 13px; display: flex; align-items: center; justify-content: center; margin-bottom: 0; }
 .kpi-icon svg { width: 19px; height: 19px; }
 .kpi-value-today { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; color: var(--label1); }
 .kpi-value-month { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; color: var(--label2); }
-.kpi-value-penghasilan { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; color: var(--label3); }
+.kpi-value-hasil { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; color: var(--label3); }
 .kpi-value-status { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; color: var(--label4); }
 .kpi-unit { font-size: 16px; font-weight: 600; color: var(--label2); }
 .kpi-sub-today { font-size: 14px; font-weight: 600; color: var(--label1); margin-top: 3px; }
 .kpi-sub-month { font-size: 14px; font-weight: 600; color: var(--label2); margin-top: 3px; }
-.kpi-sub-penghasilan { font-size: 14px; font-weight: 600; color: var(--label3); margin-top: 3px; }
+.kpi-sub-hasil { font-size: 14px; font-weight: 600; color: var(--label3); margin-top: 3px; }
 .kpi-sub-status { font-size: 14px; font-weight: 600; color: var(--label4); margin-top: 3px; }
 
 .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -160,8 +160,8 @@
   padding: 20px; border-radius: 18px;
 }
 .fin-growth.up { background: linear-gradient(80deg, var(--pill-alt) 0%, var(--page-b) 80%, transparent); }
-.fin-growth.down { background: linear-gradient(80deg, var(--pill) 0%, var(--page-b) 80%); }
-.fin-growth.empty { background: linear-gradient(80deg, var(--label3) 0%, var(--page-b) 80%, transparent); }
+.fin-growth.down { background: linear-gradient(80deg, var(--pill) 0%, var(--page-b) 80%, transparent); }
+.fin-growth.none { background: linear-gradient(80deg, var(--label1) 0%, var(--page-b) 80%, transparent); }
 
 .fin-growth-icon {
   width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
@@ -169,19 +169,17 @@
 }
 .fin-growth.up .fin-growth-icon { background: var(--growth-up-circle); color: var(--h7); }
 .fin-growth.down .fin-growth-icon { background: var(--pill); color: var(--h7); }
-.fin-growth.empty .fin-growth-icon { background: var(--label3); color: var(--h7); }
-
 .fin-growth-icon svg { width: 28px; height: 28px; }
 .fin-growth-pct { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; }
 .fin-growth.up .fin-growth-pct { color: var(--h7); }
 .fin-growth.down .fin-growth-pct { color: var(--h8); }
-.fin-growth.empty .fin-growth-pct { color: var(--h7); }
-
+.fin-growth.none .fin-growth-icon { background: var(--label1); color: var(--h7); }
+.fin-growth.none .fin-growth-pct { color: var(--h7); }
 .fin-growth-desc { font-size: 14px; color: var(--h7); font-weight: 700; margin-top: 2px; }
 .fin-growth-sub { font-weight: 500; color: var(--h7); }
 
-.empty-state-dashboard-grid { text-align: center; padding: 32px 16px; color: var(--ink-soft); font-size: 13px; }
-.loading-state { text-align: center; padding: 60px; color: var(--ink-soft); font-size: 14px; }
+.empty-state-dashboard-grid { text-align: left; padding: 20px 0; color: var(--ink-soft); font-size: 13px; }
+.loading-state { text-align: center; padding: 60px; color: var(--ink-soft); font-size: 13px; }
 
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; }
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 18px; }

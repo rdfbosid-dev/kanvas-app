@@ -227,7 +227,7 @@
 .status-pill.akan-datang { background: var(--pill-later); color: var(--h7); }
 
 .empty-state-klien {
-  color: var(--ink-soft); font-size: 13px; font-weight: 600;
+  text-align: left; color: var(--ink-soft); font-size: 13px; font-weight: 600;
 }
 
 @media (max-width: 900px) {

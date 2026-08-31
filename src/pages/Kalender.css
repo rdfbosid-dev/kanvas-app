@@ -106,8 +106,8 @@
 .status-pill.lunas { background: var(--pill-alt); color: var(--h7); }
 .status-pill.belum { background: var(--pill); color: var(--h8); }
 
-.loading-state { text-align: center; padding: 60px; color: var(--ink-soft); font-size: 14px; }
-.empty-state { text-align: left; padding: 10px 0; color: var(--ink-soft); font-size: 14px; }
+.loading-state { text-align: center; padding: 60px; color: var(--ink-soft); font-size: 13px; }
+.empty-state { text-align: left; padding: 10px 0; color: var(--ink-soft); font-size: 13px; }
 
 @media (max-width: 900px) {
   .kalender-layout { grid-template-columns: 1fr; }

@@ -164,7 +164,7 @@ export default function Dashboard() {
       type: 'laporan',
       id: 'laporan-bulan',
       title: 'Laporan bulan ini udah lengkap',
-      desc: 'Hari terakhir bulan ini — cek rekap Keuangan & Laporan sekarang.',
+      desc: 'Cek rekap Keuangan & Laporan sekarang.',
     }] : []),
   ]
   const notifKey = notifications.map((n) => n.id).join(',')
@@ -236,10 +236,13 @@ export default function Dashboard() {
     return d.getMonth() === prevMonthIdx && d.getFullYear() === prevMonthYear
   })
   const penghasilanBulanLalu = bookingBulanLalu.reduce((sum, b) => sum + (Number(b.penghasilan) || 0), 0)
-  const growthPct = penghasilanBulanLalu > 0
-    ? Math.round(((penghasilanBulanIni - penghasilanBulanLalu) / penghasilanBulanLalu) * 100)
-    : (penghasilanBulanIni > 0 ? 100 : 0)
-  const isGrowthUp = penghasilanBulanIni >= penghasilanBulanLalu
+  const hasNoGrowthData = penghasilanBulanIni === 0 && penghasilanBulanLalu === 0
+  const growthPct = hasNoGrowthData
+    ? 0
+    : penghasilanBulanLalu > 0
+      ? Math.round(((penghasilanBulanIni - penghasilanBulanLalu) / penghasilanBulanLalu) * 100)
+      : (penghasilanBulanIni > 0 ? 100 : 0)
+  const growthStatus = hasNoGrowthData ? 'none' : (penghasilanBulanIni >= penghasilanBulanLalu ? 'up' : 'down')
   const monthlyStats = BULAN_SINGKAT.map((label, i) => {
     const bulanBookings = bookings.filter((b) => {
       const d = new Date(b.tanggal_acara)
@@ -372,15 +375,15 @@ export default function Dashboard() {
                 <div className="kpi-sub-month">{pesertaBulanIni} klien</div>
               </div>
 
-              <div className="kpi-card-penghasilan">
+              <div className="kpi-card-hasil">
                 <div className="kpi-top">
-                  <span className="kpi-label-penghasilan">Penghasilan</span>
+                  <span className="kpi-label-hasil">Penghasilan</span>
                   <div className="kpi-icon" style={{ background: '#2b8d76' }}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="var(--h7)" strokeWidth="2"><path d="M3 3v18h18"/><path d="M7 14l4-5 3 3 5-7"/></svg>
                   </div>
                 </div>
-                <div className="kpi-value-penghasilan">{formatRupiah(penghasilanBulanIni)}</div>
-                <div className="kpi-sub-penghasilan">Total bulan ini</div>
+                <div className="kpi-value-hasil">{formatRupiah(penghasilanBulanIni)}</div>
+                <div className="kpi-sub-hasil">Total bulan ini</div>
               </div>
 
               <div className="kpi-card-status">
@@ -453,23 +456,31 @@ export default function Dashboard() {
                   <span className="fin-value">{formatRupiah(penghasilanBulanIni)}</span>
                 </div>
 
-                <div className={`fin-growth ${status === 'up' ? 'up' : status === 'down' ? 'down' : 'empty'}`}>
+                <div className={`fin-growth ${growthStatus}`}>
                   <div className="fin-growth-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                      {status === 'up' && <path d="M3 17l6-6 4 4 8-8M15 7h6v6" />}
-                      {status === 'down' && <path d="M3 7l6 6 4-4 8 8M15 17h6v-6" />}
-                      {status === 'empty' && <path d="M5 12h14" />}
-                    </svg>
+                    {growthStatus === 'none' ? (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                        <path d="M6 12h12" />
+                      </svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                        {growthStatus === 'up'
+                          ? <path d="M3 17l6-6 4 4 8-8M15 7h6v6" />
+                          : <path d="M3 7l6 6 4-4 8 8M15 17h6v-6" />}
+                      </svg>
+                    )}
                   </div>
                   <div className="fin-growth-text">
-                    <div className="fin-growth-pct">
-                    {status === 'up' ? `+${growthPct}%` : status === 'down' ? `${growthPct}%` : '—'}
-                    </div>
+                    <div className="fin-growth-pct">{growthStatus === 'up' ? '+' : ''}{growthPct}%</div>
                     <div className="fin-growth-desc">
-                      {status === 'up' && `Meningkat dari ${namaBulanLalu}`}
-                      {status === 'down' && `Menurun dari ${namaBulanLalu}`}
-                      {status === 'empty' && 'Belum ada data masuk'}
-                      {status !== 'empty' && <span className="fin-growth-sub"> ({formatRupiah(penghasilanBulanLalu)})</span>}
+                      {growthStatus === 'none' ? (
+                        'Belum ada data masuk'
+                      ) : (
+                        <>
+                          {growthStatus === 'up' ? 'Meningkat' : 'Menurun'} dari {namaBulanLalu}
+                          <span className="fin-growth-sub"> ({formatRupiah(penghasilanBulanLalu)})</span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
