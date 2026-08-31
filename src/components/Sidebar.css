@@ -49,7 +49,7 @@
 
   .sidebar-close {
     display: flex; align-items: center; justify-content: center;
-    width: 30px; height: 30px; border-radius: 9px; border: none; background: color-mix(in srgb, var(--button-theme) 60%, transparent);
+    width: 30px; height: 30px; border-radius: 9px; border: none; background: var(--button-theme);
     color: var(--ink-soft); position: absolute; top: 20px; right: 16px; cursor: pointer;
   }
   .sidebar-close svg { width: 15px; height: 15px; }
