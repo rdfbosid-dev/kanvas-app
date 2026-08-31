@@ -69,8 +69,8 @@
   cursor: pointer; margin-bottom: 3px; text-decoration: none;
 }
 .nav-item svg { width: 18px; height: 18px; flex-shrink: 0; }
-.nav-item.active { background: color-mix(in srgb, var(--active-nav) var(--mix-active-nav), transparent); color: var(--h2); }
-.nav-item:not(.active):hover { background: color-mix(in srgb, var(--active-nav) var(--mix-hover-nav), transparent); color: var(--ink); }
+.nav-item.active { background: color-mix(in srgb, var(--placeholder) 30%, transparent); color: var(--h2); }
+.nav-item:not(.active):hover { background: color-mix(in srgb, var(--placeholder) 20%, transparent); color: var(--ink); }
 
 .sidebar-bottom { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--ink-soft); }
 
