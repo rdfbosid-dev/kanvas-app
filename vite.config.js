@@ -12,8 +12,8 @@ export default defineConfig({
       manifest: {
         name: 'Dapur MUA',
         short_name: 'Dapur MUA',
-        description: 'Kelola booking, tim, dan uang masuk studio makeup-mu di satu tempat.',
-        theme_color: '#C4A4F0',
+        description: 'Kelola booking, tim, dan keuangan MUA di satu tempat.',
+        theme_color: '#5b68bb',
         background_color: '#F6F1FC',
         display: 'standalone',
         start_url: '/dashboard',
