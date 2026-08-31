@@ -35,7 +35,7 @@
 
 .onboard-skip {
   background: none; border: none; font-size: 12.5px; color: var(--ink-soft);
-  cursor: pointer; text-decoration: underline; font-family: inherit;
+  cursor: pointer; font-family: inherit;
 }
 .onboard-skip:hover { color: var(--ink-soft); }
 
