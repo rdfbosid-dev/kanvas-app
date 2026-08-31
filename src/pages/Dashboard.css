@@ -276,4 +276,36 @@
     font-size: 11px;
     margin-top: 2px;
   }
+
+  /* Penyesuaian khusus kartu finansial di HP (Penghasilan Bulan & Growth) */
+  .fin-net {
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+  .fin-net .fin-label {
+    font-size: 13.5px;
+  }
+  .fin-net .fin-value {
+    font-size: 16px;
+  }
+
+  .fin-growth {
+    padding: 14px;
+    border-radius: 16px;
+    gap: 12px;
+  }
+  .fin-growth-icon {
+    width: 42px;
+    height: 42px;
+  }
+  .fin-growth-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .fin-growth-pct {
+    font-size: 22px;
+  }
+  .fin-growth-desc {
+    font-size: 12.5px;
+  }
 }
