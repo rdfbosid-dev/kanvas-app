@@ -14,9 +14,9 @@
 .nav-btn svg { width: 15px; height: 15px; }
 .today-btn {
   font-size: 13px; font-weight: 600; color: var(--h5); background: color-mix(in srgb, var(--sidebar) 50%, transparent);
-  border: 3px solid color-mix(in srgb, var(--h9) 90%, transparent); border-radius: 8px; padding: 7px 14px; cursor: pointer; transition: background 0.15s;
+  border: 2px solid color-mix(in srgb, var(--h9) 90%, transparent); border-radius: 8px; padding: 7px 14px; cursor: pointer; transition: background 0.15s;
 }
-.today-btn:hover { filter: brightness(0.95); background: color-mix(in srgb, var(--h9) 90%, transparent); border: 3px solid color-mix(in srgb, var(--h3) 10%, transparent); color: var(--field); }
+.today-btn:hover { filter: brightness(0.95); background: color-mix(in srgb, var(--h9) 90%, transparent); border: 2px solid color-mix(in srgb, var(--h3) 10%, transparent); color: var(--field); }
 
 .kalender-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
 .kalender-head { margin-bottom: 6px; }
@@ -113,8 +113,11 @@
   .kalender-layout { grid-template-columns: 1fr; gap: 14px; }
 }
 
+.card.kalender-card { border: 1px solid var(--table-body); }
+.card.agenda-card { border: 1px solid var(--table-body); }
+
 @media (max-width: 600px) {
-  .kalender-card, .card.agenda-card { padding: 20px; }
+  .kalender-card, .card.agenda-card { padding: 20px; border: 1px solid var(--table-body); }
   .kalender-title { font-size: 14px; }
 
   .card .card-head h3 { font-size: 14px; margin-bottom: 10px; text-underline-offset: 6px; text-decoration-thickness: 1px; }

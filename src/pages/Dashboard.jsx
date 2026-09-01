@@ -605,7 +605,7 @@ export default function Dashboard() {
                 <svg viewBox="0 0 24 24" fill="none" stroke="var(--h5)" strokeWidth="2"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1.1.9 1.9v.2h5.2v-.2c0-.8.3-1.5.9-1.9A6 6 0 0 0 12 3Z"/></svg>
                 <span>
                   Booking terbanyak dari <b>{sumberCounts[0]?.[0]} ({Math.round((sumberCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>
-                  {' · '}Event <b>{eventCounts[0]?.[0]} mendominasi ({Math.round((eventCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>
+                  {' · '}Event <b>{eventCounts[0]?.[0]}</b> mendominasi <b>({Math.round((eventCounts[0]?.[1] / bookingBulanIni.length) * 100)}%)</b>
                   {belumLunas.length > 0
                     ? <> · Ingatkan <b>{belumLunas.length} klien</b> yang belum lunas, ya!</>
                     : ' · Semua booking sudah lunas 🎉'}
