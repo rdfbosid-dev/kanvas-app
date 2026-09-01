@@ -108,7 +108,7 @@ export default function Laporan() {
           </div>
         </div>
 
-        {error && <div className="empty-state" style={{ color: 'var(--coral-tx)' }}>Gagal memuat data: {error}</div>}
+        {error && <div className="empty-state" style={{ color: 'var(--ink-soft)' }}>Gagal memuat data: {error}</div>}
         {loading && <div className="loading-state">Memuat data...</div>}
 
         {!loading && !error && (
