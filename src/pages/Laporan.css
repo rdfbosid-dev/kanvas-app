@@ -31,7 +31,9 @@
 .laporan-insight-strip b { color: var(--h5); }
 
 @media (max-width: 900px) {
-  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .app-shell { flex-direction: column; }
+  .main { padding: 18px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .grid-3 { grid-template-columns: 1fr; }
   .card { border: 1px solid var(--line-box); }
   .laporan-insight-strip { border: 1px solid var(--line-box); font-size: 11px; }
