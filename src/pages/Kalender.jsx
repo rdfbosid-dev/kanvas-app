@@ -183,7 +183,7 @@ export default function Kalender() {
           </div>
 
           <div className="card agenda-card">
-            <div className="card-head">
+            <div className="card-head-kalender">
               <h3>Agenda — {selectedDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</h3>
             </div>
             {loading ? (
