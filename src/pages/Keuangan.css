@@ -22,7 +22,7 @@
 .table-card {
   background: color-mix(in srgb, var(--page-b) 60%, transparent);
   border: 2px solid var(--button-border);
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 0;
   overflow-x: auto;
 }

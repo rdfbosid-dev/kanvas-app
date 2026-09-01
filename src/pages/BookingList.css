@@ -21,21 +21,17 @@
 .table-card {
   background: color-mix(in srgb, var(--page-b) 60%, transparent);
   border: 2px solid var(--button-border);
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 0;
   margin-bottom: 20px;
   overflow: hidden;
 }
 
-/* Header tabel sengaja dijadiin <table> & kotak (card) TERPISAH dari body --
-   bukan cuma dikasih jarak doang. Makanya lebar tiap kolom di kedua tabel
-   itu WAJIB disamain manual pakai <colgroup> (lihat BookingList.jsx), plus
-   table-layout: fixed biar browser nggak nge-resize kolom sesuai isi teks
-   masing-masing tabel secara independen (yang bisa bikin kolom "geser"
-   nggak sejajar antara header & body). */
-.booking-table, .booking-table-head { table-layout: fixed; }
-.table-head-card { margin-bottom: 10px; }
-.booking-table-head thead th { border-bottom: none; }
+/* Header & body sekarang balik jadi 1 <table> utuh (bukan dipisah lagi
+   kayak sebelumnya) -- soalnya versi split bikin scroll header & body
+   nggak sinkron pas di mobile. Warna header (thead th) tetep dipertahanin
+   sama persis. */
+.booking-table { table-layout: fixed; }
 
 .booking-table { width: 100%; border-collapse: collapse; }
 .booking-table thead th {
@@ -65,12 +61,12 @@
 }
 .bl-avatar.selesai { background: var(--ava-grad-alt); color: var(--h7); }
 .b-name { font-size: 13.5px; font-weight: 700; color: var(--h9); margin-bottom: 5px; }
-.b-meta { font-size: 11px; color: var(--h5); }
+.b-meta-bookinglist { font-size: 10px; color: var(--h5); }
 
 .selesai-badge {
-  display: inline-block; margin-left: 8px; font-size: 9.5px; font-weight: 600;
+  display: inline-block; margin-left: 8px; font-size: 8px; font-weight: 600;
   background: var(--label3); color: var(--h7); border: none;
-  padding: 2px 7px; border-radius: 20px; letter-spacing: 0.03em; vertical-align: middle;
+  padding: 2px 7px; border-radius: 8px; letter-spacing: 0.03em; vertical-align: middle;
 }
 
 .empty-state-bookinglist {

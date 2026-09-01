@@ -134,70 +134,55 @@ export default function BookingList() {
         )}
 
         {!loading && !error && filtered.length > 0 && (
-          <>
-            <div className="table-card table-head-card">
-              <table className="booking-table booking-table-head">
-                <colgroup>
-                  <col style={{ width: '20%' }} />
-                  <col style={{ width: '15%' }} />
-                  <col style={{ width: '15%' }} />
-                  <col style={{ width: '25%' }} />
-                  <col style={{ width: '13%' }} />
-                  <col style={{ width: '12%' }} />
-                </colgroup>
-                <thead>
-                  <tr>
-                    <th>Nama Klien</th>
-                    <th>Event</th>
-                    <th>Tanggal Acara</th>
-                    <th>Lokasi</th>
-                    <th className="right">Tagihan</th>
-                    <th className="center">Status</th>
-                  </tr>
-                </thead>
-              </table>
-            </div>
-
-            <div className="table-card">
-              <table className="booking-table">
-                <colgroup>
-                  <col style={{ width: '20%' }} />
-                  <col style={{ width: '15%' }} />
-                  <col style={{ width: '15%' }} />
-                  <col style={{ width: '25%' }} />
-                  <col style={{ width: '13%' }} />
-                  <col style={{ width: '12%' }} />
-                </colgroup>
-                <tbody>
-                  {filtered.map((b) => (
-                    <tr key={b.id} onClick={() => setSelectedBooking(b)}>
-                      <td>
-                        <div className="tbl-klien">
-                          <div className={`bl-avatar${isSelesai(b.tanggal_acara, b.jam_start_makeup) ? ' selesai' : ''}`}>{initialsOf(b.nama_klien)}</div>
-                          <div>
-                            <div className="b-name">{b.nama_klien}</div>
-                            <div className="b-meta">
-                              {b.kode_booking}
-                              {isSelesai(b.tanggal_acara, b.jam_start_makeup) && <span className="selesai-badge">Selesai</span>}
-                            </div>
+          <div className="table-card">
+            <table className="booking-table">
+              <colgroup>
+                <col style={{ width: '20%' }} />
+                <col style={{ width: '15%' }} />
+                <col style={{ width: '15%' }} />
+                <col style={{ width: '25%' }} />
+                <col style={{ width: '13%' }} />
+                <col style={{ width: '12%' }} />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Nama Klien</th>
+                  <th>Event</th>
+                  <th>Tanggal Acara</th>
+                  <th>Lokasi</th>
+                  <th className="right">Tagihan</th>
+                  <th className="center">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.map((b) => (
+                  <tr key={b.id} onClick={() => setSelectedBooking(b)}>
+                    <td>
+                      <div className="tbl-klien">
+                        <div className={`bl-avatar${isSelesai(b.tanggal_acara, b.jam_start_makeup) ? ' selesai' : ''}`}>{initialsOf(b.nama_klien)}</div>
+                        <div>
+                          <div className="b-name">{b.nama_klien}</div>
+                          <div className="b-meta-bookinglist">
+                            {b.kode_booking}
+                            {isSelesai(b.tanggal_acara, b.jam_start_makeup) && <span className="selesai-badge">Selesai</span>}
                           </div>
                         </div>
-                      </td>
-                      <td>{b.event || '-'}</td>
-                      <td className="mono">{formatTanggal(b.tanggal_acara)}</td>
-                      <td>{b.lokasi || '-'}</td>
-                      <td className="right mono">{formatRupiah(b.sisa_kekurangan)}</td>
-                      <td className="center mono">
-                        <span className={`status-pill ${b.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
-                          {b.status_pembayaran}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </>
+                      </div>
+                    </td>
+                    <td>{b.event || '-'}</td>
+                    <td className="mono">{formatTanggal(b.tanggal_acara)}</td>
+                    <td>{b.lokasi || '-'}</td>
+                    <td className="right mono">{formatRupiah(b.sisa_kekurangan)}</td>
+                    <td className="center mono">
+                      <span className={`status-pill ${b.status_pembayaran === 'Lunas' ? 'lunas' : 'belum'}`}>
+                        {b.status_pembayaran}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
 
