@@ -51,7 +51,7 @@ export default function ResetPassword() {
           </div>
           <div className="auth-title">Kata sandi berhasil diubah ✅</div>
           <div className="auth-subtitle">Kamu sekarang bisa masuk pakai kata sandi barumu.</div>
-          <button className="auth-btn" onClick={() => navigate('/dashboard')}>Ke Dashboard</button>
+          <button className="auth-btn" onClick={() => navigate('/dashboard')}>Lanjut ke Dashboard</button>
         </div>
       </div>
     )
