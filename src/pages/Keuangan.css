@@ -2,13 +2,12 @@
 
 .card-keuangan { background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border-radius: 20px; padding: 22px; border: 2px solid var(--button-border); }
 .card-head-keuangan { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-.card-head-keuangan h3 { font-size: 15.5px; color: var(--ink-soft); }
+.card-head-keuangan h3 { font-size: 14px; color: var(--ink-soft); }
 
 .bar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 30px; }
-.bar-grid .card-head-keuangan h3 { font-size: 13.5px; }
-.bar-grid .chart-total-belanja { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: var(--bar-belanja); filter: brightness(1.08); }
-.bar-grid .chart-total-transport { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: var(--bar-transport); filter: brightness(1.08); }
-.bar-grid .chart-total-komisi { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: var(--bar-komisi); filter: brightness(1.08); }
+.bar-grid .chart-total-belanja { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 14px; color: var(--bar-belanja); filter: brightness(1.08); }
+.bar-grid .chart-total-transport { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 14px; color: var(--bar-transport); filter: brightness(1.08); }
+.bar-grid .chart-total-komisi { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 14px; color: var(--bar-komisi); filter: brightness(1.08); }
 
 @media (max-width: 1100px) {
   .bar-grid { grid-template-columns: 1fr; }

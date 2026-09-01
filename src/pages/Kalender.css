@@ -1,6 +1,6 @@
 .kalender-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; align-items: start; }
 
-.card.kalender-card { background: var(--table-body); }
+.card.kalender-card { background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); }
 .kalender-card { padding: 22px; }
 .kalender-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
 .kalender-title { color: var(--ink-soft); font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; flex: 1; text-align: center; }
@@ -44,7 +44,7 @@
 .kalender-cell.outside .cell-circle.density-3 {
   background: color-mix(in srgb, var(--ink-soft) 22%, transparent);
 }
-.kalender-cell.outside .cell-date { color: var(--ink-faint); opacity: 0.7; font-size: 20px; font-weight: 700; }
+.kalender-cell.outside .cell-date { color: var(--ink-faint); opacity: 1; font-size: 20px; font-weight: 700; }
 
 .cell-circle {
   width: 60%; height: 60%; border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -69,7 +69,7 @@
   width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--h9);
 }
 
-.card.agenda-card { padding: 22px; min-height: 100px; background: var(--table-body); }
+.card.agenda-card { padding: 22px; min-height: 100px; background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); }
 .card .card-head-kalender {
   color: var(--ink-soft);
   font-size: 13px;
