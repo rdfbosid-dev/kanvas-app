@@ -82,7 +82,7 @@
   .search-box-booking { max-width: none; flex: 1 1 100%; }
   .filter-select { flex: 1 1 calc(50% - 6px); width: auto; }
 
-  .table-card { overflow-x: auto; }
+  .table-card { overflow-x: auto; border: 1px solid var(--table-body); }
 
   /* table-layout:auto (bukan fixed) khusus mobile, biar lebar tiap kolom
      ngikutin panjang konten aslinya (yang sekarang dipaksa 1 baris lewat
