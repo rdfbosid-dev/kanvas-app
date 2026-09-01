@@ -114,32 +114,19 @@
 }
 
 @media (max-width: 600px) {
-  .kalender-card, .card.agenda-card { padding: 14px; }
-  .kalender-title { font-size: 15px; }
+  .kalender-card, .card.agenda-card { padding: 20px; }
+  .kalender-title { font-size: 14px; }
+
+  .card .card-head h3 { font-size: 14px; margin-bottom: 10px; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+
   .kalender-headcell { font-size: 13px; font-weight: 600; padding: 4px 0; }
   .cell-date, .kalender-cell.outside .cell-date { font-size: 14px; }
-
-  .card .card-head {
-  font-size: 13px;
-  text-decoration: underline;
-  text-decoration-color: var(--ink-soft);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 5px;
-  }
   
   /* Pengecilan indikator lingkaran tanggal agar proporsional di layar HP kecil */
   .cell-circle { width: 75%; height: 75%; }
   .today-dot { width: 90%; height: 90%; border-width: 2px; }
   
   /* Merapikan baris agenda agar tidak terlalu lebar padding-nya di HP */
-
-  .card .card-head {
-  font-size: 14px;
-  text-decoration: underline;
-  text-decoration-color: var(--ink-soft);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 5px;
-  }
 
   .dash-booking-row { padding: 10px 10px; margin: 0; }
   .dash-b-avatar { width: 32px; height: 32px; font-size: 11px; }
