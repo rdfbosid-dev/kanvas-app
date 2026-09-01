@@ -12,6 +12,7 @@
 
 @media (max-width: 1100px) {
   .bar-grid { grid-template-columns: 1fr; }
+  .card-keuangan { border: 1px solid var(--line-box); }
 }
 
 /* .table-card & pola 3-kotak-terpisah (head/body/foot) ini SENGAJA disamain

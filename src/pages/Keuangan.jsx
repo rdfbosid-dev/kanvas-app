@@ -128,7 +128,7 @@ export default function Keuangan() {
                 <div className="empty-state">Belum ada data di tahun ini.</div>
               ) : (
                 <TrendChart
-                  months={BULAN_PENUH}
+                  months={BULAN_SINGKAT}
                   mounted={true}
                   area
                   series={[

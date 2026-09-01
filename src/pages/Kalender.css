@@ -113,11 +113,11 @@
 
 @media (max-width: 900px) {
   .kalender-layout { grid-template-columns: 1fr; gap: 14px; }
-  .card.kalender-card { border: 1px solid var(--table-body); }
-  .card.agenda-card { border: 1px solid var(--table-body); }
+  .card.kalender-card { border: 1px solid var(--line-box); }
+  .card.agenda-card { border: 1px solid var(--line-box); }
   }
 @media (max-width: 600px) {
-  .kalender-card, .card.agenda-card { padding: 20px; border: 1px solid var(--table-body); }
+  .kalender-card, .card.agenda-card { padding: 20px; border: 1px solid var(--line-box); }
   .kalender-title { font-size: 14px; }
 
   .card-head-kalender h3 { font-size: 13px; margin-bottom: 10px; text-underline-offset: 6px; text-decoration-thickness: 1px; }

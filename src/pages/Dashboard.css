@@ -230,8 +230,8 @@
   .app-shell { flex-direction: column; }
   .main { padding: 18px; }
   .content-grid { grid-template-columns: 1fr; }
-  .card-dashboard { border-radius: 20px; border: 1px solid var(--table-body); }
-  .dashboard-insight-strip { border: 1px solid var(--table-body); font-size: 11px; }
+  .card-dashboard { border-radius: 20px; border: 1px solid var(--line-box); }
+  .dashboard-insight-strip { border: 1px solid var(--line-box); font-size: 11px; }
 
   /* Penyesuaian khusus untuk KPI card 4 warna di HP */
   .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
