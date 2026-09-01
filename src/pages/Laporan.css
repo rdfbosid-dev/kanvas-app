@@ -31,7 +31,6 @@
 .laporan-insight-strip b { color: var(--h5); }
 
 @media (max-width: 900px) {
-  .app-shell { flex-direction: column; }
   .main { padding: 18px; }
   .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .grid-3 { grid-template-columns: 1fr; }
