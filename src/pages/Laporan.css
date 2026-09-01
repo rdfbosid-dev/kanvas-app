@@ -37,4 +37,29 @@
   .grid-3 { grid-template-columns: 1fr; }
   .card { border: 1px solid var(--line-box); }
   .laporan-insight-strip { border: 1px solid var(--line-box); font-size: 11px; }
+
+  .kpi-card-booking,
+  .kpi-card-klien,
+  .kpi-card-omzet,
+  .kpi-card-penghasilan {
+    padding: 12px 14px;
+    border-radius: 16px;
+    border-width: 3.5px;
+  }
+  
+  .kpi-label-booking,
+  .kpi-label-klien,
+  .kpi-label-omzet,
+  .kpi-label-penghasilan {
+    font-size: 12.5px;
+  }
+  
+  .kpi-value-booking,
+  .kpi-value-klien,
+  .kpi-value-omzet,
+  .kpi-value-penghasilan {
+    font-size: 17px;
+    margin-top: 2px;
+  }
+
 }
