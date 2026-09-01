@@ -120,7 +120,7 @@
   .cell-date, .kalender-cell.outside .cell-date { font-size: 14px; }
 
   .card .card-head {
-  font-size: 14px;
+  font-size: 13px;
   text-decoration: underline;
   text-decoration-color: var(--ink-soft);
   text-decoration-thickness: 2px;
