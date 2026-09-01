@@ -74,14 +74,37 @@
 }
 
 @media (max-width: 900px) {
-  .filter-bar { flex-direction: column; }
-  .filter-select { width: 100%; }
+  /* Search box ambil 1 baris penuh sendiri, dropdown Tahun & Bulan
+     berbagi baris di bawahnya (masing-masing ~separuh lebar) -- pakai
+     flex-wrap, bukan flex-direction:column, biar 2 dropdown itu bisa
+     nempel sejajar bukannya numpuk 3 baris kayak sebelumnya. */
+  .filter-bar { flex-wrap: wrap; }
+  .search-box-booking { max-width: none; flex: 1 1 100%; }
+  .filter-select { flex: 1 1 calc(50% - 6px); width: auto; }
+
   .table-card { overflow-x: auto; }
-  .booking-table { min-width: 720px; }
+
+  /* table-layout:auto (bukan fixed) khusus mobile, biar lebar tiap kolom
+     ngikutin panjang konten aslinya (yang sekarang dipaksa 1 baris lewat
+     white-space:nowrap), bukan dipaksa persen tetap kayak di desktop.
+     Ini yang bikin tabel otomatis melebar & munculin scroll horizontal,
+     tanpa perlu nebak-nebak angka min-width pixel. */
+  .booking-table { table-layout: auto; }
+  .booking-table th, .booking-table td { white-space: nowrap; }
+  .b-name, .b-meta-bookinglist { white-space: nowrap; }
 }
 
 @media (max-width: 480px) {
   .search-box-booking { padding: 8px 12px; }
-  .booking-table { min-width: 640px; }
   .btn-booking-primary { padding: 9px 12px; font-size: 12.5px; }
+
+  .booking-table th { font-size: 10.5px; padding: 10px 14px; }
+  .booking-table td { font-size: 12px; padding: 8px 14px; }
+  .b-name { font-size: 12.5px; }
+  .b-meta-bookinglist { font-size: 9.5px; }
+
+  /* Khusus di dalam tabel ini doang -- nggak nimpa definisi .status-pill
+     global (yang dipakai bareng di halaman lain juga). */
+  .booking-table .status-pill { font-size: 9.5px; padding: 4px 9px; }
+  .selesai-badge { font-size: 7.5px; padding: 1px 5px; }
 }
