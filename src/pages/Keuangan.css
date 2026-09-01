@@ -19,7 +19,7 @@
    horizontal SEMUA bagian (head/body/foot) WAJIB sama (24px) -- walau lebar
    kolom udah disamain lewat <colgroup>, kalau padding beda, teksnya tetep
    keliatan "geser" nggak sejajar antar bagian. */
-.table-card {
+.table-card-finance {
   background: color-mix(in srgb, var(--page-b) 60%, transparent);
   border: 2px solid var(--button-border);
   border-radius: 10px;

@@ -183,7 +183,7 @@ export default function Keuangan() {
               </div>
             </div>
 
-            <div className="table-card table-head-card">
+            <div className="table-card-finance table-head-card">
               <table className="keuangan-table keuangan-table-head">
                 <colgroup>
                   <col style={{ width: '13%' }} />
@@ -212,7 +212,7 @@ export default function Keuangan() {
               </table>
             </div>
 
-            <div className="table-card table-body-card">
+            <div className="table-card-finance table-body-card">
               <table className="keuangan-table keuangan-table-body">
                 <colgroup>
                   <col style={{ width: '13%' }} />
@@ -244,7 +244,7 @@ export default function Keuangan() {
                 </tbody>
               </table>
             </div>
-            <div className="table-card table-foot-card">
+            <div className="table-card-finance table-foot-card">
               <table className="keuangan-table keuangan-table-foot">
                 <colgroup>
                   <col style={{ width: '13%' }} />
