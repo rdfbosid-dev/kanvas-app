@@ -1,23 +1,23 @@
 /* ---- Kartu ringkasan statistik di atas (Total Klien, Klien Aktif, dst) ---- */
 .klien-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
 .klien-stat-card-totalklien {
-  background: var(--grad1); border: 5px solid var(--border1); border-radius: 18px;
-  padding: 18px; display: flex; align-items: center; gap: 14px;
+  background: var(--grad1); border: 3px solid var(--border1); border-radius: 18px;
+  padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-card);
 }
 
 .klien-stat-card-klienaktif {
-  background: var(--grad2); border: 5px solid var(--border2); border-radius: 18px;
-  padding: 18px; display: flex; align-items: center; gap: 14px;
+  background: var(--grad2); border: 3px solid var(--border2); border-radius: 18px;
+  padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-card);
 }
 
 .klien-stat-card-klienselesai {
-  background: var(--grad3); border: 5px solid var(--border3); border-radius: 18px;
-  padding: 18px; display: flex; align-items: center; gap: 14px;
+  background: var(--grad3); border: 3px solid var(--border3); border-radius: 18px;
+  padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-card);
 }
 
 .klien-stat-card-totalbelanja {
-  background: var(--grad4); border: 5px solid var(--border4); border-radius: 18px;
-  padding: 18px; display: flex; align-items: center; gap: 14px;
+  background: var(--grad4); border: 3px solid var(--border4); border-radius: 18px;
+  padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-card);
 }
 
 .klien-stat-icon {
@@ -74,11 +74,12 @@
 
 /* ---- Tampilan tabel (mode "list", default) ---- */
 .klien-table-card {
-  border: 2px solid var(--button-border);
+  border: 1px solid var(--line-box);
   border-radius: 20px;
   padding: 0;
   margin-bottom: 14px;
   overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 .klien-table { width: 100%; border-collapse: collapse; }
 .klien-table th {

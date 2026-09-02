@@ -96,10 +96,10 @@
 .btn-booking-primary svg { width: 14px; height: 14px; }
 
 .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 22px; }
-.kpi-card-today { background: var(--grad1); border-radius: 20px; padding: 20px; border: 5px solid var(--border1); box-shadow: var(--shadow-card); }
-.kpi-card-month { background: var(--grad2); border-radius: 20px; padding: 20px; border: 5px solid var(--border2); box-shadow: var(--shadow-card); }
-.kpi-card-hasil { background: var(--grad3); border-radius: 20px; padding: 20px; border: 5px solid var(--border3); box-shadow: var(--shadow-card); }
-.kpi-card-status { background: var(--grad4); border-radius: 20px; padding: 20px; border: 5px solid var(--border4); box-shadow: var(--shadow-card); }
+.kpi-card-today { background: var(--grad1); border-radius: 20px; padding: 20px; border: 3px solid var(--border1); box-shadow: var(--shadow-card); }
+.kpi-card-month { background: var(--grad2); border-radius: 20px; padding: 20px; border: 3px solid var(--border2); box-shadow: var(--shadow-card); }
+.kpi-card-hasil { background: var(--grad3); border-radius: 20px; padding: 20px; border: 3px solid var(--border3); box-shadow: var(--shadow-card); }
+.kpi-card-status { background: var(--grad4); border-radius: 20px; padding: 20px; border: 3px solid var(--border4); box-shadow: var(--shadow-card); }
 .kpi-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5px; }
 .kpi-label-today { font-size: 16px; color: var(--label1); font-weight: 600; }
 .kpi-label-month { font-size: 16px; color: var(--label2); font-weight: 600; }
