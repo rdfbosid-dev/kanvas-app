@@ -309,7 +309,7 @@
      barunya (nyambar semua 4 kolom di atas), bukan cuma sepetak kolom
      pertama doang. Tombolnya sendiri rata kiri (default flex), jadi
      visualnya "nempel di bawah tanggal" persis kayak yang diminta. */
-  .booking-detail-overlay .pay-actions { grid-column: 1 / -1; margin-top: 2px; }
+  .booking-detail-overlay .pay-actions { grid-column: 1 / -1; margin-top: 2px; justify-content: flex-end; }
   .booking-detail-overlay .pay-actions button { padding: 3px 4px; font-size: 9px; }
   .booking-detail-overlay .delete-confirm-banner { padding: 14px 18px; }
   .booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa,
