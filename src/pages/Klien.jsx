@@ -267,72 +267,59 @@ export default function Klien() {
             </div>
           ) : (
             <>
-              <div className="klien-table-card klien-table-head-card">
-                <table className="klien-table klien-table-head">
-                  <colgroup>
-                    <col style={{ width: '30%' }} />
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '10%' }} />
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th>Nama Klien</th>
-                      <th>Kontak</th>
-                      <th className>Statistik</th>
-                      <th className="right">Total Belanja</th>
-                      <th className="center">Status Terakhir</th>
-                      <th className="center">Lihat Data</th>
+            <div className="klien-table-card">
+              <table className="klien-table">
+                <colgroup>
+                  <col style={{ width: '30%' }} />
+                  <col style={{ width: '15%' }} />
+                  <col style={{ width: '15%' }} />
+                  <col style={{ width: '15%' }} />
+                  <col style={{ width: '15%' }} />
+                  <col style={{ width: '10%' }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Nama Klien</th>
+                    <th>Kontak</th>
+                    <th>Statistik</th>
+                    <th className="right">Total Belanja</th>
+                    <th className="center">Status Terakhir</th>
+                    <th className="center">Lihat Data</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {paged.map((c) => (
+                    <tr key={c.id}>
+                      <td>
+                        <div className="klien-table-name-cell">
+                          <div className={`klien-avatar-big klien-avatar-sm${c.isFullySelesai ? ' selesai' : ''}`}>{initialsOf(c.nama)}</div>
+                          <div>
+                            <div className="klien-table-name">{c.nama}</div>
+                            <div className="klien-table-sub">{c.createdAt ? `Klien sejak ${formatTanggal(c.createdAt)}` : '-'}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="klien-table-whatsapp">{c.whatsapp || '-'}</td>
+                      <td className="klien-table-stats">
+                        <div className="klien-stat-dot"><span className="dot orange" />{c.totalCount} Booking</div>
+                        <div className="klien-stat-dot"><span className="dot green" />{c.selesaiCount} Selesai</div>
+                      </td>
+                      <td className="klien-table-belanja">{formatRupiah(c.totalBelanja)}</td>
+                      <td className="klien-table-status">
+                        <span className={`status-pill ${c.statusTerakhir === 'Selesai' ? 'lunas' : 'akan-datang'}`}>{c.statusTerakhir}</span>
+                      </td>
+                      <td>
+                        <div className="klien-table-actions">
+                          <button type="button" title="Lihat detail" onClick={() => setSelectedClient(c)}>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                          </button>
+                        </div>
+                      </td>
                     </tr>
-                  </thead>
-                </table>
-              </div>
-
-              <div className="klien-table-card">
-                <table className="klien-table">
-                  <colgroup>
-                    <col style={{ width: '30%' }} />
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '10%' }} />
-                  </colgroup>
-                  <tbody>
-                    {paged.map((c) => (
-                      <tr key={c.id}>
-                        <td>
-                          <div className="klien-table-name-cell">
-                            <div className={`klien-avatar-big klien-avatar-sm${c.isFullySelesai ? ' selesai' : ''}`}>{initialsOf(c.nama)}</div>
-                            <div>
-                              <div className="klien-table-name">{c.nama}</div>
-                              <div className="klien-table-sub">{c.createdAt ? `Klien sejak ${formatTanggal(c.createdAt)}` : '-'}</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="klien-table-whatsapp">{c.whatsapp || '-'}</td>
-                        <td className="klien-table-stats">
-                          <div className="klien-stat-dot"><span className="dot orange" />{c.totalCount} Booking</div>
-                          <div className="klien-stat-dot"><span className="dot green" />{c.selesaiCount} Selesai</div>
-                        </td>
-                        <td className="klien-table-belanja">{formatRupiah(c.totalBelanja)}</td>
-                        <td className="klien-table-status">
-                          <span className={`status-pill ${c.statusTerakhir === 'Selesai' ? 'lunas' : 'akan-datang'}`}>{c.statusTerakhir}</span>
-                        </td>
-                        <td>
-                          <div className="klien-table-actions">
-                            <button type="button" title="Lihat detail" onClick={() => setSelectedClient(c)}>
-                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
                 <div className="klien-pagination">
                   <div className="klien-pagination-info">Menampilkan {rangeStart}–{rangeEnd} dari {filtered.length} klien</div>

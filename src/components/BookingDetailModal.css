@@ -10,9 +10,9 @@
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .booking-detail-overlay .modal {
-  background: var(--table-body); border: 1.5px solid var(--line-modal); border-radius: 24px; width: 100%; max-width: 600px;
+  background: var(--table-body); border: 1.5px solid var(--line-box); border-radius: 24px; width: 100%; max-width: 600px;
   max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: 0 24px 60px -12px var(--shadow-modal);
+  box-shadow: var(--shadow-modal);
 }
 .booking-detail-overlay .modal-head {
   display: flex; align-items: center; justify-content: space-between;
@@ -56,7 +56,7 @@
 }
 
 .booking-detail-overlay .btn-ghost {
-  padding: 5px 10px; border-radius: 8px; border: 1.5px solid var(--button-border); background: var(--box-dashboard);
+  padding: 5px 10px; border-radius: 8px; border: 1.5px solid var(--button-border); background: var(--table-body);
   font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s; margin-bottom: 20px; line-height: 1.4;
 }
@@ -197,7 +197,7 @@
 .booking-detail-overlay .field input:focus,
 .booking-detail-overlay .field select:focus,
 .booking-detail-overlay .field textarea:focus {
-  outline: none; border-color: var(--h3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--h3) 18%, transparent);
+  outline: none; border-color: var(--h3); box-shadow: var(--shadow-modal);
 }
 .booking-detail-overlay .field textarea { resize: vertical; min-height: 40px; }
 .booking-detail-overlay .cselect-trigger { height: 40px; }

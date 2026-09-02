@@ -87,15 +87,12 @@
   text-transform: uppercase; letter-spacing: 0.04em; padding: 12px 24px;
   background: color-mix(in srgb, var(--sidebar) 90%, transparent);
 }
-/* Header tabel Klien sengaja dijadiin <table> & kotak (card) TERPISAH dari
-   body, sama persis konsepnya kayak BookingList.css -- lebar kolom disamain
-   manual pakai <colgroup> di Klien.jsx + table-layout: fixed biar kolom
-   header & body tetap sejajar walau 2 tabel yang beda. */
-.klien-table, .klien-table-head { table-layout: fixed; }
-.klien-table-head-card { margin-bottom: 10px; }
-.klien-table-head thead th { border-bottom: none; }
-.klien-table-head thead th.center {text-align: center; }
-.klien-table-head thead th.right { text-align: right; }
+.klien-table th.right { text-align: right; }
+.klien-table th.center { text-align: center; }
+/* Header & body sekarang 1 <table> utuh (bukan dipisah lagi) -- sama
+   persis polanya kayak BookingList.css, biar scroll header & body tetep
+   sinkron pas di mobile. */
+.klien-table { table-layout: fixed; }
 .klien-table td {
   transition: background 0.15s;
   padding: 10px 24px;
@@ -181,7 +178,7 @@
 .klien-modal-overlay .modal-body { padding: 10px 26px 20px; overflow-y: auto; flex: 1; }
 .klien-modal-overlay .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 10px 26px 20px; flex-shrink: 0; }
 .klien-modal-overlay .btn-ghost {
-  padding: 5px 10px; border-radius: 8px; border: 1.5px solid var(--button-border); background: var(--box-dashboard);
+  padding: 5px 10px; border-radius: 8px; border: 1.5px solid var(--button-border); background: var(--table-body);
   font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s; margin-bottom: 0; line-height: 1.4;
 }
@@ -232,25 +229,72 @@
 }
 
 @media (max-width: 900px) {
-  .klien-stat-row { grid-template-columns: repeat(2, 1fr); }
-}
+  /* Penyesuaian KPI card 4 warna di HP -- disamain PERSIS kayak
+     .kpi-grid di Dashboard.css: dari 4 kolom jadi 2 kolom, dan TETEP
+     2 kolom (nggak collapse jadi 1 lagi di layar lebih kecil), plus
+     padding/border/font-size card-nya ikut mengecil senada. */
+  .klien-stat-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
-@media (max-width: 640px) {
+  .klien-stat-card-totalklien,
+  .klien-stat-card-klienaktif,
+  .klien-stat-card-klienselesai,
+  .klien-stat-card-totalbelanja {
+    padding: 12px 14px;
+    border-radius: 16px;
+    border-width: 3.5px;
+  }
+
+  .klien-stat-label1, .klien-stat-label2, .klien-stat-label3, .klien-stat-label4 {
+    font-size: 12.5px;
+  }
+
+  .klien-stat-icon { width: 30px; height: 30px; border-radius: 10px; }
+  .klien-stat-icon svg { width: 14px; height: 14px; }
+
+  .klien-stat-num1, .klien-stat-num2, .klien-stat-num3, .klien-stat-num4 {
+    font-size: 17px;
+    margin-top: 2px;
+  }
+
+  .klien-stat-sub1, .klien-stat-sub2, .klien-stat-sub3, .klien-stat-sub4 {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
   .klien-modal-overlay { padding: 0; align-items: flex-end; }
   .klien-modal-overlay .modal { max-width: 100%; max-height: 92vh; border-radius: 22px 22px 0 0; }
   .klien-modal-overlay .modal-head { padding: 16px 18px; }
   .klien-modal-overlay .modal-body { padding: 16px 18px; }
   .klien-modal-overlay .modal-foot { padding: 10px 18px calc(16px + env(safe-area-inset-bottom, 0px)); }
   .klien-modal-overlay .detail-grid { grid-template-columns: repeat(2, 1fr); }
-  .klien-stat-row { grid-template-columns: 1fr; }
   .search-box-klien { max-width: 100%; }
   .klien-toolbar { flex-direction: column; align-items: stretch; }
   .klien-toolbar-right { justify-content: space-between; }
   .filter-select { width: 100%; }
-  .klien-table { display: block; overflow-x: auto; white-space: nowrap; }
+
+  /* Sama persis teknik & breakpoint-nya kayak BookingList.css: kotak
+     tabel dikasih overflow-x:auto, table-layout diganti auto (bukan
+     fixed) biar lebar kolom ngikutin panjang konten aslinya (yang
+     dipaksa 1 baris lewat white-space:nowrap), munculin scroll
+     horizontal otomatis tanpa perlu nebak angka min-width. */
+  .klien-table-card { overflow-x: auto; }
+  .klien-table { table-layout: auto; }
+  .klien-table th, .klien-table td { white-space: nowrap; }
+  .klien-table-name, .klien-table-sub { white-space: nowrap; }
 }
 
 @media (max-width: 480px) {
   .klien-stat-card { padding: 14px; gap: 10px; }
   .search-box-klien { padding: 8px 12px; }
+
+  .klien-table th { font-size: 10.5px; padding: 10px 14px; }
+  .klien-table td { font-size: 12px; padding: 8px 14px; }
+  .klien-table-name { font-size: 12.5px; }
+  .klien-table-sub { font-size: 9.5px; }
+
+  /* Khusus di dalem tabel Klien ini doang -- nggak nimpa .status-pill
+     global yang dipakai bareng di halaman/modal lain. */
+  .klien-table .status-pill { font-size: 9.5px; padding: 4px 9px; }
+  .klien-table-actions button { width: 28px; height: 28px; }
+  .klien-table-actions button svg { width: 12px; height: 12px; }
 }

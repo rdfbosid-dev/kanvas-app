@@ -156,7 +156,7 @@
   --line-box: #1f405a;
   --line-modal: #FFFFFF;
 
-  --shadow-modal: 0 24px 60px -12px rgb(142, 187, 205, 0.35);
+  --shadow-modal: 0 6px 20px -5px rgb(142, 187, 205, 0.35);
   --shadow-card: 5px 6px 10px -5px rgba(142, 187, 205, 0.35);
   --shadow-button: 0 6px 18px -6px rgb(142, 187, 205, 0.35);
   --sidebar-bg: rgba(13, 20, 19, 0.85);
