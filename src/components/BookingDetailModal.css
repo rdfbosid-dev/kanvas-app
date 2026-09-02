@@ -6,7 +6,7 @@
    sebaliknya, file lain nggak akan pernah nyenggol tampilan modal ini. */
 
 .booking-detail-overlay {
-  position: fixed; inset: 0; background: rgb(36, 55, 62, 0.45);
+  position: fixed; inset: 0; background: rgb(36, 55, 62, 0.6);
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .booking-detail-overlay .modal {
@@ -128,7 +128,7 @@
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   text-align: left;
 }
-.booking-detail-overlay .pay-row:hover { background: linear-gradient(80deg, var(--active-nav) 0%, var(--box-dashboard) 100%); }
+.booking-detail-overlay .pay-row:hover { background: linear-gradient(80deg, var(--active-nav) 0%, var(--table-body) 100%); }
 .booking-detail-overlay .pay-row:last-child { border-bottom: none; }
 .booking-detail-overlay .pay-amount { font-weight: 700; color: var(--ink-soft); text-align: right; }
 .booking-detail-overlay .pay-actions { position: relative; display: flex; gap: 5px; }
