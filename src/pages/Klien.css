@@ -82,7 +82,7 @@
   box-shadow: var(--shadow-card);
 }
 .klien-table { width: 100%; border-collapse: collapse; }
-.klien-table th {
+.klien-table thead th {
   text-align: left; font-size: 12px; font-weight: 700; color: var(--h4);
   text-transform: uppercase; letter-spacing: 0.04em; padding: 16px 24px;
   background: color-mix(in srgb, var(--sidebar) 90%, transparent);
@@ -95,7 +95,7 @@
 .klien-table { table-layout: fixed; }
 .klien-table td {
   transition: background 0.15s;
-  padding: 10px 24px;
+  padding: 8px 20px;
   background: var(--table-body);
   border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 50%, transparent);
   font-size: 13px;

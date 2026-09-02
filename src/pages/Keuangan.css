@@ -34,7 +34,7 @@
 .keuangan-table { width: 100%; border-collapse: collapse; min-width: 860px; }
 .keuangan-table thead th {
   text-align: left; font-size: 12px; font-weight: 700; color: var(--h4);
-  text-transform: uppercase; letter-spacing: 0.03em; padding: 14px 24px;
+  text-transform: uppercase; letter-spacing: 0.03em; padding: 16px 24px;
   background: color-mix(in srgb, var(--sidebar) 90%, transparent);
   white-space: nowrap;
 }
