@@ -2,29 +2,33 @@
 .klien-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
 .klien-stat-card-totalklien {
   background: var(--grad1); border: 3px solid var(--border1); border-radius: 18px;
-  padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-card);
+  padding: 18px; box-shadow: var(--shadow-card);
 }
 
 .klien-stat-card-klienaktif {
   background: var(--grad2); border: 3px solid var(--border2); border-radius: 18px;
-  padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-card);
+  padding: 18px; box-shadow: var(--shadow-card);
 }
 
 .klien-stat-card-klienselesai {
   background: var(--grad3); border: 3px solid var(--border3); border-radius: 18px;
-  padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-card);
+  padding: 18px; box-shadow: var(--shadow-card);
 }
 
 .klien-stat-card-totalbelanja {
   background: var(--grad4); border: 3px solid var(--border4); border-radius: 18px;
-  padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-card);
+  padding: 18px; box-shadow: var(--shadow-card);
 }
 
+/* Baris atas kartu: label di kiri, icon di kanan -- sama persis polanya
+   kayak .kpi-top di Dashboard.css. */
+.klien-stat-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5px; }
+
 .klien-stat-icon {
-  width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+  width: 40px; height: 40px; border-radius: 13px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
 }
-.klien-stat-icon svg { width: 20px; height: 20px; }
+.klien-stat-icon svg { width: 19px; height: 19px; }
 .klien-stat-icon.violet { background: var(--label1); color: var(--h7); }
 .klien-stat-icon.gold { background: var(--label2); color: var(--h7); }
 .klien-stat-icon.mint { background: var(--label3); color: var(--h7); }

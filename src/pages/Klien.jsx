@@ -189,44 +189,44 @@ export default function Klien() {
 
         <div className="klien-stat-row">
           <div className="klien-stat-card-totalklien">
-            <div className="klien-stat-icon violet">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
-            </div>
-            <div>
+            <div className="klien-stat-top">
               <div className="klien-stat-label1">Total Klien</div>
-              <div className="klien-stat-num1">{summary.totalKlien}</div>
-              <div className="klien-stat-sub1">Klien terdaftar</div>
+              <div className="klien-stat-icon violet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+              </div>
             </div>
+            <div className="klien-stat-num1">{summary.totalKlien}</div>
+            <div className="klien-stat-sub1">Klien terdaftar</div>
           </div>
           <div className="klien-stat-card-klienaktif">
-            <div className="klien-stat-icon gold">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
-            </div>
-            <div>
+            <div className="klien-stat-top">
               <div className="klien-stat-label2">Klien Aktif</div>
-              <div className="klien-stat-num2">{summary.klienAktif}</div>
-              <div className="klien-stat-sub2">Punya booking mendatang</div>
+              <div className="klien-stat-icon gold">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
+              </div>
             </div>
+            <div className="klien-stat-num2">{summary.klienAktif}</div>
+            <div className="klien-stat-sub2">Punya booking mendatang</div>
           </div>
           <div className="klien-stat-card-klienselesai">
-            <div className="klien-stat-icon mint">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><path d="M22 4L12 14.01l-3-3" /></svg>
-            </div>
-            <div>
+            <div className="klien-stat-top">
               <div className="klien-stat-label3">Klien Selesai</div>
-              <div className="klien-stat-num3">{summary.klienSelesai}</div>
-              <div className="klien-stat-sub3">Selesai semua booking</div>
+              <div className="klien-stat-icon mint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><path d="M22 4L12 14.01l-3-3" /></svg>
+              </div>
             </div>
+            <div className="klien-stat-num3">{summary.klienSelesai}</div>
+            <div className="klien-stat-sub3">Selesai semua booking</div>
           </div>
           <div className="klien-stat-card-totalbelanja">
-            <div className="klien-stat-icon coral">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v12M15 9.5c0-1.38-1.34-2.5-3-2.5s-3 1.12-3 2.5 1.34 2.5 3 2.5 3 1.12 3 2.5-1.34 2.5-3 2.5-3-1.12-3-2.5" /></svg>
-            </div>
-            <div>
+            <div className="klien-stat-top">
               <div className="klien-stat-label4">Total Belanja</div>
-              <div className="klien-stat-num4">{formatRupiah(summary.totalBelanja)}</div>
-              <div className="klien-stat-sub4">Dari semua klien</div>
+              <div className="klien-stat-icon coral">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v12M15 9.5c0-1.38-1.34-2.5-3-2.5s-3 1.12-3 2.5 1.34 2.5 3 2.5 3 1.12 3 2.5-1.34 2.5-3 2.5-3-1.12-3-2.5" /></svg>
+              </div>
             </div>
+            <div className="klien-stat-num4">{formatRupiah(summary.totalBelanja)}</div>
+            <div className="klien-stat-sub4">Dari semua klien</div>
           </div>
         </div>
 
