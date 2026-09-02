@@ -51,7 +51,7 @@
 
 /* ---- Kartu grid (tampilan lama, dipertahankan buat mode "grid") ---- */
 .klien-avatar-big {
-  width: 38px; height: 38px; font-size: 18px; margin: 0 auto 12px;
+  width: 32px; height: 32px; font-size: 18px; margin: 0 auto 12px;
   border-radius: 50%; background: var(--ava-grad); display: flex; align-items: center; justify-content: center;
   font-weight: 700; color: var(--h7);
 }
@@ -108,7 +108,7 @@
 .klien-table-name-cell { display: flex; align-items: center; gap: 12px; }
 .klien-avatar-sm { width: 38px; height: 38px; font-size: 13px; margin: 0; flex-shrink: 0; }
 .klien-table-name { font-size: 13.5px; font-weight: 700; color: var(--h9); margin-bottom: 5px; }
-.klien-table-sub { font-size: 11px; color: var(--h5); }
+.klien-table-sub { font-size: 10px; color: var(--h5); }
 .klien-table-whatsapp { text-align: left; color: var(--ink-soft); }
 .klien-table-stats { text-align: left; color: var(--ink-soft); }
 .klien-table-belanja { font-weight: 700; color: var(--ink-soft); text-align: right; }
