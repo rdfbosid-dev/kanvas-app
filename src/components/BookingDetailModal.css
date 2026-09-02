@@ -303,7 +303,7 @@
      otomatis "kececer" ke baris baru di bawahnya (perilaku default CSS
      Grid: item yang nggak muat di kolom yang tersedia otomatis pindah
      ke baris implisit berikutnya). */
-  .booking-detail-overlay .pay-row { grid-template-columns: 95px 72px 62px 1fr; font-size: 11px; gap: 4px; row-gap: 4px; }
+  .booking-detail-overlay .pay-row { grid-template-columns: 100px 72px 62px 1fr; font-size: 11px; gap: 4px; row-gap: 4px; }
   .booking-detail-overlay .pay-note { font-size: 10px; }
   /* grid-column: 1 / -1 -- maksa .pay-actions ngambil LEBAR PENUH baris
      barunya (nyambar semua 4 kolom di atas), bukan cuma sepetak kolom
