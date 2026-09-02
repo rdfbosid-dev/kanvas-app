@@ -129,7 +129,7 @@ export default function Keuangan() {
               ) : (
                 <TrendChart
                   months={BULAN_SINGKAT}
-                  mounted={true}
+                  mounted={chartsIn}
                   area
                   series={[
                     { label: 'Omzet', values: monthlyStats.map((m) => m.omzet), color: trendColorA, format: formatRupiah },
