@@ -183,8 +183,8 @@ export default function Keuangan() {
               </div>
             </div>
 
-            <div className="table-card-finance table-head-card">
-              <table className="keuangan-table keuangan-table-head">
+            <div className="table-card-finance">
+              <table className="keuangan-table">
                 <colgroup>
                   <col style={{ width: '13%' }} />
                   <col style={{ width: '9%' }} />
@@ -209,22 +209,6 @@ export default function Keuangan() {
                     <th className="center">Tren</th>
                   </tr>
                 </thead>
-              </table>
-            </div>
-
-            <div className="table-card-finance table-body-card">
-              <table className="keuangan-table keuangan-table-body">
-                <colgroup>
-                  <col style={{ width: '13%' }} />
-                  <col style={{ width: '9%' }} />
-                  <col style={{ width: '8%' }} />
-                  <col style={{ width: '13%' }} />
-                  <col style={{ width: '11%' }} />
-                  <col style={{ width: '11%' }} />
-                  <col style={{ width: '11%' }} />
-                  <col style={{ width: '14%' }} />
-                  <col style={{ width: '10%' }} />
-                </colgroup>
                 <tbody>
                   {monthlyStats.map((m, i) => (
                     <tr key={m.label} className={m.booking === 0 ? 'row-empty' : ''}>
@@ -242,21 +226,6 @@ export default function Keuangan() {
                     </tr>
                   ))}
                 </tbody>
-              </table>
-            </div>
-            <div className="table-card-finance table-foot-card">
-              <table className="keuangan-table keuangan-table-foot">
-                <colgroup>
-                  <col style={{ width: '13%' }} />
-                  <col style={{ width: '9%' }} />
-                  <col style={{ width: '8%' }} />
-                  <col style={{ width: '13%' }} />
-                  <col style={{ width: '11%' }} />
-                  <col style={{ width: '11%' }} />
-                  <col style={{ width: '11%' }} />
-                  <col style={{ width: '14%' }} />
-                  <col style={{ width: '10%' }} />
-                </colgroup>
                 <tfoot>
                   <tr>
                     <td className="bulan-cell">Total</td>

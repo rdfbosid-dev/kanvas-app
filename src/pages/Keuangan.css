@@ -14,22 +14,20 @@
   .card-keuangan { border: 1px solid var(--line-box); }
 }
 
-/* .table-card & pola 3-kotak-terpisah (head/body/foot) ini SENGAJA disamain
-   konsepnya kayak BookingList.css, biar konsisten satu tema. Padding
-   horizontal SEMUA bagian (head/body/foot) WAJIB sama (24px) -- walau lebar
-   kolom udah disamain lewat <colgroup>, kalau padding beda, teksnya tetep
-   keliatan "geser" nggak sejajar antar bagian. */
+/* .table-card-finance sengaja disamain persis kayak .klien-table-card di
+   Klien.css -- background/border/radius/padding-nya. margin-bottom
+   ditambahin di sini (14px, sama kayak Klien) soalnya sekarang udah nggak
+   dipisah 3 kotak lagi. */
 .table-card-finance {
   background: color-mix(in srgb, var(--page-b) 60%, transparent);
   border: 1px solid var(--line-box);
   border-radius: 10px;
   padding: 0;
+  margin-bottom: 14px;
   overflow-x: auto;
   box-shadow: var(--shadow-card);
 }
-.table-head-card, .table-body-card { margin-bottom: 10px; }
 .keuangan-table { table-layout: fixed; }
-.keuangan-table-head thead th { border-bottom: none; }
 
 .keuangan-table { width: 100%; border-collapse: collapse; min-width: 860px; }
 .keuangan-table thead th {
@@ -47,7 +45,7 @@
 }
 .keuangan-table tbody tr:last-child { border-bottom: none; }
 .keuangan-table tbody tr:hover { background: color-mix(in srgb, var(--active-nav) var(--mix-box), transparent); }
-.keuangan-table td { padding: 11px 24px; font-size: 13px; font-family: 'Poppins', sans-serif; color: var(--ink-soft); }
+.keuangan-table td { padding: 8px 20px; font-size: 13px; font-family: 'Poppins', sans-serif; color: var(--ink-soft); }
 .keuangan-table td.right { text-align: right; }
 .keuangan-table td.center { text-align: center; }
 .keuangan-table td.mono { font-size: 12px; font-weight: 700; }
