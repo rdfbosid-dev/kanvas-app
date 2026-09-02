@@ -6,7 +6,7 @@
    .booking-modal-overlay biar konsisten. */
 
 .booking-modal-overlay {
-  position: fixed; inset: 0; background: rgb(36, 55, 62, 0.45);
+  position: fixed; inset: 0; background: rgb(36, 55, 62, 0.6);
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .booking-modal-overlay .modal {

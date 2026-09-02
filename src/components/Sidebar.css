@@ -36,7 +36,7 @@
   .brand-mark.small { width: 26px; height: 26px; border-radius: 8px; background: var(--grad); flex-shrink: 0; }
 
   .sidebar-backdrop {
-    display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 99;
+    display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 99;
   }
 
   .sidebar {

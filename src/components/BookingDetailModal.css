@@ -298,8 +298,18 @@
      -- kalau kosong, di JSX udah otomatis kefallback jadi "-" (lihat
      {p.catatan || '-'}), jadi cukup dikasih ruang sempit + ellipsis kalau
      teksnya kepanjangan. */
-  .booking-detail-overlay .pay-row { grid-template-columns: 74px 58px 56px 1fr auto; font-size: 10.5px; gap: 6px; }
+  /* Cuma 4 kolom (tanggal/metode/nominal/catatan) di baris grid ini --
+     kolom ke-5 (actions) SENGAJA dihilangin dari definisi track, biar
+     otomatis "kececer" ke baris baru di bawahnya (perilaku default CSS
+     Grid: item yang nggak muat di kolom yang tersedia otomatis pindah
+     ke baris implisit berikutnya). */
+  .booking-detail-overlay .pay-row { grid-template-columns: 92px 72px 62px 1fr; font-size: 11px; gap: 6px; row-gap: 4px; }
   .booking-detail-overlay .pay-note { font-size: 10px; }
+  /* grid-column: 1 / -1 -- maksa .pay-actions ngambil LEBAR PENUH baris
+     barunya (nyambar semua 4 kolom di atas), bukan cuma sepetak kolom
+     pertama doang. Tombolnya sendiri rata kiri (default flex), jadi
+     visualnya "nempel di bawah tanggal" persis kayak yang diminta. */
+  .booking-detail-overlay .pay-actions { grid-column: 1 / -1; margin-top: 2px; }
   .booking-detail-overlay .pay-actions button { padding: 3px 4px; font-size: 9px; }
   .booking-detail-overlay .delete-confirm-banner { padding: 14px 18px; }
   .booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa,
