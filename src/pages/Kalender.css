@@ -18,12 +18,12 @@
 }
 .today-btn:hover { filter: brightness(0.95); background: color-mix(in srgb, var(--h9) 90%, transparent); border: 2px solid color-mix(in srgb, var(--h3) 10%, transparent); color: var(--field); }
 
-.kalender-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.kalender-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0 4px; }
 .kalender-head { margin-bottom: 6px; }
 .kalender-headcell { text-align: center; font-size: 16px; font-weight: 600; color: var(--ink-soft); padding: 6px 0; }
 
 .kalender-cell {
-  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 1.2; display: flex; align-items: center; justify-content: center;
   cursor: pointer; position: relative;
 }
 /* Tanggal luar bulan (numpang dari bulan sebelum/sesudah) yang KEBETULAN
@@ -47,7 +47,7 @@
 .kalender-cell.outside .cell-date { color: var(--ink-faint); opacity: 1; font-size: 20px; font-weight: 700; }
 
 .cell-circle {
-  width: 60%; height: 60%; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  width: 60%; aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center;
   position: relative; transition: transform 0.15s, box-shadow 0.15s;
 }
 .kalender-cell:hover .cell-circle { transform: scale(1.08); }

@@ -110,7 +110,7 @@
 .booking-detail-overlay .b-name { font-size: 12px; font-weight: 600; margin-bottom: 5px; color: var(--ink-soft); }
 .booking-detail-overlay .b-meta { font-size: 11px; color: var(--h5); }
 
-.booking-detail-overlay .pay-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: linear-gradient(80deg, var(--active-nav) 0%, var(--box-dashboard) 80%); border-radius: 14px; padding: 10px 16px; margin-bottom: 12px; color: var(--ink-soft); }
+.booking-detail-overlay .pay-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: linear-gradient(80deg, var(--active-nav) 0%, var(--table-body) 80%); border-radius: 14px; padding: 10px 16px; margin-bottom: 12px; color: var(--ink-soft); }
 .booking-detail-overlay .pay-value { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; margin-top: 5px; }
 
 .booking-detail-overlay .detail-label-history { margin-left: 10px; padding: 5px 5px 0; font-size: 12px; font-weight: 600; color: var(--ink-soft); }
@@ -285,9 +285,22 @@
   .booking-detail-overlay .modal-body { padding: 16px 18px; }
   .booking-detail-overlay .modal-foot { padding: 12px 18px 18px; }
   .booking-detail-overlay .detail-grid { grid-template-columns: repeat(2, 1fr); }
-  .booking-detail-overlay .pay-summary { grid-template-columns: 1fr; gap: 10px; }
-  .booking-detail-overlay .pay-row { grid-template-columns: 1fr 1fr auto; font-size: 11.5px; gap: 6px; }
-  .booking-detail-overlay .pay-note { display: none; }
+  /* PEMBAYARAN (Total Tagihan/Sudah Dibayar/Sisa Tagihan) tetep 3 kolom
+     1 baris di mobile -- cuma font & gap-nya yang dikompres, BUKAN
+     ditumpuk jadi 1 kolom/3 baris kayak sebelumnya. */
+  .booking-detail-overlay .pay-summary { gap: 6px; padding: 10px 12px; }
+  .booking-detail-overlay .detail-label-summary { font-size: 10px; }
+  .booking-detail-overlay .pay-value { font-size: 12.5px; margin-top: 3px; }
+
+  /* Riwayat Pembayaran -- semua 5 kolom (tanggal/metode/nominal/catatan/
+     aksi) TETEP ditampilin 1 baris, lebar px dikompres biar muat di layar
+     sempit. Kolom Catatan sengaja TETEP ada (nggak di-display:none lagi)
+     -- kalau kosong, di JSX udah otomatis kefallback jadi "-" (lihat
+     {p.catatan || '-'}), jadi cukup dikasih ruang sempit + ellipsis kalau
+     teksnya kepanjangan. */
+  .booking-detail-overlay .pay-row { grid-template-columns: 74px 58px 56px 1fr auto; font-size: 10.5px; gap: 6px; }
+  .booking-detail-overlay .pay-note { font-size: 10px; }
+  .booking-detail-overlay .pay-actions button { padding: 3px 4px; font-size: 9px; }
   .booking-detail-overlay .delete-confirm-banner { padding: 14px 18px; }
   .booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa,
   .booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event,
