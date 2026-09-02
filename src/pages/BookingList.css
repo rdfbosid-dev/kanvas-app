@@ -94,6 +94,8 @@
   .booking-table { table-layout: auto; }
   .booking-table th, .booking-table td { white-space: nowrap; }
   .b-name, .b-meta-bookinglist { white-space: nowrap; }
+
+  .empty-state-bookinglist { border: 1px solid var(--line-box);
 }
 
 @media (max-width: 480px) {
