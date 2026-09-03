@@ -225,6 +225,7 @@
 .booking-detail-overlay .toggle-opt:not(.sel):hover { background: color-mix(in srgb, var(--ink-faint) 50%, transparent); color: var(--ink-soft); }
 .booking-detail-overlay .toggle-opt.sel { background: var(--h3); color: #fff; border-color: transparent; }
 
+.booking-detail-overlay .toggle-row { display: flex; gap: 4px; }
 .booking-detail-overlay .toggle-opt-rambut {
   flex: 1; text-align: center; padding: 7px 5px; border-radius: 6px; font-size: 12px; font-weight: 600;
   background: var(--ink-faint); color: var(--ink-soft); cursor: pointer; border: 1px;
