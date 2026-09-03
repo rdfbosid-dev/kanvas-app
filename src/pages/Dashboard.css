@@ -18,7 +18,7 @@
   display: flex; align-items: center; justify-content: center; color: var(--h4); position: relative;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-.icon-btn:hover { background: var(--button-theme); color: var(--h2); border: 1px solid var(--button-theme); }
+.icon-btn:hover { background: color-mix(in srgb, var(--h2) 30%, transparent); color: var(--h2); border: 1px solid var(--button-theme); }
 .icon-btn svg { width: 16px; height: 16px; }
 
 .notif-wrap { position: relative; }
@@ -30,7 +30,7 @@
 .notif-panel {
   position: absolute; top: calc(100% + 10px); right: 0; width: 320px; max-height: 400px; overflow-y: auto;
   background: var(--panel); border: 1.5px solid var(--line-box); border-radius: 18px; box-shadow: var(--shadow-card);
-  z-index: 41; padding: 10px;
+  z-index: 41; padding: 10px 6px;
 }
 .notif-panel-head {
   font-size: 12px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em;
@@ -39,7 +39,7 @@
 .notif-drag-handle { display: none; }
 
 .notif-empty { padding: 10px; text-align: left; font-size: 12px; color: var(--ink); }
-.notif-item { display: flex; gap: 12px; padding: 10px 12px; border-radius: 12px; cursor: pointer; align-items: flex-start; }
+.notif-item { display: flex; gap: 12px; padding: 10px 8px; border-radius: 12px; cursor: pointer; align-items: flex-start; }
 .notif-item:hover { background: color-mix(in srgb, var(--active-nav) var(--mix-hover-panel), transparent); color: var(--ink); }
 .notif-icon {
   width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
