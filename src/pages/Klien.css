@@ -66,7 +66,7 @@
 
 .search-box-klien {
   flex: 1; max-width: 350px; display: flex; align-items: center; gap: 10px;
-  background: color-mix(in srgb, var(--box-dashboard) 60%, transparent); border: 1px solid color-mix(in srgb, var(--button-border) 70%, transparent); border-radius: 12px; padding: 6px 14px;
+  background: color-mix(in srgb, var(--box-dashboard) 60%, transparent); border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); border-radius: 12px; padding: 6px 14px;
 }
 .search-box-klien svg { width: 14px; height: 14px; color: var(--h5); flex-shrink: 0; }
 .search-box-klien input { border: none; outline: none; font-size: 12px; font-family: inherit; color: var(--ink-soft); flex: 1; background: none; }

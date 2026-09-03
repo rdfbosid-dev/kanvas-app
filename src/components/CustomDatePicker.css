@@ -32,7 +32,7 @@
 .cdate-cell:hover { background: color-mix(in srgb, var(--h3) 20%, transparent); }
 .cdate-cell.outside { color: var(--ink-faint); opacity: 0.4; }
 .cdate-cell.today { border: 1.5px solid var(--h3); }
-.cdate-cell.selected { background: var(--h3); color: #fff; font-weight: 700; }
+.cdate-cell.selected { background: color-mix(in srgb, var(--h3) 70%, transparent); color: #fff; font-weight: 700; }
 
 .ctime-panel {
   position: absolute; top: calc(100% + 6px); left: 0; z-index: 30; min-width: 100px;

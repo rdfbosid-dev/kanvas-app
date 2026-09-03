@@ -323,7 +323,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       <div className="pay-edit-row" key={p.id}>
                         <div className="field-grid-detail add-edit-pay-cols-3">
                           <div className="field"><label>Tanggal Pembayaran</label><CustomDatePicker value={editPayDate} onChange={setEditPayDate} variant="modal" /></div>
-                          <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="Rp 0" value={editPayAmount ? `Rp${formatAngkaInput(editPayAmount)}` : ''} onChange={(e) => setEditPayAmount(parseAngkaInput(e.target.value))} /></div>
+                          <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="Rp0" value={editPayAmount ? `Rp${formatAngkaInput(editPayAmount)}` : ''} onChange={(e) => setEditPayAmount(parseAngkaInput(e.target.value))} /></div>
                           <div className="field">
                           <label>Metode Pembayaran</label>
                           <CustomSelect
@@ -375,7 +375,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 <form onSubmit={handleAddPayment} className="add-payment-card" style={{ marginTop: 8 }}>
                   <div className="field-grid-detail add-edit-pay-cols-3">
                     <div className="field"><label>Tanggal Pembayaran</label><CustomDatePicker value={payDate} onChange={setPayDate} variant="modal" /></div>
-                    <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="Rp 0" value={payAmount ? `Rp${formatAngkaInput(payAmount)}` : ''} onChange={(e) => setPayAmount(parseAngkaInput(e.target.value))} /></div>
+                    <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="Rp0" value={payAmount ? `Rp${formatAngkaInput(payAmount)}` : ''} onChange={(e) => setPayAmount(parseAngkaInput(e.target.value))} /></div>
                     <div className="field">
                       <label>Metode Pembayaran</label>
                       <CustomSelect
@@ -483,7 +483,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
               <div className="field-grid-booking cols-transport-catatan">
                 <div className="field">
                   <label>Biaya Transport</label>
-                  <input type="text" inputMode="numeric" placeholder="Rp 0" value={biayaTransport ? `Rp${formatAngkaInput(biayaTransport)}` : ''} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} />
+                  <input type="text" inputMode="numeric" placeholder="Rp0" value={biayaTransport ? `Rp${formatAngkaInput(biayaTransport)}` : ''} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} />
                 </div>
                 <div className="field">
                   <label>Catatan</label>
@@ -533,12 +533,12 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       <div className="field-grid-peserta cols-2">
                         <div className="field">
                           <label>Biaya Makeup</label>
-                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.biaya_makeup ? `Rp${formatAngkaInput(p.biaya_makeup)}` : ''} onChange={(e) => updateEditPeserta(i, 'biaya_makeup', parseAngkaInput(e.target.value))} />
+                          <input type="text" inputMode="numeric" placeholder="Rp0" value={p.biaya_makeup ? `Rp${formatAngkaInput(p.biaya_makeup)}` : ''} onChange={(e) => updateEditPeserta(i, 'biaya_makeup', parseAngkaInput(e.target.value))} />
                         </div>
                         {p.dikerjakan_oleh_makeup === 'Tim' && (
                         <div className="field">
                           <label>Komisi untuk Kamu</label>
-                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.komisi_makeup_tim ? `Rp${formatAngkaInput(p.komisi_makeup_tim)}` : ''} onChange={(e) => updateEditPeserta(i, 'komisi_makeup_tim', parseAngkaInput(e.target.value))} />
+                          <input type="text" inputMode="numeric" placeholder="Rp0" value={p.komisi_makeup_tim ? `Rp${formatAngkaInput(p.komisi_makeup_tim)}` : ''} onChange={(e) => updateEditPeserta(i, 'komisi_makeup_tim', parseAngkaInput(e.target.value))} />
                         </div>
                         )}
                       </div>
@@ -570,12 +570,12 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       <div className="field-grid-peserta cols-2">
                         <div className="field">
                           <label>Biaya Layanan Tambahan</label>
-                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.biaya_tambahan ? `Rp${formatAngkaInput(p.biaya_tambahan)}` : ''} onChange={(e) => updateEditPeserta(i, 'biaya_tambahan', parseAngkaInput(e.target.value))} />
+                          <input type="text" inputMode="numeric" placeholder="Rp0" value={p.biaya_tambahan ? `Rp${formatAngkaInput(p.biaya_tambahan)}` : ''} onChange={(e) => updateEditPeserta(i, 'biaya_tambahan', parseAngkaInput(e.target.value))} />
                         </div>
                         {p.dikerjakan_oleh_tambahan === 'Tim' && (
                         <div className="field">
                           <label>Komisi untuk Kamu</label>
-                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.komisi_tambahan ? `Rp${formatAngkaInput(p.komisi_tambahan)}` : ''} onChange={(e) => updateEditPeserta(i, 'komisi_tambahan', parseAngkaInput(e.target.value))} />
+                          <input type="text" inputMode="numeric" placeholder="Rp0" value={p.komisi_tambahan ? `Rp${formatAngkaInput(p.komisi_tambahan)}` : ''} onChange={(e) => updateEditPeserta(i, 'komisi_tambahan', parseAngkaInput(e.target.value))} />
                         </div>
                           )}
                       </div>

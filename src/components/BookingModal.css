@@ -163,10 +163,38 @@
   .booking-modal-overlay .modal-head { padding: 16px 18px; }
   .booking-modal-overlay .modal-body { padding: 16px 18px; }
   .booking-modal-overlay .modal-foot { padding: 12px 18px 18px; }
-  .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa,
-  .booking-modal-overlay .field-grid-booking.cols-tanggal-jam-event,
-  .booking-modal-overlay .field-grid-booking.cols-lokasi-sumber,
-  .booking-modal-overlay .field-grid-booking.cols-transport-dp-metode,
-  .booking-modal-overlay .field-grid-booking.cols-catatan,
-  .booking-modal-overlay .field-grid-peserta.cols-2 { grid-template-columns: 1fr; }
+  /* Susunan field di mobile SENGAJA nggak cuma numpuk 1 kolom polos --
+     tiap grup field diatur beda-beda sesuai kebutuhan barisnya masing-
+     masing (lihat komentar per grup di bawah). */
+
+  /* Baris 1: Tanggal Booking setengah lebar (kolom kiri doang, kolom
+     kanannya sengaja kosong). Baris 2 & 3: Nama Klien & Nomor WhatsApp,
+     masing-masing full-width di barisnya sendiri. */
+  .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: 1fr 1fr; }
+  .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(1) { grid-column: 1 / 2; }
+  .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(2),
+  .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(3) { grid-column: 1 / -1; }
+
+  /* Baris 4: Tanggal Acara & Jam Mulai berbagi 1 baris (2 kolom sama
+     rata). Baris 5: Event full-width sendiri di bawahnya. */
+  .booking-modal-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: 1fr 1fr; }
+  .booking-modal-overlay .field-grid-booking.cols-tanggal-jam-event > .field:nth-child(3) { grid-column: 1 / -1; }
+
+  /* Baris 6 & 7: Lokasi & Sumber Kanal Booking, masing-masing full-width
+     di barisnya sendiri-sendiri. */
+  .booking-modal-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 1fr; }
+
+  /* Baris 8: Biaya Transport, DP Masuk, Metode DP -- SENGAJA TETEP 3
+     kolom sebaris (nggak di-collapse), persis konsepnya kayak desktop.
+     Metode DP tetep cuma muncul kondisional pas DP Masuk diisi (logic-nya
+     di JSX, nggak berubah). */
+  .booking-modal-overlay .field-grid-booking.cols-transport-dp-metode { grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.9fr) minmax(0, 1.2fr); }
+
+  /* Baris 9: Catatan -- udah 1fr (full-width) dari sononya, nggak perlu
+     rule tambahan. */
+
+  /* Field pasangan Biaya Makeup+Komisi & Biaya Layanan Tambahan+Komisi
+     SENGAJA nggak di-collapse -- dipertahanin 2 kolom (default desktop-nya),
+     jadi tetep sebaris kayak yang diminta. Nggak ada rule di sini sama
+     sekali buat .field-grid-peserta.cols-2 -- default-nya udah 2 kolom. */
 }

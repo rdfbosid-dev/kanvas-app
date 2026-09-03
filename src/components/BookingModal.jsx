@@ -273,16 +273,16 @@ export default function BookingModal({ onClose, onSaved }) {
             <div className="field-grid-booking cols-transport-dp-metode">  
               <div className="field">
                 <label>Biaya Transport</label>
-                <input type="text" inputMode="numeric" placeholder="Rp 0" value={biayaTransport ? `Rp ${formatAngkaInput(biayaTransport)}` : ''} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} />
+                <input type="text" inputMode="numeric" placeholder="Rp0" value={biayaTransport ? `Rp${formatAngkaInput(biayaTransport)}` : ''} onChange={(e) => setBiayaTransport(parseAngkaInput(e.target.value))} />
               </div>
               <div className="field">
                 <label>DP Masuk</label>
-                <input type="text" inputMode="numeric" placeholder="Rp 0" value={dp ? `Rp ${formatAngkaInput(dp)}` : ''} onChange={(e) => setDp(parseAngkaInput(e.target.value))} />
+                <input type="text" inputMode="numeric" placeholder="Rp0" value={dp ? `Rp${formatAngkaInput(dp)}` : ''} onChange={(e) => setDp(parseAngkaInput(e.target.value))} />
               </div>
               <div className="field">
               {Number(dp) > 0 && (
                 <div className="field">
-                  <label>Metode DP</label>
+                  <label>Metode Pembayaran</label>
                   <CustomSelect
                     options={['Transfer Bank', 'E-Wallet', 'QRIS', 'Cash']}
                     value={dpMetode}
@@ -355,12 +355,12 @@ export default function BookingModal({ onClose, onSaved }) {
                       <div className="field-grid-peserta cols-2">
                         <div className="field">
                           <label>Biaya Makeup</label>
-                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.biayaMakeup ? `Rp ${formatAngkaInput(p.biayaMakeup)}` : ''} onChange={(e) => updatePeserta(i, 'biayaMakeup', parseAngkaInput(e.target.value))} />
+                          <input type="text" inputMode="numeric" placeholder="Rp0" value={p.biayaMakeup ? `Rp${formatAngkaInput(p.biayaMakeup)}` : ''} onChange={(e) => updatePeserta(i, 'biayaMakeup', parseAngkaInput(e.target.value))} />
                         </div>
                         {p.dikerjakanOlehMakeup === 'Tim' && (
                         <div className="field">
                           <label>Komisi untuk Kamu</label>
-                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.komisiMakeup ? `Rp ${formatAngkaInput(p.komisiMakeup)}` : ''} onChange={(e) => updatePeserta(i, 'komisiMakeup', parseAngkaInput(e.target.value))} />
+                          <input type="text" inputMode="numeric" placeholder="Rp0" value={p.komisiMakeup ? `Rp${formatAngkaInput(p.komisiMakeup)}` : ''} onChange={(e) => updatePeserta(i, 'komisiMakeup', parseAngkaInput(e.target.value))} />
                         </div>
                         )}
                       </div>
@@ -392,12 +392,12 @@ export default function BookingModal({ onClose, onSaved }) {
                       <div className="field-grid-peserta cols-2">
                         <div className="field">
                           <label>Biaya Layanan Tambahan</label>
-                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.biayaTambahan ? `Rp ${formatAngkaInput(p.biayaTambahan)}` : ''} onChange={(e) => updatePeserta(i, 'biayaTambahan', parseAngkaInput(e.target.value))} />
+                          <input type="text" inputMode="numeric" placeholder="Rp0" value={p.biayaTambahan ? `Rp${formatAngkaInput(p.biayaTambahan)}` : ''} onChange={(e) => updatePeserta(i, 'biayaTambahan', parseAngkaInput(e.target.value))} />
                         </div>
                         {p.dikerjakanOlehTambahan === 'Tim' && (
                         <div className="field">
                           <label>Komisi untuk Kamu</label>
-                          <input type="text" inputMode="numeric" placeholder="Rp 0" value={p.komisiTambahan ? `Rp ${formatAngkaInput(p.komisiTambahan)}` : ''} onChange={(e) => updatePeserta(i, 'komisiTambahan', parseAngkaInput(e.target.value))} />
+                          <input type="text" inputMode="numeric" placeholder="Rp0" value={p.komisiTambahan ? `Rp${formatAngkaInput(p.komisiTambahan)}` : ''} onChange={(e) => updatePeserta(i, 'komisiTambahan', parseAngkaInput(e.target.value))} />
                         </div>
                           )}
                       </div>
