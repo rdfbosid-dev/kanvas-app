@@ -134,7 +134,7 @@
 .booking-modal-overlay .toggle-opt:not(.sel):hover { background: color-mix(in srgb, var(--ink-faint) 50%, transparent); color: var(--ink-soft); }
 .booking-modal-overlay .toggle-opt.sel { background: var(--h3); color: #fff; border-color: transparent; }
 
-.booking-modal-overlay .toggle-row-rambut { display: flex; gap: 4px; }
+.booking-modal-overlay .toggle-row-rambut { display: flex; gap: 2px; }
 .booking-modal-overlay .toggle-opt-rambut {
   flex: 1; text-align: center; padding: 7px 5px; border-radius: 6px; font-size: 12px; font-weight: 600;
   background: var(--ink-faint); color: var(--ink-soft); cursor: pointer; border: 1px;
@@ -182,8 +182,8 @@
      masing-masing full-width di barisnya sendiri. */
   .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: 1fr 1fr; }
   .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(1) { grid-column: 1 / 2; }
-  .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(2),
-  .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(3) { grid-column: 1 / -1; }
+  .booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(2) { grid-column: 1 / -1; }
+.booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(3) { grid-column: 1 / 2; }
 
   /* Baris 4: Tanggal Acara & Jam Mulai berbagi 1 baris (2 kolom sama
      rata). Baris 5: Event full-width sendiri di bawahnya. */
@@ -192,7 +192,9 @@
 
   /* Baris 6 & 7: Lokasi & Sumber Kanal Booking, masing-masing full-width
      di barisnya sendiri-sendiri. */
-  .booking-modal-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 1fr; }
+  .booking-modal-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 1fr 1fr; }
+  .booking-modal-overlay .field-grid-booking.cols-lokasi-sumber > .field:nth-child(1) { grid-column: 1 / -1; }
+  .booking-modal-overlay .field-grid-booking.cols-lokasi-sumber > .field:nth-child(2) { grid-column: 1 / 2; }
 
   /* Baris 8: Biaya Transport, DP Masuk, Metode DP -- SENGAJA TETEP 3
      kolom sebaris (nggak di-collapse), persis konsepnya kayak desktop.
