@@ -63,9 +63,6 @@ export default function Sidebar({ headerAction = null }) {
         <button type="button" className="hamburger-btn" onClick={() => setMobileOpen(true)}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
         </button>
-        <div className="mobile-brand">
-          <div className="brand-mark small"></div>
-        </div>
         {headerAction}
       </div>
 
