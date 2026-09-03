@@ -64,10 +64,19 @@
 .inv-summary-final span { color: var(--ink-soft); font-weight: 700; }
 .inv-summary-final b { color: var(--h5); font-size: 15px; }
 
-.inv-pay-row { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; color: var(--ink-soft); padding: 5px 0; border-bottom: 1px solid color-mix(in srgb, var(--button-border) 30%, transparent); }
+/* SENGAJA pakai grid kolom tetap (bukan flex space-between) -- soalnya
+   space-between itu nempatin tiap elemen ngikutin lebar teksnya sendiri,
+   jadi kolom "Metode" bisa "geser" beda-beda posisi antar baris kalau
+   panjang tanggal/metode-nya beda-beda. Grid kolom tetap jamin ketiganya
+   selalu sejajar rapi, berapapun panjang teksnya. */
+.inv-pay-row {
+  display: grid; grid-template-columns: 100px 1fr auto; gap: 10px;
+  font-size: 12.5px; color: var(--ink-soft); padding: 5px 0; border-bottom: 1px solid color-mix(in srgb, var(--button-border) 30%, transparent);
+}
+.inv-pay-row > span:nth-child(3) { text-align: right; }
 
 .inv-note { margin-top: 16px; }
-.inv-footer { text-align: center; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-top: 28px; padding: 10px; }
+.inv-footer { text-align: center; font-size: 10px; font-weight: 600; color: var(--ink-soft); margin-top: 28px; padding: 10px; }
 
 /* ===== Cetak / Simpan PDF ===== */
 @media print {
@@ -85,7 +94,4 @@
   .invoice-overlay .modal-head { padding: 16px 18px; }
   .invoice-overlay .modal-body { padding: 16px 18px; }
   .invoice-overlay .modal-foot { padding: 12px 18px 18px; }
-  .inv-grid { grid-template-columns: 1fr; gap: 12px; }
-  .inv-header { flex-direction: column; gap: 10px; }
-  .inv-title-block { text-align: left; }
 }
