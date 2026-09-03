@@ -47,3 +47,7 @@
 }
 .ctime-opt:hover { background: color-mix(in srgb, var(--h3) 18%, transparent); }
 .ctime-opt.sel { background: var(--h3); color: #fff; font-weight: 700; }
+
+@media (max-width: 640px) {
+  .cdate-panel { left: auto; right: 0; }
+}
