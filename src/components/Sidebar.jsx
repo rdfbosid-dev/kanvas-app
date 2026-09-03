@@ -40,7 +40,7 @@ function Icon({ name }) {
   }
 }
 
-export default function Sidebar() {
+export default function Sidebar({ headerAction = null }) {
   const { user, profile } = useAuth()
   const { theme, toggleTheme } = useTheme()
   const studioName = profile?.studio_name || ''
@@ -65,8 +65,8 @@ export default function Sidebar() {
         </button>
         <div className="mobile-brand">
           <div className="brand-mark small"></div>
-          <span>Dapur MUA</span>
         </div>
+        {headerAction}
       </div>
 
       {mobileOpen && <div className="sidebar-backdrop" onClick={() => setMobileOpen(false)}></div>}

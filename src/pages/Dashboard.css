@@ -234,6 +234,17 @@
   .card-dashboard { border-radius: 20px; border: 1px solid var(--line-box); }
   .dashboard-insight-strip { border: 1px solid var(--line-box); font-size: 11px; }
 
+  /* Notif copy yang di .topbar-actions ini KHUSUS desktop -- di mobile,
+     notif-nya udah dipindah ke header (mobile-topbar, lewat Sidebar).
+     Ini yang nyembunyiin copy-nya di sini, biar nggak dobel keliatan. */
+  .topbar-actions .notif-wrap { display: none; }
+  /* .topbar defaultnya flex-wrap:wrap (dari base, di luar media query ini)
+     -- itu yang bikin tombol "Booking Baru" kececer ke baris bawah kalau
+     ruangnya sempit. Dipaksa nowrap di sini biar dia TETEP sebaris sama
+     teks "Halo, ..." (di sisi kanan, via justify-content:space-between
+     yang emang udah ada dari awal di .topbar). */
+  .topbar { flex-wrap: nowrap; }
+
   /* Penyesuaian khusus untuk KPI card 4 warna di HP */
   .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   

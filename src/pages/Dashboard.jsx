@@ -262,84 +262,93 @@ export default function Dashboard() {
     .filter((b) => new Date(b.tanggal_acara) >= new Date(today.toDateString()))
     .slice(0, 5)
 
+  // Dijadiin variable (bukan langsung ditulis di JSX) soalnya dipakai 2x:
+  // 1x buat desktop (di dalam .topbar-actions), 1x lagi dikirim ke Sidebar
+  // buat header mobile (lewat prop headerAction). Dua-duanya nyambung ke
+  // state notifOpen yang SAMA, jadi tetep sinkron -- yang keliatan cuma
+  // salah satu doang tergantung lebar layar (diatur lewat CSS).
+  const notifButton = (
+    <div className="notif-wrap">
+      <button
+        type="button"
+        className={`icon-btn${hasUnreadNotif ? ' has-dot' : ''}`}
+        onClick={() => {
+          setNotifOpen((v) => {
+            const opening = !v
+            if (opening) {
+              setNotifReadKey(notifKey)
+              if (user) localStorage.setItem(`dapurmua-notif-read-${user.id}`, notifKey)
+            }
+            return opening
+          })
+        }}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+      </button>
+
+      {notifOpen && (
+        <>
+          <div className="notif-backdrop" onClick={() => setNotifOpen(false)}></div>
+          <div className="notif-panel">
+            <div className="notif-drag-handle"></div>
+            <div className="notif-panel-head">
+              <span>Notifikasi</span>
+              <button
+                type="button"
+                className="notif-close-btn"
+                onClick={() => setNotifOpen(false)}
+                aria-label="Tutup notifikasi"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              </button>
+            </div>
+            {notifications.length === 0 ? (
+              <div className="notif-empty">Nggak ada notifikasi baru saat ini.</div>
+            ) : (
+              notifications.map((n) => (
+                <div
+                  className="notif-item"
+                  key={n.id}
+                  onClick={() => {
+                    setNotifOpen(false)
+                    if (n.type === 'booking') setSelectedBooking(n.booking)
+                    else navigate('/laporan')
+                  }}
+                >
+                  <div className={`notif-icon ${n.type}`}>
+                    {n.type === 'booking' ? (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M7 14l4-5 3 3 5-7"/></svg>
+                    )}
+                  </div>
+                  <div>
+                    <div className="notif-item-title">{n.title}</div>
+                    <div className="notif-item-desc">{n.desc}</div>
+                    {n.lokasi && <div className="notif-item-loc">{n.lokasi}</div>}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  )
+
   return (
     <div className="app-shell">
-      <Sidebar />
+      <Sidebar headerAction={notifButton} />
       <div className="main">
         <div className="topbar">
           <div>
-            <div className="greeting">Halo, {profile?.studio_name || 'Studio Saya'} 👋</div>
+            <div className="greeting">Halo, {profile?.studio_name || 'Studio Saya'}!</div>
             <div className="greeting-date">
               {today.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
             </div>
           </div>
           <div className="topbar-actions">
-            <div className="notif-wrap">
-              <button
-                type="button"
-                className={`icon-btn${hasUnreadNotif ? ' has-dot' : ''}`}
-                onClick={() => {
-                  setNotifOpen((v) => {
-                    const opening = !v
-                    if (opening) {
-                      setNotifReadKey(notifKey)
-                      if (user) localStorage.setItem(`dapurmua-notif-read-${user.id}`, notifKey)
-                    }
-                    return opening
-                  })
-                }}
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-              </button>
-
-              {notifOpen && (
-                <>
-                  <div className="notif-backdrop" onClick={() => setNotifOpen(false)}></div>
-                  <div className="notif-panel">
-                    <div className="notif-drag-handle"></div>
-                    <div className="notif-panel-head">
-                      <span>Notifikasi</span>
-                      <button
-                        type="button"
-                        className="notif-close-btn"
-                        onClick={() => setNotifOpen(false)}
-                        aria-label="Tutup notifikasi"
-                      >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-                      </button>
-                    </div>
-                    {notifications.length === 0 ? (
-                      <div className="notif-empty">Nggak ada notifikasi baru saat ini.</div>
-                    ) : (
-                      notifications.map((n) => (
-                        <div
-                          className="notif-item"
-                          key={n.id}
-                          onClick={() => {
-                            setNotifOpen(false)
-                            if (n.type === 'booking') setSelectedBooking(n.booking)
-                            else navigate('/laporan')
-                          }}
-                        >
-                          <div className={`notif-icon ${n.type}`}>
-                            {n.type === 'booking' ? (
-                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
-                            ) : (
-                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M7 14l4-5 3 3 5-7"/></svg>
-                            )}
-                          </div>
-                          <div>
-                            <div className="notif-item-title">{n.title}</div>
-                            <div className="notif-item-desc">{n.desc}</div>
-                            {n.lokasi && <div className="notif-item-loc">{n.lokasi}</div>}
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
+            {notifButton}
             <button className="btn-booking-primary" onClick={() => setShowModal(true)} type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 5v14M5 12h14"/></svg>
               Booking Baru

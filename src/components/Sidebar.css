@@ -21,7 +21,7 @@
 /* ===== MOBILE: sidebar jadi drawer geser dari kiri ===== */
 @media (max-width: 900px) {
   .mobile-topbar {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 12px; justify-content: space-between;
     position: sticky; top: 0; z-index: 90;
     background: var(--sidebar);
     padding: 14px 18px;
