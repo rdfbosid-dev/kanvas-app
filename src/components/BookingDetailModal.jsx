@@ -547,9 +547,9 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                         <div className="field">
                         <div className="sb-label">Tambahan Layanan Rambut</div>
                           <div className="toggle-row">
-                          <div className={`toggle-opt${p.layanan_tambahan === 'Tidak Ada' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Tidak Ada')}>Tidak Ada</div>
-                          <div className={`toggle-opt${p.layanan_tambahan === 'Hairdo' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Hairdo')}>Hairdo</div>
-                          <div className={`toggle-opt${p.layanan_tambahan === 'Hijabdo Plus' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Hijabdo Plus')}>Hijabdo+</div>
+                          <div className={`toggle-opt-rambut${p.layanan_tambahan === 'Tidak Ada' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Tidak Ada')}>Tidak</div>
+                          <div className={`toggle-opt-rambut${p.layanan_tambahan === 'Hairdo' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Hairdo')}>Hairdo</div>
+                          <div className={`toggle-opt-rambut${p.layanan_tambahan === 'Hijabdo Plus' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Hijabdo Plus')}>Hijabdo+</div>
                         </div>
                         </div>
 
