@@ -300,10 +300,36 @@
   .booking-detail-overlay .pay-actions { grid-column: 1 / -1; margin-top: 2px; justify-content: flex-end; }
   .booking-detail-overlay .pay-actions button { padding: 3px 4px; font-size: 9px; }
   .booking-detail-overlay .delete-confirm-banner { padding: 14px 18px; }
-  .booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa,
-  .booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event,
-  .booking-detail-overlay .field-grid-booking.cols-lokasi-sumber,
+
+  /* Susunan field di mobile disamain persis konsepnya kayak BookingModal.css
+     -- BUKAN cuma numpuk 1 kolom polos. */
+
+  /* Baris 1: Tanggal Booking setengah lebar (kolom kanannya sengaja
+     kosong). Baris 2 & 3: Nama Klien & Nomor WhatsApp, masing-masing
+     full-width di barisnya sendiri. */
+  .booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: 1fr 1fr; }
+  .booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(1) { grid-column: 1 / 2; }
+  .booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(2),
+  .booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa > .field:nth-child(3) { grid-column: 1 / -1; }
+
+  /* Baris 4: Tanggal Acara & Jam Mulai berbagi 1 baris (2 kolom sama
+     rata). Baris 5: Event full-width sendiri di bawahnya. */
+  .booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: 1fr 1fr; }
+  .booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event > .field:nth-child(3) { grid-column: 1 / -1; }
+
+  /* Baris 6 & 7: Lokasi & Sumber Kanal Booking, masing-masing full-width
+     di barisnya sendiri-sendiri. */
+  .booking-detail-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 1fr; }
+
+  /* cols-transport-catatan SENGAJA nggak disentuh -- tetep collapse ke
+     1 kolom (grup ini beda field-nya dari BookingModal.css, nggak ada
+     acuan screenshot buat cara belah barisnya). */
   .booking-detail-overlay .field-grid-booking.cols-transport-catatan,
-  .booking-detail-overlay .field-grid-peserta.cols-2,
   .booking-detail-overlay .field-grid-detail.add-edit-pay-cols-3 { grid-template-columns: 1fr; }
+
+  /* Field pasangan Biaya Makeup+Komisi & Biaya Layanan Tambahan+Komisi
+     (bagian Klien) SENGAJA nggak di-collapse -- dipertahanin 2 kolom
+     (default desktop-nya), sama persis kayak BookingModal.css. Nggak ada
+     rule di sini buat .field-grid-peserta.cols-2 -- default-nya udah
+     2 kolom. */
 }

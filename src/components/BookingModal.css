@@ -206,4 +206,6 @@
      SENGAJA nggak di-collapse -- dipertahanin 2 kolom (default desktop-nya),
      jadi tetep sebaris kayak yang diminta. Nggak ada rule di sini sama
      sekali buat .field-grid-peserta.cols-2 -- default-nya udah 2 kolom. */
+
+  .booking-modal-overlay .field-grid-peserta.cols-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-bottom: 5px; }
 }
