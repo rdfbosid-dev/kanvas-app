@@ -16,7 +16,7 @@
 }
 .booking-detail-overlay .modal-head {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 26px 0; flex-shrink: 0; margin-bottom: 10px;
+  padding: 16px 16px 0; flex-shrink: 0; margin-bottom: 10px;
 }
 .booking-detail-overlay .modal-head h2 {
   font-size: 18px;
@@ -39,7 +39,7 @@
   transition: background 0.15s;
 }
 .booking-detail-overlay .modal-close:hover { background: color-mix(in srgb, var(--h3) 50%, transparent); color: var(--h3); }
-.booking-detail-overlay .modal-body { padding: 10px 26px 20px; overflow-y: auto; flex: 1; }
+.booking-detail-overlay .modal-body { padding: 10px 16px 20px; overflow-y: auto; flex: 1; }
 .booking-detail-overlay .modal-foot { display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 10px 26px 20px; flex-shrink: 0; }
 .booking-detail-overlay .modal-foot .btn-ghost { margin-bottom: 0; }
 .booking-detail-overlay .modal-error { background: var(--pill); color: var(--h8); font-size: 12.5px; padding: 10px 14px; border-radius: 10px; margin-bottom: 10px; }
@@ -113,8 +113,8 @@
 .booking-detail-overlay .pay-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: linear-gradient(80deg, var(--active-nav) 0%, var(--table-body) 80%); border-radius: 14px; padding: 10px 16px; margin-bottom: 12px; color: var(--ink-soft); }
 .booking-detail-overlay .pay-value { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; margin-top: 5px; }
 
-.booking-detail-overlay .detail-label-history { margin-left: 10px; padding: 5px 5px 0; font-size: 12px; font-weight: 600; color: var(--ink-soft); }
-.booking-detail-overlay .pay-history { margin-left: 10px; padding: 5px 5px; margin-bottom: 5px; }
+.booking-detail-overlay .detail-label-history { margin-left: 0; padding: 5px 5px 0; font-size: 12px; font-weight: 600; color: var(--ink-soft); }
+.booking-detail-overlay .pay-history { margin-left: 5px; padding: 5px 0; margin-bottom: 5px; }
 .booking-detail-overlay .pay-row {
   display: grid; grid-template-columns: 120px 90px 80px 1fr auto; gap: 20px; align-items: center;
   padding: 5px 10px; background: color-mix(in srgb, var(--button-prm-hover) 10%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); font-family: inherit; font-size: 12px; color: var(--ink-soft);
@@ -136,7 +136,7 @@
   background: color-mix(in srgb, var(--button-prm-hover) 50%, transparent); border: none; cursor: pointer; font-size: 10px; color: var(--h2); padding: 3px 5px; border-radius: 5px;
 }
 .booking-detail-overlay .pay-actions button:hover { background: var(--button-prm-hover); color: var(--h7); }
-.booking-detail-overlay .pay-edit-row { margin-top: 10px; background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.booking-detail-overlay .pay-edit-row { margin-top: 10px; background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-radius: 16px; padding: 14px; margin-bottom: 12px; }
 
 .booking-detail-overlay .pay-confirm-popup {
   position: absolute; top: calc(100% + 8px); right: 0; z-index: 30;
@@ -162,24 +162,24 @@
 .booking-detail-overlay .peserta-view-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 50%, transparent); }
 .booking-detail-overlay .peserta-view-row:last-child { border-bottom: none; }
 
-.booking-detail-overlay .add-payment { margin-left: 15px; padding: 5px 5px; background: color-mix(in srgb, var(--active-nav) 50%, transparent); border-radius: 5px; border: none;
+.booking-detail-overlay .add-payment { margin-left: 5px; padding: 5px 5px; background: color-mix(in srgb, var(--active-nav) 50%, transparent); border-radius: 5px; border: none;
   color: var(--ink-soft); font-size: 12px; font-weight: 500; cursor: pointer; text-align: center; transition: background 0.15s;
   margin-bottom: 5px;
 }
 .booking-detail-overlay .add-payment:hover {
   background: color-mix(in srgb, var(--active-nav) 90%, transparent);
 }
-.booking-detail-overlay .add-payment-card { margin-left: 10px; background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-radius: 16px; padding: 15px 15px; }
+.booking-detail-overlay .add-payment-card { margin-left: 5px; background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-radius: 16px; padding: 14px; }
 
 .booking-detail-overlay .field-grid-detail { display: grid; gap: 12px; margin-bottom: 5px; }
 
 .booking-detail-overlay .field-grid-detail.add-edit-pay-cols-3 { display: grid; grid-template-columns: 1.2fr 0.8fr 1fr; }
 .booking-detail-overlay .field-grid-detail.add-edit-pay-cols-1 { display: grid; grid-template-columns: 1fr; }
 
-.booking-detail-overlay .field-grid-booking { display: grid; gap: 12px; margin-bottom: 5px; }
+.booking-detail-overlay .field-grid-booking { display: grid; gap: 8px; margin-bottom: 5px; }
 
-.booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 0.8fr); }
-.booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr) minmax(0, 1.4fr); }
+.booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr) minmax(0, 0.8fr); }
+.booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.6fr) minmax(0, 1.5fr); }
 .booking-detail-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 2fr 1fr; }
 .booking-detail-overlay .field-grid-booking.cols-transport-catatan { grid-template-columns: 1fr 2fr; }
 
@@ -236,7 +236,7 @@
 /* ---- Konfirmasi hapus booking ---- */
 .booking-detail-overlay .delete-confirm-banner {
   background: var(--notif);
-  padding: 12px 26px;
+  padding: 12px 16px;
 }
 .booking-detail-overlay .delete-confirm-text { display: flex; flex-direction: column; gap: 3px; }
 .booking-detail-overlay .delete-confirm-text b { color: var(--h8); font-size: 13.5px; }

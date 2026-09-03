@@ -52,14 +52,14 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
           <div className="inv-grid">
             <div>
               <div className="inv-label">Ditagihkan kepada</div>
-              <div className="inv-value">{booking.nama_klien}</div>
+              <div className="inv-name">{booking.nama_klien}</div>
               {booking.nomor_whatsapp && <div className="inv-sub">{booking.nomor_whatsapp}</div>}
             </div>
             <div>
               <div className="inv-label">Detail Acara</div>
-              <div className="inv-value">{booking.event}</div>
-              <div className="inv-sub">{formatTanggal(booking.tanggal_acara)}{booking.jam_start_makeup ? ` · ${booking.jam_start_makeup.slice(0, 5)} WIB` : ''}</div>
-              {booking.lokasi && <div className="inv-sub">{booking.lokasi}</div>}
+              <div className="inv-sub-event">{booking.event}</div>
+              <div className="inv-sub-date">{formatTanggal(booking.tanggal_acara)}{booking.jam_start_makeup ? ` · ${booking.jam_start_makeup.slice(0, 5)} WIB` : ''}</div>
+              {booking.lokasi && <div className="inv-sub-loc">{booking.lokasi}</div>}
             </div>
           </div>
 

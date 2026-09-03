@@ -16,7 +16,7 @@
 }
 .booking-modal-overlay .modal-head {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 26px; flex-shrink: 0;
+  padding: 16px 16px; flex-shrink: 0;
 }
 
 .booking-modal-overlay .modal-head h2 {
@@ -41,7 +41,7 @@
   transition: background 0.15s;
 }
 .booking-modal-overlay .modal-close:hover { background: color-mix(in srgb, var(--h3) 50%, transparent); color: var(--h3); }
-.booking-modal-overlay .modal-body { padding: 5px 26px; overflow-y: auto; flex: 1; }
+.booking-modal-overlay .modal-body { padding: 5px 16px; overflow-y: auto; flex: 1; }
 
 .booking-modal-overlay .section-label {
   font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
@@ -51,10 +51,10 @@
   display: inline-block;
 }
 
-.booking-modal-overlay .field-grid-booking { display: grid; gap: 12px; margin-bottom: 5px; }
+.booking-modal-overlay .field-grid-booking { display: grid; gap: 8px; margin-bottom: 5px; }
 
-.booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 0.8fr); }
-.booking-modal-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr) minmax(0, 1.4fr); }
+.booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr) minmax(0, 0.8fr); }
+.booking-modal-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.6fr) minmax(0, 1.5fr); }
 .booking-modal-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 2fr 1fr; }
 .booking-modal-overlay .field-grid-booking.cols-transport-dp-metode { grid-template-columns: 1fr 1fr 1fr; }
 .booking-modal-overlay .field-grid-booking.cols-catatan { grid-template-columns: 1fr; }
@@ -111,7 +111,7 @@
 }
 .booking-modal-overlay .klien-suggest-wa::before { content: '- '; }
 
-.booking-modal-overlay .peserta-card { background: color-mix(in srgb, var(--button-prm-hover) 60%, transparent); border: none; border-radius: 16px; padding: 16px; margin-bottom: 10px; }
+.booking-modal-overlay .peserta-card { background: color-mix(in srgb, var(--button-prm-hover) 60%, transparent); border: none; border-radius: 16px; padding: 10px; margin-bottom: 10px; }
 .booking-modal-overlay .peserta-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .booking-modal-overlay .peserta-title { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--ink-soft); }
 .booking-modal-overlay .peserta-num {
@@ -124,7 +124,7 @@
   padding: 4px 8px; border-radius: 7px; transition: background 0.15s;
 }
 .booking-modal-overlay .peserta-remove:hover { background: color-mix(in srgb, var(--notif) 85%, black); border: 1px solid color-mix(in srgb, var(--notif) 85%, black); color: var(--h8); }
-.booking-modal-overlay .peserta-body { background: var(--box-dashboard); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.booking-modal-overlay .peserta-body { background: var(--table-body); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
 .booking-modal-overlay .toggle-row { display: flex; gap: 6px; }
 .booking-modal-overlay .toggle-opt {
   flex: 1; text-align: center; padding: 7px; border-radius: 6px; font-size: 12px; font-weight: 600;
@@ -133,6 +133,15 @@
 }
 .booking-modal-overlay .toggle-opt:not(.sel):hover { background: color-mix(in srgb, var(--ink-faint) 50%, transparent); color: var(--ink-soft); }
 .booking-modal-overlay .toggle-opt.sel { background: var(--h3); color: #fff; border-color: transparent; }
+
+.booking-modal-overlay .toggle-opt-rambut {
+  flex: 1; text-align: center; padding: 7px 5px; border-radius: 6px; font-size: 12px; font-weight: 600;
+  background: var(--ink-faint); color: var(--ink-soft); cursor: pointer; border: 1px;
+  transition: background 0.15s, color 0.15s;
+}
+.booking-modal-overlay .toggle-opt-rambut:not(.sel):hover { background: color-mix(in srgb, var(--ink-faint) 50%, transparent); color: var(--ink-soft); }
+.booking-modal-overlay .toggle-opt-rambut.sel { background: var(--h3); color: #fff; border-color: transparent; }
+
 .booking-modal-overlay .sb-label { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); margin-bottom: 5px; }
 
 .booking-modal-overlay .add-peserta {
@@ -188,7 +197,7 @@
      kolom sebaris (nggak di-collapse), persis konsepnya kayak desktop.
      Metode DP tetep cuma muncul kondisional pas DP Masuk diisi (logic-nya
      di JSX, nggak berubah). */
-  .booking-modal-overlay .field-grid-booking.cols-transport-dp-metode { grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.9fr) minmax(0, 1.2fr); }
+  .booking-modal-overlay .field-grid-booking.cols-transport-dp-metode { grid-template-columns: minmax(0, 0.95fr) minmax(0, 0.95fr) minmax(0, 1.1fr); }
 
   /* Baris 9: Catatan -- udah 1fr (full-width) dari sononya, nggak perlu
      rule tambahan. */

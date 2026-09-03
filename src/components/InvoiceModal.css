@@ -9,7 +9,7 @@
 }
 .invoice-overlay .modal-head.invoice-no-print {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 26px; flex-shrink: 0; margin-bottom: 5px;
+  padding: 16px 16px; flex-shrink: 0; margin-bottom: 5px;
 }
 .invoice-overlay .modal-head h2 { font-size: 18px; }
 .invoice-overlay .modal-close {
@@ -41,8 +41,12 @@
 
 .inv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
 .inv-label { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; }
-.inv-value { font-size: 12.5px; font-weight: 600; color: var(--h5); margin-bottom: 5px; }
-.inv-sub { font-size: 11px; color: var(--ink-soft); margin-top: 1px; }
+.inv-name { font-size: 12.5px; font-weight: 600; color: var(--h5); margin-bottom: 5px; }
+.inv-sub-event { font-size: 12.5px; font-weight: 600; color: var(--h5); margin-bottom: 5px; }
+.inv-sub-date { font-size: 11px; color: var(--ink); margin-top: 1px; }
+.inv-sub-loc { font-size: 11px; color: var(--ink); margin-top: 1px; }
+
+.inv-sub { font-size: 11px; color: var(--h5); margin-top: 1px; }
 
 .inv-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
 .inv-table thead th {
@@ -50,7 +54,7 @@
   color: var(--ink-soft); padding: 8px 4px; border-bottom: 1.5px solid var(--button-border);
 }
 .inv-table thead th.right { text-align: right; }
-.inv-table td { padding: 7px 4px; font-size: 13px; color: var(--ink-soft); border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); }
+.inv-table td { padding: 8px 4px; font-size: 13px; color: var(--ink-soft); border-bottom: 1px solid color-mix(in srgb, var(--button-border) 30%, transparent); }
 .inv-table td.right { text-align: right; font-size: 12.5px; }
 
 .inv-summary { background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-radius: 14px; padding: 14px 18px; margin-bottom: 16px; }
@@ -60,7 +64,7 @@
 .inv-summary-final span { color: var(--ink-soft); font-weight: 700; }
 .inv-summary-final b { color: var(--h5); font-size: 15px; }
 
-.inv-pay-row { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; color: var(--ink-soft); padding: 5px 4px; border-bottom: 1px solid var(--button-border); }
+.inv-pay-row { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; color: var(--ink-soft); padding: 5px 0; border-bottom: 1px solid color-mix(in srgb, var(--button-border) 30%, transparent); }
 
 .inv-note { margin-top: 16px; }
 .inv-footer { text-align: center; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-top: 28px; padding: 10px; }
