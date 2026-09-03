@@ -115,6 +115,7 @@
   .kalender-layout { grid-template-columns: 1fr; gap: 14px; }
   .card.kalender-card { border: 1px solid var(--line-box); }
   .card.agenda-card { border: 1px solid var(--line-box); }
+  .kalender-cell { aspect-ratio: 1; }
   }
 @media (max-width: 600px) {
   .kalender-card, .card.agenda-card { padding: 20px; border: 1px solid var(--line-box); }
