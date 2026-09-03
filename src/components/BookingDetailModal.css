@@ -117,7 +117,7 @@
 .booking-detail-overlay .pay-history { margin-left: 10px; padding: 5px 5px; margin-bottom: 5px; }
 .booking-detail-overlay .pay-row {
   display: grid; grid-template-columns: 120px 90px 80px 1fr auto; gap: 20px; align-items: center;
-  padding: 5px 10px; background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); font-family: inherit; font-size: 12px; color: var(--ink-soft);
+  padding: 5px 10px; background: color-mix(in srgb, var(--button-prm-hover) 10%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); font-family: inherit; font-size: 12px; color: var(--ink-soft);
   border-radius: 8px; transition: background 0.15s;
   text-align: left;
 }
@@ -136,12 +136,12 @@
   background: color-mix(in srgb, var(--button-prm-hover) 50%, transparent); border: none; cursor: pointer; font-size: 10px; color: var(--h2); padding: 3px 5px; border-radius: 5px;
 }
 .booking-detail-overlay .pay-actions button:hover { background: var(--button-prm-hover); color: var(--h7); }
-.booking-detail-overlay .pay-edit-row { margin-top: 10px; background: color-mix(in srgb, var(--active-nav) 20%, transparent); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.booking-detail-overlay .pay-edit-row { margin-top: 10px; background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
 
 .booking-detail-overlay .pay-confirm-popup {
   position: absolute; top: calc(100% + 8px); right: 0; z-index: 30;
-  background: color-mix(in srgb, var(--active-nav) 50%, transparent); border: none; border-radius: 8px;
-  padding: 10px; width: 240px; box-shadow: var(--shadow-button);
+  background: var(--box-dashboard); border: 1px solid var(--line-box); border-radius: 8px;
+  padding: 10px; width: 240px; box-shadow: var(--shadow-modal);
 }
 .booking-detail-overlay .pay-confirm-popup p {
   font-size: 11px; font-weight: 500; color: var(--ink-soft); margin: 5px 0 10px; line-height: 1.4; text-align: center;
@@ -169,17 +169,17 @@
 .booking-detail-overlay .add-payment:hover {
   background: color-mix(in srgb, var(--active-nav) 90%, transparent);
 }
-.booking-detail-overlay .add-payment-card { margin-left: 10px; background: color-mix(in srgb, var(--active-nav) 20%, transparent); border-radius: 16px; padding: 15px 15px; }
+.booking-detail-overlay .add-payment-card { margin-left: 10px; background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-radius: 16px; padding: 15px 15px; }
 
 .booking-detail-overlay .field-grid-detail { display: grid; gap: 12px; margin-bottom: 5px; }
 
-.booking-detail-overlay .field-grid-detail.add-edit-pay-cols-3 { display: grid; grid-template-columns: 0.6fr 1fr 1.4fr; }
+.booking-detail-overlay .field-grid-detail.add-edit-pay-cols-3 { display: grid; grid-template-columns: 1.2fr 0.8fr 1fr; }
 .booking-detail-overlay .field-grid-detail.add-edit-pay-cols-1 { display: grid; grid-template-columns: 1fr; }
 
 .booking-detail-overlay .field-grid-booking { display: grid; gap: 12px; margin-bottom: 5px; }
 
-.booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: 1.2fr 1.4fr 0.4fr; }
-.booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: 1.2fr 0.6fr 1.2fr; }
+.booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 0.8fr); }
+.booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr) minmax(0, 1.4fr); }
 .booking-detail-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 2fr 1fr; }
 .booking-detail-overlay .field-grid-booking.cols-transport-catatan { grid-template-columns: 1fr 2fr; }
 
@@ -201,18 +201,6 @@
 }
 .booking-detail-overlay .field textarea { resize: vertical; min-height: 40px; }
 .booking-detail-overlay .cselect-trigger { height: 40px; }
-.booking-detail-overlay .field input[type="date"],
-.booking-detail-overlay .field input[type="time"] {
-  padding-right: 10px; color-scheme: light;
-}
-[data-theme="dark"] .booking-detail-overlay .field input[type="date"],
-[data-theme="dark"] .booking-detail-overlay .field input[type="time"] {
-  color-scheme: dark;
-}
-.booking-detail-overlay .field input[type="date"]::-webkit-calendar-picker-indicator,
-.booking-detail-overlay .field input[type="time"]::-webkit-calendar-picker-indicator {
-  margin-left: 8px; padding: 2px; cursor: pointer; opacity: 0.75;
-}
 
 .booking-detail-overlay .peserta-card { background: color-mix(in srgb, var(--button-prm-hover) 60%, transparent); border: none; border-radius: 16px; padding: 16px; margin-bottom: 10px; }
 .booking-detail-overlay .peserta-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }

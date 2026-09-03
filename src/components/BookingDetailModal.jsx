@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import CustomSelect from './CustomSelect'
+import CustomDatePicker from './CustomDatePicker'
+import CustomTimePicker from './CustomTimePicker'
 import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL } from '../lib/constants'
 import { cariAtauBuatKlien } from '../lib/klien'
 import { formatAngkaInput, parseAngkaInput } from '../lib/format'
@@ -10,7 +12,9 @@ import './BookingModal.css'
 import './BookingDetailModal.css'
 
 function formatRupiah(n) {
-  return 'Rp' + (Number(n) || 0).toLocaleString('id-ID')
+  const num = Number(n) || 0
+  const sign = num < 0 ? '-' : ''
+  return sign + 'Rp' + Math.abs(num).toLocaleString('id-ID')
 }
 function formatTanggal(dateStr) {
   if (!dateStr) return '-'
@@ -318,7 +322,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                     editingPaymentId === p.id ? (
                       <div className="pay-edit-row" key={p.id}>
                         <div className="field-grid-detail add-edit-pay-cols-3">
-                          <div className="field"><label>Tanggal Pembayaran</label><input type="date" value={editPayDate} onChange={(e) => setEditPayDate(e.target.value)} /></div>
+                          <div className="field"><label>Tanggal Pembayaran</label><CustomDatePicker value={editPayDate} onChange={setEditPayDate} variant="modal" /></div>
                           <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="Rp 0" value={editPayAmount ? `Rp${formatAngkaInput(editPayAmount)}` : ''} onChange={(e) => setEditPayAmount(parseAngkaInput(e.target.value))} /></div>
                           <div className="field">
                           <label>Metode Pembayaran</label>
@@ -370,7 +374,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
               ) : (
                 <form onSubmit={handleAddPayment} className="add-payment-card" style={{ marginTop: 8 }}>
                   <div className="field-grid-detail add-edit-pay-cols-3">
-                    <div className="field"><label>Tanggal Pembayaran</label><input type="date" value={payDate} onChange={(e) => setPayDate(e.target.value)} /></div>
+                    <div className="field"><label>Tanggal Pembayaran</label><CustomDatePicker value={payDate} onChange={setPayDate} variant="modal" /></div>
                     <div className="field"><label>Jumlah</label><input type="text" inputMode="numeric" placeholder="Rp 0" value={payAmount ? `Rp${formatAngkaInput(payAmount)}` : ''} onChange={(e) => setPayAmount(parseAngkaInput(e.target.value))} /></div>
                     <div className="field">
                       <label>Metode Pembayaran</label>
@@ -420,7 +424,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
               <div className="field-grid-booking cols-tanggal-nama-wa">
                 <div className="field">
                   <label>Tanggal Booking</label>
-                  <input type="date" value={tanggalBooking} onChange={(e) => setTanggalBooking(e.target.value)} required />
+                  <CustomDatePicker value={tanggalBooking} onChange={setTanggalBooking} variant="modal" />
                 </div>
                 <div className="field" style={{ position: 'relative' }}>
                   <label>Nama Klien</label>
@@ -435,11 +439,11 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
               <div className="field-grid-booking cols-tanggal-jam-event" style={{ marginTop: 12 }}>
                 <div className="field">
                   <label>Tanggal Acara</label>
-                  <input type="date" value={tanggalAcara} onChange={(e) => setTanggalAcara(e.target.value)} />
+                  <CustomDatePicker value={tanggalAcara} onChange={setTanggalAcara} variant="modal" />
                 </div>
                 <div className="field">
                   <label>Jam Mulai</label>
-                  <input type="time" value={jamStartMakeup} onChange={(e) => setJamStartMakeup(e.target.value)} />
+                  <CustomTimePicker value={jamStartMakeup} onChange={setJamStartMakeup} variant="modal" />
                 </div>
                 <div className="field">
                   <label>Event</label>

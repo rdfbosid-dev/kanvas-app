@@ -210,7 +210,7 @@
   padding: 10px; background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); font-family: inherit;
   font-size: 12px; color: var(--ink-soft); border-radius: 8px; transition: background 0.15s; cursor: pointer;
 }
-.klien-modal-overlay .riwayat-row:hover { background: linear-gradient(80deg, var(--active-nav) 0%, var(--box-dashboard) 100%); }
+.klien-modal-overlay .riwayat-row:hover { background: linear-gradient(80deg, var(--active-nav) 0%, var(--table-body) 100%); }
 .klien-modal-overlay .riwayat-row:last-child { border-bottom: none; }
 .klien-modal-overlay .riwayat-event { font-weight: 600; color: var(--ink-soft); text-align: left; }
 .klien-modal-overlay .riwayat-tanggal { text-align: left; color: var(--ink-soft); }
