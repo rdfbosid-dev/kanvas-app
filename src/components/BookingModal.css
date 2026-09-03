@@ -63,7 +63,7 @@
 .booking-modal-overlay .quickfill-btn {
   font-size: 12px; font-weight: 500; color: var(--h1); background: var(--ink-faint);
   border: none; border-radius: 5px; padding: 4px 10px; cursor: pointer; transition: background 0.15s;
-  margin-top: -4px;
+  margin-top: -2px;
 }
 .booking-modal-overlay .quickfill-btn:hover { background: color-mix(in srgb, var(--ink-faint) 50%, transparent); }
 .booking-modal-overlay .field input,
@@ -134,7 +134,7 @@
 .booking-modal-overlay .toggle-opt:not(.sel):hover { background: color-mix(in srgb, var(--ink-faint) 50%, transparent); color: var(--ink-soft); }
 .booking-modal-overlay .toggle-opt.sel { background: var(--h3); color: #fff; border-color: transparent; }
 
-.booking-modal-overlay .toggle-row-rambut { display: flex; gap: 2px; }
+.booking-modal-overlay .toggle-row-rambut { display: flex; gap: 3px; }
 .booking-modal-overlay .toggle-opt-rambut {
   flex: 1; text-align: center; padding: 7px 5px; border-radius: 6px; font-size: 12px; font-weight: 600;
   background: var(--ink-faint); color: var(--ink-soft); cursor: pointer; border: 1px;
@@ -211,4 +211,10 @@
      sekali buat .field-grid-peserta.cols-2 -- default-nya udah 2 kolom. */
 
   .booking-modal-overlay .field-grid-peserta.cols-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-bottom: 5px; }
+
+  .booking-modal-overlay .quickfill-btn {
+    font-size: 8px; font-weight: 500; color: var(--h1); background: var(--ink-faint);
+    border: none; border-radius: 5px; padding: 4px; cursor: pointer; transition: background 0.15s;
+    margin-top: 0;
+  }
 }
