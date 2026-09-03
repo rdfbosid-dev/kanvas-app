@@ -9,7 +9,7 @@
 }
 
 .topbar { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 26px; flex-wrap: wrap; gap: 14px; }
-.greeting { font-size: 24px; font-weight: 700; font-family: 'Poppins', sans-serif; color: var(--h9); }
+.greeting { font-size: 24px; font-weight: 700; font-family: 'Poppins', sans-serif; color: var(--h9); line-height: 1.2; }
 .greeting-date { font-size: 13.5px; color: var(--ink-soft); margin-top: 4px; }
 .topbar-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 
