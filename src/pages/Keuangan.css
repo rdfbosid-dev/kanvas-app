@@ -45,7 +45,7 @@
 }
 .keuangan-table tbody tr:last-child { border-bottom: none; }
 .keuangan-table tbody tr:hover { background: color-mix(in srgb, var(--active-nav) var(--mix-box), transparent); }
-.keuangan-table td { padding: 8px 20px; font-size: 13px; font-family: 'Poppins', sans-serif; color: var(--ink-soft); }
+.keuangan-table td { padding: 5px 20px; font-size: 13px; font-family: 'Poppins', sans-serif; color: var(--ink-soft); }
 .keuangan-table td.right { text-align: right; }
 .keuangan-table td.center { text-align: center; }
 .keuangan-table td.mono { font-size: 12px; font-weight: 700; }
@@ -59,7 +59,7 @@
    di tiap <td> (lihat Keuangan.jsx), jadi rule ini nggak perlu set
    text-align sendiri. */
 .keuangan-table tfoot td {
-  font-size: 12px; font-weight: 700; color: var(--h4);
+  font-size: 12px; font-weight: 700; color: var(--h5);
   text-transform: uppercase; letter-spacing: 0.03em; padding: 14px 24px;
   background: color-mix(in srgb, var(--sidebar) 90%, transparent);
   white-space: nowrap;
