@@ -293,14 +293,12 @@ export default function Dashboard() {
             <div className="notif-drag-handle"></div>
             <div className="notif-panel-head">
               <span>Notifikasi</span>
-              <button
-                type="button"
+              <div
                 className="notif-close-btn"
                 onClick={() => setNotifOpen(false)}
                 aria-label="Tutup notifikasi"
               >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-              </button>
+              </div>
             </div>
             {notifications.length === 0 ? (
               <div className="notif-empty">Nggak ada notifikasi baru saat ini.</div>
