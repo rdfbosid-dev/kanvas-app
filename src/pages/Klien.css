@@ -79,7 +79,7 @@
 /* ---- Tampilan tabel (mode "list", default) ---- */
 .klien-table-card {
   border: 1px solid var(--line-box);
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 0;
   margin-bottom: 14px;
   overflow: hidden;
@@ -207,7 +207,7 @@
 .klien-modal-overlay .riwayat-list { margin-bottom: 5px; }
 .klien-modal-overlay .riwayat-row {
   display: grid; grid-template-columns: 1fr 140px auto; gap: 16px; align-items: center;
-  padding: 10px; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); font-family: inherit;
+  padding: 10px; background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); font-family: inherit;
   font-size: 12px; color: var(--ink-soft); border-radius: 8px; transition: background 0.15s; cursor: pointer;
 }
 .klien-modal-overlay .riwayat-row:hover { background: linear-gradient(80deg, var(--active-nav) 0%, var(--box-dashboard) 100%); }

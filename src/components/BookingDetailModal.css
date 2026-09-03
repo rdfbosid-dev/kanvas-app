@@ -117,7 +117,7 @@
 .booking-detail-overlay .pay-history { margin-left: 10px; padding: 5px 5px; margin-bottom: 5px; }
 .booking-detail-overlay .pay-row {
   display: grid; grid-template-columns: 120px 90px 80px 1fr auto; gap: 20px; align-items: center;
-  padding: 5px 10px; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); font-family: inherit; font-size: 12px; color: var(--ink-soft);
+  padding: 5px 10px; background: color-mix(in srgb, var(--button-prm-hover) 20%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent); font-family: inherit; font-size: 12px; color: var(--ink-soft);
   border-radius: 8px; transition: background 0.15s;
   text-align: left;
 }
@@ -178,8 +178,8 @@
 
 .booking-detail-overlay .field-grid-booking { display: grid; gap: 12px; margin-bottom: 5px; }
 
-.booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: 0.6fr 1.4fr 1fr; }
-.booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: 0.6fr 0.4fr 2fr; }
+.booking-detail-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: 1.2fr 1.4fr 0.4fr; }
+.booking-detail-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: 1.2fr 0.6fr 1.2fr; }
 .booking-detail-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 2fr 1fr; }
 .booking-detail-overlay .field-grid-booking.cols-transport-catatan { grid-template-columns: 1fr 2fr; }
 

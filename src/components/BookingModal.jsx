@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import CustomSelect from './CustomSelect'
+import CustomDatePicker from './CustomDatePicker'
+import CustomTimePicker from './CustomTimePicker'
 import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL } from '../lib/constants'
 import { formatAngkaInput, parseAngkaInput } from '../lib/format'
 import { cariAtauBuatKlien } from '../lib/klien'
@@ -188,7 +190,7 @@ export default function BookingModal({ onClose, onSaved }) {
             <div className="field-grid-booking cols-tanggal-nama-wa">
               <div className="field">
                 <label>Tanggal Booking</label>
-                <input type="date" value={tanggalBooking} onChange={(e) => setTanggalBooking(e.target.value)} required />
+                <CustomDatePicker value={tanggalBooking} onChange={setTanggalBooking} variant="modal" />
               </div>
               <div className="field" style={{ position: 'relative' }}>
                 <label>Nama Klien</label>
@@ -226,11 +228,11 @@ export default function BookingModal({ onClose, onSaved }) {
             <div className="field-grid-booking cols-tanggal-jam-event">
               <div className="field">
                 <label>Tanggal Acara</label>
-                <input type="date" value={tanggalAcara} onChange={(e) => setTanggalAcara(e.target.value)} required />
+                <CustomDatePicker value={tanggalAcara} onChange={setTanggalAcara} variant="modal" />
               </div>
               <div className="field">
                 <label>Jam Mulai</label>
-                <input type="time" value={jamStartMakeup} onChange={(e) => setJamStartMakeup(e.target.value)} />
+                <CustomTimePicker value={jamStartMakeup} onChange={setJamStartMakeup} variant="modal" />
               </div>
               <div className="field">
                 <label>Event</label>

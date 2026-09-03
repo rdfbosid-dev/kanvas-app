@@ -6,13 +6,13 @@
    .booking-modal-overlay biar konsisten. */
 
 .booking-modal-overlay {
-  position: fixed; inset: 0; background: rgb(36, 55, 62, 0.6);
+  position: fixed; inset: 0; background: rgb(36, 55, 62, 0.45);
   display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
 }
 .booking-modal-overlay .modal {
-  background: color-mix(in srgb, var(--table-body) 90%, transparent); border: 1.5px solid var(--line-box); border-radius: 24px; width: 100%; max-width: 600px;
+  background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border-radius: 24px; width: 100%; max-width: 600px;
   max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: var(--shadow-modal);
+  box-shadow: 0 24px 60px -12px var(--shadow-modal);
 }
 .booking-modal-overlay .modal-head {
   display: flex; align-items: center; justify-content: space-between;
@@ -53,8 +53,8 @@
 
 .booking-modal-overlay .field-grid-booking { display: grid; gap: 12px; margin-bottom: 5px; }
 
-.booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: 0.6fr 1.4fr 1fr; }
-.booking-modal-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: 0.6fr 0.4fr 2fr; }
+.booking-modal-overlay .field-grid-booking.cols-tanggal-nama-wa { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 0.8fr); }
+.booking-modal-overlay .field-grid-booking.cols-tanggal-jam-event { grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr) minmax(0, 1.4fr); }
 .booking-modal-overlay .field-grid-booking.cols-lokasi-sumber { grid-template-columns: 2fr 1fr; }
 .booking-modal-overlay .field-grid-booking.cols-transport-dp-metode { grid-template-columns: 1fr 1fr 1fr; }
 .booking-modal-overlay .field-grid-booking.cols-catatan { grid-template-columns: 1fr; }
@@ -86,25 +86,6 @@
 .booking-modal-overlay .field textarea { resize: vertical; min-height: 56px; }
 .booking-modal-overlay .cselect-trigger { height: 40px; }
 
-.booking-modal-overlay .field input[type="date"],
-.booking-modal-overlay .field input[type="time"] {
-  padding-right: 10px;
-  color: var(--ink-soft);
-  font-size: 12px;
-  color-scheme: light;
-}
-[data-theme="dark"] .booking-modal-overlay .field input[type="date"],
-[data-theme="dark"] .booking-modal-overlay .field input[type="time"] {
-  color-scheme: dark;
-}
-.booking-modal-overlay .field input[type="date"]::-webkit-calendar-picker-indicator,
-.booking-modal-overlay .field input[type="time"]::-webkit-calendar-picker-indicator {
-  margin-left: 8px;
-  padding: 2px;
-  cursor: pointer;
-  opacity: 0.75;
-}
-
 /* Dropdown suggestion "klien lama" pas ngetik di field Nama Klien --
    sengaja dibikin sendiri (custom), BUKAN autofill bawaan browser (field
    input-nya udah dikasih autoComplete="off"). Ngambang di bawah field
@@ -112,7 +93,7 @@
    (udah di-set inline lewat style={{position:'relative'}} di JSX). */
 .booking-modal-overlay .klien-suggest {
   position: absolute; top: calc(100% + 1px); left: 0; right: 0; z-index: 20;
-  background: color-mix(in srgb, var(--field) 90%, transparent); border: none;
+  background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border: none;
   border-radius: 6px; padding: 6px; max-height: 200px; overflow-y: auto;
   box-shadow: var(--shadow-modal);
 }
@@ -143,7 +124,7 @@
   padding: 4px 8px; border-radius: 7px; transition: background 0.15s;
 }
 .booking-modal-overlay .peserta-remove:hover { background: color-mix(in srgb, var(--notif) 85%, black); border: 1px solid color-mix(in srgb, var(--notif) 85%, black); color: var(--h8); }
-.booking-modal-overlay .peserta-body { background: var(--box-dashboard); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; }
+.booking-modal-overlay .peserta-body { background: var(--box-dashboard); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .booking-modal-overlay .toggle-row { display: flex; gap: 6px; }
 .booking-modal-overlay .toggle-opt {
   flex: 1; text-align: center; padding: 7px; border-radius: 6px; font-size: 12px; font-weight: 600;
@@ -156,26 +137,24 @@
 
 .booking-modal-overlay .add-peserta {
   text-align: center; padding: 8px; border-radius: 10px; border: 1.5px dashed var(--h3);
-  color: var(--ink-soft); font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 5px; background: none;
+  color: var(--h3); font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 5px; background: none;
   width: 100%; transition: background 0.15s, border-color 0.15s;
 }
 .booking-modal-overlay .add-peserta:hover { background: color-mix(in srgb, var(--button-prm) 12%, transparent); border-color: var(--button-border); }
 
 .booking-modal-overlay .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 26px; flex-shrink: 0; }
-.booking-modal-overlay .btn-ghost {
-  padding: 10px 18px; border-radius: 11px; border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); background: var(--table-body);
-  font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
-  transition: background 0.15s, border-color 0.15s;
-}
-.booking-modal-overlay .btn-ghost:hover { background: color-mix(in srgb, var(--button-prm-hover) 50%, transparent); border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) 50%, transparent); }
 .booking-modal-overlay .btn-primary-booking {
   padding: 10px 18px; border-radius: 11px; border: 1.5px solid var(--button-prm-hover); background: var(--button-prm-hover);
   font-size: 13.5px; font-weight: 600; color: var(--button-tx-hover); cursor: pointer; font-family: inherit;
   transition: background 0.15s, border-color 0.15s;
 }
-.booking-modal-overlay .btn-primary-booking:hover {
-  background: var(--h3);
+.booking-modal-overlay .btn-primary-booking:hover { background: var(--h3); }
+.booking-modal-overlay .btn-ghost {
+  padding: 10px 18px; border-radius: 11px; border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); background: var(--box-dashboard);
+  font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
 }
+.booking-modal-overlay .btn-ghost:hover { background: color-mix(in srgb, var(--button-prm-hover) 50%, transparent); border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) 50%, transparent); }
 .booking-modal-overlay .modal-error { background: var(--pill); color: var(--h8); font-size: 12.5px; padding: 10px 14px; border-radius: 10px; margin-bottom: 10px; }
 
 @media (max-width: 640px) {

@@ -21,7 +21,7 @@
 .table-card {
   background: color-mix(in srgb, var(--page-b) 60%, transparent);
   border: 1px solid var(--line-box);
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 0;
   margin-bottom: 20px;
   overflow: hidden;
