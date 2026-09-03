@@ -92,22 +92,22 @@
    pakai position:absolute, wrapper .field induknya WAJIB position:relative
    (udah di-set inline lewat style={{position:'relative'}} di JSX). */
 .booking-modal-overlay .klien-suggest {
-  position: absolute; top: calc(100% + 1px); left: 0; right: 0; z-index: 20;
-  background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border: none;
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 20;
+  background: var(--field); border: 1px solid var(--line-box);
   border-radius: 6px; padding: 6px; max-height: 200px; overflow-y: auto;
   box-shadow: var(--shadow-modal);
 }
 .booking-modal-overlay .klien-suggest-item {
-  display: flex; align-items: baseline; padding: 8px 10px; border-radius: 6px;
+  display: flex; align-items: baseline; padding: 8px; border-radius: 6px;
   cursor: pointer; transition: background 0.12s;
 }
-.booking-modal-overlay .klien-suggest-item:hover { background: color-mix(in srgb, var(--h3) 30%, transparent); }
-.booking-modal-overlay .klien-suggest-name { font-size: 10px; font-weight: 500; color: color-mix(in srgb, var(--ink-soft) 80%, transparent); }
+.booking-modal-overlay .klien-suggest-item:hover { background: color-mix(in srgb, var(--h3) 10%, transparent); }
+.booking-modal-overlay .klien-suggest-name { font-size: 12px; font-weight: 500; color: color-mix(in srgb, var(--ink-soft) 80%, transparent); }
 /* ::before nyisipin " - " otomatis SEBELUM nomor WA, jadi hasilnya
    "Laura Basuki - 089435931745" -- tanpa perlu ubah JSX (yang dua-duanya
    emang udah dipisah jadi <span> beda dari awal). */
 .booking-modal-overlay .klien-suggest-wa {
-  font-size: 10px; color: color-mix(in srgb, var(--ink-soft) 80%, transparent); font-family: 'Space Mono', monospace; margin-left: 4px;
+  font-size: 12px; color: color-mix(in srgb, var(--ink-soft) 80%, transparent); font-family: 'Space Mono', monospace; margin-left: 4px;
 }
 .booking-modal-overlay .klien-suggest-wa::before { content: '- '; }
 
