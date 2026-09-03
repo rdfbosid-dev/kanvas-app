@@ -121,12 +121,10 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
             </>
           )}
 
-          {booking.catatan && (
-            <div className="inv-note">
-              <div className="inv-label">Catatan</div>
-              <div className="inv-sub">{booking.catatan}</div>
-            </div>
-          )}
+          <div className="inv-note">
+            <div className="inv-label">Catatan</div>
+            <div className="inv-sub">{booking.catatan || '—'}</div>
+          </div>
 
           <div className="inv-footer">Terima kasih atas kepercayaan Anda karena telah menggunakan jasa kami.</div>
         </div>
