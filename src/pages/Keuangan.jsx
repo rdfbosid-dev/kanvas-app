@@ -230,12 +230,24 @@ export default function Keuangan() {
           </div>
           <div className="topbar-actions topbar-actions-keuangan">
             <div className="filter-select"><CustomSelect options={tahunOptions} value={filterTahun} onChange={setFilterTahun} /></div>
-            <button type="button" className="btn-booking-primary" onClick={handleExportExcel} disabled={!adaData}>
+            <button type="button" className="btn-booking-primary btn-export-desktop" onClick={handleExportExcel} disabled={!adaData}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" /></svg>
               Export Excel
             </button>
           </div>
         </div>
+
+        {/* Versi mobile tombol Export Excel -- elemen TERPISAH (bukan cuma
+            digeser lewat CSS), sengaja ditaruh di sini (di luar .topbar,
+            di atas semua konten) biar di layar sempit dia jadi baris
+            sendiri di bawah subjudul "Rekap bulanan sepanjang tahun",
+            di atas kartu Tren Omzet & Penghasilan. Disembunyiin di
+            desktop lewat CSS (lihat .btn-export-mobile di Keuangan.css),
+            munculnya gantian sama .btn-export-desktop di atas. */}
+        <button type="button" className="btn-booking-primary btn-export-mobile" onClick={handleExportExcel} disabled={!adaData}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" /></svg>
+          Export Excel
+        </button>
 
         {error && <div className="empty-state" style={{ color: 'var(--coral-tx)' }}>Gagal memuat data: {error}</div>}
         {loading && <div className="loading-state">Memuat data...</div>}

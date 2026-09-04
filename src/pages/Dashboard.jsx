@@ -338,7 +338,7 @@ export default function Dashboard() {
     <div className="app-shell">
       <Sidebar headerAction={notifButton} />
       <div className="main">
-        <div className="topbar">
+        <div className="topbar topbar-dashboard">
           <div>
             <div className="greeting">Halo, {profile?.studio_name || 'Studio Saya'}!</div>
             <div className="greeting-date">

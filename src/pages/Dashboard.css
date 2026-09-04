@@ -218,8 +218,17 @@
      -- itu yang bikin tombol "Booking Baru" kececer ke baris bawah kalau
      ruangnya sempit. Dipaksa nowrap di sini biar dia TETEP sebaris sama
      teks "Halo, ..." (di sisi kanan, via justify-content:space-between
-     yang emang udah ada dari awal di .topbar). */
-  .topbar { flex-wrap: nowrap; }
+     yang emang udah ada dari awal di .topbar).
+     PENTING: sengaja di-scope ke `.topbar-dashboard` (bukan `.topbar`
+     polos) -- soalnya class `.topbar` itu GLOBAL, dipakai bareng di semua
+     halaman (Keuangan, Klien, Booking, Kalender, Laporan, dll). Kalau
+     nowrap dipasang di `.topbar` polos, halaman lain yang topbar-action-nya
+     lebih lebar dari punya Dashboard (misal Keuangan: dropdown tahun +
+     tombol Export) jadi KEPAKSA sebaris juga padahal ruangnya nggak cukup
+     -- itu penyebab tombol Export Excel di Keuangan nyasar/kepotong keluar
+     layar di HP. Dashboard sendiri aman dipaksa nowrap karena isi
+     topbar-actions-nya cuma 1 tombol + icon notif, selalu muat. */
+  .topbar-dashboard { flex-wrap: nowrap; }
 
   /* Penyesuaian khusus untuk KPI card 4 warna di HP */
   .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }

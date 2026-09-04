@@ -259,12 +259,23 @@ export default function Klien() {
             <div className="greeting-date">Kelola semua data klien Anda</div>
           </div>
           <div className="topbar-actions">
-            <button type="button" className="btn-booking-primary" onClick={handleExportExcel} disabled={clients.length === 0}>
+            <button type="button" className="btn-booking-primary btn-export-desktop" onClick={handleExportExcel} disabled={clients.length === 0}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" /></svg>
               Export Excel
             </button>
           </div>
         </div>
+
+        {/* Versi mobile tombol Export Excel -- elemen TERPISAH, ditaruh
+            di sini (di luar .topbar) biar di layar sempit jadi baris
+            sendiri di bawah subjudul "Kelola semua data klien Anda",
+            di atas KPI grid (Total Klien dkk). Disembunyiin di desktop
+            lewat CSS (lihat .btn-export-mobile di Klien.css), munculnya
+            gantian sama .btn-export-desktop di atas. */}
+        <button type="button" className="btn-booking-primary btn-export-mobile" onClick={handleExportExcel} disabled={clients.length === 0}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" /></svg>
+          Export Excel
+        </button>
 
         <div className="klien-stat-row">
           <div className="klien-stat-card-totalklien">
@@ -321,7 +332,7 @@ export default function Klien() {
                 onChange={setStatusFilter}
               />
           </div>
-          <div className="filter-select">
+          <div className="filter-select filter-select-sort">
               <CustomSelect
                 options={['Terbaru', 'Nama A-Z', 'Total Pembayaran']}
                 value={sortBy}

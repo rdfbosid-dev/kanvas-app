@@ -1,11 +1,28 @@
-.cselect { position: relative; width: 100%; }
+.cselect { position: relative; width: 100%; display: inline-block; }
 
 .cselect-trigger {
-  width: 100%; display: flex; align-items: center; justify-content: space-between;
-  border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); border-radius: 11px; padding: 8px 10px 8px 12px;
-  font-size: 12px; font-family: inherit; color: color-mix(in srgb, var(--ink-soft) 70%, transparent); background: color-mix(in srgb, var(--box-dashboard) 90%, transparent);
-  cursor: pointer; text-align: left; transition: border-color 0.15s, box-shadow 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px; 
+  border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); 
+  border-radius: 11px; 
+  padding: 8px 12px;
+  font-size: 12px; 
+  font-family: inherit; 
+  color: color-mix(in srgb, var(--ink-soft) 70%, transparent); 
+  background: color-mix(in srgb, var(--box-dashboard) 90%, transparent);
+  cursor: pointer; 
+  text-align: left; 
+  width: 100%; /* Balikin ke 100% supaya ukurannya stabil ngikutin kontainer */
+  min-width: 140px; /* Beri batas minimal agar tidak terlalu kecil saat isinya singkat (seperti "2026") */
 }
+
+.cselect-trigger span, 
+.cselect-trigger div {
+  white-space: nowrap;
+}
+
 .cselect-trigger:hover { border-color: color-mix(in srgb, var(--h2) 90%, transparent); }
 .cselect-trigger.open { border-color: var(--h3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--h3) 18%, transparent); }
 
@@ -30,17 +47,37 @@
 .cselect-trigger.open .cselect-icon svg { transform: none; color: var(--ink-faint); }
 
 .cselect-menu {
-  position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30;
-  background: var(--field); border: 1px solid color-mix(in srgb, var(--button-border) var(--mix-border), transparent); border-radius: 12px;
-  padding: 6px; box-shadow: 0 16px 36px -12px rgba(43,36,56,0.25);
-  max-height: 220px; overflow-y: auto;
-  display: flex; flex-direction: column; gap: 4px;
+  position: absolute; 
+  top: calc(100% + 6px); 
+  left: 0; 
+  right: auto; 
+  min-width: 100%; /* Dropdown minimal selebar triggernya, tapi bisa melar jika opsi di dalamnya panjang */
+  width: max-content; 
+  z-index: 30;
+  background: var(--box-dashboard); 
+  border: 1px solid color-mix(in srgb, var(--button-border) var(--mix-border), transparent); 
+  border-radius: 11px;
+  padding: 6px; 
+  box-shadow: 0 16px 36px -12px rgba(43,36,56,0.25);
+  max-height: 220px; 
+  overflow-y: auto;
+  display: flex; 
+  flex-direction: column; 
+  gap: 4px;
 }
 
 .cselect-option {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 8px 10px; border-radius: 8px; font-size: 12px; color: var(--ink-soft);
-  cursor: pointer; transition: background 0.12s, color 0.12s;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  gap: 10px; /* Tambah jarak antara teks opsi dengan icon centang/check */
+  padding: 8px 14px; /* Sesuaikan padding kiri-kanan agar fair */
+  border-radius: 8px; 
+  font-size: 12px; 
+  color: var(--ink-soft);
+  cursor: pointer; 
+  transition: background 0.12s, color 0.12s;
+  white-space: nowrap;
 }
 .cselect-option:hover { background: color-mix(in srgb, var(--h3) 18%, transparent); color: var(--h5); }
 .cselect-option.sel { background: color-mix(in srgb, var(--h3) 18%, transparent); color: var(--ink-soft); font-weight: 600; }

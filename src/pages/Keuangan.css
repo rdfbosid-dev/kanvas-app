@@ -1,17 +1,24 @@
 .filter-select { width: 130px; }
 
-/* Topbar Keuangan isinya 2 elemen (dropdown tahun + tombol Export) --
-   beda dari halaman lain yang cuma 1 tombol doang, jadi butuh rule
-   sendiri biar nggak overflow pas layar sempit. Di desktop tetep sejajar
-   biasa (mewarisi behavior .topbar-actions global), baru di mobile
-   dipaksa "wrap" -- dropdown & tombol berbagi proporsi lebar yang sama
-   (flex:1), dan kalau masih kurang muat, tombolnya otomatis turun ke
-   baris baru (bukan kepotong/nongol keluar layar).
-*/
-@media (max-width: 640px) {
-  .topbar-actions-keuangan { flex-wrap: wrap; gap: 10px; width: 100%; }
-  .topbar-actions-keuangan .filter-select { flex: 1; width: auto; min-width: 100px; }
-  .topbar-actions-keuangan .btn-booking-primary { flex: 1; justify-content: center; white-space: nowrap; }
+/* --- Export Excel: DESKTOP tetap kayak semula (sejajar sama dropdown
+   tahun di topbar, rata kanan). Di MOBILE, tombolnya dipisah dari
+   topbar -- turun jadi baris sendiri, full-width, di bawah subjudul
+   "Rekap bulanan sepanjang tahun" dan di atas kartu "Tren Omzet &
+   Penghasilan". Dropdown tahun TETAP di topbar (nemenin judul halaman),
+   nggak ikut turun.
+
+   Caranya: ada 2 <button> render di Keuangan.jsx (isi/fungsi sama
+   persis) -- `.btn-export-desktop` (di dalam topbar) & `.btn-export-mobile`
+   (elemen baru, di luar topbar). Yang aktif cuma satu, gantian lewat
+   `display`, sesuai lebar layar. */
+.btn-export-mobile { display: none; }
+
+@media (max-width: 900px) {
+  .btn-export-desktop { display: none; }
+  .btn-export-mobile {
+    display: flex; width: fit-content;
+    margin: 14px 0 18px;
+  }
 }
 
 .card-keuangan { background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border-radius: 20px; padding: 22px; border: 1px solid var(--line-box); box-shadow: var(--shadow-card); }
