@@ -166,7 +166,7 @@ export default function Keuangan() {
       { header: 'Bulan', key: 'bulan', width: 12 },
       { header: 'Booking', key: 'booking', width: 10 },
       { header: 'Klien', key: 'klien', width: 8 },
-      { header: 'Belanja Klien', key: 'belanja', width: 15 },
+      { header: 'Pembayaran Klien', key: 'belanja', width: 15 },
       { header: 'Transport', key: 'transport', width: 13 },
       { header: 'Omzet', key: 'omzet', width: 15 },
       { header: 'Komisi Tim', key: 'komisi', width: 13 },
@@ -262,7 +262,7 @@ export default function Keuangan() {
             <div className="bar-grid">
               <div className="card-keuangan">
                 <div className="card-head-keuangan">
-                  <h3>Total Belanja Klien {filterTahun}</h3>
+                  <h3>Total Pembayaran Klien {filterTahun}</h3>
                   <span className="chart-total-belanja">{formatRupiah(totalTahun.belanja)}</span>
                 </div>
                 <MonthlyBarChart
@@ -321,7 +321,7 @@ export default function Keuangan() {
                     <th>Bulan</th>
                     <th className="right">Booking</th>
                     <th className="right">Klien</th>
-                    <th className="right">Belanja Klien</th>
+                    <th className="right">Pembayaran Klien</th>
                     <th className="right">Transport</th>
                     <th className="right">Omzet</th>
                     <th className="right">Komisi Tim</th>

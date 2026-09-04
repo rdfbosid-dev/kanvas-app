@@ -28,6 +28,8 @@ export default function Pengaturan() {
   const [savingPassword, setSavingPassword] = useState(false)
   const [passwordMessage, setPasswordMessage] = useState(null)
 
+  const [linkCopied, setLinkCopied] = useState(false)
+
   useEffect(() => {
     if (profile) {
       setStudioName(profile.studio_name || '')
@@ -44,6 +46,18 @@ export default function Pengaturan() {
     const timeout = setTimeout(() => setLoading(false), 6000)
     return () => clearTimeout(timeout)
   }, [])
+
+  useEffect(() => {
+    // Kode kalender itu "kunci" buat link langganan (.ics) -- di-generate
+    // SEKALI doang, otomatis, begitu ketauan user ini belum punya. Nggak
+    // perlu tombol/aksi manual dari user.
+    if (profile && !profile.kode_kalender && user) {
+      const kode = crypto.randomUUID().replace(/-/g, '')
+      supabase.from('profiles').upsert({ id: user.id, kode_kalender: kode }).then(({ error }) => {
+        if (!error) refreshProfile(user.id)
+      })
+    }
+  }, [profile, user, refreshProfile])
 
   async function handleSaveProfile(e) {
     e.preventDefault()
@@ -123,6 +137,13 @@ export default function Pengaturan() {
       setLogoMessage({ type: 'success', text: 'Logo berhasil diperbarui.' })
       await refreshProfile(user.id) // biar Sidebar langsung ikut update
     }
+  }
+
+  function handleCopyLink() {
+    const link = `${window.location.origin}/api/kalender-ics?kode=${profile?.kode_kalender}`
+    navigator.clipboard.writeText(link)
+    setLinkCopied(true)
+    setTimeout(() => setLinkCopied(false), 2000)
   }
 
   async function handleChangePassword(e) {
@@ -258,6 +279,31 @@ export default function Pengaturan() {
                   {savingPassword ? 'Menyimpan...' : 'Ubah Kata Sandi'}
                 </button>
               </form>
+            </div>
+
+            <div className="card-pengaturan">
+              <div className="card-head-pengaturan"><h3>Sinkronisasi Kalender</h3></div>
+              <p className="danger-text" style={{ marginBottom: 14 }}>
+                Salin link di bawah, terus tempel di app Kalender HP kamu (Google Calendar / Kalender iPhone / Outlook)
+                lewat menu "Subscribe from URL" atau "Tambah kalender lain". Semua jadwal booking bakal otomatis
+                muncul di situ, dan ke-update sendiri kalau ada booking baru.
+              </p>
+              {profile?.kode_kalender ? (
+                <div className="logo-upload-row" style={{ alignItems: 'stretch' }}>
+                  <input
+                    type="text"
+                    readOnly
+                    value={`${window.location.origin}/api/kalender-ics?kode=${profile.kode_kalender}`}
+                    onFocus={(e) => e.target.select()}
+                    style={{ flex: 1 }}
+                  />
+                  <button type="button" className="btn-ghost-small" onClick={handleCopyLink}>
+                    {linkCopied ? 'Tersalin!' : 'Salin Link'}
+                  </button>
+                </div>
+              ) : (
+                <div className="field-hint">Menyiapkan link kalender kamu...</div>
+              )}
             </div>
 
             <div className="card-pengaturan">
