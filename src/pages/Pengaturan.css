@@ -9,12 +9,50 @@
 .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
 .field label { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-bottom: 5px; }
 .field input {
-  border: 1px solid color-mix(in srgb, var(--button-border) 70%, transparent); border-radius: 11px; padding: 10px 14px;
+  border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); border-radius: 11px; padding: 10px 14px;
   font-size: 13.5px; font-family: inherit; color: var(--button-tx); background: var(--field);
 }
 .field input::placeholder { color: var(--placeholder); opacity: 1; }
 .field input:focus { outline: none; border-color: var(--h3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--h3) 18%, transparent); }
 .field input:disabled { color: var(--ink); background: var(--field); cursor: not-allowed; }
+
+/* Area upload logo brand -- lingkaran preview klik-able (buka file picker),
+   nempel overlay icon kamera pas di-hover, plus tombol "Ganti Logo" di
+   sebelahnya buat yang nggak sadar preview-nya bisa diklik. */
+.logo-upload-row { display: flex; align-items: center; gap: 16px; }
+.logo-preview {
+  width: 64px; height: 64px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;
+  background: var(--ava-grad-alt); display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: var(--h7); font-size: 20px; flex-shrink: 0;
+  border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent);
+}
+.logo-preview img { width: 100%; height: 100%; object-fit: cover; }
+.logo-preview-overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.45); color: #fff;
+  display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s;
+}
+.logo-preview-overlay svg { width: 20px; height: 20px; }
+.logo-preview:hover .logo-preview-overlay { opacity: 1; }
+.btn-ghost-small {
+  padding: 7px 14px; border-radius: 9px; border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent);
+  background: var(--field); font-size: 12.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer;
+  font-family: inherit; transition: background 0.15s; margin-bottom: 6px;
+}
+.btn-ghost-small:hover { background: color-mix(in srgb, var(--button-prm-hover) 40%, transparent); }
+.btn-ghost-small:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Tombol mata (tampilkan/sembunyikan kata sandi) -- beda struktur dari
+   Auth.css (di sini label-nya nggak mengambang/nggak ngandelin selector
+   sibling, jadi urutan taro tombolnya bebas). */
+.field-control-pw { position: relative; max-width: 280px; }
+.field-control-pw input { width: 100%; padding-right: 40px; }
+.field-toggle-pw {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; padding: 4px; cursor: pointer;
+  color: var(--ink-soft); display: flex; align-items: center; justify-content: center;
+}
+.field-toggle-pw svg { width: 17px; height: 17px; }
+.field-toggle-pw:hover { color: var(--h3); }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .field-hint { font-size: 11px; color: var(--ink); }
 
@@ -45,4 +83,7 @@
 @media (max-width: 700px) {
   .field-row { grid-template-columns: 1fr; }
   .card-pengaturan { border: 1px solid var(--line-box); }
+  .logo-upload-row { gap: 12px; }
+  .logo-preview { width: 56px; height: 56px; border-radius: 14px; }
+  .logo-preview-overlay svg { width: 16px; height: 16px; }
 }

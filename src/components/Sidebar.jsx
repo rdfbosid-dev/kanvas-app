@@ -74,7 +74,9 @@ export default function Sidebar({ headerAction = null }) {
         </button>
 
         <div className="brand">
-        <div className="brand-mark"></div>
+        <div className="brand-mark">
+          {profile?.logo_url && <img src={profile.logo_url} alt="Logo" />}
+        </div>
         <div>
           <div className="brand-name">Dapur MUA</div>
           <div className="brand-sub">{studioName || 'Studio Saya'}</div>
@@ -124,7 +126,7 @@ export default function Sidebar({ headerAction = null }) {
           Pengaturan
         </NavLink>
         <div className="profile">
-          <div className="avatar">{initials}</div>
+          <div className="avatar">{profile?.logo_url ? <img src={profile.logo_url} alt="Logo" /> : initials}</div>
           <div>
             <div className="profile-name">{studioName || 'Studio Saya'}</div>
             <div className="profile-role">{user?.email}</div>

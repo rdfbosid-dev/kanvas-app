@@ -134,7 +134,7 @@
 .booking-modal-overlay .toggle-opt:not(.sel):hover { background: color-mix(in srgb, var(--ink-faint) 50%, transparent); color: var(--ink-soft); }
 .booking-modal-overlay .toggle-opt.sel { background: var(--h3); color: #fff; border-color: transparent; }
 
-.booking-modal-overlay .toggle-row-rambut { display: flex; gap: 3px; }
+.booking-modal-overlay .toggle-row-rambut { display: flex; gap: 6px; }
 .booking-modal-overlay .toggle-opt-rambut {
   flex: 1; text-align: center; padding: 7px 5px; border-radius: 6px; font-size: 12px; font-weight: 600;
   background: var(--ink-faint); color: var(--ink-soft); cursor: pointer; border: 1px;
@@ -217,4 +217,5 @@
     border: none; border-radius: 5px; padding: 4px; cursor: pointer; transition: background 0.15s;
     margin-top: 0;
   }
+  .booking-modal-overlay .toggle-row-rambut { display: flex; gap: 3px; }
 }

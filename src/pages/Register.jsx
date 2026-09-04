@@ -31,6 +31,19 @@ export default function Register() {
       return
     }
 
+    // Supabase SENGAJA nggak ngasih error kalau signUp() dipanggil pakai
+    // email yang udah kedaftar & udah konfirmasi -- ini demi keamanan
+    // (biar orang nggak bisa "nebak" email mana aja yang udah kedaftar
+    // di sistem). Tapi ada sinyal buat bedainnya: kalau `identities`
+    // kosong ([]), itu tandanya BUKAN akun baru -- email-nya emang
+    // udah ada, dan nggak ada email konfirmasi apapun yang beneran
+    // terkirim barusan.
+    if (data.user && data.user.identities && data.user.identities.length === 0) {
+      setLoading(false)
+      setError('Email ini udah terdaftar. Coba masuk, atau pakai "Lupa kata sandi?" kalau lupa kata sandinya.')
+      return
+    }
+
     // simpan nama studio ke tabel profiles (baris profiles-nya sendiri
     // udah otomatis dibuat oleh trigger di database begitu user baru daftar)
     if (data.user) {

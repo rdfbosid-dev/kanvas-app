@@ -225,7 +225,7 @@
 .booking-detail-overlay .toggle-opt:not(.sel):hover { background: color-mix(in srgb, var(--ink-faint) 50%, transparent); color: var(--ink-soft); }
 .booking-detail-overlay .toggle-opt.sel { background: var(--h3); color: #fff; border-color: transparent; }
 
-.booking-detail-overlay .toggle-row-rambut { display: flex; gap: 2px; }
+.booking-detail-overlay .toggle-row-rambut { display: flex; gap: 6px; }
 .booking-detail-overlay .toggle-opt-rambut {
   flex: 1; text-align: center; padding: 7px 5px; border-radius: 6px; font-size: 12px; font-weight: 600;
   background: var(--ink-faint); color: var(--ink-soft); cursor: pointer; border: 1px;
@@ -352,4 +352,5 @@
      2 kolom. */
 
   .booking-detail-overlay .field-grid-peserta.cols-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-bottom: 5px; }
+  .booking-detail-overlay .toggle-row-rambut { display: flex; gap: 3px; }
 }

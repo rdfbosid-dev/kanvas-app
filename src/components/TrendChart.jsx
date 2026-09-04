@@ -138,7 +138,14 @@ export default function TrendChart({ series, months, area = false, mounted }) {
       {hoverIdx !== null && (
         <div
           className="trendchart-tooltip"
-          style={{ left: `${(hoverX / W) * 100}%` }}
+          style={{
+            left: `${(hoverX / W) * 100}%`,
+            // SENGAJA dibikin dinamis -- default-nya di-tengahin
+            // (translateX(-50%)) pas titiknya di tengah grafik, tapi khusus
+            // titik PERTAMA (rata kiri) & titik TERAKHIR (rata kanan), biar
+            // tooltip-nya nggak pernah nongol keluar kartu & ke-crop.
+            transform: hoverIdx === 0 ? 'translateX(0%)' : hoverIdx === n - 1 ? 'translateX(-100%)' : 'translateX(-50%)',
+          }}
         >
           <div className="tt-month">{months[hoverIdx]}</div>
           {series.map((s) => (

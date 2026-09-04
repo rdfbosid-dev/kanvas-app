@@ -310,7 +310,7 @@ export default function Dashboard() {
                   onClick={() => {
                     setNotifOpen(false)
                     if (n.type === 'booking') setSelectedBooking(n.booking)
-                    else navigate('/laporan')
+                    else navigate('/keuangan', { state: { highlightBulan: curMonth, highlightTahun: curYear } })
                   }}
                 >
                   <div className={`notif-icon ${n.type}`}>
@@ -442,7 +442,7 @@ export default function Dashboard() {
               <div className="card-dashboard">
                 <div className="card-dashboard-head"><h3>Ringkasan Keuangan</h3></div>
                 <div className="fin-row">
-                  <span className="fin-label">Total Belanja Klien Bulan {namaBulanIni}</span>
+                  <span className="fin-label">Total Pembayaran Klien Bulan {namaBulanIni}</span>
                   <span className="fin-value">{formatRupiah(belanjaKlienBulanIni)}</span>
                 </div>
                 <div className="fin-row">

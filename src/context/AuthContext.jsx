@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
     if (!userId) return
     const { data, error } = await supabase
       .from('profiles')
-      .select('studio_name, kode_prefix, instagram, whatsapp')
+      .select('studio_name, kode_prefix, instagram, whatsapp, logo_url')
       .eq('id', userId)
       .maybeSingle() // beda dari .single() -- nggak error kalau 0 baris, cuma balikin null
 
@@ -24,42 +24,26 @@ export function AuthProvider({ children }) {
     // Baris profil belum ada (misal akun lama sebelum trigger auto-create
     // dipasang) -- bikinin baru sekarang, biar nggak nyangkut nunggu
     // data yang emang nggak akan pernah datang.
-    const fallback = { studio_name: 'Studio Saya', kode_prefix: 'Book', instagram: '', whatsapp: '' }
+    const fallback = { studio_name: 'Studio Saya', kode_prefix: 'Book', instagram: '', whatsapp: '', logo_url: null }
     const { data: created, error: createErr } = await supabase
       .from('profiles')
       .upsert({ id: userId, ...fallback })
-      .select('studio_name, kode_prefix, instagram, whatsapp')
+      .select('studio_name, kode_prefix, instagram, whatsapp, logo_url')
       .single()
 
     setProfile(created || fallback) // tetap kasih nilai walau upsert-nya somehow gagal juga
   }, [])
 
   useEffect(() => {
-    // Kalau URL-nya lagi bawa token recovery (dari link reset password),
-    // jangan langsung anggap ini "user login" -- biarin ResetPassword.jsx
-    // yang pegang kendali sesi ini.
-    const isRecoveryLink = window.location.hash.includes('type=recovery')
-
     // cek sesi yang mungkin udah ada (misal user refresh halaman)
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (isRecoveryLink) {
-        setLoading(false)
-        return
-      }
       setUser(session?.user ?? null)
       setLoading(false)
       if (session?.user) refreshProfile(session.user.id)
     })
 
-    // dengerin perubahan status login (login, logout, token refresh, dan
-    // reset password). Khusus event PASSWORD_RECOVERY sengaja DIBEDAIN --
-    // itu sesi sementara buat ganti password doang, bukan "login beneran".
-    // Kalau diperlakukan sama kayak login biasa, bisa nyebabin app "loncat"
-    // ke Dashboard padahal harusnya user masih di halaman reset password.
-    const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'PASSWORD_RECOVERY') {
-        return // biarin ResetPassword.jsx yang nanganin sesi ini sendiri
-      }
+    // dengerin perubahan status login (login, logout, token refresh)
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
       if (session?.user) refreshProfile(session.user.id)
       else setProfile(null)

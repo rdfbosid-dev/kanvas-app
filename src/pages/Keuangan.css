@@ -70,6 +70,14 @@
 .trend-arrow.trend-down { color: var(--pill); }
 .trend-arrow.trend-flat { color: var(--ink-soft); }
 
+.keuangan-table tr.row-highlight {
+  animation: rowHighlightFlash 2.5s ease-out;
+}
+@keyframes rowHighlightFlash {
+  0% { background: color-mix(in srgb, var(--h3) 35%, transparent); }
+  100% { background: transparent; }
+}
+
 @media (max-width: 900px) {
   .keuangan-table { min-width: 860px; }
 }

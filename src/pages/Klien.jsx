@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { useAuth } from '../context/AuthContext'
+import ExcelJS from 'exceljs'
 import Sidebar from '../components/Sidebar'
 import BookingDetailModal from '../components/BookingDetailModal'
 import CustomSelect from '../components/CustomSelect'
@@ -14,6 +16,12 @@ function formatTanggal(dateStr) {
 }
 function initialsOf(name) {
   return (name || '?').split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()
+}
+
+// Nama studio dipakai buat awalan nama file export -- spasi dibuang total
+// (misal "Dapur MUA" jadi "DapurMUA"), biar nama filenya bersih & valid.
+function studioFilePrefix(name) {
+  return (name || 'DapurMUA').replace(/\s+/g, '')
 }
 
 // Sama persis rumus "Selesai" yang udah dipakai di Dashboard & BookingList --
@@ -36,6 +44,7 @@ function isBookingSelesai(tanggalAcara, jamStartMakeup) {
 const PAGE_SIZE = 10
 
 export default function Klien() {
+  const { profile } = useAuth()
   const [bookings, setBookings] = useState([])
   const [klienRows, setKlienRows] = useState([])
   const [loading, setLoading] = useState(true)
@@ -151,6 +160,70 @@ export default function Klien() {
     totalBelanja: clients.reduce((s, c) => s + c.totalBelanja, 0),
   }), [clients])
 
+  // Backup lengkap data Klien + Booking ke Excel -- SENGAJA pakai `clients`
+  // (bukan `filtered`/`paged`), biar backup-nya nyertain SEMUA klien,
+  // nggak kepotong sama pencarian/filter/halaman yang lagi aktif di layar.
+  // 2 sheet terpisah: Ringkasan Klien (1 baris = 1 klien) & Detail Booking
+  // (1 baris = 1 booking) -- soalnya 1 klien bisa punya banyak booking,
+  // dua level data ini nggak bisa dipaksa jadi 1 baris tanpa ada yang
+  // kepotong.
+  async function handleExportExcel() {
+    const wb = new ExcelJS.Workbook()
+
+    const wsRingkasan = wb.addWorksheet('Ringkasan Klien')
+    wsRingkasan.columns = [
+      { header: 'ID Klien', key: 'id', width: 14 },
+      { header: 'Nama Klien', key: 'nama', width: 24 },
+      { header: 'Nomor WhatsApp', key: 'whatsapp', width: 18 },
+      { header: 'Total Booking', key: 'totalCount', width: 14 },
+      { header: 'Total Selesai', key: 'selesaiCount', width: 14 },
+      { header: 'Total Belanja', key: 'totalBelanja', width: 16 },
+    ]
+    clients.forEach((c) => {
+      wsRingkasan.addRow({
+        id: c.id, nama: c.nama, whatsapp: c.whatsapp || '-',
+        totalCount: c.totalCount, selesaiCount: c.selesaiCount, totalBelanja: c.totalBelanja,
+      })
+    })
+    wsRingkasan.getColumn('totalBelanja').numFmt = '#,##0'
+
+    const wsDetail = wb.addWorksheet('Detail Booking')
+    wsDetail.columns = [
+      { header: 'ID Klien', key: 'idKlien', width: 14 },
+      { header: 'Nama Klien', key: 'nama', width: 24 },
+      { header: 'Tanggal Acara', key: 'tanggal', width: 18 },
+      { header: 'Event', key: 'event', width: 18 },
+      { header: 'Lokasi', key: 'lokasi', width: 26 },
+    ]
+    clients.forEach((c) => {
+      c.bookingList.forEach((b) => {
+        wsDetail.addRow({
+          idKlien: c.id, nama: c.nama, tanggal: formatTanggal(b.tanggal_acara),
+          event: b.event || '-', lokasi: b.lokasi || '-',
+        })
+      })
+    })
+
+    // Style header -- sama persis konsepnya kayak export Keuangan, biar
+    // konsisten satu tema. Diterapin ke kedua sheet.
+    ;[wsRingkasan, wsDetail].forEach((ws) => {
+      ws.getRow(1).eachCell((cell) => {
+        cell.font = { bold: true, color: { argb: 'FFFFFFFF' } }
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF4472C4' } }
+        cell.alignment = { horizontal: 'center' }
+      })
+    })
+
+    const buffer = await wb.xlsx.writeBuffer()
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${studioFilePrefix(profile?.studio_name)}_Rekap-Klien-dan-Booking.xlsx`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   const filtered = useMemo(() => {
     let list = clients.filter((c) =>
       !search.trim() || c.nama?.toLowerCase().includes(search.trim().toLowerCase())
@@ -184,6 +257,12 @@ export default function Klien() {
           <div>
             <div className="greeting">Klien</div>
             <div className="greeting-date">Kelola semua data klien Anda</div>
+          </div>
+          <div className="topbar-actions">
+            <button type="button" className="btn-booking-primary" onClick={handleExportExcel} disabled={clients.length === 0}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" /></svg>
+              Export Excel
+            </button>
           </div>
         </div>
 

@@ -82,7 +82,7 @@
 
 .auth-field input {
   width: 100%;
-  border: 1px solid var(--button-tx);
+  border: 1.5px solid var(--button-tx);
   border-radius: 12px;
   padding: 22px 14px 8px 14px;
   font-size: 14px;
@@ -119,6 +119,21 @@
   transition: background-color 5000s ease-in-out 0s;
   caret-color: var(--button-tx);
 }
+
+/* Tombol mata (tampilkan/sembunyikan kata sandi) -- input dikasih ruang
+   ekstra di kanan (padding-right) biar teksnya nggak numpuk sama icon-nya.
+   Tombolnya SENGAJA ditaro SETELAH <label> di JSX (bukan di antara input
+   & label), soalnya label mengambang itu ngandelin selector `input + label`
+   (nempel PERSIS abis input) -- kalau ada elemen lain nyelip di antaranya,
+   efek label mengambangnya rusak. */
+.auth-field-control--pw input { padding-right: 44px; }
+.auth-toggle-pw {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; padding: 4px; cursor: pointer;
+  color: var(--ink); display: flex; align-items: center; justify-content: center;
+}
+.auth-toggle-pw svg { width: 18px; height: 18px; }
+.auth-toggle-pw:hover { color: var(--h5); }
 
 .auth-btn {
   width: 100%;

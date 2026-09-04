@@ -1,8 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import Sidebar from '../components/Sidebar'
 import './Pengaturan.css'
+
+function initialsOf(name) {
+  return (name || '?').split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()
+}
 
 export default function Pengaturan() {
   const { user, signOut, profile, refreshProfile } = useAuth()
@@ -15,7 +19,12 @@ export default function Pengaturan() {
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState(null) // { type: 'success' | 'error', text }
 
+  const fileInputRef = useRef(null)
+  const [uploadingLogo, setUploadingLogo] = useState(false)
+  const [logoMessage, setLogoMessage] = useState(null)
+
   const [newPassword, setNewPassword] = useState('')
+  const [showNewPassword, setShowNewPassword] = useState(false)
   const [savingPassword, setSavingPassword] = useState(false)
   const [passwordMessage, setPasswordMessage] = useState(null)
 
@@ -66,6 +75,56 @@ export default function Pengaturan() {
     }
   }
 
+  // Upload logo -- disimpen di Storage bucket "logos", pathnya
+  // `{user.id}/logo.{ext}` (biar tiap user cuma bisa nimpa logo-nya
+  // sendiri, sesuai RLS policy yang di-setup di Supabase). URL publiknya
+  // ditempel ` ?t=timestamp` biar browser nggak nge-cache gambar lama
+  // begitu logo diganti.
+  async function handleLogoChange(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    e.target.value = '' // biar bisa pilih file yang SAMA lagi kalau perlu
+
+    if (!file.type.startsWith('image/')) {
+      setLogoMessage({ type: 'error', text: 'File harus berupa gambar (JPG/PNG).' })
+      return
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      setLogoMessage({ type: 'error', text: 'Ukuran file maksimal 2MB.' })
+      return
+    }
+
+    setUploadingLogo(true)
+    setLogoMessage(null)
+
+    const ext = file.name.split('.').pop()
+    const filePath = `${user.id}/logo.${ext}`
+
+    const { error: uploadError } = await supabase.storage
+      .from('logos')
+      .upload(filePath, file, { upsert: true, cacheControl: '3600' })
+
+    if (uploadError) {
+      setUploadingLogo(false)
+      setLogoMessage({ type: 'error', text: uploadError.message })
+      return
+    }
+
+    const { data: urlData } = supabase.storage.from('logos').getPublicUrl(filePath)
+    const publicUrl = `${urlData.publicUrl}?t=${Date.now()}`
+
+    const { error: dbError } = await supabase.from('profiles').upsert({ id: user.id, logo_url: publicUrl })
+
+    setUploadingLogo(false)
+
+    if (dbError) {
+      setLogoMessage({ type: 'error', text: dbError.message })
+    } else {
+      setLogoMessage({ type: 'success', text: 'Logo berhasil diperbarui.' })
+      await refreshProfile(user.id) // biar Sidebar langsung ikut update
+    }
+  }
+
   async function handleChangePassword(e) {
     e.preventDefault()
     setPasswordMessage(null)
@@ -109,6 +168,32 @@ export default function Pengaturan() {
               )}
 
               <form onSubmit={handleSaveProfile}>
+                <div className="field logo-field">
+                  <label>Logo Brand</label>
+                  <div className="logo-upload-row">
+                    <div className="logo-preview" onClick={() => fileInputRef.current?.click()}>
+                      {profile?.logo_url ? (
+                        <img src={profile.logo_url} alt="Logo brand" />
+                      ) : (
+                        <span>{initialsOf(studioName)}</span>
+                      )}
+                      <div className="logo-preview-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" /><circle cx="12" cy="13" r="4" /></svg>
+                      </div>
+                    </div>
+                    <div>
+                      <button type="button" className="btn-ghost-small" onClick={() => fileInputRef.current?.click()} disabled={uploadingLogo}>
+                        {uploadingLogo ? 'Mengunggah...' : 'Ganti Logo'}
+                      </button>
+                      <div className="field-hint">JPG/PNG, maksimal 2MB.</div>
+                    </div>
+                    <input ref={fileInputRef} type="file" accept="image/*" onChange={handleLogoChange} style={{ display: 'none' }} />
+                  </div>
+                  {logoMessage && (
+                    <div className={logoMessage.type === 'success' ? 'msg-success' : 'msg-error'} style={{ marginTop: 10 }}>{logoMessage.text}</div>
+                  )}
+                </div>
+
                 <div className="field">
                   <label>Nama Brand MUA</label>
                   <input type="text" value={studioName} onChange={(e) => setStudioName(e.target.value)} placeholder="contoh: Makeup by Jenny" />
@@ -148,12 +233,26 @@ export default function Pengaturan() {
               <form onSubmit={handleChangePassword}>
                 <div className="field">
                   <label>Kata Sandi Baru</label>
-                  <input
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="Minimal 6 karakter"
-                  />
+                  <div className="field-control-pw">
+                    <input
+                      type={showNewPassword ? 'text' : 'password'}
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder="Minimal 6 karakter"
+                    />
+                    <button
+                      type="button"
+                      className="field-toggle-pw"
+                      onClick={() => setShowNewPassword((v) => !v)}
+                      aria-label={showNewPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+                    >
+                      {showNewPassword ? (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24" /><path d="M1 1l22 22" /></svg>
+                      ) : (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                      )}
+                    </button>
+                  </div>
                 </div>
                 <button className="btn-primary" type="submit" disabled={savingPassword}>
                   {savingPassword ? 'Menyimpan...' : 'Ubah Kata Sandi'}

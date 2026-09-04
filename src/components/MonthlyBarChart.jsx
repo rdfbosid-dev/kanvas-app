@@ -18,7 +18,13 @@ export default function MonthlyBarChart({ months, values, color, format, mounted
             {hoverIdx === i && (
               <div
                 className="mbar-tooltip"
-                style={{ background: `color-mix(in srgb, ${color} 60%, transparent)` }}
+                style={{
+                  background: `color-mix(in srgb, ${color} 60%, transparent)`,
+                  // Sama persis konsepnya kayak TrendChart -- rata kiri di
+                  // kolom pertama, rata kanan di kolom terakhir, biar
+                  // tooltip nggak pernah nongol keluar kartu.
+                  transform: i === 0 ? 'translateX(0%)' : i === values.length - 1 ? 'translateX(-100%)' : 'translateX(-50%)',
+                }}
               >
                 <div className="tt-month">{months[i]}</div>
                 <div className="tt-val">{format ? format(v) : v}</div>
