@@ -21,7 +21,7 @@
    layout: input & tombol Salin sejajar, tombolnya nggak ikut nyusut. */
 .field-control-link { display: flex; gap: 10px; align-items: stretch; }
 .field-control-link input { flex: 1; min-width: 0; }
-.field-control-link .btn-ghost-small { flex-shrink: 0; margin-bottom: 0; white-space: nowrap; }
+.field-control-link .btn-primary { flex: 0 0 auto; width: auto; white-space: nowrap; }
 
 /* Area upload logo brand -- lingkaran preview klik-able (buka file picker),
    nempel overlay icon kamera pas di-hover, plus tombol "Ganti Logo" di
@@ -41,12 +41,16 @@
 .logo-preview-overlay svg { width: 20px; height: 20px; }
 .logo-preview:hover .logo-preview-overlay { opacity: 1; }
 .btn-ghost-small {
-  padding: 7px 14px; border-radius: 9px; border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent);
-  background: var(--field); font-size: 12.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer;
+  padding: 7px 14px; border-radius: 9px; border: none;
+  background: var(--button-prm-hover); font-size: 12.5px; font-weight: 600; color: var(--button-tx-hover); cursor: pointer;
   font-family: inherit; transition: background 0.15s; margin-bottom: 6px;
 }
-.btn-ghost-small:hover { background: color-mix(in srgb, var(--button-prm-hover) 40%, transparent); }
+.btn-ghost-small:hover { background: var(--h3); }
 .btn-ghost-small:disabled { opacity: 0.6; cursor: not-allowed; }
+.logo-actions-row { display: flex; gap: 8px; margin-bottom: 6px; }
+.logo-actions-row .btn-ghost-small { margin-bottom: 0; }
+.btn-ghost-danger { color: var(--h8); background: var(--notif); }
+.btn-ghost-danger:hover { background: color-mix(in srgb, var(--notif) 85%, black) }
 
 /* Tombol mata (tampilkan/sembunyikan kata sandi) -- beda struktur dari
    Auth.css (di sini label-nya nggak mengambang/nggak ngandelin selector
@@ -93,5 +97,6 @@
   .logo-upload-row { gap: 12px; }
   .logo-preview { width: 56px; height: 56px; border-radius: 14px; }
   .logo-preview-overlay svg { width: 16px; height: 16px; }
-  .field-control-link { flex-direction: column; align-items: stretch; }
+  .field-control-link { flex-direction: column; align-items: flex-start; }
+  .field-control-link input { width: 100%; }
 }

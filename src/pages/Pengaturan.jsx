@@ -21,6 +21,7 @@ export default function Pengaturan() {
 
   const fileInputRef = useRef(null)
   const [uploadingLogo, setUploadingLogo] = useState(false)
+  const [deletingLogo, setDeletingLogo] = useState(false)
   const [logoMessage, setLogoMessage] = useState(null)
 
   const [newPassword, setNewPassword] = useState('')
@@ -146,6 +147,32 @@ export default function Pengaturan() {
     setTimeout(() => setLinkCopied(false), 2000)
   }
 
+  // Hapus logo -- 2 langkah: (1) coba bersihin file-nya dari Storage juga
+  // (nggak wajib sukses, biar nggak numpuk file "sampah" tak terpakai),
+  // (2) yang WAJIB & penentu tampilan balik ke avatar default: reset
+  // `logo_url` di database jadi null.
+  async function handleDeleteLogo() {
+    setDeletingLogo(true)
+    setLogoMessage(null)
+
+    const { data: files } = await supabase.storage.from('logos').list(user.id)
+    if (files && files.length > 0) {
+      const paths = files.map((f) => `${user.id}/${f.name}`)
+      await supabase.storage.from('logos').remove(paths)
+    }
+
+    const { error: dbError } = await supabase.from('profiles').upsert({ id: user.id, logo_url: null })
+
+    setDeletingLogo(false)
+
+    if (dbError) {
+      setLogoMessage({ type: 'error', text: dbError.message })
+    } else {
+      setLogoMessage({ type: 'success', text: 'Logo berhasil dihapus.' })
+      await refreshProfile(user.id) // biar avatar balik ke inisial di Sidebar juga
+    }
+  }
+
   async function handleChangePassword(e) {
     e.preventDefault()
     setPasswordMessage(null)
@@ -203,9 +230,16 @@ export default function Pengaturan() {
                       </div>
                     </div>
                     <div>
-                      <button type="button" className="btn-ghost-small" onClick={() => fileInputRef.current?.click()} disabled={uploadingLogo}>
-                        {uploadingLogo ? 'Mengunggah...' : 'Ganti Logo'}
-                      </button>
+                      <div className="logo-actions-row">
+                        <button type="button" className="btn-ghost-small" onClick={() => fileInputRef.current?.click()} disabled={uploadingLogo || deletingLogo}>
+                          {uploadingLogo ? 'Mengunggah...' : 'Ganti Logo'}
+                        </button>
+                        {profile?.logo_url && (
+                          <button type="button" className="btn-ghost-small btn-ghost-danger" onClick={handleDeleteLogo} disabled={uploadingLogo || deletingLogo}>
+                            {deletingLogo ? 'Menghapus...' : 'Hapus Logo'}
+                          </button>
+                        )}
+                      </div>
                       <div className="field-hint">JPG/PNG, maksimal 2MB.</div>
                     </div>
                     <input ref={fileInputRef} type="file" accept="image/*" onChange={handleLogoChange} style={{ display: 'none' }} />
@@ -298,7 +332,7 @@ export default function Pengaturan() {
                       value={`${window.location.origin}/api/kalender-ics?kode=${profile.kode_kalender}`}
                       onFocus={(e) => e.target.select()}
                     />
-                    <button type="button" className="btn-ghost-small" onClick={handleCopyLink}>
+                    <button type="button" className="btn-primary" onClick={handleCopyLink}>
                       {linkCopied ? 'Tersalin!' : 'Salin Link'}
                     </button>
                   </div>
