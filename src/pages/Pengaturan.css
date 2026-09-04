@@ -6,7 +6,7 @@
 .card-pengaturan { background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border-radius: 20px; padding: 24px; border: 1px solid var(--line-box); box-shadow: var(--shadow-card); }
 .card-head-pengaturan h3 { font-size: 16px; margin-bottom: 18px; color: var(--ink-soft); }
 
-.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
 .field label { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-bottom: 5px; }
 .field input {
   border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); border-radius: 11px; padding: 10px 14px;
@@ -14,7 +14,7 @@
 }
 .field input::placeholder { color: var(--placeholder); opacity: 1; }
 .field input:focus { outline: none; border-color: var(--h3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--h3) 18%, transparent); }
-.field input:disabled { color: var(--ink); background: var(--field); cursor: not-allowed; }
+.field input:disabled { color: var(--ink); background: var(--field); border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent); cursor: not-allowed; }
 
 /* Field link kalender -- input-nya otomatis kewaris style dari `.field
    input` di atas (soalnya nangkring di dalem .field), di sini cuma ngatur
