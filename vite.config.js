@@ -47,6 +47,13 @@ export default defineConfig({
         // nggak pernah nyampe walau server-nya udah versi terbaru.
         skipWaiting: true,
         clientsClaim: true,
+        // WAJIB -- tanpa ini, Service Worker bakal "nyegat" navigasi ke
+        // /api/... juga (dianggep kayak pindah halaman biasa), terus
+        // otomatis diarahin ke index.html yang di-cache (app shell),
+        // BUKAN ke response asli dari server. Ini yang bikin link
+        // .ics kalender kena redirect ke /dashboard alih-alih nampilin
+        // data mentahnya.
+        navigateFallbackDenylist: [/^\/api\//],
       },
     }),
   ],
