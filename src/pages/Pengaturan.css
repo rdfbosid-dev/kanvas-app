@@ -31,7 +31,7 @@
   width: 64px; height: 64px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;
   background: var(--ava-grad-alt); display: flex; align-items: center; justify-content: center;
   font-weight: 700; color: var(--h7); font-size: 20px; flex-shrink: 0;
-  border: 1.5px solid color-mix(in srgb, var(--button-border) 70%, transparent);
+  border: 1.5px solid var(--line-box);
 }
 .logo-preview img { width: 100%; height: 100%; object-fit: cover; }
 .logo-preview-overlay {
