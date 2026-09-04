@@ -22,7 +22,8 @@
     justify-content: space-between;
     box-sizing: border-box;
     margin-bottom: 16px;
-    padding: 0 2px;
+    padding: 0 4px;
+    overflow: hidden;
   }
 
   .topbar .greeting {
@@ -34,8 +35,11 @@
   }
 
   /* Perkecil lebar dropdown filter khusus mobile agar pas di iPhone XR */
-  .filter-select { 
-    width: 90px; 
+  .filter-select, 
+  .filter-select * {
+    width: 85px !important;
+    min-width: unset !important;
+    max-width: 85px !important;
   }
 
   .topbar-actions {
