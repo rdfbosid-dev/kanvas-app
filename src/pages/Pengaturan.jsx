@@ -289,17 +289,19 @@ export default function Pengaturan() {
                 muncul di situ, dan ke-update sendiri kalau ada booking baru.
               </p>
               {profile?.kode_kalender ? (
-                <div className="logo-upload-row" style={{ alignItems: 'stretch' }}>
-                  <input
-                    type="text"
-                    readOnly
-                    value={`${window.location.origin}/api/kalender-ics?kode=${profile.kode_kalender}`}
-                    onFocus={(e) => e.target.select()}
-                    style={{ flex: 1 }}
-                  />
-                  <button type="button" className="btn-ghost-small" onClick={handleCopyLink}>
-                    {linkCopied ? 'Tersalin!' : 'Salin Link'}
-                  </button>
+                <div className="field">
+                  <label>Link Kalender</label>
+                  <div className="field-control-link">
+                    <input
+                      type="text"
+                      readOnly
+                      value={`${window.location.origin}/api/kalender-ics?kode=${profile.kode_kalender}`}
+                      onFocus={(e) => e.target.select()}
+                    />
+                    <button type="button" className="btn-ghost-small" onClick={handleCopyLink}>
+                      {linkCopied ? 'Tersalin!' : 'Salin Link'}
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div className="field-hint">Menyiapkan link kalender kamu...</div>

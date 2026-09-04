@@ -228,7 +228,7 @@ export default function Keuangan() {
             <div className="greeting">Keuangan</div>
             <div className="greeting-date">Rekap bulanan sepanjang tahun</div>
           </div>
-          <div className="topbar-actions">
+          <div className="topbar-actions topbar-actions-keuangan">
             <div className="filter-select"><CustomSelect options={tahunOptions} value={filterTahun} onChange={setFilterTahun} /></div>
             <button type="button" className="btn-booking-primary" onClick={handleExportExcel} disabled={!adaData}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" /></svg>

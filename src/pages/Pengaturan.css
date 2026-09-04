@@ -16,6 +16,13 @@
 .field input:focus { outline: none; border-color: var(--h3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--h3) 18%, transparent); }
 .field input:disabled { color: var(--ink); background: var(--field); cursor: not-allowed; }
 
+/* Field link kalender -- input-nya otomatis kewaris style dari `.field
+   input` di atas (soalnya nangkring di dalem .field), di sini cuma ngatur
+   layout: input & tombol Salin sejajar, tombolnya nggak ikut nyusut. */
+.field-control-link { display: flex; gap: 10px; align-items: stretch; }
+.field-control-link input { flex: 1; min-width: 0; }
+.field-control-link .btn-ghost-small { flex-shrink: 0; margin-bottom: 0; white-space: nowrap; }
+
 /* Area upload logo brand -- lingkaran preview klik-able (buka file picker),
    nempel overlay icon kamera pas di-hover, plus tombol "Ganti Logo" di
    sebelahnya buat yang nggak sadar preview-nya bisa diklik. */
@@ -86,4 +93,5 @@
   .logo-upload-row { gap: 12px; }
   .logo-preview { width: 56px; height: 56px; border-radius: 14px; }
   .logo-preview-overlay svg { width: 16px; height: 16px; }
+  .field-control-link { flex-direction: column; align-items: stretch; }
 }
