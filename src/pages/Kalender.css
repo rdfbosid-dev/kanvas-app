@@ -46,16 +46,17 @@
    banner penuh kayak state sebelumnya. */
 .kalender-connect-banner.connected {
   width: fit-content;
-  padding: 10px 16px;
+  padding: 0;
   gap: 10px;
-  background: color-mix(in srgb, var(--pill-alt) 30%, transparent);
-  border: 1.5px solid color-mix(in srgb, var(--pill-alt) 10%, transparent);
-  border-radius: 8px;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 .kalender-connect-banner.connected .kcb-text { flex: 0 0 auto; }
 .kalender-connect-banner.connected .kcb-title { font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 0; }
 .kalender-connect-banner.connected .kcb-icon {
-  width: 26px; height: 26px; border-radius: 7px;
+  width: 26px; height: 26px; border-radius: 50%;
   background: color-mix(in srgb, var(--pill-alt) 60%, transparent); color: var(--h7);
 }
 .kalender-connect-banner.connected .kcb-icon svg { width: 14px; height: 14px; }
