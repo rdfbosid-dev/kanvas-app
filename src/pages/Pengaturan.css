@@ -95,7 +95,7 @@
   .field-row { grid-template-columns: 1fr; }
   .card-pengaturan { border: 1px solid var(--line-box); }
   .logo-upload-row { gap: 12px; }
-  .logo-preview { width: 56px; height: 56px; border-radius: 14px; }
+  .logo-preview { width: 80px; height: 80px; border-radius: 14px; }
   .logo-preview-overlay svg { width: 16px; height: 16px; }
   .field-control-link { flex-direction: column; align-items: flex-start; }
   .field-control-link input { width: 100%; }
