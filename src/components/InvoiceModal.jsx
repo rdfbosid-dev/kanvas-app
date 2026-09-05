@@ -22,7 +22,7 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
   function handleWhatsApp() {
   const nomor = (booking.nomor_whatsapp || '').replace(/[^0-9]/g, '').replace(/^0/, '62')
   const namaStudio = profile?.studio_name || 'Makeup by'
-  const pesan = `Halo, Kak!\n\nBerikut kami kirimkan ringkasan invoice makeup untuk *Kak ${booking.nama_klien}*.\n\n*Kode booking*: ${booking.kode_booking}\n*Tanggal makeup*: ${formatTanggal(booking.tanggal_acara)}\n*Event*: ${booking.event}\n\n*Total*: ${formatRupiah(booking.belanja_klien)}\n*Sudah dibayar*: ${formatRupiah(totalDibayar)}\n*Sisa*: ${formatRupiah(sisa)}\n\nTerima kasih!\n\nSalam hangat,\n*${namaStudio}*.`
+  const pesan = `Halo, Kak!\n\nBerikut kami kirimkan ringkasan invoice makeup untuk *Kak ${booking.nama_klien}*.\n\n*Kode Booking*: ${booking.kode_booking}\n*Tanggal Makeup*: ${formatTanggal(booking.tanggal_acara)}\n*Event*: ${booking.event}\n\n*Total Biaya*: ${formatRupiah(booking.belanja_klien)}\n\n*Sudah Dibayar*: ${formatRupiah(totalDibayar)}\n*Kekurangan*: ${formatRupiah(sisa)}\n\nTerima kasih!\n\nSalam hangat,\n*${namaStudio}*.`
   const pesanEncoded = encodeURIComponent(pesan)
   const waUrl = `https://wa.me/${nomor}?text=${pesanEncoded}`
 
