@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
     if (!userId) return
     const { data, error } = await supabase
       .from('profiles')
-      .select('studio_name, kode_prefix, instagram, whatsapp, logo_url, kode_kalender')
+      .select('studio_name, kode_prefix, instagram, whatsapp, logo_url, kode_kalender, trial_ends_at, subscription_status')
       .eq('id', userId)
       .maybeSingle() // beda dari .single() -- nggak error kalau 0 baris, cuma balikin null
 
@@ -24,11 +24,14 @@ export function AuthProvider({ children }) {
     // Baris profil belum ada (misal akun lama sebelum trigger auto-create
     // dipasang) -- bikinin baru sekarang, biar nggak nyangkut nunggu
     // data yang emang nggak akan pernah datang.
-    const fallback = { studio_name: 'Makeup by', kode_prefix: 'Book', instagram: '', whatsapp: '', logo_url: null, kode_kalender: null }
+    const fallback = {
+      studio_name: 'Makeup by', kode_prefix: 'Book', instagram: '', whatsapp: '', logo_url: null, kode_kalender: null,
+      trial_ends_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), subscription_status: 'trial',
+    }
     const { data: created, error: createErr } = await supabase
       .from('profiles')
       .upsert({ id: userId, ...fallback })
-      .select('studio_name, kode_prefix, instagram, whatsapp, logo_url, kode_kalender')
+      .select('studio_name, kode_prefix, instagram, whatsapp, logo_url, kode_kalender, trial_ends_at, subscription_status')
       .single()
 
     setProfile(created || fallback) // tetap kasih nilai walau upsert-nya somehow gagal juga
@@ -96,8 +99,19 @@ export function AuthProvider({ children }) {
 
   const signOut = () => supabase.auth.signOut()
 
+  // Kekunci kalau: status langganan BUKAN 'active' DAN tanggal
+  // trial_ends_at udah lewat. Selama profile belum kebaca (null), anggap
+  // BELUM terkunci -- biar nggak "kedip" nge-redirect duluan sebelum
+  // data profil sempet kebaca.
+  const isLocked = !!(
+    profile &&
+    profile.subscription_status !== 'active' &&
+    profile.trial_ends_at &&
+    new Date(profile.trial_ends_at) < new Date()
+  )
+
   return (
-    <AuthContext.Provider value={{ user, loading, signOut, profile, refreshProfile }}>
+    <AuthContext.Provider value={{ user, loading, signOut, profile, refreshProfile, isLocked }}>
       {children}
     </AuthContext.Provider>
   )

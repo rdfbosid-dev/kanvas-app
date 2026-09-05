@@ -13,8 +13,35 @@ import Klien from './pages/Klien'
 import Keuangan from './pages/Keuangan'
 import Laporan from './pages/Laporan'
 import Pengaturan from './pages/Pengaturan'
+import TrialHabis from './pages/TrialHabis'
 
 function ProtectedRoute({ children }) {
+  const { user, loading, isLocked } = useAuth()
+
+  if (loading) {
+    return (
+      <div style={{
+        minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#8B8299'
+      }}>
+        Memuat...
+      </div>
+    )
+  }
+
+  if (!user) return <Navigate to="/login" replace />
+  // Trial abis & belum berlangganan -- SEMUA halaman di dalem ProtectedRoute
+  // (termasuk Pengaturan) kekunci, kecuali /trial-habis sendiri (itu route
+  // terpisah, nggak lewat ProtectedRoute -- lihat di bawah).
+  if (isLocked) return <Navigate to="/trial-habis" replace />
+  return children
+}
+
+// Khusus buat halaman /trial-habis -- butuh login (biar tau siapa yang
+// mau di-lock), tapi SENGAJA nggak lewat ProtectedRoute (yang otomatis
+// nge-redirect ke /trial-habis kalau isLocked) -- kalau ikut lewat situ,
+// muter-muter redirect ke diri sendiri terus (infinite loop).
+function TrialGateRoute({ children }) {
   const { user, loading } = useAuth()
 
   if (loading) {
@@ -64,6 +91,14 @@ export default function App() {
             <Route path="/register" element={<GuestRoute><Register /></GuestRoute>} />
             <Route path="/lupa-password" element={<LupaPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route
+              path="/trial-habis"
+              element={
+                <TrialGateRoute>
+                  <TrialHabis />
+                </TrialGateRoute>
+              }
+            />
             <Route
               path="/dashboard"
               element={

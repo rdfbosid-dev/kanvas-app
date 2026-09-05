@@ -132,6 +132,27 @@
 }
 .landing-footer p { font-size: 12.5px; color: var(--ink-soft); }
 
+/* Tombol WhatsApp admin -- floating di pojok kanan bawah, nempel terus
+   pas discroll (position:fixed), di atas semua section lain (z-index
+   tinggi). Warna ijo WhatsApp resmi dipakai literal (bukan var(--...))
+   soalnya ini identitas brand WhatsApp, harus konsisten di light/dark
+   mode, bukan warna tema Dapur MUA. */
+.landing-wa-float {
+  position: fixed; bottom: 24px; right: 24px; z-index: 50;
+  width: 54px; height: 54px; border-radius: 50%; border: none;
+  background: #25D366; color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 20px -6px rgba(37,211,102,0.6);
+  transition: transform 0.2s ease;
+}
+.landing-wa-float:hover { transform: translateY(-2px) scale(1.05); }
+.landing-wa-float svg { width: 28px; height: 28px; }
+
+@media (max-width: 480px) {
+  .landing-wa-float { width: 48px; height: 48px; bottom: 16px; right: 16px; }
+  .landing-wa-float svg { width: 24px; height: 24px; }
+}
+
 @media (max-width: 900px) {
   .landing-nav { padding: 16px 20px; }
   .landing-nav-links { display: none; }

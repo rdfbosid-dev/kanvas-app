@@ -74,6 +74,15 @@
 .nav-item.active { background: color-mix(in srgb, var(--placeholder) 30%, transparent); color: var(--h2); }
 .nav-item:not(.active):hover { background: color-mix(in srgb, var(--placeholder) 20%, transparent); color: var(--ink); }
 
+/* .nav-item-bantuan itu <button>, bukan <a>/NavLink kayak nav-item
+   lainnya -- browser ngasih default style beda ke <button> (border,
+   background, font, text-align), jadi di-reset manual di sini biar
+   keliatan identik sama nav-item yang lain. */
+.nav-item-bantuan {
+  border: none; background: none; width: 100%; text-align: left;
+  font-family: inherit;
+}
+
 .sidebar-bottom { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--ink-soft); }
 
 .theme-toggle {

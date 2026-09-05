@@ -2,6 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
+import { openAdminWhatsApp } from '../lib/whatsapp'
 import './Sidebar.css'
 
 const navUtama = [
@@ -35,6 +36,8 @@ function Icon({ name }) {
       return <svg {...common}><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4M9 12h6M9 16h6"/></svg>
     case 'settings':
       return <svg {...common}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1Z"/></svg>
+    case 'help':
+      return <svg {...common}><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
     default:
       return null
   }
@@ -56,6 +59,11 @@ export default function Sidebar({ headerAction = null }) {
     .slice(0, 2)
     .join('')
     .toUpperCase()
+
+  function handleBantuan() {
+    const pesan = `Halo, Kak! Saya mau tanya-tanya/ada kendala soal Dapur MUA.\n\nAkun: ${studioName || user?.email || '-'}`
+    openAdminWhatsApp(pesan)
+  }
 
   return (
     <>
@@ -119,6 +127,11 @@ export default function Sidebar({ headerAction = null }) {
             </span>
           </span>
           <span className="theme-toggle-label">{theme === 'dark' ? 'Mode Gelap' : 'Mode Terang'}</span>
+        </button>
+
+        <button type="button" className="nav-item nav-item-bantuan" onClick={handleBantuan}>
+          <Icon name="help" />
+          Bantuan
         </button>
 
         <NavLink to="/pengaturan" className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')} style={{ marginBottom: 12 }}>
