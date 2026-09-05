@@ -11,6 +11,11 @@ import './Landing.css'
 // langganan bulanan, tinggal ganti angka & teks "sekali bayar, akses
 // selamanya" di bagian <section className="landing-harga"> di bawah.
 const HARGA_LIFETIME = 200000
+// Harga "asli" yang ditampilin dicoret di atas HARGA_LIFETIME -- kesan
+// diskon/promo. Samain juga di sini kalau nanti HARGA_LIFETIME diubah,
+// biar potongannya tetep masuk akal (jangan sampe harga coret malah
+// lebih murah/sama).
+const HARGA_CORET = 240000
 
 const FITUR = [
   {
@@ -194,16 +199,17 @@ export default function Landing() {
 
       <section className="landing-harga" id="harga">
         <div className="section-head">
-          <h2>Investasi kecil bikin kerjamu lebih efektif dan rapi selamanya</h2>
+          <h2>Investasi kecil bikin kerjamu lebih efektif dan rapi</h2>
           <p>Coba dulu 7 hari gratis — baru mikirin bayar kalau emang cocok.</p>
         </div>
         <div className="harga-card">
           <div className="harga-badge">Harga Peluncuran — Terbatas</div>
+          <div className="harga-coret">Rp{HARGA_CORET.toLocaleString('id-ID')}</div>
           <div className="harga-price">
             <span className="harga-currency">Rp</span>
             <span className="harga-amount">{HARGA_LIFETIME.toLocaleString('id-ID')}</span>
           </div>
-          <div className="harga-period">sekali bayar, akses selamanya</div>
+          <div className="harga-period">untuk akses satu tahun</div>
 
           <ul className="harga-list">
             <li><Check /> Booking &amp; kalender otomatis tersinkron ke HP</li>

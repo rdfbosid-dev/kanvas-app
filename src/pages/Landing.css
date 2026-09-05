@@ -138,10 +138,21 @@
   display: inline-block; font-size: 12px; font-weight: 700; color: var(--h7);
   background: var(--pill-alt); padding: 6px 14px; border-radius: 20px; margin-bottom: 18px;
 }
+.harga-coret {
+  position: relative; display: inline-block;
+  font-size: 30px; font-weight: 800; color: var(--pill-alt);
+  margin-bottom: 5px;
+}
+
+.harga-coret::after {
+  content: ''; position: absolute; left: -18px; right: -18px; top: 50%;
+  height: 6px; background: var(--h2);
+}
+
 .harga-price { display: flex; align-items: flex-start; justify-content: center; gap: 4px; }
 .harga-currency { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--h3); margin-top: 6px; }
-.harga-amount { font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 700; color: var(--h3); line-height: 1; }
-.harga-period { font-size: 13px; color: var(--ink-soft); margin-bottom: 26px; }
+.harga-amount { font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 700; color: var(--pill-alt); line-height: 1; }
+.harga-period { font-size: 16px; font-weight: 700; color: var(--ink-soft); margin-bottom: 26px; }
 
 .harga-list { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 13px; margin-bottom: 28px; padding: 5px 15px; }
 .harga-list li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--h4); }
