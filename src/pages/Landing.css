@@ -122,6 +122,43 @@
 .cara-step h3 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--h2); margin-bottom: 8px; }
 .cara-step p { font-size: 13.5px; color: var(--h4); line-height: 1.6; }
 
+/* ---- Section Harga -- kartu tunggal (bukan tabel perbandingan 3 tier),
+   soalnya Dapur MUA emang cuma 1 paket: semua fitur, nggak ada versi
+   "premium" di atasnya. Tema warnanya numpang var(--...) yang sama kayak
+   fitur-card & btn-landing, biar konsisten satu palet sama section lain. ---- */
+.landing-harga { padding: 20px 60px 60px; }
+.harga-card {
+  max-width: 420px; margin: 0 auto; text-align: center;
+  background: color-mix(in srgb, var(--page-b) var(--mix-page-b), transparent);
+  border: 1.5px solid color-mix(in srgb, var(--button-prm) 30%, transparent);
+  border-radius: 24px; padding: 36px 32px;
+  box-shadow: var(--shadow-modal);
+}
+.harga-badge {
+  display: inline-block; font-size: 12px; font-weight: 700; color: var(--h7);
+  background: var(--pill-alt); padding: 6px 14px; border-radius: 20px; margin-bottom: 18px;
+}
+.harga-price { display: flex; align-items: flex-start; justify-content: center; gap: 4px; }
+.harga-currency { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--h3); margin-top: 6px; }
+.harga-amount { font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 700; color: var(--h3); line-height: 1; }
+.harga-period { font-size: 13px; color: var(--ink-soft); margin-bottom: 26px; }
+
+.harga-list { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 13px; margin-bottom: 28px; padding: 5px 15px; }
+.harga-list li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--h4); }
+.harga-list li svg {
+  width: 18px; height: 18px; flex-shrink: 0; color: var(--h7);
+  background: var(--pill-alt); border-radius: 50%; padding: 3px; box-sizing: border-box;
+}
+
+.harga-cta { width: 100%; box-sizing: border-box; max-width: none; }
+.harga-note { font-size: 13px; color: var(--ink-soft); margin-top: 14px; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .landing-harga { padding: 60px 20px; }
+  .harga-card { padding: 28px 22px; }
+  .harga-amount { font-size: 38px; }
+}
+
 .landing-cta { text-align: center; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
 .landing-cta h2 { font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 700; color: var(--h3); margin-bottom: 10px; text-wrap: balance; }
 .landing-cta p { font-size: 15px; color: var(--ink-soft); margin-bottom: 28px; text-wrap: pretty; }
@@ -134,23 +171,25 @@
 
 /* Tombol WhatsApp admin -- floating di pojok kanan bawah, nempel terus
    pas discroll (position:fixed), di atas semua section lain (z-index
-   tinggi). Warna ijo WhatsApp resmi dipakai literal (bukan var(--...))
-   soalnya ini identitas brand WhatsApp, harus konsisten di light/dark
-   mode, bukan warna tema Dapur MUA. */
+   tinggi). SEKARANG tombolnya PUTIH (bukan ijo) -- soalnya warna ijo-nya
+   udah dipindah ke dalem SVG-nya sendiri (bentuk gelembung chat), biar
+   ada "ring" putih ngelilingin persis kayak logo resmi WhatsApp
+   (referensi user). Shadow-nya abu netral (bukan ijo lagi), soalnya
+   sekarang tombolnya putih. */
 .landing-wa-float {
   position: fixed; bottom: 24px; right: 24px; z-index: 50;
   width: 54px; height: 54px; border-radius: 50%; border: none;
-  background: #25D366; color: #fff; cursor: pointer;
+  background: #fff; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 8px 20px -6px rgba(37,211,102,0.6);
+  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.35);
   transition: transform 0.2s ease;
 }
 .landing-wa-float:hover { transform: translateY(-2px) scale(1.05); }
-.landing-wa-float svg { width: 28px; height: 28px; }
+.landing-wa-float svg { width: 36px; height: 36px; }
 
 @media (max-width: 480px) {
   .landing-wa-float { width: 48px; height: 48px; bottom: 16px; right: 16px; }
-  .landing-wa-float svg { width: 24px; height: 24px; }
+  .landing-wa-float svg { width: 32px; height: 32px; }
 }
 
 @media (max-width: 900px) {

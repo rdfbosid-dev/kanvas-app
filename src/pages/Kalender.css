@@ -34,14 +34,31 @@
 /* State begitu udah pernah sinkron (kalender_synced_at keisi) -- ganti
    warna dari biru (var(--h3), warna "ajakan") jadi ijo (var(--pill-alt)/
    var(--h7), warna "berhasil"), konsisten sama status-pill "Lunas" yang
-   udah dipakai di tempat lain (Booking, Klien, dst). */
+   udah dipakai di tempat lain (Booking, Klien, dst).
+
+   Beda sama state "belum sinkron" -- state ini nggak lagi maksa lebar
+   penuh 1 baris (nggak ada tombol/subtitle lagi soalnya), jadi dibikin
+   `width: fit-content` biar cuma sebesar isinya doang. `flex: 0 0 auto`
+   di .kcb-text SENGAJA ditambahin -- soalnya flex:1 (bawaan) itu maksud-
+   nya "rebutin sisa ruang kosong", padahal di sini kontainernya udah
+   nggak punya "sisa ruang" (dia sendiri cuma sebesar isinya). Icon &
+   teksnya juga dikecilin, biar proporsinya pas jadi badge kecil, bukan
+   banner penuh kayak state sebelumnya. */
 .kalender-connect-banner.connected {
-  background: color-mix(in srgb, var(--pill-alt) 40%, transparent);
-  border: 1.5px solid color-mix(in srgb, var(--pill-alt) 70%, transparent);
+  width: fit-content;
+  padding: 10px 16px;
+  gap: 10px;
+  background: color-mix(in srgb, var(--pill-alt) 30%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--pill-alt) 10%, transparent);
+  border-radius: 8px;
 }
+.kalender-connect-banner.connected .kcb-text { flex: 0 0 auto; }
+.kalender-connect-banner.connected .kcb-title { font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 0; }
 .kalender-connect-banner.connected .kcb-icon {
+  width: 26px; height: 26px; border-radius: 7px;
   background: color-mix(in srgb, var(--pill-alt) 60%, transparent); color: var(--h7);
 }
+.kalender-connect-banner.connected .kcb-icon svg { width: 14px; height: 14px; }
 
 .kalender-connect-panel {
   display: flex; gap: 10px; margin: -8px 0 18px;

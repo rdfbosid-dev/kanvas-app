@@ -3,6 +3,14 @@ import ThemeToggleButton from '../components/ThemeToggleButton'
 import { openAdminWhatsApp } from '../lib/whatsapp'
 import './Landing.css'
 
+// Harga promo peluncuran -- SEKALI BAYAR, akses selamanya. Ini "harga
+// early adopter" (lihat diskusi harga sebelumnya), sengaja dipisah jadi
+// 1 variable di paling atas biar gampang diganti kapan aja tanpa perlu
+// ubek-ubek JSX di bawah -- termasuk kalau nanti pindah ke model
+// langganan bulanan, tinggal ganti angka & teks "sekali bayar, akses
+// selamanya" di bagian <section className="landing-harga"> di bawah.
+const HARGA_LIFETIME = 200000
+
 const FITUR = [
   {
     icon: 'grid',
@@ -56,6 +64,12 @@ function Icon({ name }) {
   }
 }
 
+function Check() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5" /></svg>
+  )
+}
+
 export default function Landing() {
   function handleHubungiAdmin() {
     openAdminWhatsApp('Halo, Kak!\n\nSaya mau tanya-tanya soal Dapur MUA.')
@@ -73,6 +87,7 @@ export default function Landing() {
         </div>
         <nav className="landing-nav-links">
           <a href="#fitur">Fitur</a>
+          <a href="#harga">Harga</a>
           <a href="#cara-kerja">Cara Kerja</a>
         </nav>
         <div className="landing-nav-actions">
@@ -159,6 +174,32 @@ export default function Landing() {
         </div>
       </section>
 
+      <section className="landing-harga" id="harga">
+        <div className="section-head">
+          <h2>Investasi kecil bikin kerjamu lebih efektif dan rapi selamanya</h2>
+          <p>Coba dulu 7 hari gratis — baru mikirin bayar kalau emang cocok.</p>
+        </div>
+        <div className="harga-card">
+          <div className="harga-badge">Harga Peluncuran — Terbatas</div>
+          <div className="harga-price">
+            <span className="harga-currency">Rp</span>
+            <span className="harga-amount">{HARGA_LIFETIME.toLocaleString('id-ID')}</span>
+          </div>
+          <div className="harga-period">sekali bayar, akses selamanya</div>
+
+          <ul className="harga-list">
+            <li><Check /> Booking &amp; kalender otomatis tersinkron ke HP</li>
+            <li><Check /> Invoice rapi, kirim langsung ke WhatsApp klien</li>
+            <li><Check /> Rekap keuangan &amp; laporan otomatis</li>
+            <li><Check /> Data &amp; riwayat klien tersimpan rapi</li>
+            <li><Check /> Bantu usaha MUA-mu naik kelas</li>
+          </ul>
+
+          <Link to="/register" className="btn-landing large harga-cta">Mulai Coba Gratis 7 Hari →</Link>
+          <div className="harga-note">Langsung chat admin untuk tanya seputar Dapur MUA.</div>
+        </div>
+      </section>
+
       <section className="landing-cta">
         <h2>Siap rapiin bisnis makeup kamu?</h2>
         <p>Gratis buat mulai — nggak perlu ribet.</p>
@@ -171,7 +212,10 @@ export default function Landing() {
       </footer>
 
       <button type="button" className="landing-wa-float" onClick={handleHubungiAdmin} aria-label="Hubungi Admin lewat WhatsApp">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.78 14.13c-.24.68-1.4 1.3-1.93 1.38-.49.08-1.11.11-1.79-.11-.41-.13-.94-.3-1.62-.6-2.84-1.23-4.7-4.1-4.84-4.29-.14-.19-1.16-1.54-1.16-2.94s.72-2.09.98-2.38c.25-.28.55-.35.74-.35h.53c.17 0 .4-.06.63.48.24.57.81 1.98.88 2.12.07.14.11.31.02.5-.09.19-.14.31-.28.47-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.21 1.37.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.65.78 1.93.92.28.14.47.21.54.33.07.12.07.68-.17 1.35Z"/></svg>
+        <svg viewBox="0 0 24 24">
+          <path fill="#25D366" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Z" />
+          <path fill="#fff" d="M17.82 16.13c-.24.68-1.4 1.3-1.93 1.38-.49.08-1.11.11-1.79-.11-.41-.13-.94-.3-1.62-.6-2.84-1.23-4.7-4.1-4.84-4.29-.14-.19-1.16-1.54-1.16-2.94s.72-2.09.98-2.38c.25-.28.55-.35.74-.35h.53c.17 0 .4-.06.63.48.24.57.81 1.98.88 2.12.07.14.11.31.02.5-.09.19-.14.31-.28.47-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.21 1.37.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.65.78 1.93.92.28.14.47.21.54.33.07.12.07.68-.17 1.35Z" />
+        </svg>
       </button>
     </div>
   )

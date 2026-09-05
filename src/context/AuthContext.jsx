@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
     // dipasang) -- bikinin baru sekarang, biar nggak nyangkut nunggu
     // data yang emang nggak akan pernah datang.
     const fallback = {
-      studio_name: 'Makeup by', kode_prefix: 'Book', instagram: '', whatsapp: '', logo_url: null, kode_kalender: null,
+      studio_name: '', kode_prefix: 'Book', instagram: '', whatsapp: '', logo_url: null, kode_kalender: null,
       trial_ends_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), subscription_status: 'trial', kalender_synced_at: null,
     }
     const { data: created, error: createErr } = await supabase

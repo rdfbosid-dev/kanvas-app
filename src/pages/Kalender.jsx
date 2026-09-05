@@ -179,10 +179,7 @@ export default function Kalender() {
           </div>
           <div className="kcb-text">
             {profile?.kalender_synced_at ? (
-              <>
-                <div className="kcb-title">Agenda makeup-mu udah sinkron dengan kalender di HP-mu</div>
-                <div className="kcb-sub">Ada HP/kalender lain yang mau disambungin juga? Link-nya sama, tinggal pakai ulang.</div>
-              </>
+              <div className="kcb-title">Agenda makeup-mu udah sinkron dengan kalender di HP-mu.</div>
             ) : (
               <>
                 <div className="kcb-title">Hubungkan Kalender HP</div>
@@ -190,17 +187,19 @@ export default function Kalender() {
               </>
             )}
           </div>
-          <button
-            type="button"
-            className="kcb-btn"
-            onClick={() => setShowKalenderLink((v) => !v)}
-            disabled={!profile?.kode_kalender}
-          >
-            {!profile?.kode_kalender ? 'Menyiapkan...' : showKalenderLink ? 'Tutup' : profile?.kalender_synced_at ? 'Lihat Link' : 'Hubungkan'}
-          </button>
+          {!profile?.kalender_synced_at && (
+            <button
+              type="button"
+              className="kcb-btn"
+              onClick={() => setShowKalenderLink((v) => !v)}
+              disabled={!profile?.kode_kalender}
+            >
+              {!profile?.kode_kalender ? 'Menyiapkan...' : showKalenderLink ? 'Tutup' : 'Hubungkan'}
+            </button>
+          )}
         </div>
 
-        {showKalenderLink && profile?.kode_kalender && (
+        {showKalenderLink && profile?.kode_kalender && !profile?.kalender_synced_at && (
           <div className="kalender-connect-panel">
             <input
               type="text"

@@ -73,7 +73,7 @@ export default function Pengaturan() {
       .from('profiles')
       .upsert({
         id: user.id,
-        studio_name: studioName.trim() || 'Makeup by',
+        studio_name: studioName.trim(),
         kode_prefix: cleanPrefix,
         instagram: instagram.trim(),
         whatsapp: whatsapp.trim(),
@@ -211,10 +211,6 @@ export default function Pengaturan() {
             <div className="card-pengaturan">
               <div className="card-head-pengaturan"><h3>Profil Dapur MUA</h3></div>
 
-              {message && (
-                <div className={message.type === 'success' ? 'msg-success' : 'msg-error'}>{message.text}</div>
-              )}
-
               <form onSubmit={handleSaveProfile}>
                 <div className="field logo-field">
                   <label>Logo Brand</label>
@@ -245,7 +241,7 @@ export default function Pengaturan() {
                     <input ref={fileInputRef} type="file" accept="image/*" onChange={handleLogoChange} style={{ display: 'none' }} />
                   </div>
                   {logoMessage && (
-                    <div className={logoMessage.type === 'success' ? 'msg-success' : 'msg-error'} style={{ marginTop: 10 }}>{logoMessage.text}</div>
+                    <div className={logoMessage.type === 'success' ? 'msg-success' : 'msg-error'} style={{ marginTop: 10, alignSelf: 'flex-start' }}>{logoMessage.text}</div>
                   )}
                 </div>
 
@@ -277,6 +273,10 @@ export default function Pengaturan() {
                 <button className="btn-primary" type="submit" disabled={saving}>
                   {saving ? 'Menyimpan...' : 'Simpan Perubahan'}
                 </button>
+
+                {message && (
+                  <div className={message.type === 'success' ? 'msg-success' : 'msg-error'} style={{ marginTop: 14 }}>{message.text}</div>
+                )}
               </form>
             </div>
 
