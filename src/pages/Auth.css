@@ -137,8 +137,8 @@
 
 .auth-btn {
   width: 100%;
-  background: color-mix(in srgb, var(--button-prm) var(--mix-btn-a), transparent);
-  color: var(--button-tx);
+  background: var(--button-prm-hover);
+  color: var(--button-tx-hover);
   border: 1.5px solid color-mix(in srgb, var(--button-border) var(--mix-border), transparent);
   border-radius: 12px;
   padding: 12px;
@@ -152,9 +152,9 @@
 }
 
 .auth-btn:hover {
-  background: color-mix(in srgb, var(--button-prm-hover) 80%, transparent);
+  background: var(--h3);
   color: var(--button-tx-hover);
-  border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) var(--mix-border), transparent);
+  border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) var(--mix-border), transparent);;
   transform:translateY(-2px);
 }
 
