@@ -47,7 +47,7 @@
 .kalender-connect-banner.connected {
   width: fit-content;
   padding: 0;
-  gap: 10px;
+  gap: 8px;
   background: none;
   border: none;
   border-radius: 0;
@@ -56,8 +56,8 @@
 .kalender-connect-banner.connected .kcb-text { flex: 0 0 auto; }
 .kalender-connect-banner.connected .kcb-title { font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 0; }
 .kalender-connect-banner.connected .kcb-icon {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: color-mix(in srgb, var(--pill-alt) 60%, transparent); color: var(--h7);
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--h5); color: var(--h7); font-weight: 800;
 }
 .kalender-connect-banner.connected .kcb-icon svg { width: 14px; height: 14px; }
 
@@ -202,7 +202,7 @@
   .kalender-connect-panel { flex-wrap: wrap; }
   .kalender-connect-panel input { flex: 1 1 100%; }
   .kcp-btn { flex: 1 1 100%; }
-  .kalender-connect-banner.connected .kcb-title { font-size: 10px; font-weight: 500; }
+  .kalender-connect-banner.connected .kcb-title { font-size: 11px; font-weight: 500; }
   }
 
 @media (max-width: 600px) {
