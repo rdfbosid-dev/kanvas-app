@@ -218,12 +218,6 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="landing-cta">
-        <h2>Siap rapiin bisnis makeup kamu?</h2>
-        <p>Gratis buat mulai — nggak perlu ribet.</p>
-        <Link to="/register" className="btn-landing large">Coba Dapur MUA Sekarang →</Link>
-      </section>
-
       <section className="landing-tentang" id="tentang">
         <div className="tentang-card">
           <div className="tentang-text">
