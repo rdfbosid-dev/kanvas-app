@@ -23,8 +23,27 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
   const nomor = (booking.nomor_whatsapp || '').replace(/[^0-9]/g, '').replace(/^0/, '62')
   const namaStudio = profile?.studio_name || 'Makeup by'
   const pesan = `Halo, Kak ${booking.nama_klien}!\nBerikut kami kirimkan ringkasan invoice makeup untuk Kak ${booking.nama_klien}.\n\nKode booking: ${booking.kode_booking}\nTanggal makeup: ${formatTanggal(booking.tanggal_acara)}\nEvent: ${booking.event}\n\nTotal: ${formatRupiah(booking.belanja_klien)}\nSudah dibayar: ${formatRupiah(totalDibayar)}\nSisa: ${formatRupiah(sisa)}\n\nTerima kasih!\n\nSalam hangat,\n${namaStudio}.`
-  const url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`
-  window.open(url, '_blank')
+  const pesanEncoded = encodeURIComponent(pesan)
+  const waUrl = `https://wa.me/${nomor}?text=${pesanEncoded}`
+
+  // Link wa.me biasa itu "universal" -- OS yang mutusin app mana yang
+  // kebuka kalau WhatsApp reguler & Business dua-duanya keinstall.
+  // Di iPhone, iOS otomatis nawarin pilihan "Message" vs "Open in
+  // WhatsApp Business" duluan, jadi link biasa aja udah cukup di sana.
+  // Di Android, TIDAK ada pilihan itu -- langsung ke WhatsApp reguler.
+  // Satu-satunya cara maksa app spesifik di Android: Intent URI yang
+  // nunjuk LANGSUNG ke package WhatsApp Business (com.whatsapp.w4b).
+  // `S.browser_fallback_url` jaga-jaga andaikan WhatsApp Business
+  // TERNYATA nggak keinstall di HP klien yang buka link ini -- otomatis
+  // balik ke link wa.me biasa, bukan macet/dead-end.
+  const isAndroid = /Android/i.test(navigator.userAgent)
+
+  if (isAndroid) {
+    const intentUrl = `intent://wa.me/${nomor}?text=${pesanEncoded}#Intent;scheme=https;package=com.whatsapp.w4b;S.browser_fallback_url=${encodeURIComponent(waUrl)};end`
+    window.location.href = intentUrl
+  } else {
+    window.open(waUrl, '_blank')
+  }
 }
 
   return (
