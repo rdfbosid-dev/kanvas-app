@@ -26,9 +26,9 @@
 /* Area upload logo brand -- lingkaran preview klik-able (buka file picker),
    nempel overlay icon kamera pas di-hover, plus tombol "Ganti Logo" di
    sebelahnya buat yang nggak sadar preview-nya bisa diklik. */
-.logo-upload-row { display: flex; align-items: center; gap: 16px; }
+.logo-upload-row { display: flex; align-items: flex-end; gap: 16px; }
 .logo-preview {
-  width: 64px; height: 64px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;
+  width: 100px; height: 100px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;
   background: var(--ava-grad-alt); display: flex; align-items: center; justify-content: center;
   font-weight: 700; color: var(--h7); font-size: 20px; flex-shrink: 0;
   border: 1.5px solid var(--line-box);
@@ -38,7 +38,7 @@
   position: absolute; inset: 0; background: rgba(0,0,0,0.45); color: #fff;
   display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s;
 }
-.logo-preview-overlay svg { width: 20px; height: 20px; }
+.logo-preview-overlay svg { width: 40px; height: 40px; }
 .logo-preview:hover .logo-preview-overlay { opacity: 1; }
 .btn-ghost-small {
   padding: 7px 14px; border-radius: 9px; border: none;
