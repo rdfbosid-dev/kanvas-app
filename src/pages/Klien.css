@@ -102,13 +102,25 @@
    .cselect...` -- jadi CUMA berlaku di dropdown "Urutkan" halaman Klien
    ini doang. Filter "Status" di sebelahnya, dan semua CustomSelect di
    halaman lain (Booking/Keuangan/Laporan), tetap pakai default
-   width:100% dari CustomSelect.css seperti biasa, nggak kesentuh. */
+   width:100% dari CustomSelect.css seperti biasa, nggak kesentuh.
+
+   PENTING: dibungkus @media (min-width: 901px) -- KHUSUS DESKTOP.
+   Soalnya `.cselect-trigger { width: max-content }` itu nge-override
+   width:100% BAWAAN-nya secara mutlak, nggak peduli lebar layar. Kalau
+   dibiarin nyala terus (nggak di-scope), pas mobile kotaknya bakal tetep
+   "ngotot" ngikutin panjang konten sendiri, ngelewatin jatah lebar 50%
+   yang udah diatur di media query mobile (lihat .filter-select di bawah,
+   dalem @media max-width:900px) -- itu yang bikin tampilan mobile ikut
+   "fleksibel"/nggak konsisten kemarin. Di mobile, dropdown ini balik ke
+   behavior lama: 50/50 sama filter Status, FIXED, nggak dinamis. */
 .filter-select { width: 170px; }
 
-.filter-select-sort { width: max-content; min-width: 170px; }
-.filter-select-sort .cselect { width: max-content; }
-.filter-select-sort .cselect-trigger { width: max-content; }
-.filter-select-sort .cselect-menu { left: 0; right: auto; width: max-content; min-width: 100%; }
+@media (min-width: 901px) {
+  .filter-select-sort { width: max-content; min-width: 170px; }
+  .filter-select-sort .cselect { width: max-content; }
+  .filter-select-sort .cselect-trigger { width: max-content; }
+  .filter-select-sort .cselect-menu { left: 0; right: auto; width: max-content; min-width: 100%; }
+}
 
 
 /* ---- Kartu grid (tampilan lama, dipertahankan buat mode "grid") ---- */
