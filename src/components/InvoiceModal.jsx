@@ -21,7 +21,7 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
 
   function handleWhatsApp() {
   const nomor = (booking.nomor_whatsapp || '').replace(/[^0-9]/g, '').replace(/^0/, '62')
-  const namaStudio = profile?.studio_name || 'Studio Saya'
+  const namaStudio = profile?.studio_name || 'Makeup by'
   const pesan = `Halo, Kak ${booking.nama_klien}!\nBerikut kami kirimkan ringkasan invoice makeup untuk Kak ${booking.nama_klien}.\n\nKode booking: ${booking.kode_booking}\nTanggal makeup: ${formatTanggal(booking.tanggal_acara)}\nEvent: ${booking.event}\n\nTotal: ${formatRupiah(booking.belanja_klien)}\nSudah dibayar: ${formatRupiah(totalDibayar)}\nSisa: ${formatRupiah(sisa)}\n\nTerima kasih!\n\nSalam hangat,\n${namaStudio}.`
   const url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`
   window.open(url, '_blank')
@@ -38,7 +38,7 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
         <div className="modal-body invoice-paper">
           <div className="inv-header">
             <div>
-              <div className="inv-studio">{profile?.studio_name || 'Studio Saya'}</div>
+              <div className="inv-studio">{profile?.studio_name || 'Makeup by'}</div>
               {profile?.whatsapp && <div className="inv-studio-meta">WA: {profile.whatsapp}</div>}
               {profile?.instagram && <div className="inv-studio-meta">IG: {profile.instagram}</div>}
             </div>

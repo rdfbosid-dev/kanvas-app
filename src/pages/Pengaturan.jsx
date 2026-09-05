@@ -73,7 +73,7 @@ export default function Pengaturan() {
       .from('profiles')
       .upsert({
         id: user.id,
-        studio_name: studioName.trim() || 'Studio Saya',
+        studio_name: studioName.trim() || 'Makeup by',
         kode_prefix: cleanPrefix,
         instagram: instagram.trim(),
         whatsapp: whatsapp.trim(),

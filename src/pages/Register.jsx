@@ -49,7 +49,7 @@ export default function Register() {
     if (data.user) {
       await supabase
         .from('profiles')
-        .update({ studio_name: studioName || 'Studio Saya' })
+        .update({ studio_name: studioName || 'Makeup by' })
         .eq('id', data.user.id)
     }
 
