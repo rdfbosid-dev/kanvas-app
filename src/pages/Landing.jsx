@@ -210,7 +210,7 @@ export default function Landing() {
         <div className="tentang-card">
           <div className="tentang-text">
             <div className="tentang-title">Dibangun oleh RDF-dev</div>
-            <p className="tentang-desc"> Dapur MUA hadir sebagai solusi bagi para Makeup Artist (MUA)<br />untuk efisiensi dan efektivitas kerja terkait manajemen booking dan pengelolaan data.<br /><br />Ada pertanyaan, kendala, atau masukan?<br />Langsung aja hubungi lewat salah satu kontak di samping.</p>
+            <p className="tentang-desc"> Dapur MUA hadir sebagai solusi bagi para Makeup Artist (MUA)<br />untuk efisiensi dan efektivitas kerja terkait manajemen booking dan pengelolaan data.<br /><br />Ada pertanyaan, kendala, atau masukan?<br />Langsung aja hubungi lewat salah satu kontak berikut.</p>
           </div>
           <div className="tentang-kontak">
             <a href="mailto:support@dapurmua.biz.id" className="tentang-kontak-item">

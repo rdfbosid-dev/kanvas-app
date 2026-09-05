@@ -178,7 +178,7 @@
 .tentang-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: var(--h3); margin-bottom: 8px; }
 .tentang-desc { font-size: 13.5px; color: var(--h4); line-height: 1.6; }
 
-.tentang-kontak { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.tentang-kontak { flex: 1; display: flex; flex-direction: column; gap: 20px; }
 .tentang-kontak-item {
   display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px;
   background: color-mix(in srgb, var(--box) var(--mix-box), transparent);
