@@ -91,6 +91,7 @@ export default function Dashboard() {
           setShowOnboarding(true)
         }
       }
+
     }
     setLoading(false)
     setChartsIn(false)

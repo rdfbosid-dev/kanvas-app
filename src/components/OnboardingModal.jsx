@@ -10,15 +10,15 @@ export default function OnboardingModal({ onClose, onBookingBaru }) {
         <div className="onboard-hero">
           <div className="onboard-emoji">👋</div>
           <h2>Selamat datang di Dapur MUA!</h2>
-          <p>Semua booking, tim, dan uang masuk studiomu, diracik rapi di satu tempat.</p>
+          <p>Semua booking, tim, dan uang masuk studio MUA-mu, diracik rapi di satu tempat.</p>
         </div>
 
         <div className="onboard-steps">
           <div className="onboard-step">
             <div className="onboard-step-num">1</div>
             <div>
-              <div className="onboard-step-title">Lengkapi profil studio</div>
-              <div className="onboard-step-desc">Nama studio, kode booking, kontak — biar semua rapi dari awal.</div>
+              <div className="onboard-step-title">Lengkapi profil studio MUA</div>
+              <div className="onboard-step-desc">Nama brand MUA, kode booking, kontak — biar semua rapi dari awal.</div>
             </div>
           </div>
           <div className="onboard-step">
