@@ -14,7 +14,7 @@ export default function TrialHabis() {
 
   function handleHubungiAdmin() {
     const namaStudio = profile?.studio_name || 'Makeup by'
-    const pesan = `Halo, Kak! Saya mau lanjut berlangganan Dapur MUA.\n\nNama Brand: ${namaStudio}\n\nMohon info cara pembayarannya ya. Terima kasih!`
+    const pesan = `Halo, Kak!\n\nSaya mau lanjut berlangganan Dapur MUA.\n\nNama Brand: ${namaStudio}\n\nMohon info cara pembayarannya ya.\n\nTerima kasih!`
     openAdminWhatsApp(pesan)
   }
 
