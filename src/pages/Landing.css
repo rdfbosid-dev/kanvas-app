@@ -198,7 +198,7 @@
 }
 
 .landing-footer {
-  display: flex; align-items: center; justify-content: space-between; padding: 20px 60px;
+  display: flex; align-items: center; justify-content: space-between; padding: 15px 60px;
   background: color-mix(in srgb, var(--footer) 30%, transparent); border-top: 1px solid var(--footer);
 }
 .landing-footer p { font-size: 12.5px; color: var(--ink-soft); }
@@ -256,7 +256,8 @@
   .hero-actions { flex-direction: column; gap: 14px; margin-bottom: 30px; }
   .landing-fitur, .landing-cara { padding: 30px 20px; }
   .fitur-grid, .cara-grid { grid-template-columns: 1fr; }
-  .landing-footer { flex-direction: column; gap: 12px; padding: 24px 20px; text-align: center; }
+  .landing-footer { flex-direction: column; gap: 5px; padding: 10px 20px; text-align: center; }
+  .landing-footer p { font-size: 10px; }
   .harga-list { padding: 5px 10px; }
 }
 
