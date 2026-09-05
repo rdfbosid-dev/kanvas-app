@@ -66,14 +66,6 @@
     font-size: 11px;
   }
 
-  /* Sesuaikan lebar dropdown filter agar pas di iPhone XR */
-  .filter-select, 
-  .filter-select * {
-    width: 85px !important;
-    min-width: unset !important;
-    max-width: 85px !important;
-  }
-
   .topbar-actions {
     gap: 8px;
   }

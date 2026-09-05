@@ -73,10 +73,42 @@
 /* ---- Toolbar: search, filter status, sort, toggle tampilan ---- */
 .klien-toolbar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
 
-.filter-select, .filter-select-sort {
-  width: fit-content;
-  min-width: max-content;
-}
+/* Filter "Status" (opsi pendek: Semua Status/Selesai/Akan Datang) tetap
+   170px, FIXED -- nggak perlu dinamis, opsinya emang selalu pendek.
+
+   Filter "Urutkan" beda ceritanya -- opsinya macem-macem panjang
+   ("Terbaru" pendek, "Total Pembayaran" panjang). Sesuai request: lebar
+   box-nya HARUS ngikutin panjang teks yang lagi kepilih (dinamis per
+   pilihan), bukan angka fixed yang ditebak-tebak.
+
+   Caranya: `width: max-content` di 3 level sekaligus (wrapper -> .cselect
+   -> .cselect-trigger) -- BUKAN cuma di wrapper doang. Kalau cuma di
+   wrapper doang sementara .cselect/.cselect-trigger di dalamnya masih
+   width:100% (dari CustomSelect.css global), itu bakal jadi "percentage
+   di dalam elemen yang lebarnya intrinsik" -- kombinasi yang nggak
+   reliable di CSS (ini akar masalah kenapa percobaan `fit-content`
+   sebelumnya malah collapse balik ke ukuran minimum). Dengan
+   max-content di SEMUA level, nggak ada percentage yang perlu diresolve
+   sama sekali -- tiap level ngukur dirinya sendiri dari konten asli,
+   jadi PASTI pas ukurannya brapa pun lebar font aslinya nanti (nggak
+   perlu nebak lebar pixel-nya lagi kayak sebelumnya).
+
+   `.cselect-menu` juga di-scope disamain -- biar dropdown listnya SELALU
+   selebar opsi terpanjang ("Total Pembayaran"), nggak ikut nyempit ke
+   lebar trigger yang lagi kepilih pas isinya pendek (misal lagi
+   nampilin "Terbaru").
+
+   SEMUA rule di bawah ini di-scope pakai selector `.filter-select-sort
+   .cselect...` -- jadi CUMA berlaku di dropdown "Urutkan" halaman Klien
+   ini doang. Filter "Status" di sebelahnya, dan semua CustomSelect di
+   halaman lain (Booking/Keuangan/Laporan), tetap pakai default
+   width:100% dari CustomSelect.css seperti biasa, nggak kesentuh. */
+.filter-select { width: 170px; }
+
+.filter-select-sort { width: max-content; min-width: 170px; }
+.filter-select-sort .cselect { width: max-content; }
+.filter-select-sort .cselect-trigger { width: max-content; }
+.filter-select-sort .cselect-menu { left: 0; right: auto; width: max-content; min-width: 100%; }
 
 
 /* ---- Kartu grid (tampilan lama, dipertahankan buat mode "grid") ---- */
