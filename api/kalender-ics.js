@@ -47,12 +47,52 @@ export default async function handler(req, res) {
 
   const { data: profile, error: profileError } = await supabaseAdmin
     .from('profiles')
-    .select('id, studio_name')
+    .select('id, studio_name, trial_ends_at, subscription_status')
     .eq('kode_kalender', kode)
     .maybeSingle()
 
   if (profileError || !profile) {
     res.status(404).send('Kode kalender tidak valid atau tidak ditemukan.')
+    return
+  }
+
+  const studioName = profile.studio_name || 'Dapur MUA'
+  const now = formatDateUTC(new Date())
+
+  // Sama persis logic-nya kayak `isLocked` di AuthContext.jsx (React) --
+  // TAPI endpoint ini jalan di server, di luar app React, jadi nggak bisa
+  // numpang ke situ, logic-nya perlu di-duplikasi manual di sini.
+  const isLocked = profile.subscription_status !== 'active'
+    && profile.trial_ends_at
+    && new Date(profile.trial_ends_at) < new Date()
+
+  if (isLocked) {
+    // JANGAN ambil/bocorin data booking asli sama sekali kalau udah
+    // kekunci -- balikin kalender isinya 1 event placeholder doang, yang
+    // nyantumin tanggal HARI INI biar kelihatan di app kalender HP-nya
+    // dan ngingetin buat lanjut berlangganan. Event lama yang sempet
+    // ke-subscribe sebelumnya bakal ke-replace sama ini pas app
+    // kalendernya sinkron ulang (soalnya semua event lama otomatis
+    // ilang begitu file .ics-nya nggak nyantumin UID itu lagi).
+    const todayStr = formatDateUTC(new Date()).slice(0, 8)
+    const placeholderIcs = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Dapur MUA//Kalender Booking//ID',
+      'CALSCALE:GREGORIAN',
+      `X-WR-CALNAME:Jadwal Booking - ${escapeICS(studioName)}`,
+      'BEGIN:VEVENT',
+      `UID:trial-habis-${profile.id}@dapurmua.app`,
+      `DTSTAMP:${now}`,
+      `DTSTART;VALUE=DATE:${todayStr}`,
+      `SUMMARY:${escapeICS('Langganan Dapur MUA kamu udah habis -- hubungi admin buat lanjut')}`,
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\r\n')
+
+    res.setHeader('Content-Type', 'text/calendar; charset=utf-8')
+    res.setHeader('Content-Disposition', 'inline; filename="dapurmua-kalender.ics"')
+    res.status(200).send(placeholderIcs)
     return
   }
 
@@ -66,9 +106,6 @@ export default async function handler(req, res) {
     res.status(500).send('Gagal mengambil data booking.')
     return
   }
-
-  const studioName = profile.studio_name || 'Dapur MUA'
-  const now = formatDateUTC(new Date())
 
   const events = (bookings || []).map((b) => {
     const [y, m, d] = b.tanggal_acara.split('-').map(Number)

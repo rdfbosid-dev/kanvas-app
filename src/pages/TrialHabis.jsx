@@ -27,10 +27,11 @@ export default function TrialHabis() {
           <div className="auth-brand-name">Dapur MUA</div>
         </div>
 
-        <div className="auth-title">Masa Coba Gratis Kamu Udah Habis</div>
+        <div className="auth-title">Masa coba gratis kamu udah habis</div>
         <div className="auth-subtitle">
           Data booking, klien, dan keuangan kamu tetap aman kok, cuma belum bisa diakses
-          sementara. Yuk lanjut berlangganan biar bisa lanjut kelola Dapur MUA kamu lagi.
+          sementara.<br />
+          Yuk lanjut berlangganan biar bisa lanjut kelola Dapur MUA kamu lagi.
         </div>
 
         <button className="auth-btn" type="button" onClick={handleHubungiAdmin}>
