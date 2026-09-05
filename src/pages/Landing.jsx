@@ -58,7 +58,7 @@ function Icon({ name }) {
 
 export default function Landing() {
   function handleHubungiAdmin() {
-    openAdminWhatsApp('Halo, Kak! Saya mau tanya-tanya soal Dapur MUA.')
+    openAdminWhatsApp('Halo, Kak!\n\nSaya mau tanya-tanya soal Dapur MUA.')
   }
 
   return (

@@ -61,7 +61,7 @@ export default function Sidebar({ headerAction = null }) {
     .toUpperCase()
 
   function handleBantuan() {
-    const pesan = `Halo, Kak! Saya mau tanya-tanya/ada kendala soal Dapur MUA.\n\nAkun: ${studioName || user?.email || '-'}`
+    const pesan = `Halo, Kak!\n\nSaya mau tanya-tanya/ada kendala soal Dapur MUA.\n\nAkun: ${studioName || user?.email || '-'}`
     openAdminWhatsApp(pesan)
   }
 
