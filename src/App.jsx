@@ -14,6 +14,7 @@ import Keuangan from './pages/Keuangan'
 import Laporan from './pages/Laporan'
 import Pengaturan from './pages/Pengaturan'
 import TrialHabis from './pages/TrialHabis'
+import Panduan from './pages/Panduan'
 
 function ProtectedRoute({ children }) {
   const { user, loading, isLocked } = useAuth()
@@ -152,6 +153,14 @@ export default function App() {
               element={
                 <ProtectedRoute>
                   <Pengaturan />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/panduan"
+              element={
+                <ProtectedRoute>
+                  <Panduan />
                 </ProtectedRoute>
               }
             />
