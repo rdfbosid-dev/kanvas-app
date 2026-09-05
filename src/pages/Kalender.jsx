@@ -169,13 +169,26 @@ export default function Kalender() {
 
         {error && <div className="empty-state" style={{ color: 'var(--ink-soft)' }}>Gagal memuat data: {error}</div>}
 
-        <div className="kalender-connect-banner">
+        <div className={`kalender-connect-banner${profile?.kalender_synced_at ? ' connected' : ''}`}>
           <div className="kcb-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/><path d="M8 14l2.5 2.5L16 11"/></svg>
+            {profile?.kalender_synced_at ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6 9 17l-5-5" /></svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/><path d="M8 14l2.5 2.5L16 11"/></svg>
+            )}
           </div>
           <div className="kcb-text">
-            <div className="kcb-title">Hubungkan Kalender HP</div>
-            <div className="kcb-sub">Sinkronisasi jadwal booking-mu ke Google Calendar/Kalender iPhone untuk update otomatis tiap ada booking baru.</div>
+            {profile?.kalender_synced_at ? (
+              <>
+                <div className="kcb-title">Agenda makeup-mu udah sinkron dengan kalender di HP-mu</div>
+                <div className="kcb-sub">Ada HP/kalender lain yang mau disambungin juga? Link-nya sama, tinggal pakai ulang.</div>
+              </>
+            ) : (
+              <>
+                <div className="kcb-title">Hubungkan Kalender HP</div>
+                <div className="kcb-sub">Sinkronisasi jadwal booking-mu ke Google Calendar/Kalender iPhone untuk update otomatis tiap ada booking baru.</div>
+              </>
+            )}
           </div>
           <button
             type="button"
@@ -183,7 +196,7 @@ export default function Kalender() {
             onClick={() => setShowKalenderLink((v) => !v)}
             disabled={!profile?.kode_kalender}
           >
-            {!profile?.kode_kalender ? 'Menyiapkan...' : showKalenderLink ? 'Tutup' : 'Hubungkan'}
+            {!profile?.kode_kalender ? 'Menyiapkan...' : showKalenderLink ? 'Tutup' : profile?.kalender_synced_at ? 'Lihat Link' : 'Hubungkan'}
           </button>
         </div>
 

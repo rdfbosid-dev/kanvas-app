@@ -8,9 +8,10 @@
    nggak wajib mampir ke Pengaturan dulu. ---- */
 .kalender-connect-banner {
   display: flex; align-items: center; gap: 16px;
-  background: color-mix(in srgb, var(--box-dashboard) 50%, transparent);
+  background: color-mix(in srgb, var(--box-dashboard) 90%, transparent);
   border: 1.5px solid var(--line-box);
-  border-radius: 16px; padding: 16px 20px; margin-bottom: 18px; box-shadow: var(--shadow-card);
+  border-radius: 16px; padding: 16px 20px; margin-bottom: 18px;
+  box-shadow: var(--shadow-card);
 }
 .kcb-icon {
   width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
@@ -30,10 +31,22 @@
 .kcb-btn:hover { background: var(--h3); }
 .kcb-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
+/* State begitu udah pernah sinkron (kalender_synced_at keisi) -- ganti
+   warna dari biru (var(--h3), warna "ajakan") jadi ijo (var(--pill-alt)/
+   var(--h7), warna "berhasil"), konsisten sama status-pill "Lunas" yang
+   udah dipakai di tempat lain (Booking, Klien, dst). */
+.kalender-connect-banner.connected {
+  background: color-mix(in srgb, var(--pill-alt) 40%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--pill-alt) 70%, transparent);
+}
+.kalender-connect-banner.connected .kcb-icon {
+  background: color-mix(in srgb, var(--pill-alt) 60%, transparent); color: var(--h7);
+}
+
 .kalender-connect-panel {
   display: flex; gap: 10px; margin: -8px 0 18px;
-  background: color-mix(in srgb, var(--box-dashboard) 50%, transparent);
-  border: 1.5px solid var(--line-box); border-radius: 14px; padding: 14px 16px;
+  background: color-mix(in srgb, var(--box-dashboard) 90%, transparent);
+  border: 1px solid var(--line-box); border-radius: 14px; padding: 14px 16px;
   box-shadow: var(--shadow-card);
 }
 .kalender-connect-panel input {

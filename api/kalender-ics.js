@@ -107,6 +107,24 @@ export default async function handler(req, res) {
     return
   }
 
+  // Ini SATU-SATUNYA sinyal yang kita punya buat tau app Kalender di HP
+  // user beneran "narik" link ini (bukan cuma di-copy doang) -- link .ics
+  // itu pasif, nggak ada notifikasi balik dari Google Calendar/Kalender
+  // iPhone pas mereka subscribe. Jadi begitu endpoint ini kepanggil buat
+  // data ASLI (bukan yang lock-placeholder di atas), dicatet sebagai
+  // bukti sinkronisasi berhasil. `.is('kalender_synced_at', null)` --
+  // cuma nulis SEKALI (pas masih kosong), request-request berikutnya
+  // (app kalender narik ulang berkala) nggak nimpa timestamp yang udah
+  // ada. Sengaja nggak nunggu/nge-await hasilnya (fire-and-forget) --
+  // ini bukan hal krusial yang boleh bikin response .ics-nya lambat
+  // atau gagal gara-gara ini error.
+  supabaseAdmin
+    .from('profiles')
+    .update({ kalender_synced_at: new Date().toISOString() })
+    .eq('id', profile.id)
+    .is('kalender_synced_at', null)
+    .then(() => {})
+
   const events = (bookings || []).map((b) => {
     const [y, m, d] = b.tanggal_acara.split('-').map(Number)
     let dtStart, dtEnd
