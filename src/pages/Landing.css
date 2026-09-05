@@ -232,12 +232,12 @@
 .landing-top-float {
   position: fixed; bottom: 24px; left: 24px; z-index: 50;
   width: 46px; height: 46px; border-radius: 50%; border: none;
-  background: var(--button-prm-hover); color: var(--button-tx-hover); cursor: pointer;
+  background: var(--pill-alt); color: var(--button-tx-hover); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 8px 20px -6px rgba(0,0,0,0.35);
   transition: background 0.15s, transform 0.2s ease;
 }
-.landing-top-float:hover { background: var(--h3); transform: translateY(-2px); }
+.landing-top-float:hover { background: var(--h5); transform: translateY(-2px); }
 .landing-top-float svg { width: 20px; height: 20px; }
 
 @media (max-width: 480px) {
@@ -259,6 +259,7 @@
   .landing-fitur, .landing-cara { padding: 60px 20px; }
   .fitur-grid, .cara-grid { grid-template-columns: 1fr; }
   .landing-footer { flex-direction: column; gap: 12px; padding: 24px 20px; text-align: center; }
+  .harga-list { padding: 5px 5px; }
 }
 
 @media (max-width: 480px) {
