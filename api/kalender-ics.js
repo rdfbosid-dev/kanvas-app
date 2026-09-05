@@ -115,15 +115,28 @@ export default async function handler(req, res) {
   // bukti sinkronisasi berhasil. `.is('kalender_synced_at', null)` --
   // cuma nulis SEKALI (pas masih kosong), request-request berikutnya
   // (app kalender narik ulang berkala) nggak nimpa timestamp yang udah
-  // ada. Sengaja nggak nunggu/nge-await hasilnya (fire-and-forget) --
-  // ini bukan hal krusial yang boleh bikin response .ics-nya lambat
-  // atau gagal gara-gara ini error.
-  supabaseAdmin
-    .from('profiles')
-    .update({ kalender_synced_at: new Date().toISOString() })
-    .eq('id', profile.id)
-    .is('kalender_synced_at', null)
-    .then(() => {})
+  // ada.
+  //
+  // PENTING: WAJIB di-`await`, taro SEBELUM ngirim respons -- di
+  // lingkungan serverless (Vercel), eksekusi function langsung
+  // "dibekukan" begitu respons dikirim, TANPA nunggu proses lain yang
+  // masih jalan di belakang (beda kayak server Node.js biasa yang
+  // nyala terus). Kalau ini nggak di-await, promise-nya bisa kegugurin
+  // duluan sebelum sempet nyampe ke Supabase -- response .ics-nya tetep
+  // sukses (makanya kelihatan "berhasil" padahal timestamp-nya nggak
+  // pernah kesave). Dibungkus try/catch biar kalau update-nya somehow
+  // gagal, itu TETEP nggak sampe bikin response .ics-nya ikut gagal --
+  // fitur sinkronisasi kalender-nya sendiri lebih penting daripada
+  // sekadar catatan status di UI.
+  try {
+    await supabaseAdmin
+      .from('profiles')
+      .update({ kalender_synced_at: new Date().toISOString() })
+      .eq('id', profile.id)
+      .is('kalender_synced_at', null)
+  } catch (e) {
+    // sengaja diem -- lihat alasan di komentar atas
+  }
 
   const events = (bookings || []).map((b) => {
     const [y, m, d] = b.tanggal_acara.split('-').map(Number)
