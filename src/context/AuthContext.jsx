@@ -35,12 +35,37 @@ export function AuthProvider({ children }) {
   }, [])
 
   useEffect(() => {
-    // cek sesi yang mungkin udah ada (misal user refresh halaman)
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-      setLoading(false)
-      if (session?.user) refreshProfile(session.user.id)
-    })
+    let active = true
+
+    async function init() {
+      // getSession() CUMA baca token yang tersimpan di localStorage --
+      // dia nggak nanya ke server sama sekali, jadi tetep "keliatan
+      // valid" walau usernya udah dihapus dari Supabase. getUser() beda,
+      // itu BENERAN request ke server buat verifikasi -- kalau usernya
+      // udah nggak ada, ini yang bakal ke-tangkep errornya.
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session?.user) {
+        if (active) setLoading(false)
+        return
+      }
+
+      const { data: { user: verifiedUser }, error } = await supabase.auth.getUser()
+      if (error || !verifiedUser) {
+        // Akun ini udah nggak valid lagi di server (misal: dihapus manual
+        // dari Supabase Dashboard) -- bersihin sesi lokal yang "nyangkut"
+        // itu, biar route guard di App.jsx otomatis lempar ke /login.
+        await supabase.auth.signOut()
+        if (active) { setUser(null); setProfile(null); setLoading(false) }
+        return
+      }
+
+      if (active) {
+        setUser(verifiedUser)
+        setLoading(false)
+        refreshProfile(verifiedUser.id)
+      }
+    }
+    init()
 
     // dengerin perubahan status login (login, logout, token refresh)
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -49,7 +74,24 @@ export function AuthProvider({ children }) {
       else setProfile(null)
     })
 
-    return () => listener.subscription.unsubscribe()
+    // Tambahan: verifikasi ulang ke server tiap kali tab ini balik
+    // ke-fokus (kejadian nyata yang kita tes: buka Dashboard di 1 tab,
+    // user-nya dihapus dari Supabase Dashboard, terus balik ke tab
+    // Dashboard tadi -- ini yang nangkep situasi itu tanpa nunggu token
+    // lokal expired sendiri, ~1 jam).
+    async function revalidateOnFocus() {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session?.user) return
+      const { error } = await supabase.auth.getUser()
+      if (error) await supabase.auth.signOut()
+    }
+    window.addEventListener('focus', revalidateOnFocus)
+
+    return () => {
+      active = false
+      listener.subscription.unsubscribe()
+      window.removeEventListener('focus', revalidateOnFocus)
+    }
   }, [refreshProfile])
 
   const signOut = () => supabase.auth.signOut()
