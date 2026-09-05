@@ -31,6 +31,7 @@ export default function TrialHabis() {
         <div className="auth-subtitle">
           Data booking, klien, dan keuangan kamu tetap aman kok, cuma belum bisa diakses
           sementara.<br />
+          <br />
           Yuk lanjut berlangganan biar bisa lanjut kelola Dapur MUA kamu lagi.
         </div>
 
