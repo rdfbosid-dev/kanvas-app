@@ -91,7 +91,6 @@ export default function Dashboard() {
           setShowOnboarding(true)
         }
       }
-
     }
     setLoading(false)
     setChartsIn(false)
@@ -341,7 +340,7 @@ export default function Dashboard() {
       <div className="main">
         <div className="topbar topbar-dashboard">
           <div>
-            <div className="greeting">Halo, {profile?.studio_name || 'Makeup by'}!</div>
+            <div className="greeting">Halo, {profile?.studio_name || 'Pengguna Baru'}!</div>
             <div className="greeting-date">
               {today.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
             </div>

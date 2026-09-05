@@ -224,6 +224,27 @@
 .landing-wa-float:hover { transform: translateY(-2px) scale(1.05); }
 .landing-wa-float svg { width: 36px; height: 36px; }
 
+/* Tombol "Kembali ke atas" -- SENGAJA ditaro di pojok KIRI bawah (bukan
+   ditumpuk di atas tombol WA yang udah nempatin kanan bawah), biar nggak
+   akan pernah tabrakan sama sekali, di ukuran layar manapun. Munculnya
+   juga cuma pas user udah scroll ke bawah (lihat state `showTop` di
+   Landing.jsx) -- nggak ada gunanya keliatan dari paling atas halaman. */
+.landing-top-float {
+  position: fixed; bottom: 24px; left: 24px; z-index: 50;
+  width: 46px; height: 46px; border-radius: 50%; border: none;
+  background: var(--button-prm-hover); color: var(--button-tx-hover); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.35);
+  transition: background 0.15s, transform 0.2s ease;
+}
+.landing-top-float:hover { background: var(--h3); transform: translateY(-2px); }
+.landing-top-float svg { width: 20px; height: 20px; }
+
+@media (max-width: 480px) {
+  .landing-top-float { width: 42px; height: 42px; bottom: 16px; left: 16px; }
+  .landing-top-float svg { width: 18px; height: 18px; }
+}
+
 @media (max-width: 480px) {
   .landing-wa-float { width: 48px; height: 48px; bottom: 16px; right: 16px; }
   .landing-wa-float svg { width: 32px; height: 32px; }

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ThemeToggleButton from '../components/ThemeToggleButton'
 import { openAdminWhatsApp } from '../lib/whatsapp'
@@ -71,6 +72,23 @@ function Check() {
 }
 
 export default function Landing() {
+  const [showTop, setShowTop] = useState(false)
+
+  useEffect(() => {
+    // Cuma keliatan begitu udah scroll lumayan jauh (400px) -- kalau
+    // langsung keliatan dari atas halaman, dia percuma (belom ada yang
+    // perlu di-"kembaliin ke atas").
+    function handleScroll() {
+      setShowTop(window.scrollY > 400)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  function handleGoToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   function handleHubungiAdmin() {
     openAdminWhatsApp('Halo, Kak!\n\nSaya mau tanya-tanya soal Dapur MUA.')
   }
@@ -239,6 +257,12 @@ export default function Landing() {
         <div className="landing-brand"><div className="brand-mark small"></div><span className="landing-brand-title">Dapur MUA</span></div>
         <p>© 2026 Dapur MUA. Hak cipta dilindungi.</p>
       </footer>
+
+      {showTop && (
+        <button type="button" className="landing-top-float" onClick={handleGoToTop} aria-label="Kembali ke atas">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+        </button>
+      )}
 
       <button type="button" className="landing-wa-float" onClick={handleHubungiAdmin} aria-label="Hubungi Admin lewat WhatsApp">
         <svg viewBox="0 0 24 24">

@@ -209,7 +209,7 @@ export default function Pengaturan() {
         ) : (
           <div className="pengaturan-layout">
             <div className="card-pengaturan">
-              <div className="card-head-pengaturan"><h3>Profil Dapur MUA</h3></div>
+              <div className="card-head-pengaturan"><h3>Profil Pengguna</h3></div>
 
               <form onSubmit={handleSaveProfile}>
                 <div className="field logo-field">

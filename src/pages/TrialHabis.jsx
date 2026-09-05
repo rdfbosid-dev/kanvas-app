@@ -13,7 +13,7 @@ export default function TrialHabis() {
   if (!isLocked) return <Navigate to="/dashboard" replace />
 
   function handleHubungiAdmin() {
-    const namaStudio = profile?.studio_name || 'Makeup by'
+    const namaStudio = profile?.studio_name || 'Studio Saya'
     const pesan = `Halo, Kak!\n\nSaya mau lanjut berlangganan Dapur MUA.\n\nNama Brand: ${namaStudio}\n\nMohon info cara pembayarannya ya.\n\nTerima kasih!`
     openAdminWhatsApp(pesan)
   }
