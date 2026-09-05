@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { useAuth } from '../context/AuthContext'
 import Sidebar from '../components/Sidebar'
 import BookingModal from '../components/BookingModal'
 import BookingDetailModal from '../components/BookingDetailModal'
@@ -60,6 +61,7 @@ function buildGrid(year, month) {
 }
 
 export default function Kalender() {
+  const { user, profile, refreshProfile } = useAuth()
   const today = new Date()
   const [viewYear, setViewYear] = useState(today.getFullYear())
   const [viewMonth, setViewMonth] = useState(today.getMonth())
@@ -71,6 +73,31 @@ export default function Kalender() {
 
   const [showModal, setShowModal] = useState(false)
   const [selectedBooking, setSelectedBooking] = useState(null)
+
+  const [showKalenderLink, setShowKalenderLink] = useState(false)
+  const [linkCopied, setLinkCopied] = useState(false)
+
+  useEffect(() => {
+    // Sama persis logikanya kayak di Pengaturan.jsx -- SENGAJA disalin
+    // ke sini juga (bukan cuma numpang), soalnya user bisa aja buka
+    // halaman Kalender ini duluan tanpa pernah mampir ke Pengaturan,
+    // jadi kode_kalender-nya belum tentu ada. Kalau kode ini cuma ada di
+    // Pengaturan.jsx, banner "Hubungkan Kalender" di sini bisa nyangkut
+    // nunggu kode yang nggak akan pernah muncul.
+    if (profile && !profile.kode_kalender && user) {
+      const kode = crypto.randomUUID().replace(/-/g, '')
+      supabase.from('profiles').upsert({ id: user.id, kode_kalender: kode }).then(({ error }) => {
+        if (!error) refreshProfile(user.id)
+      })
+    }
+  }, [profile, user, refreshProfile])
+
+  function handleCopyLink() {
+    const link = `${window.location.origin}/api/kalender-ics?kode=${profile?.kode_kalender}`
+    navigator.clipboard.writeText(link)
+    setLinkCopied(true)
+    setTimeout(() => setLinkCopied(false), 2000)
+  }
 
   async function loadBookings() {
     setLoading(true)
@@ -141,6 +168,38 @@ export default function Kalender() {
         </div>
 
         {error && <div className="empty-state" style={{ color: 'var(--ink-soft)' }}>Gagal memuat data: {error}</div>}
+
+        <div className="kalender-connect-banner">
+          <div className="kcb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/><path d="M8 14l2.5 2.5L16 11"/></svg>
+          </div>
+          <div className="kcb-text">
+            <div className="kcb-title">Hubungkan Kalender HP</div>
+            <div className="kcb-sub">Sinkronisasi jadwal booking-mu ke Google Calendar/Kalender iPhone untuk update otomatis tiap ada booking baru.</div>
+          </div>
+          <button
+            type="button"
+            className="kcb-btn"
+            onClick={() => setShowKalenderLink((v) => !v)}
+            disabled={!profile?.kode_kalender}
+          >
+            {!profile?.kode_kalender ? 'Menyiapkan...' : showKalenderLink ? 'Tutup' : 'Hubungkan'}
+          </button>
+        </div>
+
+        {showKalenderLink && profile?.kode_kalender && (
+          <div className="kalender-connect-panel">
+            <input
+              type="text"
+              readOnly
+              value={`${window.location.origin}/api/kalender-ics?kode=${profile.kode_kalender}`}
+              onFocus={(e) => e.target.select()}
+            />
+            <button type="button" className="kcp-btn" onClick={handleCopyLink}>
+              {linkCopied ? 'Tersalin!' : 'Salin Link'}
+            </button>
+          </div>
+        )}
 
         <div className="kalender-layout">
           <div className="card kalender-card">

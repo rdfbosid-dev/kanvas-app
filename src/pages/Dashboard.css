@@ -62,14 +62,14 @@
 }
 
 .btn-booking-primary {
-  background: color-mix(in srgb, var(--button-prm) var(--mix-btn-c), transparent); color: var(--button-tx); border: 1.5px solid color-mix(in srgb, var(--button-border) var(--mix-border), transparent); border-radius: 10px;
+  background: var(--button-prm-hover); color: var(--button-tx-hover); border: 1.5px solid color-mix(in srgb, var(--button-border) var(--mix-border), transparent); border-radius: 10px;
   padding: 9px 8px; font-size: 13px; font-weight: 600; font-family: inherit;
   display: flex; align-items: center; gap: 6px; cursor: pointer;
   box-shadow: var(--shadow-button);
   text-decoration: none;
   transition: all 0.3s ease, box-shadow 0.12s;
 }
-.btn-booking-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-button); color: var(--button-tx-hover); background: color-mix(in srgb, var(--button-prm-hover) var(--mix-btn-hover), transparent); border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) var(--mix-border), transparent); }
+.btn-booking-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-button); color: var(--button-tx-hover); background: var(--h3); border: 1.5px solid color-mix(in srgb, var(--button-prm-hover) var(--mix-border), transparent); }
 .btn-booking-primary svg { width: 14px; height: 14px; }
 
 .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 22px; }

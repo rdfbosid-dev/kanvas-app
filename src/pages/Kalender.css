@@ -1,5 +1,54 @@
 .kalender-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; align-items: start; }
 
+/* ---- Banner "Hubungkan Kalender" di atas grid -- ide-nya numpang dari
+   referensi web sejenis, tapi TANPA konsep upgrade/premium (Dapur MUA
+   cuma 1 tier: trial -> active, fitur ini udah kepake dari trial juga).
+   Logic link/salin-nya SENGAJA disalin dari Pengaturan.jsx (kode_kalender,
+   handleCopyLink) -- biar user bisa langsung dapet link dari sini juga,
+   nggak wajib mampir ke Pengaturan dulu. ---- */
+.kalender-connect-banner {
+  display: flex; align-items: center; gap: 16px;
+  background: color-mix(in srgb, var(--box-dashboard) 50%, transparent);
+  border: 1.5px solid var(--line-box);
+  border-radius: 16px; padding: 16px 20px; margin-bottom: 18px; box-shadow: var(--shadow-card);
+}
+.kcb-icon {
+  width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+  background: color-mix(in srgb, var(--h3) 20%, transparent); color: var(--h5);
+  display: flex; align-items: center; justify-content: center;
+}
+.kcb-icon svg { width: 22px; height: 22px; }
+.kcb-text { flex: 1; min-width: 0; }
+.kcb-title { font-size: 14.5px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.kcb-sub { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+.kcb-btn {
+  flex-shrink: 0; padding: 9px 18px; border-radius: 10px; border: none;
+  background: var(--button-prm-hover); color: var(--button-tx-hover);
+  font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer;
+  transition: background 0.15s;
+}
+.kcb-btn:hover { background: var(--h3); }
+.kcb-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.kalender-connect-panel {
+  display: flex; gap: 10px; margin: -8px 0 18px;
+  background: color-mix(in srgb, var(--box-dashboard) 50%, transparent);
+  border: 1.5px solid var(--line-box); border-radius: 14px; padding: 14px 16px;
+  box-shadow: var(--shadow-card);
+}
+.kalender-connect-panel input {
+  flex: 1; min-width: 0; border: 1.5px solid var(--line-box); border-radius: 10px;
+  padding: 10px 12px; font-size: 12.5px; font-family: inherit; color: var(--button-tx);
+  background: var(--field);
+}
+.kcp-btn {
+  flex-shrink: 0; padding: 10px 18px; border-radius: 10px; border: none;
+  background: var(--button-prm-hover); color: var(--button-tx-hover);
+  font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer;
+  transition: background 0.15s;
+}
+.kcp-btn:hover { background: var(--h3); }
+
 .card.kalender-card { background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); }
 .kalender-card { padding: 22px; }
 .kalender-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
@@ -116,6 +165,12 @@
   .card.kalender-card { border: 1px solid var(--line-box); }
   .card.agenda-card { border: 1px solid var(--line-box); }
   .kalender-cell { aspect-ratio: 1; }
+
+  .kalender-connect-banner { flex-wrap: wrap; }
+  .kcb-btn { width: 100%; }
+  .kalender-connect-panel { flex-wrap: wrap; }
+  .kalender-connect-panel input { flex: 1 1 100%; }
+  .kcp-btn { flex: 1 1 100%; }
   }
 @media (max-width: 600px) {
   .kalender-card, .card.agenda-card { padding: 20px; border: 1px solid var(--line-box); }
