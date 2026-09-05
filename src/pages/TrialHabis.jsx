@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { openAdminWhatsApp } from '../lib/whatsapp'
+import ThemeToggleButton from '../components/ThemeToggleButton'
 import '../pages/Auth.css'
 
 export default function TrialHabis() {
@@ -19,6 +20,7 @@ export default function TrialHabis() {
 
   return (
     <div className="auth-page">
+      <div className="auth-page-toggle"><ThemeToggleButton /></div>
       <div className="auth-card">
         <div className="auth-brand">
           <div className="auth-brand-mark"></div>
