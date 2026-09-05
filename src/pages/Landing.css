@@ -260,7 +260,7 @@
   .landing-fitur, .landing-cara { padding: 60px 20px; }
   .fitur-grid, .cara-grid { grid-template-columns: 1fr; }
   .landing-footer { flex-direction: column; gap: 12px; padding: 24px 20px; text-align: center; }
-  .harga-list { padding: 5px 5px; }
+  .harga-list { padding: 5px 10px; }
 }
 
 @media (max-width: 480px) {
