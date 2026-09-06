@@ -33,7 +33,7 @@ export default function LupaPassword() {
       <div className="auth-page-toggle"><ThemeToggleButton /></div>
         <div className="auth-card">
           <div className="auth-brand">
-            <div className="auth-brand-mark"></div>
+            <div className="auth-brand-mark"><img src="/icon-512.png" alt="Dapur MUA" /></div>
             <div className="auth-brand-name">Dapur MUA</div>
           </div>
           <div className="auth-title">Cek email kamu 📩</div>
