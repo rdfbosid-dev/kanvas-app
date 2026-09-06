@@ -45,13 +45,20 @@ export default function Register() {
       return
     }
 
-    // simpan nama studio ke tabel profiles (baris profiles-nya sendiri
-    // udah otomatis dibuat oleh trigger di database begitu user baru daftar)
+    // simpan nama studio ke tabel profiles -- pakai upsert (BUKAN update),
+    // soalnya baris profiles-nya dibikin sama trigger di database yang
+    // jalannya ASINKRON (di background). Kalau trigger itu belum sempet
+    // kelar pas baris ini nembak, update() bakal diam-diam nggak
+    // ngapa-ngapain (nggak ada error, tapi nama brand-nya nggak
+    // kesimpen) -- itu yang bikin field "Nama Brand MUA" keliatan
+    // kosong lagi pas dicek di Pengaturan. upsert() aman dari race
+    // condition ini: kalau barisnya udah ada (trigger duluan selesai),
+    // dia UPDATE; kalau belum ada (upsert ini yang lebih duluan), dia
+    // langsung CREATE barisnya sendiri.
     if (data.user) {
       await supabase
         .from('profiles')
-        .update({ studio_name: studioName.trim() })
-        .eq('id', data.user.id)
+        .upsert({ id: data.user.id, studio_name: studioName.trim() })
     }
 
     setLoading(false)
