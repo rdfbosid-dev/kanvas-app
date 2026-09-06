@@ -102,7 +102,7 @@ export default function Landing() {
     <div className="landing">
       <header className="landing-nav">
         <div className="landing-brand">
-          <div className="landing-brand-mark"></div>
+          <div className="landing-brand-mark"><img src="/icon-512.png" alt="Dapur MUA" /></div>
           <div className="landing-brand-text">
           <span className="landing-brand-title">Dapur MUA</span>
           <span className="landing-brand-tagline">Dashboard Balik Layar Make Up Artist</span>
@@ -254,7 +254,7 @@ export default function Landing() {
       </section>
 
       <footer className="landing-footer">
-        <div className="landing-brand"><div className="brand-mark small"></div><span className="landing-brand-title">Dapur MUA</span></div>
+        <div className="landing-brand"><div className="landing-brand-mark small"><img src="/icon-512.png" alt="Dapur MUA" /></div><span className="landing-brand-title">Dapur MUA</span></div>
         <p>© 2026 Dapur MUA. Hak cipta dilindungi.</p>
       </footer>
 
