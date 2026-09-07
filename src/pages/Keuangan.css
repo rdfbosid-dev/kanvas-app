@@ -81,7 +81,7 @@
    text-align sendiri. */
 .keuangan-table tfoot td {
   font-size: 12px; font-weight: 700; color: var(--h5);
-  letter-spacing: 0.03em; padding: 14px 24px;
+  letter-spacing: 0.03em; padding: 14px 20px;
   background: color-mix(in srgb, var(--sidebar) 90%, transparent);
   white-space: nowrap;
 }
