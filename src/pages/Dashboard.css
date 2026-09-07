@@ -102,12 +102,12 @@
 .card-dashboard-head a:hover { text-decoration: underline; text-underline-offset: 6px; }
 
 .dash-booking-row {
-  display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent);
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 12px 20px; border-bottom: 1px solid color-mix(in srgb, var(--ink-soft) 80%, transparent);
   border-radius: 12px; margin: 0 -10px; transition: background 0.15s;
 }
 .dash-booking-row:hover { background: color-mix(in srgb, var(--active-nav) var(--mix-box), transparent); }
 .dash-booking-row:last-child { border-bottom: none; padding-bottom: 12px; }
-.dash-booking-row-right { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
+.dash-booking-row-right { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
 .dashboard-day-pill { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 6px; flex-shrink: 0; white-space: nowrap; }
 .dashboard-day-pill.today { background: var(--pill); color: var(--h8); }
 .dashboard-day-pill.soon { background: color-mix(in srgb, var(--h5) 70%, transparent); color: var(--h7); }
@@ -116,9 +116,9 @@
 
 .dash-b-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--ava-grad); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--h7); }
 .dash-b-avatar.selesai { background: var(--ava-grad-alt); color: var(--h7); }
-.b-info { flex: 1; min-width: 0; }
-.b-name { font-size: 14px; font-weight: 600; color: var(--h9); }
-.b-meta { font-size: 12.5px; color: var(--ink); margin-top: 1px; }
+.b-info { min-width: 0; }
+.b-name { font-size: 14px; font-weight: 600; color: var(--h9); overflow-wrap: break-word; word-break: break-word; }
+.b-meta { font-size: 12.5px; color: var(--ink); margin-top: 1px; overflow-wrap: break-word; word-break: break-word; }
 
 .dashboard-status-pill { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
 .dashboard-status-pill.belum { background: var(--pill); color: var(--h8); }
