@@ -193,7 +193,7 @@
 
 .dashboard-insight-strip {
   display: flex; align-items: center; gap: 5px; background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border: none; box-shadow: var(--shadow-card);
-  border-radius: 16px; padding: 16px 20px; margin-top: 18px; font-size: 13px; color: var(--ink-soft);
+  border-radius: 16px; padding: 16px; margin-top: 18px; font-size: 13px; color: var(--ink-soft);
 }
 .dashboard-insight-strip svg { width: 20px; height: 20px; flex-shrink: 0; }
 .dashboard-insight-strip b { color: var(--h5); }
