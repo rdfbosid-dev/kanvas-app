@@ -11,7 +11,7 @@
 .landing-brand-text { display: flex; flex-direction: column; }
 .landing-brand-title { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--h1); }
 .landing-brand-tagline { font-size: 10px; font-weight: 500; color: var(--h4); }
-.landing-brand-mark { width: 50px; height: 50px; border-radius: 11px; background: var(--brand); flex-shrink: 0; overflow: hidden; }
+.landing-brand-mark { width: 50px; height: 50px; border-radius: 11px; background: none; flex-shrink: 0; overflow: hidden; }
 .landing-brand-mark.small { width: 26px; height: 26px; border-radius: 8px; }
 .landing-brand-mark img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
 
