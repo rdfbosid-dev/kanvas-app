@@ -46,7 +46,8 @@
 .inv-sub-date { font-size: 11px; color: var(--ink); margin-top: 1px; }
 .inv-sub-loc { font-size: 11px; color: var(--ink); margin-top: 1px; }
 
-.inv-sub { font-size: 11px; color: var(--h5); margin-top: 1px; }
+.inv-sub { font-size: 11px; color: var(--ink); margin-top: 1px; }
+.inv-sub-note { font-size: 11px; color: var(--ink-soft); margin-top: 1px; }
 
 .inv-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
 .inv-table thead th {

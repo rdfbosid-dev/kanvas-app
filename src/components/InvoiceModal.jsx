@@ -142,7 +142,7 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
 
           <div className="inv-note">
             <div className="inv-label">Catatan</div>
-            <div className="inv-sub" style={{ whiteSpace: 'pre-line' }}>{booking.catatan || '—'}</div>
+            <div className="inv-sub-note" style={{ whiteSpace: 'pre-line' }}>{booking.catatan || '—'}</div>
           </div>
 
           <div className="inv-footer">Terima kasih atas kepercayaan Anda karena telah menggunakan jasa kami.</div>
