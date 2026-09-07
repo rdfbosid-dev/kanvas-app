@@ -413,7 +413,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
               {liveBooking.catatan && (
                 <>
                   <div className="section-label">Catatan</div>
-                  <div style={{ fontSize: 13, color: 'var(--h5)' }}>{liveBooking.catatan}</div>
+                  <div style={{ fontSize: 13, color: 'var(--h5)', whiteSpace: 'pre-line' }}>{liveBooking.catatan}</div>
                 </>
               )}
             </>

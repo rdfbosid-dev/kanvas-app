@@ -297,7 +297,7 @@ export default function BookingModal({ onClose, onSaved }) {
             <div className="field-grid-booking cols-catatan">
               <div className="field">
                 <label>Catatan</label>
-                <input type="text" placeholder="Opsional" value={catatan} onChange={(e) => setCatatan(e.target.value)} />
+                <textarea placeholder="Opsional" value={catatan} onChange={(e) => setCatatan(e.target.value)} />
               </div>
             </div>
 

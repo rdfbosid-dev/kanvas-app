@@ -7,6 +7,7 @@ import BookingDetailModal from '../components/BookingDetailModal'
 import './BookingList.css'
 
 const BULAN_PENUH = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+const PAGE_SIZE = 10
 
 function formatRupiah(n) {
   const num = Number(n) || 0
@@ -50,6 +51,7 @@ export default function BookingList() {
 
   const [showModal, setShowModal] = useState(false)
   const [selectedBooking, setSelectedBooking] = useState(null)
+  const [page, setPage] = useState(1)
 
   async function loadBookings() {
     setLoading(true)
@@ -57,7 +59,7 @@ export default function BookingList() {
     const { data, error } = await supabase
       .from('booking_summary')
       .select('*')
-      .order('tanggal_acara', { ascending: true })
+      .order('tanggal_acara', { ascending: false })
 
     if (error) setError(error.message)
     else setBookings(data || [])
@@ -84,6 +86,16 @@ export default function BookingList() {
     if (filterBulan !== 'Semua Bulan' && BULAN_PENUH[d.getMonth()] !== filterBulan) return false
     return true
   })
+
+  // Reset ke halaman 1 tiap kali pencarian/filter berubah, biar nggak
+  // nyangkut di halaman yang udah nggak ada datanya.
+  useEffect(() => { setPage(1) }, [search, filterTahun, filterBulan])
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+  const pageSafe = Math.min(page, totalPages)
+  const paged = filtered.slice((pageSafe - 1) * PAGE_SIZE, pageSafe * PAGE_SIZE)
+  const rangeStart = filtered.length === 0 ? 0 : (pageSafe - 1) * PAGE_SIZE + 1
+  const rangeEnd = Math.min(pageSafe * PAGE_SIZE, filtered.length)
 
   function handleSaved(kode) {
     setShowModal(false)
@@ -155,7 +167,7 @@ export default function BookingList() {
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((b) => (
+                {paged.map((b) => (
                   <tr key={b.id} onClick={() => setSelectedBooking(b)}>
                     <td>
                       <div className="tbl-klien">
@@ -182,6 +194,23 @@ export default function BookingList() {
                 ))}
               </tbody>
             </table>
+          </div>
+        )}
+
+        {!loading && !error && filtered.length > 0 && (
+          <div className="booking-pagination">
+            <div className="booking-pagination-info">Menampilkan {rangeStart}–{rangeEnd} dari {filtered.length} booking</div>
+            <div className="booking-pagination-buttons">
+              <button type="button" disabled={pageSafe <= 1} onClick={() => setPage(pageSafe - 1)}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                <button type="button" key={n} className={n === pageSafe ? 'sel' : ''} onClick={() => setPage(n)}>{n}</button>
+              ))}
+              <button type="button" disabled={pageSafe >= totalPages} onClick={() => setPage(pageSafe + 1)}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+              </button>
+            </div>
           </div>
         )}
       </div>

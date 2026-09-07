@@ -75,6 +75,21 @@
   box-shadow: var(--shadow-card); border: 1px solid var(--button-border);
 }
 
+/* ---- Pagination -- disamain persis pola & styling-nya kayak
+   .klien-pagination di Klien.css, tapi class-nya sendiri (self-contained,
+   nggak numpang), sesuai konvensi project ini. ---- */
+.booking-pagination { display: flex; align-items: center; justify-content: space-between; padding: 14px 4px 0; flex-wrap: wrap; gap: 10px; }
+.booking-pagination-info { font-size: 12px; color: var(--ink-soft); }
+.booking-pagination-buttons { display: flex; align-items: center; gap: 6px; }
+.booking-pagination-buttons button {
+  min-width: 32px; height: 32px; padding: 0 6px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--h5) 40%, transparent); border-radius: 9px; background: color-mix(in srgb, var(--h5) 40%, transparent); color: var(--h5); cursor: pointer; font-size: 12px; transition: background 0.15s, color 0.15s;
+}
+.booking-pagination-buttons button svg { width: 14px; height: 14px; }
+.booking-pagination-buttons button:hover:not(:disabled) { background: color-mix(in srgb, var(--h3) 50%, transparent); border: 1px solid color-mix(in srgb, var(--h3) 50%, transparent); }
+.booking-pagination-buttons button.sel { background: color-mix(in srgb, var(--h3) 30%, transparent); color: var(--ink-soft); border: transparent; font-weight: 700; }
+.booking-pagination-buttons button:disabled { opacity: 0.4; cursor: not-allowed; }
+
 @media (max-width: 900px) {
   /* Search box ambil 1 baris penuh sendiri, dropdown Tahun & Bulan
      berbagi baris di bawahnya (masing-masing ~separuh lebar) -- pakai
