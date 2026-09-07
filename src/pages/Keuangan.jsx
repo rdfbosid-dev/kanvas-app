@@ -274,7 +274,7 @@ export default function Keuangan() {
             <div className="bar-grid">
               <div className="card-keuangan">
                 <div className="card-head-keuangan">
-                  <h3>Total Pembayaran{filterTahun}</h3>
+                  <h3>Total Pembayaran {filterTahun}</h3>
                   <span className="chart-total-belanja">{formatRupiah(totalTahun.belanja)}</span>
                 </div>
                 <MonthlyBarChart

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import './TrendChart.css'
 
 const W = 600
@@ -35,7 +35,9 @@ function pathLen(pts) {
 // area: kalau true, series[0] dirender sebagai area terisi (bukan cuma garis)
 export default function TrendChart({ series, months, area = false, mounted }) {
   const [hoverIdx, setHoverIdx] = useState(null)
+  const [tooltipLeft, setTooltipLeft] = useState(0)
   const svgRef = useRef(null)
+  const tooltipRef = useRef(null)
 
   const sharedMax = Math.max(...series.flatMap((s) => s.values), 1)
   const seriesPts = series.map((s) => buildPoints(s.values, sharedMax))
@@ -49,6 +51,27 @@ export default function TrendChart({ series, months, area = false, mounted }) {
   }
 
   const hoverX = hoverIdx !== null ? (n > 1 ? (hoverIdx / (n - 1)) * W : W / 2) : null
+
+  // Dulu posisi tooltip cuma dibedain 3 kondisi (titik pertama/tengah/
+  // terakhir) pakai translateX persen tetap -- itu nggak cukup, soalnya
+  // titik yang "deket" pinggir (misal bulan Nov, ke-11 dari 12) masih bisa
+  // nyerempet keluar card kalau card-nya sempit (di HP) atau isi tooltip-nya
+  // kepanjangan (banyak baris data). Sekarang diukur BENERAN: lebar
+  // tooltip asli (px) vs lebar card asli (px), abis itu posisinya
+  // "diclamp" (dipentok) biar nggak pernah nongol dari sisi manapun,
+  // dijalanin ulang tiap kali hover pindah titik. useLayoutEffect (bukan
+  // useEffect biasa) dipakai biar pengukuran & koreksi posisinya kelar
+  // SEBELUM browser sempet ngegambar (nggak keliatan "loncat" sekilas).
+  useLayoutEffect(() => {
+    if (hoverIdx === null || !svgRef.current || !tooltipRef.current) return
+    const containerWidth = svgRef.current.getBoundingClientRect().width
+    const tooltipWidth = tooltipRef.current.offsetWidth
+    const anchorPx = (hoverX / W) * containerWidth
+    const margin = 4
+    let left = anchorPx - tooltipWidth / 2
+    left = Math.max(margin, Math.min(left, containerWidth - tooltipWidth - margin))
+    setTooltipLeft(left)
+  }, [hoverIdx, hoverX])
 
   return (
     <div className="trendchart-wrap">
@@ -137,15 +160,9 @@ export default function TrendChart({ series, months, area = false, mounted }) {
 
       {hoverIdx !== null && (
         <div
+          ref={tooltipRef}
           className="trendchart-tooltip"
-          style={{
-            left: `${(hoverX / W) * 100}%`,
-            // SENGAJA dibikin dinamis -- default-nya di-tengahin
-            // (translateX(-50%)) pas titiknya di tengah grafik, tapi khusus
-            // titik PERTAMA (rata kiri) & titik TERAKHIR (rata kanan), biar
-            // tooltip-nya nggak pernah nongol keluar kartu & ke-crop.
-            transform: hoverIdx === 0 ? 'translateX(0%)' : hoverIdx === n - 1 ? 'translateX(-100%)' : 'translateX(-50%)',
-          }}
+          style={{ left: `${tooltipLeft}px` }}
         >
           <div className="tt-month">{months[hoverIdx]}</div>
           {series.map((s) => (

@@ -537,7 +537,7 @@ export default function Dashboard() {
 
             <div className="grid-3">
               <div className="card-dashboard">
-                <div className="card-dashboard-head"><h3>Event</h3></div>
+                <div className="card-dashboard-head"><h3>Event</h3><span className="chart-tag">{namaBulanIni}</span></div>
                 {eventCounts.length === 0 ? (
                   <div className="empty-state">Belum ada data</div>
                 ) : (
@@ -561,7 +561,7 @@ export default function Dashboard() {
               </div>
 
               <div className="card-dashboard">
-                <div className="card-dashboard-head"><h3>Sumber Booking</h3></div>
+                <div className="card-dashboard-head"><h3>Sumber Booking</h3><span className="chart-tag">{namaBulanIni}</span></div>
                 {sumberCounts.length === 0 ? (
                   <div className="empty-state">Belum ada data</div>
                 ) : (
@@ -585,7 +585,7 @@ export default function Dashboard() {
               </div>
 
               <div className="card-dashboard">
-                <div className="card-dashboard-head"><h3>Top 5 Lokasi</h3></div>
+                <div className="card-dashboard-head"><h3>Top 5 Lokasi</h3><span className="chart-tag">{namaBulanIni}</span></div>
                 {lokasiCounts.length === 0 ? (
                   <div className="empty-state">Belum ada data</div>
                 ) : (
