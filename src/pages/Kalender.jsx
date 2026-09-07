@@ -236,7 +236,7 @@ export default function Kalender() {
                 const count = dayBookings.length
                 const isSelected = sameDate(cell.date, selectedDate)
                 const isToday = sameDate(cell.date, today)
-                const density = count === 0 ? 0 : count === 1 ? 1 : count === 2 ? 2 : 3
+                const density = count === 0 ? 0 : count === 1 ? 1 : count === 2 ? 2 : count === 3 ? 3 : 4
                 return (
                   <div
                     key={i}

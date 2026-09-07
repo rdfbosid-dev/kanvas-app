@@ -143,6 +143,8 @@
 .density-2 .cell-date { color: var(--h7); font-weight: 700; }
 .density-3 { background: var(--pill); }
 .density-3 .cell-date { color: var(--h8); font-weight: 700; }
+.density-4 { background: var(--notif); }
+.density-4 .cell-date { color: var(--h8); font-weight: 700; }
 
 .today-dot {
   position: absolute;
