@@ -2,9 +2,12 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import ThemeToggleButton from '../components/ThemeToggleButton'
+import { useTheme } from '../context/ThemeContext'
 import './Auth.css'
 
 export default function LupaPassword() {
+  const { theme } = useTheme()
+  const logoSrc = theme === 'dark' ? '/icon-512-dark.png' : '/icon-512-light.png'
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -33,7 +36,7 @@ export default function LupaPassword() {
       <div className="auth-page-toggle"><ThemeToggleButton /></div>
         <div className="auth-card">
           <div className="auth-brand">
-            <div className="auth-brand-mark"><img src="/icon-512.png" alt="Dapur MUA" /></div>
+            <div className="auth-brand-mark"><img src={logoSrc} alt="Dapur MUA" /></div>
             <div className="auth-brand-name">Dapur MUA</div>
           </div>
           <div className="auth-title">Cek email kamu 📩</div>
@@ -54,7 +57,7 @@ export default function LupaPassword() {
       <div className="auth-page-toggle"><ThemeToggleButton /></div>
       <div className="auth-card">
         <div className="auth-brand">
-        <div className="auth-brand-mark"><img src="/icon-512.png" alt="Dapur MUA" /></div>
+        <div className="auth-brand-mark"><img src={logoSrc} alt="Dapur MUA" /></div>
           <div className="auth-brand-name">Dapur MUA</div>
         </div>
 

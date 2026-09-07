@@ -2,9 +2,12 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import ThemeToggleButton from '../components/ThemeToggleButton'
+import { useTheme } from '../context/ThemeContext'
 import './Auth.css'
 
 export default function Login() {
+  const { theme } = useTheme()
+  const logoSrc = theme === 'dark' ? '/icon-512-dark.png' : '/icon-512-light.png'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -34,7 +37,7 @@ export default function Login() {
       <div className="auth-page-toggle"><ThemeToggleButton /></div>
       <div className="auth-card">
         <div className="auth-brand">
-          <div className="auth-brand-mark"><img src="/icon-512.png" alt="Dapur MUA" /></div>
+          <div className="auth-brand-mark"><img src={logoSrc} alt="Dapur MUA" /></div>
           <div className="auth-brand-name">Dapur MUA</div>
         </div>
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ThemeToggleButton from '../components/ThemeToggleButton'
+import { useTheme } from '../context/ThemeContext'
 import { openAdminWhatsApp } from '../lib/whatsapp'
 import './Landing.css'
 
@@ -77,6 +78,8 @@ function Check() {
 }
 
 export default function Landing() {
+  const { theme } = useTheme()
+  const logoSrc = theme === 'dark' ? '/icon-512-dark.png' : '/icon-512-light.png'
   const [showTop, setShowTop] = useState(false)
 
   useEffect(() => {
@@ -102,7 +105,7 @@ export default function Landing() {
     <div className="landing">
       <header className="landing-nav">
         <div className="landing-brand">
-          <div className="landing-brand-mark"><img src="/icon-512.png" alt="Dapur MUA" /></div>
+          <div className="landing-brand-mark"><img src={logoSrc} alt="Dapur MUA" /></div>
           <div className="landing-brand-text">
           <span className="landing-brand-title">Dapur MUA</span>
           <span className="landing-brand-tagline">Dashboard Balik Layar Make Up Artist</span>
@@ -254,7 +257,7 @@ export default function Landing() {
       </section>
 
       <footer className="landing-footer">
-        <div className="landing-brand"><div className="landing-brand-mark small"><img src="/icon-512.png" alt="Dapur MUA" /></div><span className="landing-brand-title">Dapur MUA</span></div>
+        <div className="landing-brand"><div className="landing-brand-mark small"><img src={logoSrc} alt="Dapur MUA" /></div><span className="landing-brand-title">Dapur MUA</span></div>
         <p>© 2026 Dapur MUA. Hak cipta dilindungi.</p>
       </footer>
 
