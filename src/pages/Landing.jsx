@@ -212,7 +212,7 @@ export default function Landing() {
             <span className="harga-currency">Rp</span>
             <span className="harga-amount">{HARGA_LIFETIME.toLocaleString('id-ID')}</span>
           </div>
-          <div className="harga-period">untuk akses satu tahun</div>
+          <div className="harga-period">untuk akses enam bulan</div>
 
           <ul className="harga-list">
             <li><Check /> Booking &amp; kalender otomatis tersinkron ke HP</li>
