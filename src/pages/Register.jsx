@@ -27,7 +27,11 @@ export default function Register() {
       return
     }
 
-    const { data, error } = await supabase.auth.signUp({ email, password })
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { studio_name: studioName.trim() } },
+    })
 
     if (error) {
       setLoading(false)
@@ -48,21 +52,13 @@ export default function Register() {
       return
     }
 
-    // simpan nama studio ke tabel profiles -- pakai upsert (BUKAN update),
-    // soalnya baris profiles-nya dibikin sama trigger di database yang
-    // jalannya ASINKRON (di background). Kalau trigger itu belum sempet
-    // kelar pas baris ini nembak, update() bakal diam-diam nggak
-    // ngapa-ngapain (nggak ada error, tapi nama brand-nya nggak
-    // kesimpen) -- itu yang bikin field "Nama Brand MUA" keliatan
-    // kosong lagi pas dicek di Pengaturan. upsert() aman dari race
-    // condition ini: kalau barisnya udah ada (trigger duluan selesai),
-    // dia UPDATE; kalau belum ada (upsert ini yang lebih duluan), dia
-    // langsung CREATE barisnya sendiri.
-    if (data.user) {
-      await supabase
-        .from('profiles')
-        .upsert({ id: data.user.id, studio_name: studioName.trim() })
-    }
+    // Nama brand udah dititipin lewat `options.data` pas signUp() di atas
+    // (lihat metadata studio_name), diambil sama trigger `handle_new_user`
+    // pas baris profiles-nya dibikin. SENGAJA nggak nulis ulang ke tabel
+    // profiles di sini kayak sebelumnya -- soalnya di titik ini user
+    // BELUM PUNYA SESI LOGIN AKTIF (emailnya belum dikonfirmasi), jadi
+    // tulisan langsung ke `profiles` bakal ke-block RLS (gagal diam-diam,
+    // itu kenapa dulu nama brand keliatan nggak kesimpen).
 
     setLoading(false)
     setSuccess(true)
