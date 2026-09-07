@@ -61,7 +61,7 @@
   color: var(--h7);
 }
 .bl-avatar.selesai { background: var(--ava-grad-alt); color: var(--h7); }
-.b-name { font-size: 13.5px; font-weight: 700; color: var(--h9); margin-bottom: 5px; }
+.b-name-bookinglist { font-size: 13.5px; font-weight: 700; color: var(--h9); margin-bottom: 5px; }
 .b-meta-bookinglist { font-size: 10px; color: var(--h5); }
 
 .selesai-badge {
@@ -108,7 +108,7 @@
      tanpa perlu nebak-nebak angka min-width pixel. */
   .booking-table { table-layout: auto; }
   .booking-table th, .booking-table td { white-space: nowrap; }
-  .b-name, .b-meta-bookinglist { white-space: nowrap; }
+  .b-name-bookinglist, .b-meta-bookinglist { white-space: nowrap; }
 
   .empty-state-bookinglist { border: 1px solid var(--line-box); }
 }
@@ -119,7 +119,7 @@
 
   .booking-table th { font-size: 10.5px; padding: 10px 14px; }
   .booking-table td { font-size: 12px; padding: 8px 14px; }
-  .b-name { font-size: 12.5px; }
+  .b-name-bookinglist { font-size: 12.5px; }
   .b-meta-bookinglist { font-size: 9.5px; }
 
   /* Khusus di dalam tabel ini doang -- nggak nimpa definisi .status-pill

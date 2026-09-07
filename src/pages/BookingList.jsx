@@ -173,7 +173,7 @@ export default function BookingList() {
                       <div className="tbl-klien">
                         <div className={`bl-avatar${isSelesai(b.tanggal_acara, b.jam_start_makeup) ? ' selesai' : ''}`}>{initialsOf(b.nama_klien)}</div>
                         <div>
-                          <div className="b-name">{b.nama_klien}</div>
+                          <div className="b-name-bookinglist">{b.nama_klien}</div>
                           <div className="b-meta-bookinglist">
                             {b.kode_booking}
                             {isSelesai(b.tanggal_acara, b.jam_start_makeup) && <span className="selesai-badge">Selesai</span>}
