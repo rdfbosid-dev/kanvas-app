@@ -38,7 +38,7 @@
 
 .laporan-insight-strip {
   display: flex; align-items: center; gap: 5px; background: color-mix(in srgb, var(--box-dashboard) 90%, transparent); border: 1px solid var(--line-box);
-  border-radius: 16px; padding: 16px 20px; margin-top: 18px; font-size: 13px; color: var(--ink-soft);
+  border-radius: 16px; padding: 16px; margin-top: 18px; font-size: 13px; color: var(--ink-soft);
   box-shadow: var(--shadow-card);
 }
 .laporan-insight-strip svg { width: 20px; height: 20px; flex-shrink: 0; }
@@ -54,7 +54,6 @@
     box-sizing: border-box;
     margin-bottom: 16px;
     padding: 0 4px;
-    overflow: hidden;
   }
 
   /* Kecilkan sedikit ukuran teks judul di HP biar muat berdampingan */
@@ -64,6 +63,11 @@
   }
   .topbar .greeting-date {
     font-size: 11px;
+  }
+
+  /* Sesuaikan lebar dropdown filter agar pas di iPhone XR */
+  .filter-select {
+    width: 95% !important
   }
 
   .topbar-actions {
