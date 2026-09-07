@@ -115,7 +115,15 @@ export default function Keuangan() {
         belanja: bulanBookings.reduce((s, b) => s + (Number(b.belanja_klien) || 0), 0),
         transport: bulanBookings.reduce((s, b) => s + (Number(b.biaya_transport) || 0), 0),
         omzet: bulanBookings.reduce((s, b) => s + (Number(b.omzet) || 0), 0),
-        komisi: bulanBookings.reduce((s, b) => s + ((Number(b.omzet) || 0) - (Number(b.penghasilan) || 0)), 0),
+        // SEBELUMNYA rumusnya `omzet - penghasilan` -- keliatannya masuk akal,
+        // tapi ternyata itu SELALU balik jadi biaya_transport doang (buka
+        // definisi VIEW booking_summary: bedanya omzet & penghasilan CUMA di
+        // biaya_transport). Itu penyebab chart "Komisi dari Tim" identik
+        // sama chart "Biaya Transport". Fix-nya: VIEW-nya udah nyiapin kolom
+        // komisi ASLI (komisi_makeup_tim & komisi_tambahan_tim, udah
+        // difilter cuma yang dikerjain Tim, bukan dikerjain sendiri) --
+        // tinggal jumlahin langsung, nggak perlu diitung ulang manual.
+        komisi: bulanBookings.reduce((s, b) => s + (Number(b.komisi_makeup_tim) || 0) + (Number(b.komisi_tambahan_tim) || 0), 0),
         penghasilan: bulanBookings.reduce((s, b) => s + (Number(b.penghasilan) || 0), 0),
       }
     })
