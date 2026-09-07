@@ -11,6 +11,7 @@ export const EVENT_OPTIONS = [
   'Party',
   'Pengajian',
   'Photoshoot',
+  'Pre/Post-Grad',
   'Pre-Wedding',
   'Seremonial',
   'Siraman',
