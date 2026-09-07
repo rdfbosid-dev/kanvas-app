@@ -26,6 +26,21 @@
     background: var(--sidebar);
     padding: 14px 18px;
   }
+  /* Logo + teks "Dapur MUA" di tengah topbar mobile -- SENGAJA pakai
+     position:absolute + translate(-50%) (bukan cuma ngandelin flex
+     justify-content), soalnya lebar tombol hamburger (kiri) sama
+     headerAction/notif (kanan) itu beda-beda tiap halaman. Kalau cuma
+     ngandelin flex biasa, brand-nya bakal kegeser dikit dari tengah
+     beneran tiap kali lebar salah satu sisi beda. Absolute positioning
+     ngejamin dia SELALU pas di tengah kontainernya, nggak peduli lebar
+     elemen di kiri-kanannya. */
+  .mobile-topbar-brand {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    display: flex; align-items: center; gap: 8px;
+    pointer-events: none;
+  }
+  .mobile-topbar-brand img { width: 24px; height: 24px; border-radius: 7px; flex-shrink: 0; }
+  .mobile-topbar-brand span { font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700; color: var(--h9); white-space: nowrap; }
   .hamburger-btn {
     width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--button-border); background: var(--button-theme);
     display: flex; align-items: center; justify-content: center; color: var(--ink-soft); cursor: pointer; flex-shrink: 0;

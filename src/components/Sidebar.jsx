@@ -48,6 +48,7 @@ function Icon({ name }) {
 export default function Sidebar({ headerAction = null }) {
   const { user, profile } = useAuth()
   const { theme, toggleTheme } = useTheme()
+  const logoSrc = theme === 'dark' ? '/icon-512-dark.png' : '/icon-512-light.png'
   const studioName = profile?.studio_name || ''
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
@@ -73,6 +74,10 @@ export default function Sidebar({ headerAction = null }) {
         <button type="button" className="hamburger-btn" onClick={() => setMobileOpen(true)}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
         </button>
+        <div className="mobile-topbar-brand">
+          <img src={logoSrc} alt="" />
+          <span>Dapur MUA</span>
+        </div>
         {headerAction}
       </div>
 
