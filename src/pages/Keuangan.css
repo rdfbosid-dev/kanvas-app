@@ -50,7 +50,7 @@
 }
 .keuangan-table { table-layout: fixed; }
 
-.keuangan-table { width: 100%; border-collapse: collapse; min-width: 860px; }
+.keuangan-table { width: 100%; border-collapse: collapse; min-width: 1150px; }
 .keuangan-table thead th {
   text-align: left; font-size: 12px; font-weight: 700; color: var(--h4);
   text-transform: uppercase; letter-spacing: 0.03em; padding: 16px 24px;
@@ -66,17 +66,10 @@
 }
 .keuangan-table tbody tr:last-child { border-bottom: none; }
 .keuangan-table tbody tr:hover { background: color-mix(in srgb, var(--active-nav) var(--mix-box), transparent); }
-.keuangan-table td { padding: 5px 20px; font-size: 13px; font-family: 'Poppins', sans-serif; color: var(--ink-soft); }
+.keuangan-table td { padding: 5px 20px; font-size: 13px; font-family: 'Poppins', sans-serif; color: var(--ink-soft); white-space: nowrap; }
 .keuangan-table td.right { text-align: right; }
 .keuangan-table td.center { text-align: center; }
 .keuangan-table td.mono { font-size: 12px; font-weight: 700; }
-
-/* ===== GARIS DEBUG SEMENTARA -- buat ngecek perataan kolom.
-   HAPUS blok ini abis kelar ngecek, jangan sampe kebawa ke production. ===== */
-.keuangan-table th.right,
-.keuangan-table td.right {
-  border-right: 2px solid red;
-}
 .keuangan-table td.strong { font-weight: 700; }
 .keuangan-table .bulan-cell { font-weight: 700; white-space: nowrap; }
 .keuangan-table tr.row-empty td { opacity: 0.6; }
@@ -113,5 +106,5 @@
 }
 
 @media (max-width: 900px) {
-  .keuangan-table { min-width: 860px; }
+  .keuangan-table { min-width: 1150px; }
 }
