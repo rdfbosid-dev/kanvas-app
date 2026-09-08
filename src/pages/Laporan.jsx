@@ -44,6 +44,19 @@ function countBy(arr, key) {
   })
   return Object.entries(counts).sort((a, b) => b[1] - a[1])
 }
+
+// Field "lokasi" biasanya diisi format "Venue, Kecamatan, Kota" (koma-
+// pisah) -- buat chart Top Lokasi, kita CUMA mau 2 segmen TERAKHIR (biar
+// venue yang beda-beda tapi masih 1 daerah bisa "nyatu" jadi 1 bar, bukan
+// kepecah-pecah). Kalau lokasinya cuma 1 kata/frasa doang (nggak ada
+// koma sama sekali, misal "Studio"), apa adanya -- nggak ada yang
+// dipotong soalnya emang cuma 1 segmen.
+function shortLokasi(lokasi) {
+  if (!lokasi) return lokasi
+  const parts = lokasi.split(',').map((s) => s.trim()).filter(Boolean)
+  if (parts.length <= 2) return parts.join(', ')
+  return parts.slice(-2).join(', ')
+}
 function topNWithOthers(countsArr, n = 5) {
   if (countsArr.length <= n) return countsArr
   const top = countsArr.slice(0, n)
@@ -93,6 +106,7 @@ export default function Laporan() {
   const eventCounts = topNWithOthers(countBy(bookingTahunIni, 'event'), 7)
   const sumberCounts = countBy(bookingTahunIni, 'sumber')
   const paketCounts = countBy(pesertaTahunIni, 'jenis_paket')
+  const lokasiCounts = countBy(bookingTahunIni.map((b) => ({ ...b, lokasi: shortLokasi(b.lokasi) })), 'lokasi').slice(0, 10)
 
   return (
     <div className="app-shell">
@@ -136,7 +150,7 @@ export default function Laporan() {
               <div className="card"><div className="empty-state">Belum ada data booking di tahun {filterTahun}.</div></div>
             ) : (
               <>
-                <div className="grid-3">
+                <div className="grid-4-laporan">
                   <div className="card">
                     <div className="card-head"><h3>Event</h3></div>
                     <DonutChart
@@ -189,6 +203,25 @@ export default function Laporan() {
                         </div>
                       ))}
                     </div>
+                  </div>
+
+                  <div className="card">
+                    <div className="card-head"><h3>Top 10 Lokasi</h3></div>
+                    {lokasiCounts.length === 0 ? (
+                      <div className="empty-state">Belum ada data</div>
+                    ) : (
+                      lokasiCounts.map(([label, count], i) => (
+                        <div className="bar-row" key={label}>
+                          <div className="bar-row-top"><span>{label}</span><span className="mono">{count}</span></div>
+                          <div className="bar-track">
+                            <div
+                              className="bar-fill"
+                              style={{ width: `${(count / lokasiCounts[0][1]) * 100}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
 

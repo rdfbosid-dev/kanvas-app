@@ -335,7 +335,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                         </div>
                         </div>
                         <div className="field-grid-detail add-edit-pay-cols-1">
-                        <div className="field"><label>Catatan</label><input type="text" placeholder="Opsional" value={editPayNote} onChange={(e) => setEditPayNote(e.target.value)} /></div>
+                        <div className="field"><label>Catatan</label><textarea placeholder="Opsional" value={editPayNote} onChange={(e) => setEditPayNote(e.target.value)} /></div>
                         </div>
                         <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
                           <button type="button" className="btn-payment" onClick={() => setEditingPaymentId(null)}>Batal</button>
@@ -387,7 +387,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                     </div>
                   </div>
                   <div className="field-grid-detail add-edit-pay-cols-1">
-                    <div className="field"><label>Catatan</label><input type="text" placeholder="Opsional" value={payNote} onChange={(e) => setPayNote(e.target.value)} /></div>
+                    <div className="field"><label>Catatan</label><textarea placeholder="Opsional" value={payNote} onChange={(e) => setPayNote(e.target.value)} /></div>
                   </div>
                   <div style={{ display: 'flex', gap: 5, marginTop: 4 }}>
                     <button type="button" className="btn-payment" onClick={() => setShowAddPayment(false)}>Batal</button>

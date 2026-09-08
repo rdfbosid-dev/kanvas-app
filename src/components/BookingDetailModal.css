@@ -193,7 +193,8 @@
   height: 40px;
 }
 
-.booking-detail-overlay .field input::placeholder { color: var(--placeholder); opacity: 1; }
+.booking-detail-overlay .field input::placeholder,
+.booking-detail-overlay .field textarea::placeholder { color: var(--placeholder); opacity: 1; }
 .booking-detail-overlay .field input:focus,
 .booking-detail-overlay .field select:focus,
 .booking-detail-overlay .field textarea:focus {

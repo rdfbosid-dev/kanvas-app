@@ -195,9 +195,21 @@ export default function Dashboard() {
     return [...top, ['Lainnya', othersTotal]]
   }
 
+  // Field "lokasi" biasanya diisi format "Venue, Kecamatan, Kota" (koma-
+  // pisah) -- buat chart Top Lokasi, kita CUMA mau 2 segmen TERAKHIR (biar
+  // venue yang beda-beda tapi masih 1 daerah bisa "nyatu" jadi 1 bar,
+  // bukan kepecah-pecah). Kalau lokasinya cuma 1 kata/frasa doang (nggak
+  // ada koma sama sekali, misal "Studio"), apa adanya.
+  function shortLokasi(lokasi) {
+    if (!lokasi) return lokasi
+    const parts = lokasi.split(',').map((s) => s.trim()).filter(Boolean)
+    if (parts.length <= 2) return parts.join(', ')
+    return parts.slice(-2).join(', ')
+  }
+
   const eventCounts = topNWithOthers(countBy(bookingBulanIni, 'event'), 7)
   const sumberCounts = countBy(bookingBulanIni, 'sumber')
-  const lokasiCounts = countBy(bookingBulanIni, 'lokasi').slice(0, 5)
+  const lokasiCounts = countBy(bookingBulanIni.map((b) => ({ ...b, lokasi: shortLokasi(b.lokasi) })), 'lokasi').slice(0, 5)
   const CHART_COLORS = ['#C4A4F0', '#F0A0C0', '#E7B655', '#6FC79A', '#2868d7ff', '#f4e226ff', '#E8776C']
   // "Lainnya" sengaja dikasih warna netral sendiri (bukan ikut rotasi
   // CHART_COLORS) -- biar nggak numbuk balik ke warna kategori pertama kalau
