@@ -70,6 +70,13 @@
 .keuangan-table td.right { text-align: right; }
 .keuangan-table td.center { text-align: center; }
 .keuangan-table td.mono { font-size: 12px; font-weight: 700; }
+
+/* ===== GARIS DEBUG SEMENTARA -- buat ngecek perataan kolom.
+   HAPUS blok ini abis kelar ngecek, jangan sampe kebawa ke production. ===== */
+.keuangan-table th.right,
+.keuangan-table td.right {
+  border-right: 2px solid red;
+}
 .keuangan-table td.strong { font-weight: 700; }
 .keuangan-table .bulan-cell { font-weight: 700; white-space: nowrap; }
 .keuangan-table tr.row-empty td { opacity: 0.6; }
