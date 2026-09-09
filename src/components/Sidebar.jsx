@@ -159,6 +159,27 @@ export default function Sidebar({ headerAction = null }) {
         </div>
         </div>
       </div>
+
+      {/* Bottom tab bar -- CUMA keliatan di mobile (diatur lewat CSS,
+          display:none di desktop). Numpang array `navUtama` yang SAMA
+          persis dipakai sidebar desktop di atas, biar rute/ikon/label-nya
+          otomatis selalu sinkron -- kalau nanti nav utama ganti/nambah
+          dari 4 item, tab bar ini ikut ke-update sendiri, nggak perlu
+          diubah manual dobel. Item Keuangan/Laporan/Panduan/Bantuan/
+          Pengaturan SENGAJA nggak dimasukin ke sini (sesuai permintaan) --
+          tetep diakses lewat hamburger menu seperti biasa. */}
+      <nav className="mobile-bottom-tabs">
+        {navUtama.map((item) => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            className={({ isActive }) => 'bottom-tab-item' + (isActive ? ' active' : '')}
+          >
+            <Icon name={item.icon} />
+            <span>{item.label}</span>
+          </NavLink>
+        ))}
+      </nav>
     </>
   )
 }
