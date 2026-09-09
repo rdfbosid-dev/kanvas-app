@@ -81,7 +81,7 @@
   .bottom-tab-item {
     flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
     padding: 6px 2px; border-radius: 12px; text-decoration: none;
-    font-size: 10.5px; font-weight: 600; color: var(--button-prm);
+    font-size: 10.5px; font-weight: 600; color: var(--h1);
   }
   .bottom-tab-item svg { width: 21px; height: 21px; }
   .bottom-tab-item.active { color: var(--h5); }
