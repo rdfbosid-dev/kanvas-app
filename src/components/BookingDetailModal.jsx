@@ -16,6 +16,12 @@ function formatRupiah(n) {
   const sign = num < 0 ? '-' : ''
   return sign + 'Rp' + Math.abs(num).toLocaleString('id-ID')
 }
+// Sama persis kayak di BookingModal.jsx -- cuma nyentuh huruf PERTAMA tiap
+// kata, biar singkatan yang ditulis kapital sengaja (misal "UMS") nggak
+// keubah.
+function capitalizeWords(str) {
+  return (str || '').replace(/(^|[\s,])([a-z])/g, (_, sep, ch) => sep + ch.toUpperCase())
+}
 function formatTanggal(dateStr) {
   if (!dateStr) return '-'
   return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })
@@ -432,7 +438,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                 </div>
                 <div className="field" style={{ position: 'relative' }}>
                   <label>Nama Klien</label>
-                  <input type="text" value={namaKlien} onChange={(e) => setNamaKlien(e.target.value)} />
+                  <input type="text" value={namaKlien} onChange={(e) => setNamaKlien(e.target.value)} onBlur={(e) => setNamaKlien(capitalizeWords(e.target.value))} />
                 </div>
                 <div className="field">
                   <label>Nomor WhatsApp</label>
@@ -471,7 +477,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
 
               <div className="field-grid-booking cols-lokasi-sumber" style={{ marginTop: 12 }}>
                 <div className="field">
-                  <label>Lokasi</label><input type="text" value={lokasi} onChange={(e) => setLokasi(e.target.value)} />
+                  <label>Lokasi</label><input type="text" value={lokasi} onChange={(e) => setLokasi(e.target.value)} onBlur={(e) => setLokasi(capitalizeWords(e.target.value))} />
                 </div>
                 <div className="field">
                   <label>Sumber Kanal Booking</label>
@@ -510,7 +516,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                             <label>Nama Klien</label>
                           </div>
-                          <input type="text" placeholder="contoh: Jenny Black Pink" value={p.nama_anggota} onChange={(e) => updateEditPeserta(i, 'nama_anggota', e.target.value)} />
+                          <input type="text" placeholder="contoh: Jenny Black Pink" value={p.nama_anggota} onChange={(e) => updateEditPeserta(i, 'nama_anggota', e.target.value)} onBlur={(e) => updateEditPeserta(i, 'nama_anggota', capitalizeWords(e.target.value))} />
                         </div>
                         <div className="field">
                           <label>Peran</label>
