@@ -216,7 +216,7 @@
   .booking-modal-overlay .field-grid-peserta.cols-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-bottom: 5px; }
 
   .booking-modal-overlay .quickfill-btn {
-    font-size: 7px; font-weight: 500; color: var(--h1); background: var(--ink-faint);
+    font-size: 7.5px; font-weight: 500; color: var(--h1); background: var(--ink-faint);
     border: none; border-radius: 5px; padding: 3px; cursor: pointer; transition: background 0.15s;
     margin-top: 0;
   }
