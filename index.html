@@ -11,7 +11,15 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- maximum-scale=1 + user-scalable=no -- matiin pinch-zoom total di
+         mobile. Efek samping (sekaligus manfaat): ini juga otomatis nutup
+         bug lama "auto-zoom iOS pas fokus ke input field", soalnya iOS
+         Safari matu-zoom itu sebenernya cuma nurutin batas maximum-scale
+         yang sama ini -- jadi nggak perlu solusi terpisah (naikin
+         font-size ke 16px) buat masalah itu lagi. Tradeoff: user yang
+         butuh pinch-zoom buat baca teks kecil (misal low-vision) jadi
+         nggak bisa zoom sama sekali di app ini. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Dapur MUA</title>
   </head>
   <body>
