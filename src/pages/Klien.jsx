@@ -10,6 +10,14 @@ import './Klien.css'
 function formatRupiah(n) {
   return 'Rp' + (Number(n) || 0).toLocaleString('id-ID')
 }
+// Ambil ANGKA di ekor kode_booking doang (misal "MBS-0007" -> 7),
+// bukan asal banding teks -- biar tetep bener walau prefix-nya beda-beda
+// atau kosong (kayak kejadian bug "-0060" kemarin). Kode tanpa angka
+// sama sekali (atau kosong) dilempar ke paling belakang (Infinity).
+function kodeBookingNum(kode) {
+  const match = String(kode || '').match(/(\d+)\s*$/)
+  return match ? parseInt(match[1], 10) : Infinity
+}
 function formatTanggal(dateStr) {
   if (!dateStr) return '-'
   return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })
@@ -234,6 +242,10 @@ export default function Klien() {
     const sorted = [...list]
     if (sortBy === 'Nama A-Z') sorted.sort((a, b) => (a.nama || '').localeCompare(b.nama || ''))
     else if (sortBy === 'Total Pembayaran') sorted.sort((a, b) => b.totalBelanja - a.totalBelanja)
+    else if (sortBy === 'Kode Booking') {
+      const minKode = (c) => Math.min(...c.bookingList.map((b) => kodeBookingNum(b.kode_booking)))
+      sorted.sort((a, b) => minKode(a) - minKode(b))
+    }
     else sorted.sort((a, b) => new Date(b.lastTanggal) - new Date(a.lastTanggal))
 
     return sorted
@@ -334,7 +346,7 @@ export default function Klien() {
           </div>
           <div className="filter-select filter-select-sort">
               <CustomSelect
-                options={['Terbaru', 'Nama A-Z', 'Total Pembayaran']}
+                options={['Terbaru', 'Nama A-Z', 'Total Pembayaran', 'Kode Booking']}
                 value={sortBy}
                 onChange={setSortBy}
                 icon={
