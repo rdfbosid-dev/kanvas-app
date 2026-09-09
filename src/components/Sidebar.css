@@ -84,7 +84,7 @@
     font-size: 10.5px; font-weight: 600; color: var(--ink-soft);
   }
   .bottom-tab-item svg { width: 21px; height: 21px; }
-  .bottom-tab-item.active { color: var(--h5); }
+  .bottom-tab-item.active { color: var(--pill-alt); }
 
   /* Section "Utama" (Dashboard/Booking/Kalender/Klien) & link Pengaturan
      disembunyiin dari DRAWER mobile -- soalnya sekarang udah dipindah ke
