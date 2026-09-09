@@ -127,6 +127,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
       nama_anggota: '', peran: '', jenis_paket: 'Reguler', dikerjakan_oleh_makeup: 'Me',
       biaya_makeup: 0, komisi_makeup_tim: 0, layanan_tambahan: 'Tidak Ada',
       dikerjakan_oleh_tambahan: 'Me', biaya_tambahan: 0, komisi_tambahan: 0,
+      layanan_lainnya: '', biaya_lainnya: 0,
     }])
   }
   function removeEditPeserta(i) {
@@ -189,6 +190,8 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
         dikerjakan_oleh_tambahan: p.dikerjakan_oleh_tambahan,
         biaya_tambahan: Number(p.biaya_tambahan) || 0,
         komisi_tambahan: Number(p.komisi_tambahan) || 0,
+        layanan_lainnya: (p.layanan_lainnya || '').trim() || null,
+        biaya_lainnya: Number(p.biaya_lainnya) || 0,
       }
       if (p.id) {
         const { error: upErr } = await supabase.from('peserta').update(payload).eq('id', p.id)
@@ -405,6 +408,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                     <div className="b-meta">
                       {p.jenis_paket} ({p.dikerjakan_oleh_makeup}) — {formatRupiah(p.biaya_makeup)}
                       {p.layanan_tambahan !== 'Tidak Ada' ? ` · ${p.layanan_tambahan} (${p.dikerjakan_oleh_tambahan})` : ''}
+                      {p.layanan_lainnya ? ` · ${p.layanan_lainnya} (${formatRupiah(p.biaya_lainnya)})` : ''}
                     </div>
                   </div>
                 </div>
@@ -580,6 +584,19 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                           )}
                       </div>
                       )}
+
+                      <div className="field-grid-peserta cols-2">
+                        <div className="field">
+                          <label>Tambahan Layanan Lainnya</label>
+                          <input type="text" placeholder="contoh: Softlens" value={p.layanan_lainnya || ''} onChange={(e) => updateEditPeserta(i, 'layanan_lainnya', e.target.value)} />
+                        </div>
+                        {(p.layanan_lainnya || '').trim() && (
+                          <div className="field">
+                            <label>Biaya Layanan Lainnya</label>
+                            <input type="text" inputMode="numeric" placeholder="Rp0" value={p.biaya_lainnya ? `Rp${formatAngkaInput(p.biaya_lainnya)}` : ''} onChange={(e) => updateEditPeserta(i, 'biaya_lainnya', parseAngkaInput(e.target.value))} />
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 )

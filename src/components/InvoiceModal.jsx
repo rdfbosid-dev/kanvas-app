@@ -109,6 +109,15 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
                     </tr>
                   )
                 }
+                if (p.layanan_lainnya) {
+                  rows.push(
+                    <tr key={p.id + '-lain'}>
+                      <td></td>
+                      <td>{p.layanan_lainnya}</td>
+                      <td className="right">{formatRupiah(p.biaya_lainnya)}</td>
+                    </tr>
+                  )
+                }
                 return rows
               })}
               {Number(booking.biaya_transport) > 0 && (
@@ -142,7 +151,7 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
 
           <div className="inv-note">
             <div className="inv-label">Catatan</div>
-            <div className="inv-sub-note" style={{ whiteSpace: 'pre-line' }}>{booking.catatan || '—'}</div>
+            <div className="inv-sub" style={{ whiteSpace: 'pre-line' }}>{booking.catatan || '—'}</div>
           </div>
 
           <div className="inv-footer">Terima kasih atas kepercayaan Anda karena telah menggunakan jasa kami.</div>

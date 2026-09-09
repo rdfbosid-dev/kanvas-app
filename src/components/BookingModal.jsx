@@ -20,6 +20,7 @@ function blankPeserta(nama = '') {
     biayaMakeup: '', komisiMakeup: '',
     layananTambahan: 'Tidak Ada', dikerjakanOlehTambahan: 'Me',
     biayaTambahan: '', komisiTambahan: '',
+    layananLainnya: '', biayaLainnya: '',
   }
 }
 
@@ -146,6 +147,8 @@ export default function BookingModal({ onClose, onSaved }) {
       dikerjakan_oleh_tambahan: p.dikerjakanOlehTambahan,
       biaya_tambahan: Number(p.biayaTambahan) || 0,
       komisi_tambahan: Number(p.komisiTambahan) || 0,
+      layanan_lainnya: p.layananLainnya.trim() || null,
+      biaya_lainnya: Number(p.biayaLainnya) || 0,
     }))
 
     const { error: pesertaError } = await supabase.from('peserta').insert(pesertaRows)
@@ -402,6 +405,26 @@ export default function BookingModal({ onClose, onSaved }) {
                           )}
                       </div>
                       )}
+
+                      {/* Layanan Lainnya -- TERPISAH dari Layanan Rambut di atas (klien
+                          bisa punya dua-duanya sekaligus, misal Hairdo + Softlens).
+                          Nggak ada opsi Me/Tim/komisi di sini (sesuai keputusan), jadi
+                          field harganya cuma nongol kondisional begitu nama layanannya
+                          diisi -- kalau nama dikosongin lagi, field harga otomatis
+                          ke-hide juga (bukan cuma disembunyiin doang, harusnya diinget
+                          user ini emang desainnya "1 paket": nama+harga jalan bareng). */}
+                      <div className="field-grid-peserta cols-2">
+                        <div className="field">
+                          <label>Tambahan Layanan Lainnya</label>
+                          <input type="text" placeholder="contoh: Softlens" value={p.layananLainnya} onChange={(e) => updatePeserta(i, 'layananLainnya', e.target.value)} />
+                        </div>
+                        {p.layananLainnya.trim() && (
+                          <div className="field">
+                            <label>Biaya Layanan Lainnya</label>
+                            <input type="text" inputMode="numeric" placeholder="Rp0" value={p.biayaLainnya ? `Rp${formatAngkaInput(p.biayaLainnya)}` : ''} onChange={(e) => updatePeserta(i, 'biayaLainnya', parseAngkaInput(e.target.value))} />
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 )
