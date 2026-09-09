@@ -21,9 +21,20 @@ export function AuthProvider({ children }) {
       return
     }
 
-    // Baris profil belum ada (misal akun lama sebelum trigger auto-create
-    // dipasang) -- bikinin baru sekarang, biar nggak nyangkut nunggu
-    // data yang emang nggak akan pernah datang.
+    if (error) {
+      // Query-nya GAGAL (network/timeout/dll) -- ini BUKAN berarti
+      // profilnya beneran kosong. JANGAN lanjut ke bikin fallback &
+      // nimpa data asli yang mungkin masih ada di database -- itu bug
+      // yang pernah beneran kejadian & ngilangin data user. Diem aja,
+      // biarin state profile apa adanya, coba lagi nanti (auth state
+      // change / window focus bakal manggil refreshProfile lagi).
+      console.error('Gagal memuat profil:', error.message)
+      return
+    }
+
+    // Di titik ini dipastikan: data null DAN nggak ada error sama sekali
+    // -- artinya BENERAN nggak ada baris profil (akun lama sebelum
+    // trigger auto-create dipasang). Baru sekarang aman bikin baru.
     const fallback = {
       studio_name: '', kode_prefix: '', instagram: '', whatsapp: '', logo_url: null, kode_kalender: null,
       trial_ends_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), subscription_status: 'trial', kalender_synced_at: null,
