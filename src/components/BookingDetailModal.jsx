@@ -658,7 +658,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                             </div>
                             {(p[namaField] || '').trim() && (
                               <div className="field-grid-peserta cols-2">
-                                <div className="field">
+                                <div className="field" style={{ gridColumn: 2 }}>
                                   <label>Keuntungan Add On Item</label>
                                   <input type="text" inputMode="numeric" placeholder="Rp0" value={p[untungField] ? `Rp${formatAngkaInput(p[untungField])}` : ''} onChange={(e) => updateEditPeserta(i, untungField, parseAngkaInput(e.target.value))} />
                                 </div>

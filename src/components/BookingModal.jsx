@@ -457,7 +457,7 @@ export default function BookingModal({ onClose, onSaved }) {
                           <div className="field-grid-peserta cols-2">
                             <div className="field">
                               <div className="field-label-row">
-                                <label>{ai === 0 ? 'Add On Item Lainnya' : `Add On Item Lainnya ${ai + 1}`}</label>
+                                <label>{ai === 0 ? 'Add On Item' : `Add On Item ${ai + 1}`}</label>
                                 {ai > 0 && (
                                   <button type="button" className="peserta-remove" onClick={() => removeAddOn(i, ai)}>Hapus</button>
                                 )}
@@ -473,7 +473,7 @@ export default function BookingModal({ onClose, onSaved }) {
                           </div>
                           {a.nama.trim() && (
                             <div className="field-grid-peserta cols-2">
-                              <div className="field">
+                              <div className="field" style={{ gridColumn: 2 }}>
                                 <label>Keuntungan Add On Item</label>
                                 <input type="text" inputMode="numeric" placeholder="Rp0" value={a.keuntungan ? `Rp${formatAngkaInput(a.keuntungan)}` : ''} onChange={(e) => updateAddOn(i, ai, 'keuntungan', parseAngkaInput(e.target.value))} />
                               </div>
