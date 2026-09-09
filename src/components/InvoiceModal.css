@@ -79,14 +79,28 @@
 .inv-note { margin-top: 16px; }
 .inv-footer { text-align: center; font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-top: 28px; padding: 10px; }
 
-/* ===== Cetak / Simpan PDF ===== */
+/* ===== Cetak / Simpan PDF =====
+   Portal .invoice-print-portal (lihat InvoiceModal.jsx) itu nge-render
+   ke document.body, JADI SAUDARA #root, bukan anak dari #root. Normalnya
+   disembunyiin (display:none) -- baru dimunculin pas @media print, di
+   saat yang sama #root (SELURUH app: sidebar, halaman, modal lain, dll)
+   di-display:none-in total. Nggak pakai visibility:hidden lagi, soalnya
+   visibility:hidden TETEP nyisain tinggi/ruang kosong di layout walau
+   nggak keliatan -- itu penyebab lama bug ">4 halaman kosong pas print".
+   display:none beneran ngilangin elemennya dari layout, jadi nggak ada
+   lagi ruang kosong yang kehitung pas browser mecah halaman cetak. */
+@page {
+  size: A4;
+  margin: 15mm;
+}
+
+.invoice-print-portal { display: none; }
+
 @media print {
-  body * { visibility: hidden; }
-  .invoice-paper, .invoice-paper * { visibility: visible; }
-  .invoice-paper { position: absolute; top: 0; left: 0; width: 100%; padding: 20px; }
-  .invoice-no-print { display: none !important; }
-  .invoice-overlay { position: static; background: none; padding: 0; }
-  .invoice-modal { box-shadow: none; max-height: none; max-width: 100%; }
+  html, body { height: auto; }
+  #root { display: none !important; }
+  .invoice-print-portal { display: block !important; }
+  .invoice-print-portal .invoice-paper { padding: 0; }
 }
 
 @media (max-width: 640px) {
