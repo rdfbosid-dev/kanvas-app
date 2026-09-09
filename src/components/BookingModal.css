@@ -217,7 +217,7 @@
 
   .booking-modal-overlay .quickfill-btn {
     font-size: 8px; font-weight: 500; color: var(--h1); background: var(--ink-faint);
-    border: none; border-radius: 5px; padding: 4px; cursor: pointer; transition: background 0.15s;
+    border: none; border-radius: 5px; padding: 2px; cursor: pointer; transition: background 0.15s;
     margin-top: 0;
   }
   .booking-modal-overlay .toggle-row-rambut { display: flex; gap: 3px; }
