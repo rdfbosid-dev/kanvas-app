@@ -85,6 +85,14 @@
   }
   .bottom-tab-item svg { width: 21px; height: 21px; }
   .bottom-tab-item.active { color: var(--h2); }
+
+  /* Section "Utama" (Dashboard/Booking/Kalender/Klien) & link Pengaturan
+     disembunyiin dari DRAWER mobile -- soalnya sekarang udah dipindah ke
+     bottom tab bar di atas, biar nggak dobel/mubazir. Garis pembatas
+     (border-top) di .sidebar-bottom TETEP kepake apa adanya -- itu bukan
+     didefinisiin dari section Utama, jadi aman nggak ikut ilang. */
+  .nav-utama-group { display: none; }
+  .nav-item-pengaturan { display: none; }
 }
 
 .brand { display: flex; align-items: center; gap: 11px; margin-bottom: 32px; padding: 0 6px; }

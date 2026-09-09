@@ -98,17 +98,25 @@ export default function Sidebar({ headerAction = null }) {
         </div>
       </div>
 
-      <div className="nav-section">Utama</div>
-      {navUtama.map((item) => (
-        <NavLink
-          key={item.to}
-          to={item.to}
-          className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}
-        >
-          <Icon name={item.icon} />
-          {item.label}
-        </NavLink>
-      ))}
+      {/* Section "Utama" (Dashboard/Booking/Kalender/Klien) dibungkus
+          wrapper ini -- di DESKTOP tetep keliatan normal, tapi di MOBILE
+          disembunyiin lewat CSS (lihat .nav-utama-group di Sidebar.css),
+          soalnya 4 item itu sekarang udah ada di bottom tab bar. Nggak
+          dihapus dari JSX-nya sama sekali -- biar desktop (yang nggak
+          punya bottom tab bar) tetep dapet akses penuh. */}
+      <div className="nav-utama-group">
+        <div className="nav-section">Utama</div>
+        {navUtama.map((item) => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}
+          >
+            <Icon name={item.icon} />
+            {item.label}
+          </NavLink>
+        ))}
+      </div>
 
       <div className="nav-section">Rekapan</div>
       {navRekapan.map((item) => (
@@ -146,7 +154,7 @@ export default function Sidebar({ headerAction = null }) {
           Bantuan
         </button>
 
-        <NavLink to="/pengaturan" className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')} style={{ marginBottom: 12 }}>
+        <NavLink to="/pengaturan" className={({ isActive }) => 'nav-item nav-item-pengaturan' + (isActive ? ' active' : '')} style={{ marginBottom: 12 }}>
           <Icon name="settings" />
           Pengaturan
         </NavLink>
@@ -179,6 +187,13 @@ export default function Sidebar({ headerAction = null }) {
             <span>{item.label}</span>
           </NavLink>
         ))}
+        <NavLink
+          to="/pengaturan"
+          className={({ isActive }) => 'bottom-tab-item' + (isActive ? ' active' : '')}
+        >
+          <Icon name="settings" />
+          <span>Pengaturan</span>
+        </NavLink>
       </nav>
     </>
   )
