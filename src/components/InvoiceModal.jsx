@@ -118,6 +118,18 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
                     </tr>
                   )
                 }
+                for (let n = 2; n <= 5; n++) {
+                  const nama = p[`layanan_lainnya_${n}`]
+                  if (nama) {
+                    rows.push(
+                      <tr key={p.id + '-lain' + n}>
+                        <td></td>
+                        <td>{nama}</td>
+                        <td className="right">{formatRupiah(p[`biaya_lainnya_${n}`])}</td>
+                      </tr>
+                    )
+                  }
+                }
                 return rows
               })}
               {Number(booking.biaya_transport) > 0 && (

@@ -60,6 +60,7 @@ export default function BookingList() {
       .from('booking_summary')
       .select('*')
       .order('tanggal_acara', { ascending: false })
+      .order('jam_start_makeup', { ascending: true })
 
     if (error) setError(error.message)
     else setBookings(data || [])

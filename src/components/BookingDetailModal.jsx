@@ -22,6 +22,18 @@ function formatRupiah(n) {
 function capitalizeWords(str) {
   return (str || '').replace(/(^|[\s,])([a-z])/g, (_, sep, ch) => sep + ch.toUpperCase())
 }
+// Ngitung berapa slot Add On Item yang KEISI dari data lama (buat nentuin
+// berapa slot yang perlu ditampilin pas pertama kali masuk mode edit --
+// minimal 1, maksimal 5).
+function countAddOnSlots(p) {
+  let count = 1
+  for (let n = 5; n >= 2; n--) {
+    const nama = p[`layanan_lainnya_${n}`]
+    const biaya = p[`biaya_lainnya_${n}`]
+    if ((nama && nama.trim()) || Number(biaya) > 0) { count = n; break }
+  }
+  return count
+}
 function formatTanggal(dateStr) {
   if (!dateStr) return '-'
   return new Date(dateStr).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })
@@ -120,7 +132,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
     }
     setBiayaTransport(liveBooking.biaya_transport ?? '')
     setCatatan(liveBooking.catatan || '')
-    setEditPeserta(peserta.map((p) => ({ ...p })))
+    setEditPeserta(peserta.map((p) => ({ ...p, _addonCount: countAddOnSlots(p) })))
     setRemovedPesertaIds([])
     setEditMode(true)
   }
@@ -133,8 +145,29 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
       nama_anggota: '', peran: '', jenis_paket: 'Reguler', dikerjakan_oleh_makeup: 'Me',
       biaya_makeup: 0, komisi_makeup_tim: 0, layanan_tambahan: 'Tidak Ada',
       dikerjakan_oleh_tambahan: 'Me', biaya_tambahan: 0, komisi_tambahan: 0,
-      layanan_lainnya: '', biaya_lainnya: 0,
+      layanan_lainnya: '', biaya_lainnya: 0, keuntungan_lainnya: 0,
+      layanan_lainnya_2: '', biaya_lainnya_2: 0, keuntungan_lainnya_2: 0,
+      layanan_lainnya_3: '', biaya_lainnya_3: 0, keuntungan_lainnya_3: 0,
+      layanan_lainnya_4: '', biaya_lainnya_4: 0, keuntungan_lainnya_4: 0,
+      layanan_lainnya_5: '', biaya_lainnya_5: 0, keuntungan_lainnya_5: 0,
+      _addonCount: 1,
     }])
+  }
+  function addAddOnSlot(i) {
+    setEditPeserta((list) => list.map((p, idx) => (idx === i && p._addonCount < 5) ? { ...p, _addonCount: p._addonCount + 1 } : p))
+  }
+  // Slot dihapus SELALU dari yang PALING BELAKANG (bukan slot manapun
+  // dipilih) -- soalnya field-nya nempel di kolom bernomor tetap
+  // (layanan_lainnya_2, _3, dst), jadi ngehapus slot tengah butuh geser
+  // semua field setelahnya, lebih ribet & rawan salah dibanding cuma
+  // ngosongin slot terakhir yang lagi keliatan.
+  function removeAddOnSlot(i) {
+    setEditPeserta((list) => list.map((p, idx) => {
+      if (idx !== i || p._addonCount <= 1) return p
+      const n = p._addonCount
+      const suffix = n === 1 ? '' : `_${n}`
+      return { ...p, _addonCount: n - 1, [`layanan_lainnya${suffix}`]: '', [`biaya_lainnya${suffix}`]: 0, [`keuntungan_lainnya${suffix}`]: 0 }
+    }))
   }
   function removeEditPeserta(i) {
     if (i === 0) return // Klien 1 nggak boleh dihapus -- dia yang jadi "Nama Klien" utama di form atas
@@ -196,8 +229,12 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
         dikerjakan_oleh_tambahan: p.dikerjakan_oleh_tambahan,
         biaya_tambahan: Number(p.biaya_tambahan) || 0,
         komisi_tambahan: Number(p.komisi_tambahan) || 0,
-        layanan_lainnya: (p.layanan_lainnya || '').trim() || null,
-        biaya_lainnya: Number(p.biaya_lainnya) || 0,
+      }
+      for (let n = 1; n <= 5; n++) {
+        const suffix = n === 1 ? '' : `_${n}`
+        payload[`layanan_lainnya${suffix}`] = (p[`layanan_lainnya${suffix}`] || '').trim() || null
+        payload[`biaya_lainnya${suffix}`] = Number(p[`biaya_lainnya${suffix}`]) || 0
+        payload[`keuntungan_lainnya${suffix}`] = Number(p[`keuntungan_lainnya${suffix}`]) || 0
       }
       if (p.id) {
         const { error: upErr } = await supabase.from('peserta').update(payload).eq('id', p.id)
@@ -414,7 +451,11 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                     <div className="b-meta">
                       {p.jenis_paket} ({p.dikerjakan_oleh_makeup}) — {formatRupiah(p.biaya_makeup)}
                       {p.layanan_tambahan !== 'Tidak Ada' ? ` · ${p.layanan_tambahan} (${p.dikerjakan_oleh_tambahan})` : ''}
-                      {p.layanan_lainnya ? ` · ${p.layanan_lainnya} (${formatRupiah(p.biaya_lainnya)})` : ''}
+                      {[1, 2, 3, 4, 5].map((n) => {
+                        const suffix = n === 1 ? '' : `_${n}`
+                        const nama = p[`layanan_lainnya${suffix}`]
+                        return nama ? ` · ${nama} (${formatRupiah(p[`biaya_lainnya${suffix}`])})` : ''
+                      }).join('')}
                     </div>
                   </div>
                 </div>
@@ -555,7 +596,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
 
                       <div className="field-grid-peserta cols-2">
                         <div className="field">
-                        <div className="sb-label">Tambahan Layanan Rambut</div>
+                        <div className="sb-label">Add On Layanan Rambut</div>
                           <div className="toggle-row-rambut">
                           <div className={`toggle-opt-rambut${p.layanan_tambahan === 'Tidak Ada' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Tidak Ada')}>Tidak</div>
                           <div className={`toggle-opt-rambut${p.layanan_tambahan === 'Hairdo' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'layanan_tambahan', 'Hairdo')}>Hairdo</div>
@@ -591,18 +632,44 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                       </div>
                       )}
 
-                      <div className="field-grid-peserta cols-2">
-                        <div className="field">
-                          <label>Tambahan Layanan Lainnya</label>
-                          <input type="text" placeholder="contoh: Softlens" value={p.layanan_lainnya || ''} onChange={(e) => updateEditPeserta(i, 'layanan_lainnya', e.target.value)} />
-                        </div>
-                        {(p.layanan_lainnya || '').trim() && (
-                          <div className="field">
-                            <label>Biaya Layanan Lainnya</label>
-                            <input type="text" inputMode="numeric" placeholder="Rp0" value={p.biaya_lainnya ? `Rp${formatAngkaInput(p.biaya_lainnya)}` : ''} onChange={(e) => updateEditPeserta(i, 'biaya_lainnya', parseAngkaInput(e.target.value))} />
+                      {Array.from({ length: p._addonCount }, (_, idx) => idx + 1).map((n) => {
+                        const suffix = n === 1 ? '' : `_${n}`
+                        const namaField = `layanan_lainnya${suffix}`
+                        const biayaField = `biaya_lainnya${suffix}`
+                        const untungField = `keuntungan_lainnya${suffix}`
+                        return (
+                          <div key={n}>
+                            <div className="field-grid-peserta cols-2">
+                              <div className="field">
+                                <div className="field-label-row">
+                                  <label>{n === 1 ? 'Add On Item Lainnya' : `Add On Item Lainnya ${n}`}</label>
+                                  {n === p._addonCount && n > 1 && (
+                                    <button type="button" className="peserta-remove" onClick={() => removeAddOnSlot(i)}>Hapus</button>
+                                  )}
+                                </div>
+                                <input type="text" placeholder="contoh: Softlens" value={p[namaField] || ''} onChange={(e) => updateEditPeserta(i, namaField, e.target.value)} onBlur={(e) => updateEditPeserta(i, namaField, capitalizeWords(e.target.value))} />
+                              </div>
+                              {(p[namaField] || '').trim() && (
+                                <div className="field">
+                                  <label>Biaya Add On Item</label>
+                                  <input type="text" inputMode="numeric" placeholder="Rp0" value={p[biayaField] ? `Rp${formatAngkaInput(p[biayaField])}` : ''} onChange={(e) => updateEditPeserta(i, biayaField, parseAngkaInput(e.target.value))} />
+                                </div>
+                              )}
+                            </div>
+                            {(p[namaField] || '').trim() && (
+                              <div className="field-grid-peserta cols-2">
+                                <div className="field">
+                                  <label>Keuntungan Add On Item</label>
+                                  <input type="text" inputMode="numeric" placeholder="Rp0" value={p[untungField] ? `Rp${formatAngkaInput(p[untungField])}` : ''} onChange={(e) => updateEditPeserta(i, untungField, parseAngkaInput(e.target.value))} />
+                                </div>
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
+                        )
+                      })}
+                      {p._addonCount < 5 && (
+                        <button type="button" className="add-peserta" onClick={() => addAddOnSlot(i)}>+ Tambah Add On Item</button>
+                      )}
                     </div>
                   </div>
                 )
