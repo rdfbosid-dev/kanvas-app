@@ -319,7 +319,7 @@ export default function BookingModal({ onClose, onSaved }) {
                     <div className="peserta-body">
                       <div className="field-grid-peserta cols-2">
                         <div className="field">
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                          <div className="field-label-row">
                             <label>Nama Klien</label>
                             {i === 0 && namaKlien.trim() && (
                               <button

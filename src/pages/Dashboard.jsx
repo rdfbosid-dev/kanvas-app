@@ -78,6 +78,7 @@ export default function Dashboard() {
       .from('booking_summary')
       .select('*')
       .order('tanggal_acara', { ascending: true })
+      .order('jam_start_makeup', { ascending: true })
 
     if (error) {
       setError(error.message)

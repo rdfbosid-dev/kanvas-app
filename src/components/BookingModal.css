@@ -61,6 +61,7 @@
 .booking-modal-overlay .field-grid-booking.cols-catatan { grid-template-columns: 1fr; }
 .booking-modal-overlay .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 5px; }
 .booking-modal-overlay .field label { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
+.booking-modal-overlay .field-label-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
 .booking-modal-overlay .quickfill-btn {
   font-size: 12px; font-weight: 500; color: var(--h1); background: var(--ink-faint);
   border: none; border-radius: 5px; padding: 4px 10px; cursor: pointer; transition: background 0.15s;
@@ -214,10 +215,12 @@
 
   .booking-modal-overlay .field-grid-peserta.cols-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-bottom: 5px; }
 
+  .booking-modal-overlay .field-label-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+
   .booking-modal-overlay .quickfill-btn {
-    font-size: 8px; font-weight: 500; color: var(--h1); background: var(--ink-faint);
-    border: none; border-radius: 5px; padding: 4px; cursor: pointer; transition: background 0.15s;
-    margin-top: 0;
+    font-size: 10.5px; font-weight: 500; color: var(--h1); background: var(--ink-faint);
+    border: none; border-radius: 5px; padding: 4px 9px; cursor: pointer; transition: background 0.15s;
+    margin-top: 0; align-self: flex-start;
   }
   .booking-modal-overlay .toggle-row-rambut { display: flex; gap: 3px; }
 }
