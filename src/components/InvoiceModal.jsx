@@ -16,14 +16,42 @@ function formatTanggal(dateStr) {
 // InvoiceModal di bawah) -- biar pas print, konten ini BENERAN berdiri
 // sendiri, nggak numpang di dalam DOM tree modal/sidebar/halaman lain
 // yang bisa nyisain tinggi kosong pas dicetak.
-function InvoicePaper({ profile, booking, peserta, payments, totalDibayar, sisa }) {
+function IconWA() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.41-1.42a9.87 9.87 0 0 0 4.63 1.18h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.19 0 4.25.85 5.8 2.4a8.19 8.19 0 0 1 2.41 5.84c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.15 8.15 0 0 1-1.26-4.38c0-4.55 3.7-8.24 8.28-8.24Zm-4.42 4.53c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.13.17 1.72 2.7 4.22 3.68 2.08.82 2.51.66 2.96.62.45-.04 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.23-.16-.48-.28-.25-.13-1.45-.72-1.68-.8-.22-.08-.39-.13-.55.13-.16.25-.63.8-.78.96-.14.17-.28.19-.53.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.28.37-.42.12-.14.16-.25.24-.41.08-.17.04-.31-.02-.44-.06-.13-.55-1.35-.76-1.85-.2-.48-.4-.42-.55-.43h-.47Z" />
+    </svg>
+  )
+}
+function IconIG() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="15" height="15">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+// `variant` bedain 2 mode render: 'screen' (default, tampilan di dalam
+// modal/app -- TETEP presis kayak sebelumnya, teks "WA:"/"IG:" polos)
+// vs 'print' (khusus di dalam .invoice-print-portal -- pake ikon,
+// bukan cuma soal warna/ukuran CSS doang). Sengaja dibedain di sini
+// (bukan di CSS) soalnya beda ikon vs teks itu beda STRUKTUR markup,
+// bukan cuma beda style.
+function InvoicePaper({ profile, booking, peserta, payments, totalDibayar, sisa, variant = 'screen' }) {
+  const isPrint = variant === 'print'
   return (
     <div className="invoice-paper">
       <div className="inv-header">
         <div>
           <div className="inv-studio">{profile?.studio_name || 'Studio Saya'}</div>
-          {profile?.whatsapp && <div className="inv-studio-meta">WA: {profile.whatsapp}</div>}
-          {profile?.instagram && <div className="inv-studio-meta">IG: {profile.instagram}</div>}
+          {profile?.whatsapp && (
+            <div className="inv-studio-meta">{isPrint && <IconWA />}{isPrint ? profile.whatsapp : `WA: ${profile.whatsapp}`}</div>
+          )}
+          {profile?.instagram && (
+            <div className="inv-studio-meta">{isPrint && <IconIG />}{isPrint ? profile.instagram : `IG: ${profile.instagram}`}</div>
+          )}
         </div>
         <div className="inv-title-block">
           <div className="inv-title">INVOICE</div>
@@ -130,7 +158,7 @@ function InvoicePaper({ profile, booking, peserta, payments, totalDibayar, sisa 
         <div className="inv-sub" style={{ whiteSpace: 'pre-line' }}>{booking.catatan || '—'}</div>
       </div>
 
-      <div className="inv-footer">Terima kasih atas kepercayaan Anda telah menggunakan jasa kami.</div>
+      <div className="inv-footer">Terima kasih atas kepercayaan Anda karena telah menggunakan jasa kami.</div>
     </div>
   )
 }
@@ -203,7 +231,7 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
           ini dibuka. */}
       {createPortal(
         <div className="invoice-print-portal">
-          <InvoicePaper profile={profile} booking={booking} peserta={peserta} payments={payments} totalDibayar={totalDibayar} sisa={sisa} />
+          <InvoicePaper profile={profile} booking={booking} peserta={peserta} payments={payments} totalDibayar={totalDibayar} sisa={sisa} variant="print" />
         </div>,
         document.body
       )}

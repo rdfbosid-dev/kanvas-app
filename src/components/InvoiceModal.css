@@ -103,6 +103,82 @@
   .invoice-print-portal .invoice-paper { padding: 0; }
 }
 
+/* ===== Gaya khusus lembar A4 (print/simpan PDF) =====
+   SEMUA rule di bawah ini di-scope pake prefix ".invoice-print-portal",
+   jadi CUMA berlaku di versi cetak -- tampilan invoice di dalam
+   modal/app (".invoice-overlay ...") sama sekali nggak kesentuh/berubah.
+
+   Warna-warna di sini SENGAJA di-hardcode (bukan var(--ink)/var(--h5)
+   dari theme.css), soalnya var tema itu ikut ganti kalau Mode Gelap
+   aktif (dirancang buat kebaca di atas background gelap) -- kalau
+   invoice cetak numpang var itu, teksnya bisa jadi nyaris nggak
+   kebaca di atas kertas putih pas user nyetak dari Mode Gelap. Warna
+   cetak harus tetep sama & konsisten branded, nggak peduli mode
+   tema apa yang lagi aktif di app pas itu. */
+.invoice-print-portal {
+  --pi-primary: #3f4ca2;
+  --pi-text: #4a5490;
+  --pi-text-soft: #7b84c4;
+  --pi-line: #c6cbee;
+  --pi-summary-bg: #dbdff6;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--pi-text);
+}
+
+.invoice-print-portal .inv-header { margin-bottom: 22px; align-items: flex-start; }
+.invoice-print-portal .inv-studio { font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 800; color: var(--pi-primary); }
+.invoice-print-portal .inv-studio-meta {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 13px; color: var(--pi-text); margin-top: 6px;
+}
+.invoice-print-portal .inv-title-block { text-align: right; }
+.invoice-print-portal .inv-title {
+  font-family: 'Poppins', sans-serif; font-size: 40px; font-weight: 800;
+  letter-spacing: 0.03em; color: var(--pi-primary); line-height: 1;
+}
+.invoice-print-portal .inv-kode { font-size: 15px; color: var(--pi-text-soft); margin-top: 6px; }
+
+.invoice-print-portal .inv-divider { height: 3px; background: var(--pi-primary); margin: 20px 0 26px; border-radius: 2px; }
+
+.invoice-print-portal .inv-grid { margin-bottom: 26px; gap: 24px; }
+.invoice-print-portal .inv-label {
+  font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.06em; color: var(--pi-primary); margin-bottom: 7px;
+}
+.invoice-print-portal .inv-name,
+.invoice-print-portal .inv-sub-event { font-size: 17px; font-weight: 700; color: var(--pi-text); margin-bottom: 4px; }
+.invoice-print-portal .inv-sub,
+.invoice-print-portal .inv-sub-date,
+.invoice-print-portal .inv-sub-loc { font-size: 13.5px; color: var(--pi-text); }
+
+.invoice-print-portal .inv-table { margin-bottom: 22px; }
+.invoice-print-portal .inv-table thead th {
+  font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
+  letter-spacing: 0.05em; color: var(--pi-primary); padding: 10px 6px;
+  border-bottom: 2.5px solid var(--pi-primary);
+}
+.invoice-print-portal .inv-table td {
+  font-size: 14.5px; color: var(--pi-text); padding: 13px 6px;
+  border-bottom: 1.5px solid var(--pi-line);
+}
+.invoice-print-portal .inv-table td.right { font-size: 14.5px; }
+
+.invoice-print-portal .inv-summary {
+  background: var(--pi-summary-bg); border-radius: 22px; padding: 22px 26px; margin-bottom: 24px;
+}
+.invoice-print-portal .inv-summary-row { font-size: 14.5px; color: var(--pi-text); padding: 5px 0; }
+.invoice-print-portal .inv-summary-row b { color: var(--pi-text); font-size: 14.5px; }
+.invoice-print-portal .inv-summary-final { border-top: 1.5px solid var(--pi-line); margin-top: 8px; padding-top: 14px; }
+.invoice-print-portal .inv-summary-final span { color: var(--pi-primary); font-weight: 700; font-size: 16px; }
+.invoice-print-portal .inv-summary-final b { color: var(--pi-primary); font-size: 22px; }
+
+.invoice-print-portal .inv-pay-row { font-size: 13.5px; padding: 7px 0; border-bottom: 1.5px solid var(--pi-line); }
+
+.invoice-print-portal .inv-note { margin-top: 22px; }
+.invoice-print-portal .inv-footer {
+  font-size: 13px; font-weight: 600; color: var(--pi-text-soft); margin-top: 36px; padding: 0;
+}
+
 @media (max-width: 640px) {
   .invoice-overlay { padding: 0; align-items: flex-end; }
   .invoice-overlay .modal { max-width: 100%; max-height: 92vh; border-radius: 22px 22px 0 0; }
