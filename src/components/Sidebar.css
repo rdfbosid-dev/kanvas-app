@@ -75,12 +75,12 @@
   .mobile-bottom-tabs {
     display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
     background: var(--sidebar); border-top: 1px solid var(--page-b);
-    padding: 8px 4px calc(14px + env(safe-area-inset-bottom));
+    padding: 12px 4px calc(14px + env(safe-area-inset-bottom));
     backdrop-filter: blur(6px);
   }
   .bottom-tab-item {
     flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
-    padding: 6px 2px; border-radius: 12px; text-decoration: none;
+    padding: 8px 2px; border-radius: 12px; text-decoration: none;
     font-size: 10.5px; font-weight: 600; color: var(--ink-soft);
   }
   .bottom-tab-item svg { width: 21px; height: 21px; }
