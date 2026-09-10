@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
 import './InvoiceModal.css'
@@ -169,8 +170,96 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
   const totalDibayar = payments.reduce((s, p) => s + Number(p.jumlah), 0)
   const sisa = (booking.belanja_klien || 0) - totalDibayar
 
+  const printPaperRef = useRef(null)
+  const [exportOpen, setExportOpen] = useState(false)
+  const [exporting, setExporting] = useState(false)
+  const exportMenuRef = useRef(null)
+
+  // Nutup dropdown kalau user klik di luar area-nya.
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (exportMenuRef.current && !exportMenuRef.current.contains(e.target)) {
+        setExportOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   function handlePrint() {
+    setExportOpen(false)
     window.print()
+  }
+
+  // "Nangkep" versi CETAK (.invoice-print-portal, yang udah branded --
+  // logo warna, ikon WA/IG) jadi canvas gambar, dipakai bareng buat PNG
+  // maupun PDF (PDF cuma nge-bungkus gambar yang sama ke dalam 1 halaman
+  // A4). Elemen sumbernya (printPaperRef) NORMALNYA display:none di
+  // layar (cuma nongol pas @media print) -- html2canvas nggak bisa
+  // nangkep elemen yang display:none (dianggap nggak render, tinggi 0).
+  // Makanya sementara dipaksa "nyala" tapi digeser jauh ke luar layar
+  // (position:fixed, left:-99999px) SEBELUM di-capture, abis itu
+  // langsung dibalikin kayak semula -- user nggak pernah lihat kedipan
+  // apapun, prosesnya instan & invisible buat mata.
+  //
+  // `html2canvas` di-import DINAMIS (bukan di paling atas file) --
+  // library ini + jsPDF lumayan berat (~600KB gzip gabungan), dan cuma
+  // kepake kalau user BENERAN klik Unduh PDF/PNG. Kalau di-import statis
+  // di atas, semua orang yang buka app bakal ikut download 600KB itu di
+  // awal (bahkan yang nggak pernah export invoice), dan sempet bikin
+  // build gagal soalnya lewat batas ukuran precache PWA (2MB). Dynamic
+  // import bikin Vite motong ini jadi chunk terpisah, baru di-fetch
+  // browser pas fungsi ini beneran dipanggil.
+  async function captureInvoiceCanvas() {
+    const node = printPaperRef.current
+    if (!node) return null
+    const { default: html2canvas } = await import('html2canvas')
+    const prevStyle = { display: node.style.display, position: node.style.position, left: node.style.left, top: node.style.top }
+    node.style.display = 'block'
+    node.style.position = 'fixed'
+    node.style.left = '-99999px'
+    node.style.top = '0'
+    try {
+      const canvas = await html2canvas(node, { scale: 2, backgroundColor: '#ffffff', useCORS: true })
+      return canvas
+    } finally {
+      node.style.display = prevStyle.display
+      node.style.position = prevStyle.position
+      node.style.left = prevStyle.left
+      node.style.top = prevStyle.top
+    }
+  }
+
+  async function handleDownloadPNG() {
+    setExportOpen(false)
+    setExporting(true)
+    try {
+      const canvas = await captureInvoiceCanvas()
+      if (!canvas) return
+      const link = document.createElement('a')
+      link.download = `Invoice-${booking.kode_booking || 'DapurMUA'}.png`
+      link.href = canvas.toDataURL('image/png')
+      link.click()
+    } finally {
+      setExporting(false)
+    }
+  }
+
+  async function handleDownloadPDF() {
+    setExportOpen(false)
+    setExporting(true)
+    try {
+      const [canvas, { default: jsPDF }] = await Promise.all([captureInvoiceCanvas(), import('jspdf')])
+      if (!canvas) return
+      const imgData = canvas.toDataURL('image/png')
+      const pdf = new jsPDF({ unit: 'mm', format: 'a4' })
+      const pageWidth = pdf.internal.pageSize.getWidth()
+      const imgHeight = (canvas.height * pageWidth) / canvas.width
+      pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, imgHeight)
+      pdf.save(`Invoice-${booking.kode_booking || 'DapurMUA'}.pdf`)
+    } finally {
+      setExporting(false)
+    }
   }
 
   function handleWhatsApp() {
@@ -216,7 +305,18 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
           <div className="modal-foot invoice-no-print">
             <button className="btn-ghost" onClick={onClose}>Tutup</button>
             <button className="btn-ghost" onClick={handleWhatsApp} type="button">Kirim ke WhatsApp</button>
-            <button className="btn-ghost" onClick={handlePrint} type="button">Cetak / Simpan PDF</button>
+            <div className="inv-export" ref={exportMenuRef}>
+              <button className="btn-ghost" onClick={() => setExportOpen((v) => !v)} type="button" disabled={exporting}>
+                {exporting ? 'Memproses...' : 'Cetak / Unduh'} <span className="inv-export-caret">▾</span>
+              </button>
+              {exportOpen && (
+                <div className="inv-export-menu">
+                  <button type="button" onClick={handlePrint}>Cetak</button>
+                  <button type="button" onClick={handleDownloadPDF}>Unduh PDF</button>
+                  <button type="button" onClick={handleDownloadPNG}>Unduh PNG</button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -228,9 +328,12 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
           di belakang modal, BookingDetailModal, dll) yang nyisain tinggi
           kosong pas print -- itu penyebab kenapa dulu bisa keluar >4
           halaman kosong & beda-beda tergantung halaman/HP asal invoice
-          ini dibuka. */}
+          ini dibuka. `printPaperRef` nempel di elemen yang sama ini --
+          dipakai ulang buat capture PNG/PDF (lihat captureInvoiceCanvas
+          di atas), biar 3-3nya (cetak fisik, PDF, PNG) selalu ngehasilin
+          tampilan branded yang identik. */}
       {createPortal(
-        <div className="invoice-print-portal">
+        <div className="invoice-print-portal" ref={printPaperRef}>
           <InvoicePaper profile={profile} booking={booking} peserta={peserta} payments={payments} totalDibayar={totalDibayar} sisa={sisa} variant="print" />
         </div>,
         document.body
