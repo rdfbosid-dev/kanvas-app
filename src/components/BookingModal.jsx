@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import CustomSelect from './CustomSelect'
 import CustomDatePicker from './CustomDatePicker'
 import CustomTimePicker from './CustomTimePicker'
-import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL } from '../lib/constants'
+import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL, KATEGORI_MAKEUP_OPTIONS } from '../lib/constants'
 import { formatAngkaInput, parseAngkaInput } from '../lib/format'
 import { cariAtauBuatKlien } from '../lib/klien'
 import './BookingModal.css'
@@ -38,7 +38,7 @@ function addOnsToRow(addOns) {
 function blankPeserta(nama = '') {
   return {
     nama, peran: '',
-    jenisPaket: 'Reguler', dikerjakanOlehMakeup: 'Me',
+    kategoriMakeup: 'Reguler', jenisPaket: '', dikerjakanOlehMakeup: 'Me',
     biayaMakeup: '', komisiMakeup: '',
     layananTambahan: 'Tidak Ada', dikerjakanOlehTambahan: 'Me',
     biayaTambahan: '', komisiTambahan: '',
@@ -180,7 +180,8 @@ export default function BookingModal({ onClose, onSaved }) {
       user_id: user.id,
       nama_anggota: p.nama.trim(),
       peran: p.peran.trim(),
-      jenis_paket: p.jenisPaket,
+      jenis_paket: p.jenisPaket.trim(),
+      kategori_makeup: p.kategoriMakeup,
       dikerjakan_oleh_makeup: p.dikerjakanOlehMakeup,
       biaya_makeup: Number(p.biayaMakeup) || 0,
       komisi_makeup_tim: Number(p.komisiMakeup) || 0,
@@ -381,12 +382,21 @@ export default function BookingModal({ onClose, onSaved }) {
 
                       <div className="field-grid-peserta cols-2">
                         <div className="field">
-                          <div className="sb-label">Jenis Makeup</div>
-                            <div className="toggle-row">
-                            <div className={`toggle-opt${p.jenisPaket === 'Reguler' ? ' sel' : ''}`} onClick={() => updatePeserta(i, 'jenisPaket', 'Reguler')}>Reguler</div>
-                            <div className={`toggle-opt${p.jenisPaket === 'VIP' ? ' sel' : ''}`} onClick={() => updatePeserta(i, 'jenisPaket', 'VIP')}>VIP</div>
-                          </div>
+                          <label>Kategori</label>
+                          <CustomSelect
+                            options={KATEGORI_MAKEUP_OPTIONS}
+                            value={p.kategoriMakeup}
+                            onChange={(v) => updatePeserta(i, 'kategoriMakeup', v)}
+                            variant="modal"
+                          />
                         </div>
+                        <div className="field">
+                          <label>Jenis Makeup</label>
+                          <input type="text" placeholder="contoh: Gold Wedding, Premium, Standar" value={p.jenisPaket} onChange={(e) => updatePeserta(i, 'jenisPaket', e.target.value)} />
+                        </div>
+                      </div>
+
+                      <div className="field-grid-peserta cols-2">
                         <div className="field">
                           <label>Dikerjakan oleh</label>
                           <div className="toggle-row">

@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import CustomSelect from './CustomSelect'
 import CustomDatePicker from './CustomDatePicker'
 import CustomTimePicker from './CustomTimePicker'
-import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL } from '../lib/constants'
+import { EVENT_OPTIONS, EVENT_CUSTOM_SENTINEL, KATEGORI_MAKEUP_OPTIONS } from '../lib/constants'
 import { cariAtauBuatKlien } from '../lib/klien'
 import { formatAngkaInput, parseAngkaInput } from '../lib/format'
 import InvoiceModal from './InvoiceModal'
@@ -142,7 +142,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
   }
   function addEditPeserta() {
     setEditPeserta((list) => [...list, {
-      nama_anggota: '', peran: '', jenis_paket: 'Reguler', dikerjakan_oleh_makeup: 'Me',
+      nama_anggota: '', peran: '', kategori_makeup: 'Reguler', jenis_paket: '', dikerjakan_oleh_makeup: 'Me',
       biaya_makeup: 0, komisi_makeup_tim: 0, layanan_tambahan: 'Tidak Ada',
       dikerjakan_oleh_tambahan: 'Me', biaya_tambahan: 0, komisi_tambahan: 0,
       layanan_lainnya: '', biaya_lainnya: 0, keuntungan_lainnya: 0,
@@ -221,7 +221,8 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
       const payload = {
         nama_anggota: p.nama_anggota?.trim() || '',
         peran: p.peran?.trim() || '',
-        jenis_paket: p.jenis_paket,
+        jenis_paket: (p.jenis_paket || '').trim(),
+        kategori_makeup: p.kategori_makeup,
         dikerjakan_oleh_makeup: p.dikerjakan_oleh_makeup,
         biaya_makeup: Number(p.biaya_makeup) || 0,
         komisi_makeup_tim: Number(p.komisi_makeup_tim) || 0,
@@ -449,7 +450,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                   <div className="b-info">
                     <div className="b-name">{p.nama_anggota} {p.peran ? `— (${p.peran})` : ''}</div>
                     <div className="b-meta">
-                      {p.jenis_paket} ({p.dikerjakan_oleh_makeup}) — {formatRupiah(p.biaya_makeup)}
+                      {p.jenis_paket || p.kategori_makeup} ({p.dikerjakan_oleh_makeup}) — {formatRupiah(p.biaya_makeup)}
                       {p.layanan_tambahan !== 'Tidak Ada' ? ` · ${p.layanan_tambahan} (${p.dikerjakan_oleh_tambahan})` : ''}
                       {[1, 2, 3, 4, 5].map((n) => {
                         const suffix = n === 1 ? '' : `_${n}`
@@ -567,12 +568,20 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
 
                       <div className="field-grid-peserta cols-2">
                         <div className="field">
-                          <div className="sb-label">Jenis Makeup</div>
-                            <div className="toggle-row">
-                            <div className={`toggle-opt${p.jenis_paket === 'Reguler' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'jenis_paket', 'Reguler')}>Reguler</div>
-                            <div className={`toggle-opt${p.jenis_paket === 'VIP' ? ' sel' : ''}`} onClick={() => updateEditPeserta(i, 'jenis_paket', 'VIP')}>VIP</div>
-                          </div>
+                          <label>Kategori</label>
+                          <CustomSelect
+                            options={KATEGORI_MAKEUP_OPTIONS}
+                            value={p.kategori_makeup || 'Reguler'}
+                            onChange={(v) => updateEditPeserta(i, 'kategori_makeup', v)}
+                            variant="modal"
+                          />
                         </div>
+                        <div className="field">
+                          <label>Jenis Makeup</label>
+                          <input type="text" placeholder="contoh: Gold Wedding, Premium, Standar" value={p.jenis_paket || ''} onChange={(e) => updateEditPeserta(i, 'jenis_paket', e.target.value)} />
+                        </div>
+                      </div>
+                      <div className="field-grid-peserta cols-2">
                         <div className="field">
                           <label>Dikerjakan oleh</label>
                           <div className="toggle-row">

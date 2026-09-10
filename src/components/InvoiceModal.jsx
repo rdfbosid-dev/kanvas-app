@@ -88,7 +88,7 @@ function InvoicePaper({ profile, booking, peserta, payments, totalDibayar, sisa 
             const rows = [
               <tr key={p.id + '-mkp'}>
                 <td>{p.nama_anggota}{p.peran ? ` (${p.peran})` : ''}</td>
-                <td>Makeup {p.jenis_paket}</td>
+                <td>Makeup {p.jenis_paket || p.kategori_makeup}</td>
                 <td className="right">{formatRupiah(p.biaya_makeup)}</td>
               </tr>,
             ]
