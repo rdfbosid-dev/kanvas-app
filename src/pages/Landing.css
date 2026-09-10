@@ -136,13 +136,21 @@
   box-shadow: var(--shadow-modal);
 }
 .harga-badge {
-  display: inline-block; font-size: 12px; font-weight: 700; color: var(--h7);
-  background: var(--pill-alt); padding: 6px 14px; border-radius: 20px; margin-bottom: 18px;
+  /* display:block + width:fit-content (BUKAN inline-block) -- ini SENGAJA
+     biar badge ini SELALU dapet baris sendiri, apapun lebar layarnya.
+     inline-block yang lama bikin browser boleh naro badge & harga coret
+     sejajar di 1 baris kalau ruangnya kebetulan cukup lega (misal HP di-
+     rotate landscape) -- itu yang bikin dua-duanya numpuk/tabrakan.
+     width:fit-content jaga bentuk pill-nya tetep ngepas isi (nggak
+     melebar penuh), margin:auto yang gantiin peran text-align:center
+     buat naro dia di tengah. */
+  display: block; width: fit-content; margin: 0 auto 18px;
+  font-size: 12px; font-weight: 700; color: var(--h7);
+  background: var(--pill-alt); padding: 6px 14px; border-radius: 20px;
 }
 .harga-coret {
-  position: relative; display: inline-block;
+  position: relative; display: block; width: fit-content; margin: 0 auto 5px;
   font-size: 30px; font-weight: 800; color: var(--pill-alt);
-  margin-bottom: 5px;
 }
 
 .harga-coret::after {
