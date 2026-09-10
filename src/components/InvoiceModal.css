@@ -132,6 +132,15 @@
   --pi-summary-bg: #dbdff6;
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--pi-text);
+  /* Chrome (dan browser lain) DEFAULT-nya nge-skip warna background pas
+     print, kecuali user manual centang "Background graphics" di dialog
+     print-nya -- kebanyakan orang nggak tau/nggak centang itu. Property
+     ini "maksa" browser tetep nyetak background yang di-set di CSS,
+     nggak ngandelin setting manual user. Property-nya WARISAN (inherited),
+     jadi cukup di-set sekali di sini, otomatis nurun ke semua anak
+     elemen di dalam .invoice-print-portal (termasuk .inv-summary). */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 .invoice-print-portal .inv-header { margin-bottom: 22px; align-items: flex-start; }
