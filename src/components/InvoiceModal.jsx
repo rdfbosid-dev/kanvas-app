@@ -243,10 +243,22 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
     try {
       const canvas = await captureInvoiceCanvas()
       if (!canvas) return
+      // SENGAJA pake Blob + URL.createObjectURL, BUKAN canvas.toDataURL()
+      // ditempel langsung ke href kayak sebelumnya. toDataURL() ngehasilin
+      // teks base64 yang bisa beberapa MB panjangnya buat gambar resolusi
+      // tinggi kayak ini -- beberapa browser HP kadang "nyerah diam-diam"
+      // (nggak error, cuma nggak jalan) kalau ukurannya udah gede & dipicu
+      // berkali-kali dalam 1 sesi. Blob URL jauh lebih ringan & reliable
+      // buat kasus ini.
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'))
+      const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.download = `Invoice-${booking.kode_booking || 'DapurMUA'}.png`
-      link.href = canvas.toDataURL('image/png')
+      link.href = url
+      document.body.appendChild(link)
       link.click()
+      document.body.removeChild(link)
+      setTimeout(() => URL.revokeObjectURL(url), 3000)
     } finally {
       setExporting(false)
     }
