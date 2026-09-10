@@ -36,16 +36,16 @@
 .inv-export-caret { font-size: 9px; margin-left: 2px; }
 .inv-export-menu {
   position: absolute; bottom: calc(100% + 6px); right: 0; z-index: 20;
-  background: var(--table-body); border: 1.5px solid var(--button-border); border-radius: 12px;
-  box-shadow: var(--shadow-modal); overflow: hidden; min-width: 140px;
+  background: var(--table-body); border: 1.5px solid var(--line-box); border-radius: 12px;
+  box-shadow: var(--shadow-card); overflow: hidden; min-width: 115px;
 }
 .inv-export-menu button {
-  display: block; width: 100%; text-align: left; padding: 10px 14px;
+  display: block; width: 100%; text-align: left; padding: 8px 14px;
   border: none; background: none; font-family: inherit; font-size: 12.5px; font-weight: 600;
   color: var(--ink-soft); cursor: pointer;
 }
 .inv-export-menu button:hover { background: color-mix(in srgb, var(--button-prm-hover) 40%, transparent); }
-.inv-export-menu button + button { border-top: 1px solid color-mix(in srgb, var(--button-border) 60%, transparent); }
+.inv-export-menu button + button { border-top: none; }
 
 .invoice-modal { max-width: 640px; }
 .invoice-paper { background: var(--table-body); }
