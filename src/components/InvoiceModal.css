@@ -123,12 +123,30 @@
   margin: 0;
 }
 
-.invoice-print-portal { display: none; }
+.invoice-print-portal {
+  display: none;
+  width: 210mm;
+  padding: 15mm;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+/* padding/width/box-sizing SENGAJA jadi rule PERMANEN di atas (bukan
+   di dalam @media print doang kayak sebelumnya) -- soalnya proses
+   capture PNG/PDF (lihat captureInvoiceCanvas di InvoiceModal.jsx)
+   itu BUKAN mode print beneran, cuma elemen ini digeser ke luar layar
+   pake position:fixed. Kalau padding/width cuma didefinisiin di dalam
+   @media print, pas capture (bukan print) rule itu nggak pernah aktif
+   -- hasilnya konten nempel ke tepi (nol margin) DAN lebarnya nggak
+   kekunci 210mm (ikut lebar "alami" yang nggak nentu), bikin proporsi
+   teks/kolom keliatan beda dari versi cetak beneran. Sekarang
+   width+padding-nya SELALU sama, baik dicetak fisik, disave PDF lewat
+   print dialog, ATAUPUN di-capture buat Unduh PDF/PNG -- 3-3-nya
+   ngehasilin proporsi identik. */
 
 @media print {
   html, body { height: auto; }
   #root { display: none !important; }
-  .invoice-print-portal { display: block !important; padding: 15mm; box-sizing: border-box; }
+  .invoice-print-portal { display: block !important; }
   .invoice-print-portal .invoice-paper { padding: 0; }
 }
 
@@ -164,6 +182,13 @@
 }
 
 .invoice-print-portal .inv-header { margin-bottom: 22px; align-items: flex-start; }
+/* .invoice-paper (base CSS, line 51) numpang var(--table-body) yang
+   isinya bukan putih murni (#f2f3fc, abu-lavender pucat) -- di layar
+   nggak kerasa, tapi begitu print-color-adjust:exact maksa background
+   ke-print, satu lembar kertas jadi ke-tint lavender semua. Dikunci
+   putih murni khusus di sini, spesifik cuma buat versi cetak -- di
+   modal/app tetep numpang var(--table-body) seperti biasa. */
+.invoice-print-portal .invoice-paper { background: #ffffff; }
 .invoice-print-portal .inv-studio { font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 800; color: var(--pi-primary); }
 .invoice-print-portal .inv-studio-meta {
   display: flex; align-items: center; gap: 7px;

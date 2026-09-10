@@ -214,6 +214,13 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
     const node = printPaperRef.current
     if (!node) return null
     const { default: html2canvas } = await import('html2canvas')
+    // Nunggu web font (Poppins/Plus Jakarta Sans) BENERAN kemuat dulu
+    // sebelum capture -- kalau nggak, html2canvas bisa keburu nge-capture
+    // pas browser masih numpang font fallback sementara (ukuran/lebar
+    // huruf beda), bikin komposisi/jarak teks keliatan "geser" dikit
+    // dari versi cetak beneran (yang nunggu font selesai kemuat dulu
+    // sebelum browser ngerender halaman print).
+    if (document.fonts?.ready) await document.fonts.ready
     const prevStyle = { display: node.style.display, position: node.style.position, left: node.style.left, top: node.style.top }
     node.style.display = 'block'
     node.style.position = 'fixed'
