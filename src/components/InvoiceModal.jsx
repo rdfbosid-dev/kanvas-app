@@ -130,7 +130,7 @@ function InvoicePaper({ profile, booking, peserta, payments, totalDibayar, sisa 
         <div className="inv-sub" style={{ whiteSpace: 'pre-line' }}>{booking.catatan || '—'}</div>
       </div>
 
-      <div className="inv-footer">Terima kasih atas kepercayaan Anda karena telah menggunakan jasa kami.</div>
+      <div className="inv-footer">Terima kasih atas kepercayaan Anda telah menggunakan jasa kami.</div>
     </div>
   )
 }
