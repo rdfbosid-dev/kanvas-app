@@ -647,7 +647,7 @@ export default function BookingDetailModal({ booking, onClose, onChanged }) {
                                     <button type="button" className="peserta-remove" onClick={() => removeAddOnSlot(i)}>Hapus</button>
                                   )}
                                 </div>
-                                <input type="text" placeholder="contoh: Softlens" value={p[namaField] || ''} onChange={(e) => updateEditPeserta(i, namaField, e.target.value)} onBlur={(e) => updateEditPeserta(i, namaField, capitalizeWords(e.target.value))} />
+                                <input type="text" placeholder="contoh: Softlens" value={p[namaField] || ''} onChange={(e) => updateEditPeserta(i, namaField, e.target.value)} />
                               </div>
                               {(p[namaField] || '').trim() && (
                                 <div className="field">

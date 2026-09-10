@@ -462,7 +462,7 @@ export default function BookingModal({ onClose, onSaved }) {
                                   <button type="button" className="peserta-remove" onClick={() => removeAddOn(i, ai)}>Hapus</button>
                                 )}
                               </div>
-                              <input type="text" placeholder="contoh: Softlens/Kuku Palsu/Melati/lainnya" value={a.nama} onChange={(e) => updateAddOn(i, ai, 'nama', e.target.value)} onBlur={(e) => updateAddOn(i, ai, 'nama', capitalizeWords(e.target.value))} />
+                              <input type="text" placeholder="contoh: Softlens/Kuku Palsu/Melati/lainnya" value={a.nama} onChange={(e) => updateAddOn(i, ai, 'nama', e.target.value)} />
                             </div>
                             {a.nama.trim() && (
                               <div className="field">
