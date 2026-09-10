@@ -89,9 +89,18 @@
    nggak keliatan -- itu penyebab lama bug ">4 halaman kosong pas print".
    display:none beneran ngilangin elemennya dari layout, jadi nggak ada
    lagi ruang kosong yang kehitung pas browser mecah halaman cetak. */
+/* @page margin SENGAJA di-set 0 (bukan 15mm kayak sebelumnya) -- ini
+   trik biar browser nggak nyisain "ruang margin" buat nulis header/
+   footer bawaan-nya sendiri (tanggal, judul tab, URL, nomor halaman).
+   Kalau @page punya margin, browser (terutama Chrome) numpang ruang
+   kosong itu buat nulis teks-teks itu, walau opsi "Headers and footers"
+   di dialog print USER yang nyalain, bukan kode kita -- makanya nggak
+   bisa di-disable langsung dari sini. Margin 15mm yang ilang dari sini
+   dipindah jadi padding di .invoice-print-portal di bawah, biar hasil
+   visualnya (jarak konten ke tepi kertas) tetep sama persis. */
 @page {
   size: A4;
-  margin: 15mm;
+  margin: 0;
 }
 
 .invoice-print-portal { display: none; }
@@ -99,7 +108,7 @@
 @media print {
   html, body { height: auto; }
   #root { display: none !important; }
-  .invoice-print-portal { display: block !important; }
+  .invoice-print-portal { display: block !important; padding: 15mm; box-sizing: border-box; }
   .invoice-print-portal .invoice-paper { padding: 0; }
 }
 
