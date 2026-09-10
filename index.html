@@ -19,7 +19,14 @@
          font-size ke 16px) buat masalah itu lagi. Tradeoff: user yang
          butuh pinch-zoom buat baca teks kecil (misal low-vision) jadi
          nggak bisa zoom sama sekali di app ini. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- viewport-fit=cover WAJIB ada buat env(safe-area-inset-bottom) di
+         CSS bisa kebaca di iPhone/Safari. Tanpa ini, browser nggak
+         "meluaskan" halaman sampe ke area gesture-bar/notch, jadi
+         env(safe-area-inset-bottom) selalu balik 0 -- itu kenapa padding
+         tambahan di .mobile-bottom-tabs (Sidebar.css) nggak pernah
+         kerasa di iPhone walau di Android udah kelihatan. Di Android
+         atribut ini nggak berpengaruh/aman diabaikan. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Dapur MUA</title>
   </head>
   <body>
