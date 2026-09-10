@@ -40,18 +40,17 @@ function IconIG() {
 // bukan cuma soal warna/ukuran CSS doang). Sengaja dibedain di sini
 // (bukan di CSS) soalnya beda ikon vs teks itu beda STRUKTUR markup,
 // bukan cuma beda style.
-function InvoicePaper({ profile, booking, peserta, payments, totalDibayar, sisa, variant = 'screen' }) {
-  const isPrint = variant === 'print'
+function InvoicePaper({ profile, booking, peserta, payments, totalDibayar, sisa }) {
   return (
     <div className="invoice-paper">
       <div className="inv-header">
         <div>
           <div className="inv-studio">{profile?.studio_name || 'Studio Saya'}</div>
           {profile?.whatsapp && (
-            <div className="inv-studio-meta">{isPrint && <IconWA />}{isPrint ? profile.whatsapp : `WA: ${profile.whatsapp}`}</div>
+            <div className="inv-studio-meta"><IconWA />{profile.whatsapp}</div>
           )}
           {profile?.instagram && (
-            <div className="inv-studio-meta">{isPrint && <IconIG />}{isPrint ? profile.instagram : `IG: ${profile.instagram}`}</div>
+            <div className="inv-studio-meta"><IconIG />{profile.instagram}</div>
           )}
         </div>
         <div className="inv-title-block">
@@ -353,7 +352,7 @@ export default function InvoiceModal({ booking, peserta, payments, onClose }) {
           tampilan branded yang identik. */}
       {createPortal(
         <div className="invoice-print-portal" ref={printPaperRef}>
-          <InvoicePaper profile={profile} booking={booking} peserta={peserta} payments={payments} totalDibayar={totalDibayar} sisa={sisa} variant="print" />
+          <InvoicePaper profile={profile} booking={booking} peserta={peserta} payments={payments} totalDibayar={totalDibayar} sisa={sisa} />
         </div>,
         document.body
       )}
