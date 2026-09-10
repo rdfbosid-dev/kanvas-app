@@ -235,7 +235,7 @@
 .invoice-print-portal .inv-summary-final span { color: var(--pi-primary); font-weight: 700; font-size: 16px; }
 .invoice-print-portal .inv-summary-final b { color: var(--pi-primary); font-size: 22px; }
 
-.invoice-print-portal .inv-pay-row { font-size: 13.5px; padding: 7px 0; border-bottom: 1.5px solid var(--pi-line); }
+.invoice-print-portal .inv-pay-row { font-size: 13.5px; color: var(--pi-text); padding: 7px 0; border-bottom: 1.5px solid var(--pi-line); }
 
 .invoice-print-portal .inv-note { margin-top: 22px; }
 .invoice-print-portal .inv-footer {
