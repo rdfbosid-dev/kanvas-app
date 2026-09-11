@@ -5,18 +5,26 @@ import { useTheme } from '../context/ThemeContext'
 import { openAdminWhatsApp } from '../lib/whatsapp'
 import './Landing.css'
 
-// Harga promo peluncuran -- SEKALI BAYAR, akses selamanya. Ini "harga
-// early adopter" (lihat diskusi harga sebelumnya), sengaja dipisah jadi
-// 1 variable di paling atas biar gampang diganti kapan aja tanpa perlu
-// ubek-ubek JSX di bawah -- termasuk kalau nanti pindah ke model
-// langganan bulanan, tinggal ganti angka & teks "sekali bayar, akses
-// selamanya" di bagian <section className="landing-harga"> di bawah.
-const HARGA_LIFETIME = 200000
-// Harga "asli" yang ditampilin dicoret di atas HARGA_LIFETIME -- kesan
-// diskon/promo. Samain juga di sini kalau nanti HARGA_LIFETIME diubah,
-// biar potongannya tetep masuk akal (jangan sampe harga coret malah
-// lebih murah/sama).
-const HARGA_CORET = 240000
+// 3 pilihan harga -- SEKALI BAYAR per periode (bukan auto-renew), ini
+// "harga early adopter" (lihat diskusi harga sebelumnya). `trial: true`
+// nentuin plan mana yang nampilin tombol CTA "Coba Gratis 7 Hari" --
+// sesuai permintaan, paket bulanan (Rp35rb) SENGAJA nggak dikasih
+// tombol itu, cuma 6-bulan & tahunan yang dikasih.
+const HARGA_PLANS = [
+  { id: 'bulanan', harga: 35000, period: 'per bulan', trial: false },
+  { id: 'enam-bulan', harga: 200000, period: 'untuk akses enam bulan', trial: true },
+  { id: 'tahunan', harga: 380000, period: 'untuk akses satu tahun', trial: true },
+]
+
+// Fitur yang ditampilin SAMA di ke-3 card -- di-extract ke array biar
+// nggak nulis <ul> yang sama isinya 3x pas di-map per plan di bawah.
+const HARGA_FITUR = [
+  'Booking & kalender otomatis tersinkron ke HP',
+  'Invoice rapi, kirim langsung ke WhatsApp klien',
+  'Rekap keuangan & laporan otomatis',
+  'Data & riwayat klien tersimpan rapi',
+  'Bantu usaha MUA-mu naik kelas',
+]
 
 const FITUR = [
   {
@@ -205,25 +213,27 @@ export default function Landing() {
           <h2>Investasi kecil bikin kerjamu lebih efektif dan rapi</h2>
           <p>Coba dulu 7 hari gratis — baru mikirin bayar kalau emang cocok.</p>
         </div>
-        <div className="harga-card">
-          <div className="harga-badge">Harga Peluncuran — Terbatas</div>
-          <div className="harga-coret">Rp{HARGA_CORET.toLocaleString('id-ID')}</div>
-          <div className="harga-price">
-            <span className="harga-currency">Rp</span>
-            <span className="harga-amount">{HARGA_LIFETIME.toLocaleString('id-ID')}</span>
-          </div>
-          <div className="harga-period">untuk akses enam bulan</div>
+        <div className="harga-grid">
+          {HARGA_PLANS.map((plan) => (
+            <div className="harga-card" key={plan.id}>
+              <div className="harga-badge">Harga Peluncuran — Terbatas</div>
+              <div className="harga-price">
+                <span className="harga-currency">Rp</span>
+                <span className="harga-amount">{plan.harga.toLocaleString('id-ID')}</span>
+              </div>
+              <div className="harga-period">{plan.period}</div>
 
-          <ul className="harga-list">
-            <li><Check /> Booking &amp; kalender otomatis tersinkron ke HP</li>
-            <li><Check /> Invoice rapi, kirim langsung ke WhatsApp klien</li>
-            <li><Check /> Rekap keuangan &amp; laporan otomatis</li>
-            <li><Check /> Data &amp; riwayat klien tersimpan rapi</li>
-            <li><Check /> Bantu usaha MUA-mu naik kelas</li>
-          </ul>
+              <ul className="harga-list">
+                {HARGA_FITUR.map((f) => (
+                  <li key={f}><Check /> {f}</li>
+                ))}
+              </ul>
 
-          <Link to="/register" className="btn-landing large harga-cta">Mulai Coba Gratis 7 Hari →</Link>
-          <div className="harga-note">Langsung chat admin untuk tanya seputar Dapur MUA.</div>
+              {plan.trial && (
+                <Link to="/register" className="btn-landing large harga-cta">Mulai Coba Gratis 7 Hari →</Link>
+              )}
+            </div>
+          ))}
         </div>
       </section>
 

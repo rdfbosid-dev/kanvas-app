@@ -123,18 +123,30 @@
 .cara-step h3 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--h2); margin-bottom: 8px; }
 .cara-step p { font-size: 13.5px; color: var(--h4); line-height: 1.6; }
 
-/* ---- Section Harga -- kartu tunggal (bukan tabel perbandingan 3 tier),
-   soalnya Dapur MUA emang cuma 1 paket: semua fitur, nggak ada versi
-   "premium" di atasnya. Tema warnanya numpang var(--...) yang sama kayak
-   fitur-card & btn-landing, biar konsisten satu palet sama section lain. ---- */
+/* ---- Section Harga -- 3 card (bulanan/6-bulan/tahunan), semua nampilin
+   fitur yang sama, cuma beda harga & ada-tidaknya CTA trial. Tema
+   warnanya numpang var(--...) yang sama kayak fitur-card & btn-landing,
+   biar konsisten satu palet sama section lain. ---- */
 .landing-harga { padding: 30px 60px 30px; }
+.harga-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  max-width: 1080px; margin: 0 auto; align-items: stretch;
+}
 .harga-card {
-  max-width: 420px; margin: 0 auto; text-align: center;
+  text-align: center;
   background: color-mix(in srgb, var(--page-b) var(--mix-page-b), transparent);
-  border: 1.5px solid color-mix(in srgb, var(--button-prm) 30%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--button-prm) var(--mix-border), transparent);
   border-radius: 24px; padding: 36px 32px;
   box-shadow: var(--shadow-modal);
+  /* flex column -- .harga-list dikasih flex:1 di bawah, jadi dia yang
+     "ngisi" sisa ruang kalau card ini nggak punya tombol CTA (plan
+     bulanan). Efeknya semua card tinggi sama (grid align-items:stretch)
+     TANPA ada tombol yang keliatan ngambang aneh di tengah. */
+  display: flex; flex-direction: column; transition: all 0.3s ease;
 }
+
+.harga-card:hover { transform: translateY(-5px); }
+
 .harga-badge {
   /* display:block + width:fit-content (BUKAN inline-block) -- ini SENGAJA
      biar badge ini SELALU dapet baris sendiri, apapun lebar layarnya.
@@ -148,22 +160,13 @@
   font-size: 12px; font-weight: 700; color: var(--h7);
   background: var(--pill-alt); padding: 6px 14px; border-radius: 20px;
 }
-.harga-coret {
-  position: relative; display: block; width: fit-content; margin: 0 auto 5px;
-  font-size: 30px; font-weight: 800; color: var(--pill-alt);
-}
-
-.harga-coret::after {
-  content: ''; position: absolute; left: -18px; right: -18px; top: 50%;
-  height: 6px; background: var(--h2);
-}
 
 .harga-price { display: flex; align-items: flex-start; justify-content: center; gap: 4px; }
 .harga-currency { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--h3); margin-top: 6px; }
-.harga-amount { font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 700; color: var(--pill-alt); line-height: 1; }
-.harga-period { font-size: 16px; font-weight: 700; color: var(--ink-soft); margin-bottom: 26px; }
+.harga-amount { font-family: 'Poppins', sans-serif; font-size: 40px; font-weight: 700; color: var(--pill-alt); line-height: 1; }
+.harga-period { font-size: 14px; font-weight: 700; color: var(--ink-soft); margin-bottom: 26px; }
 
-.harga-list { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 13px; margin-bottom: 28px; padding: 5px 15px; }
+.harga-list { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 13px; margin: 0 0 28px; padding: 5px 15px; flex: 1; }
 .harga-list li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--h4); }
 .harga-list li svg {
   width: 18px; height: 18px; flex-shrink: 0; color: var(--h7);
@@ -171,10 +174,10 @@
 }
 
 .harga-cta { width: 100%; box-sizing: border-box; max-width: none; }
-.harga-note { font-size: 13px; color: var(--ink-soft); margin-top: 14px; line-height: 1.5; }
 
 @media (max-width: 900px) {
   .landing-harga { padding: 60px 20px; }
+  .harga-grid { grid-template-columns: 1fr; gap: 20px; }
   .harga-card { padding: 28px 22px; }
   .harga-amount { font-size: 38px; }
 }
