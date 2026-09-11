@@ -14,7 +14,15 @@ export default defineConfig({
         short_name: 'Dapur MUA',
         description: 'Kelola booking, tim, dan keuangan MUA di satu tempat.',
         theme_color: '#5b68bb',
-        background_color: '#F6F1FC',
+        // SEBELUMNYA '#F6F1FC' (putih pucat) -- ini beda sumber dari
+        // background CSS <html> yang udah di-fix (var(--page-a)).
+        // background_color ini dipakai OS buat splash screen & area
+        // sistem pas app dibuka dari Home Screen, di-set SEKALI waktu
+        // build (statis, nggak bisa ikut ganti Mode Gelap/Terang secara
+        // real-time). Karena default app ngikut preferensi tema HP dan
+        // banyak yang bakal ke dark mode, disamain ke warna --page-a
+        // dark (#42535a) biar nggak nyempil putih pas app baru dibuka.
+        background_color: '#42535a',
         display: 'standalone',
         start_url: '/dashboard',
         scope: '/',
