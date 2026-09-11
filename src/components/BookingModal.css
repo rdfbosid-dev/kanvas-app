@@ -7,7 +7,15 @@
 
 .booking-modal-overlay {
   position: fixed; inset: 0; background: rgb(36, 55, 62, 0.45);
-  display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  /* z-index 95, BUKAN 50 kayak sebelumnya -- .mobile-topbar (Sidebar.css)
+     punya z-index:90, jadi modal ini WAJIB lebih tinggi dari itu biar
+     nggak ketiban/ketutupan sama header app yang sticky. Sebelumnya
+     nggak kerasa masalahnya di Android (modal ngepas nggak numpang ke
+     area topbar), tapi di iPhone (viewport-fit=cover bikin tinggi layar
+     ke-hitung beda) modal-nya nyenggol area topbar -- karena z-index
+     kalah, bagian atas modal (judulnya) ketutup topbar. */
+  z-index: 95;
   -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
 }
 .booking-modal-overlay .modal {

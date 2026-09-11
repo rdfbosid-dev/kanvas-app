@@ -1,6 +1,9 @@
 .onboarding-overlay {
   position: fixed; inset: 0; background: rgb(36, 55, 62, 0.45);
-  display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 50;
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  /* z-index 95 -- lebih tinggi dari .mobile-topbar (z-index:90 di
+     Sidebar.css), biar nggak ketutupan header app sticky di iPhone. */
+  z-index: 95;
 }
 
 .onboarding-overlay .btn-ghost {
