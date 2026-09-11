@@ -173,7 +173,17 @@
   background: var(--pill-alt); border-radius: 50%; padding: 3px; box-sizing: border-box;
 }
 
-.harga-cta { width: 100%; box-sizing: border-box; max-width: none; }
+/* Selector-nya SENGAJA ".btn-landing.harga-cta" (2 class), BUKAN cuma
+   ".harga-cta" -- soalnya ".btn-landing.large" (juga 2 class) punya
+   max-width:300px yang specificity-nya SAMA TINGGI. Kalau cuma
+   ".harga-cta" (1 class doang), dia KALAH lawan ".btn-landing.large"
+   walau letaknya lebih bawah di file (specificity menang duluan
+   sebelum urutan file dipertimbangin) -- itu kenapa max-width:none
+   di sini sebelumnya nggak pernah beneran kepake, cuma nggak kerasa
+   soalnya waktu itu .harga-card belum flex. align-self:center jaga-
+   jaga ekstra, mastiin tombol ini SELALU di tengah kolom flex-nya,
+   apapun lebar akhirnya. */
+.btn-landing.harga-cta { width: 100%; box-sizing: border-box; max-width: none; align-self: center; }
 
 @media (max-width: 900px) {
   .landing-harga { padding: 60px 20px; }
