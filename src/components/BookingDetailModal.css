@@ -39,7 +39,7 @@
   transition: background 0.15s;
 }
 .booking-detail-overlay .modal-close:hover { background: color-mix(in srgb, var(--h3) 50%, transparent); color: var(--h3); }
-.booking-detail-overlay .modal-body { padding: 10px 16px 20px; overflow-y: auto; flex: 1; }
+.booking-detail-overlay .modal-body { padding: 10px 16px 20px; overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch; }
 .booking-detail-overlay .modal-foot { display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 10px 26px 20px; flex-shrink: 0; }
 .booking-detail-overlay .modal-foot .btn-ghost { margin-bottom: 0; }
 .booking-detail-overlay .modal-error { background: var(--pill); color: var(--h8); font-size: 12.5px; padding: 10px 14px; border-radius: 10px; margin-bottom: 10px; }

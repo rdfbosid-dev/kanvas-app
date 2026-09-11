@@ -42,7 +42,19 @@
   transition: background 0.15s;
 }
 .booking-modal-overlay .modal-close:hover { background: color-mix(in srgb, var(--h3) 50%, transparent); color: var(--h3); }
-.booking-modal-overlay .modal-body { padding: 5px 16px; overflow-y: auto; flex: 1; }
+.booking-modal-overlay .modal-body {
+  padding: 5px 16px; overflow-y: auto; flex: 1;
+  /* -webkit-overflow-scrolling:touch -- ini fix buat bug lama iOS
+     Safari/WebKit: overflow-y:auto di elemen flex bersarang kayak ini
+     kadang nggak keisolasi bener scroll-nya, jadi pas user scroll
+     form, yang ke-scroll malah SELURUH modal (termasuk .modal-head
+     yang harusnya nempel via flex-shrink:0), bukan cuma modal-body-nya
+     doang -- gejalanya: judul "Booking Baru" ketutupan/ke-scroll ke
+     atas ilang. Property ini maksa iOS ngasih layer scroll sendiri
+     yang bener-bener terisolasi ke elemen ini. Nggak ngaruh apa-apa
+     di Android/Chrome (aman diabaikan browser yang nggak butuh). */
+  -webkit-overflow-scrolling: touch;
+}
 
 .booking-modal-overlay .section-label {
   font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
@@ -217,7 +229,7 @@
 
   .booking-modal-overlay .quickfill-btn {
     font-size: 7px; font-weight: 500; color: var(--h1); background: var(--ink-faint);
-    border: none; border-radius: 5px; padding: 3px; cursor: pointer; transition: background 0.15s;
+    border: none; border-radius: 5px; padding: 4px; cursor: pointer; transition: background 0.15s;
     margin-top: 0;
   }
   .booking-modal-overlay .toggle-row-rambut { display: flex; gap: 3px; }
