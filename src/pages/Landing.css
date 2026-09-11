@@ -137,7 +137,7 @@
   background: color-mix(in srgb, var(--page-b) var(--mix-page-b), transparent);
   border: 1.5px solid color-mix(in srgb, var(--button-prm) var(--mix-border), transparent);
   border-radius: 24px; padding: 36px 32px;
-  box-shadow: var(--shadow-modal);
+  box-shadow: var(--shadow-card);
   /* flex column -- .harga-list dikasih flex:1 di bawah, jadi dia yang
      "ngisi" sisa ruang kalau card ini nggak punya tombol CTA (plan
      bulanan). Efeknya semua card tinggi sama (grid align-items:stretch)
