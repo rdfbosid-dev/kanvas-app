@@ -77,7 +77,7 @@
 .hero-preview {
   display: flex; flex-direction: column; gap: 12px; max-width: 360px; margin: 0 auto;
   background: color-mix(in srgb, var(--box) var(--mix-box), transparent); border: 1.5px solid color-mix(in srgb, var(--button-prm) var(--mix-border), transparent); border-radius: 24px; padding: 20px;
-  box-shadow: var(--shadow-modal); text-align: left;
+  box-shadow: var(--shadow-card); text-align: left;
 }
 .hp-card.hp-kpi { padding: 4px; }
 .hp-kpi-label { font-size: 12px; color: var(--ink-soft); font-weight: 600; }
